@@ -91,6 +91,7 @@ class TestShippedFiles(unittest.TestCase):
 	def test_translations(self):
 		with open(APP / "translations" / "fa.csv", encoding="utf-8", newline="") as f:
 			rows = list(csv.reader(f))
-		self.assertTrue(all(len(row) == 2 and row[0] and row[1] for row in rows), "two columns per row")
-		sources = [row[0] for row in rows]
-		self.assertEqual(len(sources), len(set(sources)))
+		# source, translation[, context]
+		self.assertTrue(all(len(row) in (2, 3) and row[0] and row[1] for row in rows), "2 or 3 columns")
+		keys = [(row[0], row[2] if len(row) == 3 else "") for row in rows]
+		self.assertEqual(len(keys), len(set(keys)))

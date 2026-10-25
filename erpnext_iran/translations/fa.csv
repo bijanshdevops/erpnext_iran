@@ -35,7 +35,7 @@ Validation,اعتبارسنجی
 Validate National ID and Economic Code,بررسی کد ملی و کد اقتصادی
 Validate Iranian IBAN (Sheba),بررسی شماره شبا
 Check Iranian Postal Codes,بررسی کد پستی
-"Shows a warning only; does not block saving",فقط هشدار می‌دهد و مانع ذخیره نمی‌شود
+Shows a warning only; does not block saving,فقط هشدار می‌دهد و مانع ذخیره نمی‌شود
 Normalize Arabic Letters,اصلاح حروف عربی (ي و ك)
 Value Added Tax,مالیات بر ارزش افزوده
 VAT Rate,نرخ مالیات بر ارزش افزوده
@@ -101,3 +101,756 @@ Jalali Year,سال شمسی
 Moadian Payload,داده صورتحساب مودیان
 Ready to send,آماده ارسال
 Nos,عدد
+"# Account Settings
+
+In ERPNext, Accounting features are configurable as per your business needs. Accounts Settings is the place to define some of your accounting preferences like:
+
+ - Credit Limit and over billing settings
+ - Taxation preferences
+ - Deferred accounting preferences","# تنظیمات حسابداری
+
+امکانات حسابداری ERPNext مطابق نیاز کسب‌وکار شما قابل تنظیم است. در تنظیمات حسابداری برخی ترجیحات خود را تعیین می‌کنید، مانند:
+
+ - سقف اعتبار و صدور صورتحساب بیش از سفارش
+ - ترجیحات مالیاتی
+ - ترجیحات حسابداری معوق"
+"# Account Settings
+
+In ERPNext, Accounting features are configurable as per your business needs. Accounts Settings is the place to define some of your accounting preferences like:
+
+ - Credit Limit and over billing settings
+ - Taxation preferences
+ - Deferred accounting preferences
+","# تنظیمات حسابداری
+
+امکانات حسابداری ERPNext مطابق نیاز کسب‌وکار شما قابل تنظیم است. در تنظیمات حسابداری برخی ترجیحات خود را تعیین می‌کنید، مانند:
+
+ - سقف اعتبار و صدور صورتحساب بیش از سفارش
+ - ترجیحات مالیاتی
+ - ترجیحات حسابداری معوق
+"
+"# Add an Existing Asset
+
+If you are just starting with ERPNext, you will need to enter Assets you already possess. You can add them as existing fixed assets in ERPNext. Please note that you will have to make a Journal Entry separately updating the opening balance in the fixed asset account.","# افزودن دارایی موجود
+
+اگر تازه کار با ERPNext را آغاز کرده‌اید، باید دارایی‌هایی را که از قبل دارید وارد کنید. آن‌ها را به‌عنوان دارایی ثابت موجود اضافه کنید. توجه کنید که باید جداگانه یک سند حسابداری برای ثبت مانده افتتاحیه حساب دارایی ثابت ثبت کنید."
+"# All about sales invoice
+
+A Sales Invoice is a bill that you send to your Customers against which the Customer makes the payment. Sales Invoice is an accounting transaction. On submission of Sales Invoice, the system updates the receivable and books income against a Customer Account.","# درباره فاکتور فروش
+
+فاکتور فروش صورتحسابی است که برای مشتری می‌فرستید و مشتری بر اساس آن پرداخت می‌کند. فاکتور فروش یک سند حسابداری است؛ با ثبت آن، سیستم حساب دریافتنی را به‌روز و درآمد را به حساب مشتری ثبت می‌کند."
+"# Asset Category
+
+An Asset Category classifies different assets of a Company.
+
+You can create an Asset Category based on the type of assets. For example, all your desktops and laptops can be part of an Asset Category named ""Electronic Equipments"". Create a separate category for furniture. Also, you can update default properties for each category, like:
+ - Depreciation type and duration
+ - Fixed asset account
+ - Depreciation account","# گروه دارایی
+
+گروه دارایی، دارایی‌های مختلف شرکت را دسته‌بندی می‌کند.
+
+گروه‌ها را بر اساس نوع دارایی بسازید. برای مثال، همه رایانه‌ها و لپ‌تاپ‌ها می‌توانند در گروهی به نام «تجهیزات الکترونیکی» باشند و برای اثاثه هم گروه جداگانه‌ای بسازید. برای هر گروه می‌توانید ویژگی‌های پیش‌فرض را تعیین کنید، مانند:
+ - روش و مدت استهلاک
+ - حساب دارایی ثابت
+ - حساب استهلاک"
+"# Asset Category
+
+An Asset Category classifies different assets of a Company.
+
+You can create an Asset Category based on the type of assets. For example, all your desktops and laptops can be part of an Asset Category named ""Electronic Equipments"". Create a separate category for furniture. Also, you can update default properties for each category, like:
+ - Depreciation type and duration
+ - Fixed asset account
+ - Depreciation account
+","# گروه دارایی
+
+گروه دارایی، دارایی‌های مختلف شرکت را دسته‌بندی می‌کند.
+
+گروه‌ها را بر اساس نوع دارایی بسازید. برای مثال، همه رایانه‌ها و لپ‌تاپ‌ها می‌توانند در گروهی به نام «تجهیزات الکترونیکی» باشند و برای اثاثه هم گروه جداگانه‌ای بسازید. برای هر گروه می‌توانید ویژگی‌های پیش‌فرض را تعیین کنید، مانند:
+ - روش و مدت استهلاک
+ - حساب دارایی ثابت
+ - حساب استهلاک
+"
+"# Asset Item
+
+Asset items are created based on Asset Category. You can create one or multiple items against once Asset Category. The sales and purchase transaction for Asset is done via Asset Item.","# کالای دارایی
+
+کالاهای دارایی بر اساس گروه دارایی ایجاد می‌شوند و برای هر گروه می‌توانید یک یا چند کالا بسازید. خرید و فروش دارایی از طریق کالای دارایی انجام می‌شود."
+"# Asset Item
+
+Asset items are created based on Asset Category. You can create one or multiple items against once Asset Category. The sales and purchase transaction for Asset is done via Asset Item. ","# کالای دارایی
+
+کالاهای دارایی بر اساس گروه دارایی ایجاد می‌شوند و برای هر گروه می‌توانید یک یا چند کالا بسازید. خرید و فروش دارایی از طریق کالای دارایی انجام می‌شود. "
+"# Buying Settings
+
+
+Buying module’s features are highly configurable as per your business needs. Buying Settings is the place where you can set your preferences for:
+
+- Supplier naming and default values
+- Billing and shipping preference in buying transactions","# تنظیمات خرید
+
+
+امکانات ماژول خرید کاملاً مطابق نیاز کسب‌وکار شما قابل تنظیم است. در تنظیمات خرید ترجیحات زیر را تعیین می‌کنید:
+
+- نام‌گذاری تأمین‌کنندگان و مقادیر پیش‌فرض
+- ترجیحات صورتحساب و ارسال در معاملات خرید"
+"# Buying Settings
+
+
+Buying module’s features are highly configurable as per your business needs. Buying Settings is the place where you can set your preferences for:
+
+- Supplier naming and default values
+- Billing and shipping preference in buying transactions
+
+
+","# تنظیمات خرید
+
+
+امکانات ماژول خرید کاملاً مطابق نیاز کسب‌وکار شما قابل تنظیم است. در تنظیمات خرید ترجیحات زیر را تعیین می‌کنید:
+
+- نام‌گذاری تأمین‌کنندگان و مقادیر پیش‌فرض
+- ترجیحات صورتحساب و ارسال در معاملات خرید
+
+
+"
+"# CRM Settings
+
+CRM module’s features are configurable as per your business needs. CRM Settings is the place where you can set your preferences for:
+- Campaign
+- Lead
+- Opportunity
+- Quotation","# تنظیمات CRM
+
+امکانات ماژول CRM مطابق نیاز کسب‌وکار شما قابل تنظیم است. در تنظیمات CRM ترجیحات زیر را تعیین می‌کنید:
+- کمپین
+- سرنخ
+- فرصت
+- پیش‌فاکتور"
+"# Chart Of Accounts
+
+ERPNext sets up a simple chart of accounts for each Company you create, but you can modify it according to business and legal requirements.","# سرفصل حساب‌ها
+
+ERPNext برای هر شرکتی که ایجاد می‌کنید یک سرفصل حساب ساده می‌سازد، اما می‌توانید آن را مطابق نیاز کسب‌وکار و الزامات قانونی تغییر دهید."
+"# Check Stock Reports
+Based on the various stock transactions, you can get a host of one-click Stock Reports in ERPNext like Stock Ledger, Stock Balance, Projected Quantity, and Ageing analysis.","# بررسی گزارش‌های انبار
+بر اساس تراکنش‌های انبار، ERPNext گزارش‌های آماده بسیاری مانند دفتر انبار، موجودی انبار، مقدار پیش‌بینی‌شده و تحلیل سن موجودی در اختیارتان می‌گذارد."
+"# Cost Centers for Budgeting and Analysis
+
+While your Books of Accounts are framed to fulfill statutory requirements, you can set up Cost Center and Accounting Dimensions to address your companies reporting and budgeting requirements.
+
+Click here to learn more about how  <b>[Cost Center](https://docs.erpnext.com/docs/v13/user/manual/en/accounts/cost-center)</b> and <b> [Dimensions](https://docs.erpnext.com/docs/v13/user/manual/en/accounts/accounting-dimensions)</b> allow you to get advanced financial analytics reports from ERPNext.","# مراکز هزینه برای بودجه‌بندی و تحلیل
+
+دفاتر حسابداری شما بر اساس الزامات قانونی تنظیم می‌شوند، اما برای نیازهای گزارش‌گیری و بودجه‌بندی شرکت می‌توانید مرکز هزینه و ابعاد حسابداری تعریف کنید.
+
+برای آشنایی با اینکه <b>[مرکز هزینه](https://docs.erpnext.com/docs/v13/user/manual/en/accounts/cost-center)</b> و <b>[ابعاد حسابداری](https://docs.erpnext.com/docs/v13/user/manual/en/accounts/accounting-dimensions)</b> چگونه گزارش‌های تحلیلی پیشرفته مالی در اختیارتان می‌گذارند، اینجا را ببینید."
+"# Create Items for Bill of Materials
+
+One of the prerequisites of a BOM is the creation of raw materials, sub-assembly, and finished items. Once these items are created, you will be able to proceed to the Bill of Materials master, which is composed of items and routing.","# ایجاد کالا برای فهرست مواد
+
+یکی از پیش‌نیازهای فهرست مواد (BOM)، تعریف مواد اولیه، قطعات نیمه‌ساخته و کالاهای ساخته‌شده است. پس از تعریف این کالاها می‌توانید به فهرست مواد بروید که از کالاها و مسیر تولید تشکیل می‌شود."
+"# Create Items for Bill of Materials
+
+One of the prerequisites of a BOM is the creation of raw materials, sub-assembly, and finished items. Once these items are created, you will be able to proceed to the Bill of Materials master, which is composed of items and routing.
+","# ایجاد کالا برای فهرست مواد
+
+یکی از پیش‌نیازهای فهرست مواد (BOM)، تعریف مواد اولیه، قطعات نیمه‌ساخته و کالاهای ساخته‌شده است. پس از تعریف این کالاها می‌توانید به فهرست مواد بروید که از کالاها و مسیر تولید تشکیل می‌شود.
+"
+"# Create Operations
+
+An Operation refers to any manufacturing operation performed on the raw materials to process it further in the manufacturing path. As an example, if you are into garments manufacturing, you will create Operations like fabric cutting, stitching, and washing as some of the operations.","# ایجاد عملیات
+
+عملیات هر کار تولیدی است که روی مواد اولیه انجام می‌شود تا در مسیر تولید پیش برود. برای مثال در تولید پوشاک، عملیاتی مانند برش پارچه، دوخت و شستشو تعریف می‌کنید."
+"# Create Workstations
+
+A Workstation stores information regarding the place where the workstation operations are performed. As an example, if you have ten sewing machines doing stitching jobs, each machine will be added as a workstation.","# ایجاد ایستگاه کاری
+
+ایستگاه کاری اطلاعات محلی را که عملیات در آن انجام می‌شود نگه می‌دارد. برای مثال، اگر ده چرخ خیاطی دارید، هر چرخ یک ایستگاه کاری است."
+"# Create a Bill of Materials
+
+A Bill of Materials (BOM) is a list of items and sub-assemblies with quantities required to manufacture an Item.
+
+BOM also provides cost estimation for the production of the item. It takes raw-materials cost based on valuation and operations to cost based on routing, which gives total costing for a BOM.","# ایجاد فهرست مواد
+
+فهرست مواد (BOM) فهرستی از کالاها و قطعات نیمه‌ساخته به همراه مقادیر لازم برای تولید یک کالاست.
+
+فهرست مواد برآورد بهای تولید را نیز ارائه می‌دهد: هزینه مواد اولیه بر اساس ارزش‌گذاری و هزینه عملیات بر اساس مسیر تولید محاسبه می‌شود و بهای کل به دست می‌آید."
+"# Create a Customer
+
+The Customer master is at the heart of your sales transactions. Customers are linked in Quotations, Sales Orders, Invoices, and Payments. Customers can be either numbered or identified by name (you would typically do this based on the number of customers you have).
+
+Through Customer’s master, you can effectively track essentials like:
+ - Customer’s multiple address and contacts
+ - Account Receivables
+ - Credit Limit and Credit Period","# ایجاد مشتری
+
+اطلاعات پایه مشتری قلب معاملات فروش شماست. مشتریان در پیش‌فاکتور، سفارش فروش، فاکتور و دریافت‌ها به کار می‌روند. مشتریان را می‌توان با شماره یا با نام شناسایی کرد (معمولاً بسته به تعداد مشتریان).
+
+با اطلاعات پایه مشتری می‌توانید موارد زیر را پیگیری کنید:
+ - نشانی‌ها و مخاطبان متعدد مشتری
+ - حساب‌های دریافتنی
+ - سقف و مهلت اعتبار"
+"# Create a Customer
+
+The Customer master is at the heart of your sales transactions. Customers are linked in Quotations, Sales Orders, Invoices, and Payments. Customers can be either numbered or identified by name (you would typically do this based on the number of customers you have).
+
+Through Customer’s master, you can effectively track essentials like:
+ - Customer’s multiple address and contacts
+ - Account Receivables
+ - Credit Limit and Credit Period
+","# ایجاد مشتری
+
+اطلاعات پایه مشتری قلب معاملات فروش شماست. مشتریان در پیش‌فاکتور، سفارش فروش، فاکتور و دریافت‌ها به کار می‌روند. مشتریان را می‌توان با شماره یا با نام شناسایی کرد (معمولاً بسته به تعداد مشتریان).
+
+با اطلاعات پایه مشتری می‌توانید موارد زیر را پیگیری کنید:
+ - نشانی‌ها و مخاطبان متعدد مشتری
+ - حساب‌های دریافتنی
+ - سقف و مهلت اعتبار
+"
+"# Create a Work Order
+
+A Work Order or a Job order is given to the manufacturing shop floor by the Production Manager to initiate the manufacturing of a certain quantity of an item. Work Order carriers details of production Item, its BOM, quantities to be manufactured, and operations.
+
+Through Work Order, you can track various production status like:
+
+- Issue of raw-material to shop material
+- Progress on each Workstation via Job Card
+- Manufactured Quantity against Work Order","# ایجاد دستور تولید
+
+دستور تولید را مدیر تولید به کارگاه می‌دهد تا تولید مقدار مشخصی از یک کالا آغاز شود. دستور تولید شامل کالای تولیدی، فهرست مواد آن، مقدار تولید و عملیات است.
+
+با دستور تولید وضعیت‌های مختلف تولید را پیگیری می‌کنید، مانند:
+
+- صدور مواد اولیه به کارگاه
+- پیشرفت هر ایستگاه کاری با کارت کار
+- مقدار تولیدشده در برابر دستور تولید"
+"# Create a Work Order
+
+A Work Order or a Job order is given to the manufacturing shop floor by the Production Manager to initiate the manufacturing of a certain quantity of an item. Work Order carriers details of production Item, its BOM, quantities to be manufactured, and operations.
+
+Through Work Order, you can track various production status like:
+
+- Issue of raw-material to shop material
+- Progress on each Workstation via Job Card
+- Manufactured Quantity against Work Order
+","# ایجاد دستور تولید
+
+دستور تولید را مدیر تولید به کارگاه می‌دهد تا تولید مقدار مشخصی از یک کالا آغاز شود. دستور تولید شامل کالای تولیدی، فهرست مواد آن، مقدار تولید و عملیات است.
+
+با دستور تولید وضعیت‌های مختلف تولید را پیگیری می‌کنید، مانند:
+
+- صدور مواد اولیه به کارگاه
+- پیشرفت هر ایستگاه کاری با کارت کار
+- مقدار تولیدشده در برابر دستور تولید
+"
+"# Create an Item
+
+Item is a product or a service offered by your company, or something you buy as a part of your supplies or raw materials.
+
+Items are integral to everything you do in ERPNext - from billing, purchasing to managing inventory. Everything you buy or sell, whether it is a physical product or a service is an Item. Items can be stock, non-stock, variants, serialized, batched, assets, etc.","# ایجاد کالا
+
+کالا محصول یا خدمتی است که شرکت شما ارائه می‌کند، یا چیزی که به‌عنوان بخشی از ملزومات یا مواد اولیه می‌خرید.
+
+کالاها در همه کارهای ERPNext نقش اصلی دارند؛ از صدور صورتحساب و خرید تا مدیریت موجودی. هر چیزی که می‌خرید یا می‌فروشید، چه محصول فیزیکی و چه خدمت، یک کالاست. کالا می‌تواند انبارشی، غیرانبارشی، دارای گونه، سریال‌دار، بچ‌دار، دارایی و ... باشد."
+"# Create an Item
+
+Item is a product or a service offered by your company, or something you buy as a part of your supplies or raw materials.
+
+Items are integral to everything you do in ERPNext - from billing, purchasing to managing inventory. Everything you buy or sell, whether it is a physical product or a service is an Item. Items can be stock, non-stock, variants, serialized, batched, assets, etc.
+","# ایجاد کالا
+
+کالا محصول یا خدمتی است که شرکت شما ارائه می‌کند، یا چیزی که به‌عنوان بخشی از ملزومات یا مواد اولیه می‌خرید.
+
+کالاها در همه کارهای ERPNext نقش اصلی دارند؛ از صدور صورتحساب و خرید تا مدیریت موجودی. هر چیزی که می‌خرید یا می‌فروشید، چه محصول فیزیکی و چه خدمت، یک کالاست. کالا می‌تواند انبارشی، غیرانبارشی، دارای گونه، سریال‌دار، بچ‌دار، دارایی و ... باشد.
+"
+"# Create first Purchase Order
+
+Purchase Order is at the heart of your buying transactions. In ERPNext, Purchase Order can can be created against a Purchase Material Request (indent) and Supplier Quotation as well.  Purchase Orders is also linked to Purchase Receipt and Purchase Invoices, allowing you to keep a birds-eye view on your purchase deals.","# ایجاد اولین سفارش خرید
+
+سفارش خرید قلب معاملات خرید شماست. در ERPNext سفارش خرید را می‌توان از روی درخواست کالا و استعلام قیمت تأمین‌کننده نیز ایجاد کرد. سفارش خرید به رسید خرید و فاکتور خرید متصل است و دید کاملی از معاملات خرید به شما می‌دهد."
+"# Create first Purchase Order
+
+Purchase Order is at the heart of your buying transactions. In ERPNext, Purchase Order can can be created against a Purchase Material Request (indent) and Supplier Quotation as well.  Purchase Orders is also linked to Purchase Receipt and Purchase Invoices, allowing you to keep a birds-eye view on your purchase deals.
+
+","# ایجاد اولین سفارش خرید
+
+سفارش خرید قلب معاملات خرید شماست. در ERPNext سفارش خرید را می‌توان از روی درخواست کالا و استعلام قیمت تأمین‌کننده نیز ایجاد کرد. سفارش خرید به رسید خرید و فاکتور خرید متصل است و دید کاملی از معاملات خرید به شما می‌دهد.
+
+"
+"# Create your first Purchase Invoice
+
+A Purchase Invoice is a bill received from a Supplier for a product(s) or service(s) delivery to your company. You can track payables through Purchase Invoice and process Payment Entries against it.
+
+Purchase Invoices can also be created against a Purchase Order or Purchase Receipt.","# ایجاد اولین فاکتور خرید
+
+فاکتور خرید صورتحسابی است که از تأمین‌کننده برای کالا یا خدمات تحویل‌شده به شرکت شما دریافت می‌شود. با فاکتور خرید، حساب‌های پرداختنی را پیگیری و پرداخت‌ها را در برابر آن ثبت می‌کنید.
+
+فاکتور خرید را می‌توان از روی سفارش خرید یا رسید خرید هم ایجاد کرد."
+"# Financial Statements
+
+In ERPNext, you can get crucial financial reports like [Balance Sheet] and [Profit and Loss] statements with a click of a button. You can run in the report for a different period and plot analytics charts premised on statement data. For more reports, check sections like Financial Statements, General Ledger, and Profitability reports.
+
+<b>[Check Accounting reports](https://docs.erpnext.com/docs/v13/user/manual/en/accounts/accounting-reports)</b>","# صورت‌های مالی
+
+در ERPNext گزارش‌های مالی مهمی مانند [ترازنامه] و [سود و زیان] را با یک کلیک دریافت می‌کنید. می‌توانید گزارش را برای دوره‌های مختلف اجرا کنید و نمودارهای تحلیلی بر اساس داده‌های آن رسم کنید. برای گزارش‌های بیشتر، بخش‌های صورت‌های مالی، دفتر کل و گزارش‌های سودآوری را ببینید.
+
+<b>[گزارش‌های حسابداری](https://docs.erpnext.com/docs/v13/user/manual/en/accounts/accounting-reports)</b>"
+"# Fixed Asset Accounts
+
+With the company, a host of fixed asset accounts are pre-configured. To ensure your asset transactions are leading to correct accounting entries, you can review and set up following asset accounts as per your business  requirements.
+ - Fixed asset accounts (Asset account)
+ - Accumulated depreciation
+ - Capital Work in progress (CWIP) account
+ - Asset Depreciation account (Expense account)","# حساب‌های دارایی ثابت
+
+همراه با شرکت، مجموعه‌ای از حساب‌های دارایی ثابت از پیش تنظیم می‌شود. برای اینکه تراکنش‌های دارایی اسناد حسابداری درستی ایجاد کنند، حساب‌های زیر را مطابق نیاز کسب‌وکار خود بررسی و تنظیم کنید.
+ - حساب‌های دارایی ثابت
+ - استهلاک انباشته
+ - حساب دارایی در جریان تکمیل
+ - حساب هزینه استهلاک"
+"# How Production Planning Works
+
+Production Plan helps in production and material planning for the Items planned for manufacturing. These production items can be committed via Sales Order (to Customers) or Material Requests (internally).","# برنامه‌ریزی تولید چگونه کار می‌کند
+
+برنامه تولید به برنامه‌ریزی تولید و مواد برای کالاهای در دست تولید کمک می‌کند. این کالاها می‌توانند از طریق سفارش فروش (برای مشتری) یا درخواست کالا (داخلی) تعهد شوند."
+"# How Production Planning Works
+
+Production Plan helps in production and material planning for the Items planned for manufacturing. These production items can be committed via Sales Order (to Customers) or Material Requests (internally).
+","# برنامه‌ریزی تولید چگونه کار می‌کند
+
+برنامه تولید به برنامه‌ریزی تولید و مواد برای کالاهای در دست تولید کمک می‌کند. این کالاها می‌توانند از طریق سفارش فروش (برای مشتری) یا درخواست کالا (داخلی) تعهد شوند.
+"
+"# Manage Stock Movements
+Stock entry allows you to register the movement of stock for various purposes like transfer, received, issues, repacked, etc. To address issues related to theft and pilferages,  you can always ensure that the movement of goods happens against a document reference Stock Entry in ERPNext.
+
+Let’s get a quick walk-through on the various scenarios covered in Stock Entry by watching [*this video*](https://www.youtube.com/watch?v=Njt107hlY3I).","# مدیریت جابه‌جایی موجودی
+با ثبت انبار، جابه‌جایی موجودی را برای اهدافی مانند انتقال، دریافت، صدور، بسته‌بندی مجدد و ... ثبت می‌کنید. برای جلوگیری از سرقت و کسری، می‌توانید مطمئن شوید که هر جابه‌جایی کالا با یک سند ثبت انبار در ERPNext انجام می‌شود.
+
+برای آشنایی سریع با حالت‌های مختلف ثبت انبار، [*این ویدیو*](https://www.youtube.com/watch?v=Njt107hlY3I) را ببینید."
+"# Purchase an Asset
+
+Assets purchases process if done following the standard Purchase cycle. If capital work in progress is enabled in Asset Category, Asset will be created as soon as Purchase Receipt is created for it. You can quickly create a Purchase Receipt for Asset and see its impact on books of accounts.","# خرید دارایی
+
+خرید دارایی با چرخه استاندارد خرید انجام می‌شود. اگر «دارایی در جریان تکمیل» در گروه دارایی فعال باشد، دارایی به محض ایجاد رسید خرید ساخته می‌شود. می‌توانید سریعاً یک رسید خرید برای دارایی بسازید و اثر آن را در دفاتر ببینید."
+"# Review Manufacturing Settings
+
+In ERPNext, the Manufacturing module’s features are configurable as per your business needs. Manufacturing Settings is the place where you can set your preferences for:
+
+- Capacity planning for allocating jobs to workstations
+- Raw-material consumption based on BOM or actual
+- Default values and over-production allowance","# بررسی تنظیمات تولید
+
+امکانات ماژول تولید ERPNext مطابق نیاز کسب‌وکار شما قابل تنظیم است. در تنظیمات تولید ترجیحات زیر را تعیین می‌کنید:
+
+- برنامه‌ریزی ظرفیت برای تخصیص کارها به ایستگاه‌ها
+- مصرف مواد اولیه بر اساس فهرست مواد یا مصرف واقعی
+- مقادیر پیش‌فرض و حد مجاز تولید بیش از سفارش"
+"# Review Manufacturing Settings
+
+In ERPNext, the Manufacturing module’s features are configurable as per your business needs. Manufacturing Settings is the place where you can set your preferences for:
+
+- Capacity planning for allocating jobs to workstations
+- Raw-material consumption based on BOM or actual
+- Default values and over-production allowance
+","# بررسی تنظیمات تولید
+
+امکانات ماژول تولید ERPNext مطابق نیاز کسب‌وکار شما قابل تنظیم است. در تنظیمات تولید ترجیحات زیر را تعیین می‌کنید:
+
+- برنامه‌ریزی ظرفیت برای تخصیص کارها به ایستگاه‌ها
+- مصرف مواد اولیه بر اساس فهرست مواد یا مصرف واقعی
+- مقادیر پیش‌فرض و حد مجاز تولید بیش از سفارش
+"
+"# Review Stock Settings
+
+In ERPNext, the Stock module’s features are configurable as per your business needs. Stock Settings is the place where you can set your preferences for:
+- Default values for Item and Pricing
+- Default valuation method for inventory valuation
+- Set preference for serialization and batching of item
+- Set tolerance for over-receipt and delivery of items","# بررسی تنظیمات انبار
+
+امکانات ماژول انبار ERPNext مطابق نیاز کسب‌وکار شما قابل تنظیم است. در تنظیمات انبار ترجیحات زیر را تعیین می‌کنید:
+- مقادیر پیش‌فرض کالا و قیمت‌گذاری
+- روش پیش‌فرض ارزش‌گذاری موجودی
+- ترجیحات سریال و بچ کالا
+- حد مجاز دریافت و تحویل بیش از سفارش"
+"# Sales Order
+
+A Sales Order is a confirmation of an order from your customer. It is also referred to as Proforma Invoice.
+
+Sales Order at the heart of your sales and purchase transactions. Sales Orders are linked in Delivery Note, Sales Invoices, Material Request, and Maintenance transactions. Through Sales Order, you can track fulfillment of the overall deal towards the customer.","# سفارش فروش
+
+سفارش فروش تأیید سفارش مشتری است و به آن پیش‌فاکتور هم گفته می‌شود.
+
+سفارش فروش قلب معاملات فروش و خرید شماست و به حواله خروج، فاکتور فروش، درخواست کالا و معاملات نگهداری متصل است. با سفارش فروش می‌توانید انجام کامل معامله با مشتری را پیگیری کنید."
+"# Selling Settings
+
+CRM and Selling module’s features are configurable as per your business needs. Selling Settings is the place where you can set your preferences for:
+ - Customer naming and default values
+ - Billing and shipping preference in sales transactions","# تنظیمات فروش
+
+امکانات ماژول‌های CRM و فروش مطابق نیاز کسب‌وکار شما قابل تنظیم است. در تنظیمات فروش ترجیحات زیر را تعیین می‌کنید:
+ - نام‌گذاری مشتریان و مقادیر پیش‌فرض
+ - ترجیحات صورتحساب و ارسال در معاملات فروش"
+"# Selling Settings
+
+CRM and Selling module’s features are configurable as per your business needs. Selling Settings is the place where you can set your preferences for:
+ - Customer naming and default values
+ - Billing and shipping preference in sales transactions
+","# تنظیمات فروش
+
+امکانات ماژول‌های CRM و فروش مطابق نیاز کسب‌وکار شما قابل تنظیم است. در تنظیمات فروش ترجیحات زیر را تعیین می‌کنید:
+ - نام‌گذاری مشتریان و مقادیر پیش‌فرض
+ - ترجیحات صورتحساب و ارسال در معاملات فروش
+"
+"# Setting up Taxes
+
+ERPNext lets you configure your taxes so that they are automatically applied in your buying and selling transactions. You can configure them globally or even on Items. ERPNext taxes are pre-configured for most regions.","# تنظیم مالیات‌ها
+
+در ERPNext می‌توانید مالیات‌ها را طوری تنظیم کنید که به‌طور خودکار در معاملات خرید و فروش اعمال شوند. می‌توانید آن‌ها را به‌صورت کلی یا حتی روی هر کالا تنظیم کنید. مالیات‌های بیشتر کشورها از پیش تنظیم شده‌اند."
+"# Setup Routing
+
+A Routing stores all Operations along with the description, hourly rate, operation time, batch size, etc. Click below to learn how the Routing template can be created, for quick selection in the BOM.","# تنظیم مسیر تولید
+
+مسیر تولید همه عملیات را به همراه شرح، نرخ ساعتی، زمان عملیات، اندازه بچ و ... نگه می‌دارد. در ادامه ببینید چگونه الگوی مسیر تولید را برای انتخاب سریع در فهرست مواد بسازید."
+"# Setup a Warehouse
+The warehouse can be your location/godown/store where you maintain the item's inventory, and receive/deliver them to various parties.
+
+In ERPNext, you can maintain a Warehouse in the tree structure, so that location and sub-location of an item can be tracked. Also, you can link a Warehouse to a specific Accounting ledger, where the real-time stock value of that warehouse’s item will be reflected.","# ایجاد انبار
+انبار محل یا فروشگاهی است که موجودی کالا را در آن نگهداری می‌کنید و از آنجا کالا را از اشخاص مختلف دریافت یا به آن‌ها تحویل می‌دهید.
+
+در ERPNext انبارها به‌صورت درختی تعریف می‌شوند تا محل و زیرمحل کالا قابل پیگیری باشد. همچنین می‌توانید هر انبار را به یک حساب حسابداری متصل کنید تا ارزش لحظه‌ای موجودی آن انبار در حساب منعکس شود."
+"# Track Material Request
+
+
+Also known as Purchase Request or an Indent, is a document identifying a requirement of a set of items (products or services) for various purposes like procurement, transfer, issue, or manufacturing. Once the Material Request is validated, a purchase manager can take the next actions for purchasing items like requesting RFQ from a supplier or directly placing an order with an identified Supplier.","# پیگیری درخواست کالا
+
+
+درخواست کالا (درخواست خرید) سندی است که نیاز به مجموعه‌ای از کالاها یا خدمات را برای اهدافی مانند تهیه، انتقال، صدور یا تولید مشخص می‌کند. پس از تأیید درخواست، مدیر خرید می‌تواند اقدام بعدی را انجام دهد؛ مثلاً از تأمین‌کننده استعلام قیمت بگیرد یا مستقیماً به تأمین‌کننده مشخصی سفارش دهد."
+"# Track Material Request
+
+
+Also known as Purchase Request or an Indent, is a document identifying a requirement of a set of items (products or services) for various purposes like procurement, transfer, issue, or manufacturing. Once the Material Request is validated, a purchase manager can take the next actions for purchasing items like requesting RFQ from a supplier or directly placing an order with an identified Supplier.
+
+","# پیگیری درخواست کالا
+
+
+درخواست کالا (درخواست خرید) سندی است که نیاز به مجموعه‌ای از کالاها یا خدمات را برای اهدافی مانند تهیه، انتقال، صدور یا تولید مشخص می‌کند. پس از تأیید درخواست، مدیر خرید می‌تواند اقدام بعدی را انجام دهد؛ مثلاً از تأمین‌کننده استعلام قیمت بگیرد یا مستقیماً به تأمین‌کننده مشخصی سفارش دهد.
+
+"
+"# Update Stock Opening Balance
+It’s an entry to update the stock balance of an item, in a warehouse, on a date and time you are going live on ERPNext.
+
+Once opening stocks are updated, you can create transactions like manufacturing and stock deliveries, where this opening stock will be consumed.","# ثبت موجودی افتتاحیه
+سندی برای ثبت موجودی هر کالا در هر انبار در تاریخ و ساعتی است که کار با ERPNext را آغاز می‌کنید.
+
+پس از ثبت موجودی افتتاحیه، می‌توانید تراکنش‌هایی مانند تولید و تحویل کالا را ثبت کنید که از این موجودی مصرف می‌کنند."
+"# Updating Opening Balances
+
+Once you close the financial statement in previous accounting software, you can update the same as opening in your ERPNext's Balance Sheet accounts. This will allow you to get complete financial statements from ERPNext in the coming years, and discontinue the parallel accounting system right away.","# ثبت مانده‌های افتتاحیه
+
+پس از بستن حساب‌ها در نرم‌افزار حسابداری قبلی، همان مانده‌ها را به‌عنوان افتتاحیه در حساب‌های ترازنامه ERPNext ثبت کنید. به این ترتیب صورت‌های مالی کامل سال‌های آینده را از ERPNext می‌گیرید و می‌توانید فوراً سیستم حسابداری موازی را کنار بگذارید."
+"<span class=""h4""><b>Masters &amp; Reports</b></span>","<span class=""h4""><b>اطلاعات پایه و گزارش‌ها</b></span>"
+"<span class=""h4""><b>Reports & Masters</b></span>","<span class=""h4""><b>گزارش‌ها و اطلاعات پایه</b></span>"
+"<span class=""h4""><b>Reports &amp; Masters</b></span>","<span class=""h4""><b>گزارش‌ها و اطلاعات پایه</b></span>"
+Accounting Dimension,بُعد حسابداری
+Accounting Masters,اطلاعات پایه حسابداری
+Accounting Period,دوره حسابداری
+Accounts Payable,حساب‌های پرداختنی
+Accounts Receivable,حساب‌های دریافتنی
+Accounts Settings,تنظیمات حسابداری
+"Accounts, Invoices, Taxation, and more.",حساب‌ها، فاکتورها، مالیات و بیشتر.
+Add an Existing Asset,افزودن دارایی موجود
+Add an existing Asset,افزودن دارایی موجود
+Address,نشانی
+Asset Capitalization,سرمایه‌ای کردن دارایی
+Asset Category,گروه دارایی
+Asset Depreciation Ledger,دفتر استهلاک دارایی
+Asset Depreciations and Balances,استهلاک و مانده دارایی‌ها
+Asset Maintenance,نگهداری دارایی
+Asset Maintenance Log,سابقه نگهداری دارایی
+Asset Maintenance Team,تیم نگهداری دارایی
+Asset Movement,جابه‌جایی دارایی
+Asset Repair,تعمیر دارایی
+Asset Value Analytics,تحلیل ارزش دارایی‌ها
+Assets,دارایی‌ها
+"Assets, Depreciations, Repairs, and more.",دارایی‌ها، استهلاک، تعمیرات و بیشتر.
+Available Stock for Packing Items,موجودی در دسترس کالاهای بسته‌بندی
+Bank Clearance,تسویه بانکی
+Bank Reconciliation Statement,صورت مغایرت بانکی
+Bank Reconciliation Tool,ابزار مغایرت‌گیری بانکی
+Batch,بچ
+Batch Item Expiry Status,وضعیت انقضای کالاهای بچ‌دار
+Batch-Wise Balance History,سابقه موجودی به تفکیک بچ
+Blanket Order,سفارش کلی
+Chart of Accounts,سرفصل حساب‌ها
+Chart of Accounts Importer,ورود سرفصل حساب‌ها
+Chart of Cost Centers,درخت مراکز هزینه
+Check Stock Ledger,بررسی دفتر انبار
+Check help to setup Routing,راهنمای تنظیم مسیر تولید
+Cost Center and Budgeting,مرکز هزینه و بودجه‌بندی
+Cost Centers for Budgeting and Analysis,مراکز هزینه برای بودجه‌بندی و تحلیل
+Create Blogger,ایجاد نویسنده وبلاگ
+Create Your First Purchase Invoice,ایجاد اولین فاکتور خرید
+Create Your First Purchase Invoice ,ایجاد اولین فاکتور خرید
+Create Your First Sales Invoice,ایجاد اولین فاکتور فروش
+Create Your First Sales Invoice ,ایجاد اولین فاکتور فروش
+Create a Customer,ایجاد مشتری
+Create a Material Transfer Entry,ایجاد سند انتقال کالا
+Create a new Item,ایجاد کالای جدید
+Create an Asset Item,ایجاد کالای دارایی
+Create an Item,ایجاد کالا
+Create and Send Quotation,ایجاد و ارسال پیش‌فاکتور
+Create first Purchase Order,ایجاد اولین سفارش خرید
+Create your first Bill of Materials,ایجاد اولین فهرست مواد
+Create your first Work Order,ایجاد اولین دستور تولید
+Currency Exchange,نرخ تبدیل ارز
+Customer Acquisition and Loyalty,جذب و وفاداری مشتری
+Customer Addresses And Contacts,نشانی و مخاطبان مشتریان
+Customer Credit Balance,مانده اعتبار مشتری
+Customers Without Any Sales Transactions,مشتریان بدون معامله فروش
+Customs Tariff Number,شماره تعرفه گمرکی
+Data Import and Settings,ورود داده‌ها و تنظیمات
+Define Asset Category,تعریف گروه دارایی
+Delivery Note,حواله خروج
+Delivery Note Trends,روند حواله خروج
+Delivery Trends,روند تحویل
+Dismiss,بستن
+Dismiss,بستن,Stop showing the onboarding widget.
+ERPNext Integrations,یکپارچه‌سازی‌های ERPNext
+"Each document created in ERPNext can have a unique ID generated for it, using a prefix defined for it. Though each document has some prefix pre-configured, you can further customize it using tools like Naming Series Tool and Document Naming Rule.",هر سند در ERPNext می‌تواند شناسه یکتایی با پیشوند تعریف‌شده داشته باشد. هر سند پیشوند پیش‌فرضی دارد، اما می‌توانید با ابزار سری شماره‌گذاری و قاعده نام‌گذاری اسناد آن را تغییر دهید.
+"Each document created in ERPNext can have a unique ID generated for it, using a prefix defined for it. Though each document has some prefix pre-configured, you can further customize it using tools like Naming Series Tool and Document Naming Rule.
+","هر سند در ERPNext می‌تواند شناسه یکتایی با پیشوند تعریف‌شده داشته باشد. هر سند پیشوند پیش‌فرضی دارد، اما می‌توانید با ابزار سری شماره‌گذاری و قاعده نام‌گذاری اسناد آن را تغییر دهید.
+"
+Email Account,حساب ایمیل
+"Every form in ERPNext has a standard set of fields. If you need to capture some information, but there is no standard Field available for it, you can insert Custom Field for it.
+
+Once custom fields are added, you can use them for reports and analytics charts as well.","هر فرم در ERPNext مجموعه‌ای از فیلدهای استاندارد دارد. اگر باید اطلاعاتی را ثبت کنید که فیلد استانداردی برای آن نیست، فیلد سفارشی اضافه کنید.
+
+پس از افزودن فیلدهای سفارشی، می‌توانید از آن‌ها در گزارش‌ها و نمودارهای تحلیلی هم استفاده کنید."
+"Every form in ERPNext has a standard set of fields. If you need to capture some information, but there is no standard Field available for it, you can insert Custom Field for it.
+
+Once custom fields are added, you can use them for reports and analytics charts as well.
+","هر فرم در ERPNext مجموعه‌ای از فیلدهای استاندارد دارد. اگر باید اطلاعاتی را ثبت کنید که فیلد استانداردی برای آن نیست، فیلد سفارشی اضافه کنید.
+
+پس از افزودن فیلدهای سفارشی، می‌توانید از آن‌ها در گزارش‌ها و نمودارهای تحلیلی هم استفاده کنید.
+"
+Exchange Rate Revaluation,تسعیر ارز
+Finance Book,دفتر مالی
+Financial Reports,گزارش‌های مالی
+Financial Statements,صورت‌های مالی
+Finished Items,کالاهای ساخته‌شده
+Fixed Asset Register,دفتر دارایی‌های ثابت
+General Ledger,دفتر کل
+Help,راهنما
+Import Data,ورود داده‌ها
+Import Supplier Invoice,ورود فاکتور تأمین‌کننده
+"In ERPNext, you can add your Employees as Users, and give them restricted access. Tools like Role Permission and User Permission allow you to define rules which give restricted access to the user to masters and transactions.",در ERPNext می‌توانید کارکنان را به‌عنوان کاربر اضافه کنید و دسترسی محدود به آن‌ها بدهید. ابزارهای مجوز نقش و مجوز کاربر امکان تعریف قواعدی را می‌دهند که دسترسی کاربر به اطلاعات پایه و تراکنش‌ها را محدود می‌کنند.
+"In each module, you will find a host of single-click reports, ranging from financial statements to sales and purchase analytics and stock tracking reports. If a required new report is not available out-of-the-box, you can create custom reports in ERPNext by pulling values from the same multiple ERPNext tables.",در هر ماژول گزارش‌های آماده بسیاری وجود دارد؛ از صورت‌های مالی تا تحلیل فروش و خرید و گزارش‌های انبار. اگر گزارشی که لازم دارید آماده نیست، می‌توانید با گرفتن داده از جدول‌های مختلف ERPNext گزارش سفارشی بسازید.
+"In each module, you will find a host of single-click reports, ranging from financial statements to sales and purchase analytics and stock tracking reports. If a required new report is not available out-of-the-box, you can create custom reports in ERPNext by pulling values from the same multiple ERPNext tables.
+","در هر ماژول گزارش‌های آماده بسیاری وجود دارد؛ از صورت‌های مالی تا تحلیل فروش و خرید و گزارش‌های انبار. اگر گزارشی که لازم دارید آماده نیست، می‌توانید با گرفتن داده از جدول‌های مختلف ERPNext گزارش سفارشی بسازید.
+"
+Inactive Customers,مشتریان غیرفعال
+Installation Note,یادداشت نصب
+Integrations,یکپارچه‌سازی‌ها
+Introduction to CRM,آشنایی با CRM
+"Inventory, Warehouses, Analysis, and more.",موجودی، انبارها، تحلیل و بیشتر.
+Item,کالا
+Item Alternative,کالای جایگزین
+Item Attribute,ویژگی کالا
+Item Code,کد کالا
+Item Group,گروه کالا
+Item Manufacturer,سازنده کالا
+Item Name,نام کالا
+Item Price,قیمت کالا
+Item Price Stock,قیمت و موجودی کالا
+Item Prices,قیمت‌های کالا
+Item Shortage Report,گزارش کمبود کالا
+Item Tax Template,الگوی مالیات کالا
+Item Variant Details,جزئیات گونه‌های کالا
+Item Variant Settings,تنظیمات گونه کالا
+"Item, Customer, Supplier and Quotation",کالا، مشتری، تأمین‌کننده و پیش‌فاکتور
+Item-wise Purchase History,سابقه خرید به تفکیک کالا
+Item-wise Sales History,سابقه فروش به تفکیک کالا
+Items,کالاها
+Items & Pricing,کالاها و قیمت‌گذاری
+Items Catalogue,کاتالوگ کالاها
+Items To Be Requested,کالاهای نیازمند درخواست
+Items and Pricing,کالاها و قیمت‌گذاری
+Items to Order and Receive,کالاهای قابل سفارش و دریافت
+Itemwise Recommended Reorder Level,نقطه سفارش پیشنهادی به تفکیک کالا
+Journal Entry,سند حسابداری
+Journal Entry Template,الگوی سند حسابداری
+Key Reports,گزارش‌های کلیدی
+Landed Cost Voucher,سند هزینه‌های جانبی خرید
+Last synced {0},آخرین همگام‌سازی {0}
+Lead,سرنخ
+Lead Source,منبع سرنخ
+"Lead, Opportunity, Customer, and more.",سرنخ، فرصت، مشتری و بیشتر.
+Learn Accounting,آموزش حسابداری
+Learn Inventory Management,آموزش مدیریت موجودی
+Learn Procurement,آموزش تدارکات
+Learn Sales Management,آموزش مدیریت فروش
+Learn how to update opening balances,آموزش ثبت مانده‌های افتتاحیه
+Learn more about Chart of Accounts,آشنایی بیشتر با سرفصل حساب‌ها
+Learn more about Production Planning,آشنایی بیشتر با برنامه‌ریزی تولید
+Let's Set Up Your Accounts and Taxes.,حساب‌ها و مالیات‌ها را راه‌اندازی کنیم.
+Let's Set Up Your CRM.,CRM را راه‌اندازی کنیم.
+Let's Set Up the Assets Module.,ماژول دارایی‌ها را راه‌اندازی کنیم.
+Let's Set Up the Buying Module.,ماژول خرید را راه‌اندازی کنیم.
+Let's Set Up the Manufacturing Module.,ماژول تولید را راه‌اندازی کنیم.
+Let's Set Up the Selling Module.,ماژول فروش را راه‌اندازی کنیم.
+Let's Set Up the Stock Module.,ماژول انبار را راه‌اندازی کنیم.
+Let's begin your journey with ERPNext,سفر خود را با ERPNext آغاز کنید
+Let's create a Purchase Receipt,ایجاد رسید خرید
+Let's create a new Asset item,ایجاد کالای دارایی جدید
+Let's review existing Asset Category,بررسی گروه‌های دارایی موجود
+Let's walk-through Chart of Accounts to review setup,مرور سرفصل حساب‌ها برای بررسی تنظیمات
+Let’s convert your first Sales Order against a Quotation,تبدیل اولین پیش‌فاکتور به سفارش فروش
+Let’s create a Workstation,ایجاد ایستگاه کاری
+Let’s create a stock opening entry,ایجاد سند موجودی افتتاحیه
+Let’s create an Operation,ایجاد عملیات
+Let’s create your first  warehouse,ایجاد اولین انبار
+Let’s create your first  warehouse ,ایجاد اولین انبار
+Let’s create your first Customer,ایجاد اولین مشتری
+Let’s create your first Material Request,ایجاد اولین درخواست کالا
+Let’s create your first Purchase Invoice,ایجاد اولین فاکتور خرید
+Let’s create your first Purchase Order,ایجاد اولین سفارش خرید
+Let’s walk-through Selling Settings,مرور تنظیمات فروش
+Let’s walk-through few Buying Settings,مرور چند تنظیم خرید
+Loyalty Point Entry,ثبت امتیاز وفاداری
+Manage Sales Tax Templates,مدیریت الگوهای مالیات فروش
+Manage Stock Movements,مدیریت جابه‌جایی موجودی
+Manufacturing,تولید
+Manufacturing module is all set up!,ماژول تولید آماده است!
+Material Request,درخواست کالا
+Material Requests for which Supplier Quotations are not created,درخواست‌های کالای بدون استعلام قیمت تأمین‌کننده
+Mode of Payment,روش پرداخت
+Multi Currency,چندارزی
+Opening Invoice Creation Tool,ابزار ایجاد فاکتورهای افتتاحیه
+Opening and Closing,افتتاحیه و اختتامیه
+Opportunity Trends,روند فرصت‌ها
+Other Reports,سایر گزارش‌ها
+POS Closing Entry,ثبت بستن صندوق
+POS Opening Entry,ثبت افتتاح صندوق
+Packing Slip,برگه بسته‌بندی
+Payables,حساب‌های پرداختنی
+Payment Entry,ثبت پرداخت
+Payment Term,شرط پرداخت
+Payments,پرداخت‌ها
+Pending SO Items For Purchase Request,کالاهای سفارش فروش در انتظار درخواست خرید
+Period Closing Voucher,سند اختتامیه دوره
+Pick List,فهرست برداشت
+Point of Sale,صندوق فروش (POS)
+Point-of-Sale Profile,پروفایل صندوق فروش
+Price List,فهرست قیمت
+Pricing Rule,قاعده قیمت‌گذاری
+Procurement Tracker,پیگیری تدارکات
+Product Bundle,بسته محصول
+Production Planning,برنامه‌ریزی تولید
+"Products, Purchases, Analysis, and more.",محصولات، خریدها، تحلیل و بیشتر.
+"Products, Raw Materials, BOM, Work Order, and more.",محصولات، مواد اولیه، فهرست مواد، دستور تولید و بیشتر.
+"Products, Sales, Analysis, and more.",محصولات، فروش، تحلیل و بیشتر.
+Profit and Loss,سود و زیان
+Projects,پروژه‌ها
+Purchase Analytics,تحلیل خرید
+Purchase Invoice,فاکتور خرید
+Purchase Invoice Trends,روند فاکتور خرید
+Purchase Order Analysis,تحلیل سفارش خرید
+Purchase Order Trends,روند سفارش خرید
+Purchase Receipt Trends,روند رسید خرید
+Purchase Taxes and Charges Template,الگوی مالیات و هزینه‌های خرید
+Purchase an Asset,خرید دارایی
+Quality Inspection Template,الگوی بازرسی کیفیت
+Quick Stock Balance,موجودی سریع انبار
+Quotation,پیش‌فاکتور
+Quotation Trends,روند پیش‌فاکتور
+Receivables,حساب‌های دریافتنی
+Regional,منطقه‌ای
+Reports & Masters,گزارش‌ها و اطلاعات پایه
+Request for Quotation,درخواست استعلام قیمت
+Requested Items To Be Transferred,کالاهای درخواستی قابل انتقال
+Review Chart of Accounts,بررسی سرفصل حساب‌ها
+Review Fixed Asset Accounts,بررسی حساب‌های دارایی ثابت
+Review Stock Settings,بررسی تنظیمات انبار
+Sales Analytics,تحلیل فروش
+Sales Invoice Trends,روند فاکتور فروش
+Sales Order Analysis,تحلیل سفارش فروش
+Sales Order Trends,روند سفارش فروش
+Sales Partner Target Variance Based On Item Group,انحراف از هدف شریک فروش بر اساس گروه کالا
+Sales Partners Commission,کمیسیون شرکای فروش
+Sales Person,کارشناس فروش
+Sales Person Target Variance Based On Item Group,انحراف از هدف کارشناس فروش بر اساس گروه کالا
+Sales Person-wise Transaction Summary,خلاصه معاملات به تفکیک کارشناس فروش
+Sales Taxes and Charges Template,الگوی مالیات و هزینه‌های فروش
+Selling Settings,تنظیمات فروش
+Serial No Service Contract Expiry,انقضای قرارداد خدمات شماره سریال
+Serial No Status,وضعیت شماره سریال
+Serial No Warranty Expiry,انقضای گارانتی شماره سریال
+Serial No and Batch,شماره سریال و بچ
+Setting up Taxes,تنظیم مالیات‌ها
+Setup Approval Workflows,تنظیم گردش کار تأیید
+Setup Limited Access for a User,دسترسی محدود برای کاربر
+Setup Naming Series,تنظیم سری شماره‌گذاری
+Setup Taxes,تنظیم مالیات‌ها
+Setup a Warehouse,ایجاد انبار
+Share Balance,مانده سهام
+Share Ledger,دفتر سهام
+Share Management,مدیریت سهام
+Share Transfer,انتقال سهام
+Shareholder,سهامدار
+Shipping Rule,قاعده حمل‌ونقل
+Show {0} List,نمایش فهرست {0}
+Skip,رد شدن
+Stock,انبار
+Stock Ageing,سن موجودی
+Stock Analytics,تحلیل موجودی
+Stock Balance,موجودی انبار
+Stock Entry,سند انبار
+Stock Ledger,دفتر انبار
+Stock Projected Qty,مقدار پیش‌بینی‌شده موجودی
+Stock Reconciliation,انبارگردانی
+Stock Reports,گزارش‌های انبار
+Stock Settings,تنظیمات انبار
+Stock Summary,خلاصه موجودی
+Stock Transactions,تراکنش‌های انبار
+Subcontracted Item To Be Received,کالای پیمانکاری قابل دریافت
+Subcontracted Raw Materials To Be Transferred,مواد اولیه پیمانکاری قابل انتقال
+Supplier,تأمین‌کننده
+Supplier Addresses And Contacts,نشانی و مخاطبان تأمین‌کنندگان
+Supplier Group,گروه تأمین‌کننده
+Supplier Quotation,استعلام قیمت تأمین‌کننده
+Supplier Quotation Comparison,مقایسه استعلام‌های قیمت تأمین‌کنندگان
+Supplier Scorecard,کارنامه تأمین‌کننده
+Supplier Scorecard Criteria,معیارهای کارنامه تأمین‌کننده
+Supplier Scorecard Standing,رتبه کارنامه تأمین‌کننده
+Supplier Scorecard Variable,متغیر کارنامه تأمین‌کننده
+Supplier-Wise Sales Analytics,تحلیل فروش به تفکیک تأمین‌کننده
+Take a quick walk-through of Accounts Settings,مرور سریع تنظیمات حسابداری
+Take a walk through Stock Settings,مرور تنظیمات انبار
+Take a walk-through of Manufacturing Settings,مرور تنظیمات تولید
+Tax Category,دسته‌بندی مالیاتی
+Tax Masters,اطلاعات پایه مالیاتی
+Tax Rule,قاعده مالیاتی
+Tax Withholding Category,دسته‌بندی مالیات تکلیفی
+Terms and Conditions Template,الگوی شرایط و ضوابط
+Territory Target Variance Based On Item Group,انحراف از هدف منطقه بر اساس گروه کالا
+The Accounts Module is all set up!,ماژول حسابداری آماده است!
+The Assets Module is all set up!,ماژول دارایی‌ها آماده است!
+The Buying Module is all set up!,ماژول خرید آماده است!
+The CRM Module is all set up!,ماژول CRM آماده است!
+The Selling Module is all set up!,ماژول فروش آماده است!
+The Stock Module is all set up!,ماژول انبار آماده است!
+Total Active Items,تعداد کالاهای فعال
+Total Incoming Bills,جمع صورتحساب‌های دریافتی
+Total Incoming Payment,جمع دریافت‌ها
+Total Outgoing Bills,جمع صورتحساب‌های صادره
+Total Outgoing Payment,جمع پرداخت‌ها
+Track Material Request,پیگیری درخواست کالا
+Trial Balance,تراز آزمایشی
+UOM Conversion Factor,ضریب تبدیل واحد
+Unit of Measure (UOM),واحد اندازه‌گیری (UOM)
+Update Stock Opening Balance,ثبت موجودی افتتاحیه
+Updating Opening Balances,ثبت مانده‌های افتتاحیه
+View Cost Center Tree,نمایش درخت مراکز هزینه
+Warehouse Wise Stock Balance,موجودی به تفکیک انبار
+Warehouse wise Stock Value,ارزش موجودی به تفکیک انبار
+You're ready to start your journey with ERPNext,آماده‌اید که کار با ERPNext را شروع کنید

@@ -15,7 +15,7 @@
 | **مالیات بر ارزش افزوده** | الگوی مالیات فروش و خرید با نرخ قابل تنظیم (پیش‌فرض ۱۰٪) و الگوی کالای «معاف از ارزش افزوده». |
 | **فاکتور رسمی** | قالب چاپ «IR Official Invoice» مطابق صورتحساب فروش کالا و خدمات: مشخصات فروشنده و خریدار، تخفیف، مالیات هر ردیف، مبلغ به حروف فارسی و تاریخ شمسی. |
 | **سامانه مودیان** | تولید شماره منحصر به فرد مالیاتی ۲۲ کاراکتری هنگام ثبت فاکتور فروش، ساخت داده صورتحساب (header / body) با نام فیلدهای سازمان امور مالیاتی و بررسی کامل بودن آن پیش از ارسال. |
-| **ترجمه** | ترجمه فارسی همه برچسب‌ها و پیام‌های این اپ (ترجمه فارسی خود ERPNext و راست‌چین بودن رابط کاربری در Frappe از قبل وجود دارد). |
+| **ترجمه** | ترجمه فارسی همه برچسب‌ها و پیام‌های این اپ؛ ترجمه همه متن‌های راهنمای راه‌اندازی ماژول‌ها (Onboarding) که در ERPNext ترجمه نشده‌اند؛ و اصلاح ترجمه‌های نادرست ERPNext با اصطلاحات استاندارد حسابداری ایران (مثلاً «Stock» = انبار نه «سهام»، «Quotation» = پیش‌فاکتور، «Item» = کالا، «Trial Balance» = تراز آزمایشی). |
 | **ریال** | تنظیم واحد پول IRR بدون اعشار با قالب `#,###`. |
 
 ## نصب
@@ -85,6 +85,12 @@ python -m pytest erpnext_iran/tests
 bench --site your-site.local set-config allow_tests true
 bench --site your-site.local run-tests --module erpnext_iran.tests.test_integration
 bench --site your-site.local execute erpnext_iran.tests.demo.make   # داده نمونه، فقط روی سایت آزمایشی
+```
+
+ترجمه‌ها در `tools/fa_overrides.py` نگهداری می‌شوند و با دستور زیر در `fa.csv` ادغام می‌شوند (متن انگلیسی راهنماها از سایت خوانده می‌شود تا کلیدها دقیقاً منطبق باشند):
+
+```bash
+./env/bin/python apps/erpnext_iran/tools/update_translations.py your-site.local
 ```
 
 پوشه `test-env/` (کنار این مخزن) یک `docker-compose.yml` برای ساخت سریع سایت آزمایشی ERPNext v15 دارد. پس از ویرایش `ir_official_invoice.html` دستور `python tools/build_print_format.py` را اجرا کنید.
