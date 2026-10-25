@@ -1,0 +1,103 @@
+Iran Tax Details,اطلاعات مالیاتی
+Person Type,نوع شخص
+Natural Person,حقیقی
+Legal Entity,حقوقی
+Civil Partnership,مشارکت مدنی
+Foreign National,اتباع غیر ایرانی
+National ID,کد ملی / شناسه ملی
+National code (10 digits) or legal national ID (11 digits),کد ملی (۱۰ رقم) یا شناسه ملی اشخاص حقوقی (۱۱ رقم)
+Economic Code,کد اقتصادی
+Registration Number,شماره ثبت
+Fiscal Memory ID,شناسه یکتای حافظه مالیاتی
+Moadian unique fiscal memory ID (overrides Iran Localization Settings),شناسه یکتای حافظه مالیاتی سامانه مودیان (بر تنظیمات بومی‌سازی اولویت دارد)
+Moadian Goods/Service ID,شناسه کالا / خدمت مودیان
+13 digit goods/service ID from the Tax Organization catalogue,شناسه ۱۳ رقمی کالا یا خدمت از سامانه سازمان امور مالیاتی
+Moadian Unit Code,کد واحد اندازه‌گیری مودیان
+Iran / Moadian,سامانه مودیان
+Jalali Posting Date,تاریخ شمسی
+Invoice Subject,موضوع صورتحساب
+"1 Original, 2 Correction, 3 Cancellation, 4 Return",۱ اصلی، ۲ اصلاحی، ۳ ابطالی، ۴ برگشت از فروش
+Tax ID,شماره منحصر به فرد مالیاتی
+Moadian Status,وضعیت در سامانه مودیان
+Moadian Reference,شماره پیگیری مودیان
+Pending,در انتظار ارسال
+Sent,ارسال شده
+Accepted,تایید شده
+Rejected,رد شده
+Iran Localization Settings,تنظیمات بومی‌سازی ایران
+Calendar,تقویم
+Jalali Date Display,نمایش تاریخ شمسی
+How Date and Datetime values are shown in the desk,نحوه نمایش تاریخ‌ها در محیط کاربری
+Jalali,شمسی
+Jalali and Gregorian,شمسی و میلادی
+Show Jalali Dates With Persian Digits,نمایش تاریخ شمسی با ارقام فارسی
+Validation,اعتبارسنجی
+Validate National ID and Economic Code,بررسی کد ملی و کد اقتصادی
+Validate Iranian IBAN (Sheba),بررسی شماره شبا
+Check Iranian Postal Codes,بررسی کد پستی
+"Shows a warning only; does not block saving",فقط هشدار می‌دهد و مانع ذخیره نمی‌شود
+Normalize Arabic Letters,اصلاح حروف عربی (ي و ك)
+Value Added Tax,مالیات بر ارزش افزوده
+VAT Rate,نرخ مالیات بر ارزش افزوده
+Combined VAT and levy rate used for new tax templates. Check the current annual budget law.,نرخ مجموع مالیات و عوارض برای الگوهای مالیاتی جدید. نرخ را با قانون بودجه سال جاری تطبیق دهید.
+Moadian (Tax Organization E-Invoicing),سامانه مودیان (صورتحساب الکترونیکی)
+Enable Moadian,فعال‌سازی سامانه مودیان
+Generate the 22 character tax ID and Moadian status on submitted Sales Invoices,تولید شماره منحصر به فرد مالیاتی ۲۲ کاراکتری برای فاکتورهای فروش ثبت‌شده
+Default 6 character fiscal memory ID. A value on the Company overrides it.,شناسه حافظه مالیاتی ۶ کاراکتری پیش‌فرض. مقدار ثبت‌شده در شرکت اولویت دارد.
+Default Invoice Type,نوع پیش‌فرض صورتحساب
+"1 = with buyer details, 2 = without buyer details",۱ = با اطلاعات خریدار، ۲ = بدون اطلاعات خریدار
+VAT Rate must be between 0 and 100,نرخ مالیات باید بین ۰ تا ۱۰۰ باشد
+Fiscal Memory ID must be 6 letters or digits,شناسه حافظه مالیاتی باید ۶ حرف یا رقم باشد
+Set a Fiscal Memory ID here or on each Company before submitting invoices,پیش از ثبت فاکتور، شناسه حافظه مالیاتی را اینجا یا در شرکت وارد کنید
+Reload the page to apply display changes,برای اعمال تغییرات صفحه را دوباره بارگذاری کنید
+National code {0} is not valid,کد ملی {0} معتبر نیست
+Legal entity national ID {0} is not valid,شناسه ملی {0} معتبر نیست
+Invalid National ID,کد ملی نامعتبر
+Economic code {0} is not valid,کد اقتصادی {0} معتبر نیست
+Invalid Economic Code,کد اقتصادی نامعتبر
+Moadian Goods/Service ID must be 13 digits,شناسه کالا / خدمت مودیان باید ۱۳ رقم باشد
+IBAN (Sheba) {0} is not valid,شماره شبای {0} معتبر نیست
+Invalid IBAN,شماره شبا نامعتبر
+"This IBAN belongs to {0}, but the selected bank is {1}",این شماره شبا متعلق به {0} است اما بانک انتخاب‌شده {1} است
+Postal code {0} does not look like a valid Iranian postal code,کد پستی {0} معتبر به نظر نمی‌رسد
+Company {0} already has accounting entries; its chart cannot be replaced,شرکت {0} سند حسابداری دارد و نمی‌توان سرفصل حساب‌های آن را جایگزین کرد
+Select the VAT output and input accounts for {0},حساب‌های مالیات بر ارزش افزوده خرید و فروش شرکت {0} را انتخاب کنید
+VAT and Levy {0}%,مالیات و عوارض ارزش افزوده {0}٪
+VAT {0}%,ارزش افزوده {0}٪
+VAT Exempt,معاف از ارزش افزوده
+Friday,جمعه
+Thursday,پنجشنبه
+Iran Holidays {0},تعطیلات رسمی {0}
+Iranian chart of accounts,سرفصل حساب‌های استاندارد ایران
+VAT templates,الگوهای مالیات بر ارزش افزوده
+Fiscal Year {0},سال مالی {0}
+Holiday List {0},فهرست تعطیلات {0}
+Set the Fiscal Memory ID on Company {0} or in Iran Localization Settings,شناسه حافظه مالیاتی را در شرکت {0} یا تنظیمات بومی‌سازی وارد کنید
+No Moadian sender is configured,هیچ روش ارسالی برای سامانه مودیان تنظیم نشده است
+Jalali Date,تاریخ شمسی
+Example: 1403/01/15,مثال: ۱۴۰۳/۰۱/۱۵
+Invalid Jalali date,تاریخ شمسی نامعتبر است
+Enter Jalali Date,ورود تاریخ شمسی
+Set,ثبت
+Iran Setup,راه‌اندازی ایران
+Iran Setup for {0},راه‌اندازی بومی ایران برای {0}
+Replace chart of accounts with the Iranian standard chart,جایگزینی سرفصل حساب‌ها با سرفصل استاندارد ایران
+Deletes the current accounts and tax templates. Only possible before any transaction.,حساب‌ها و الگوهای مالیاتی فعلی حذف می‌شوند. فقط پیش از ثبت هر سند ممکن است.
+Create VAT templates,ایجاد الگوهای مالیات بر ارزش افزوده
+VAT Output Account,حساب مالیات ارزش افزوده فروش
+VAT Input Account,حساب مالیات ارزش افزوده خرید
+Leave empty when using the Iranian chart,در صورت استفاده از سرفصل ایران خالی بگذارید
+Jalali Fiscal Year,سال مالی شمسی
+Creates Fiscal Year from 1 Farvardin to the end of Esfand,سال مالی از ۱ فروردین تا پایان اسفند ایجاد می‌شود
+Create Holiday List (Fridays and official solar holidays),ایجاد فهرست تعطیلات (جمعه‌ها و تعطیلات رسمی شمسی)
+Thursday is also a weekly holiday,پنجشنبه نیز تعطیل است
+Run,اجرا
+Setting up...,در حال راه‌اندازی...
+Done,انجام شد
+All existing accounts of {0} will be deleted. Continue?,همه حساب‌های فعلی {0} حذف می‌شوند. ادامه می‌دهید؟
+Add Iranian Holidays,افزودن تعطیلات رسمی ایران
+Jalali Year,سال شمسی
+{0} holidays added. Add lunar holidays manually.,{0} روز تعطیل اضافه شد. تعطیلات قمری را دستی وارد کنید.
+Moadian Payload,داده صورتحساب مودیان
+Ready to send,آماده ارسال
+Nos,عدد

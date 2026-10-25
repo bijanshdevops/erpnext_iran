@@ -1,0 +1,155 @@
+{
+ "actions": [],
+ "creation": "2026-10-25 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "calendar_section",
+  "jalali_display",
+  "persian_digits",
+  "validation_section",
+  "validate_national_id",
+  "validate_iban",
+  "column_break_val",
+  "validate_postal_code",
+  "normalize_arabic_letters",
+  "tax_section",
+  "vat_rate",
+  "moadian_section",
+  "moadian_enabled",
+  "moadian_memory_id",
+  "column_break_moa",
+  "moadian_invoice_type"
+ ],
+ "fields": [
+  {
+   "fieldname": "calendar_section",
+   "fieldtype": "Section Break",
+   "label": "Calendar"
+  },
+  {
+   "default": "Jalali and Gregorian",
+   "description": "How Date and Datetime values are shown in the desk",
+   "fieldname": "jalali_display",
+   "fieldtype": "Select",
+   "label": "Jalali Date Display",
+   "options": "Off\nJalali\nJalali and Gregorian"
+  },
+  {
+   "default": "0",
+   "fieldname": "persian_digits",
+   "fieldtype": "Check",
+   "label": "Show Jalali Dates With Persian Digits"
+  },
+  {
+   "fieldname": "validation_section",
+   "fieldtype": "Section Break",
+   "label": "Validation"
+  },
+  {
+   "default": "1",
+   "description": "Customer, Supplier and Company: national code (10 digits) / legal national ID (11 digits) and economic code",
+   "fieldname": "validate_national_id",
+   "fieldtype": "Check",
+   "label": "Validate National ID and Economic Code"
+  },
+  {
+   "default": "1",
+   "fieldname": "validate_iban",
+   "fieldtype": "Check",
+   "label": "Validate Iranian IBAN (Sheba)"
+  },
+  {
+   "fieldname": "column_break_val",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "1",
+   "description": "Shows a warning only; does not block saving",
+   "fieldname": "validate_postal_code",
+   "fieldtype": "Check",
+   "label": "Check Iranian Postal Codes"
+  },
+  {
+   "default": "1",
+   "description": "Replace Arabic ي and ك with Persian ی and ک in names",
+   "fieldname": "normalize_arabic_letters",
+   "fieldtype": "Check",
+   "label": "Normalize Arabic Letters"
+  },
+  {
+   "fieldname": "tax_section",
+   "fieldtype": "Section Break",
+   "label": "Value Added Tax"
+  },
+  {
+   "default": "10",
+   "description": "Combined VAT and levy rate used for new tax templates. Check the current annual budget law.",
+   "fieldname": "vat_rate",
+   "fieldtype": "Percent",
+   "label": "VAT Rate"
+  },
+  {
+   "fieldname": "moadian_section",
+   "fieldtype": "Section Break",
+   "label": "Moadian (Tax Organization E-Invoicing)"
+  },
+  {
+   "default": "0",
+   "description": "Generate the 22 character tax ID and Moadian status on submitted Sales Invoices",
+   "fieldname": "moadian_enabled",
+   "fieldtype": "Check",
+   "label": "Enable Moadian"
+  },
+  {
+   "depends_on": "moadian_enabled",
+   "description": "Default 6 character fiscal memory ID. A value on the Company overrides it.",
+   "fieldname": "moadian_memory_id",
+   "fieldtype": "Data",
+   "label": "Fiscal Memory ID",
+   "length": 6
+  },
+  {
+   "fieldname": "column_break_moa",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "1",
+   "depends_on": "moadian_enabled",
+   "description": "1 = with buyer details, 2 = without buyer details",
+   "fieldname": "moadian_invoice_type",
+   "fieldtype": "Select",
+   "label": "Default Invoice Type",
+   "options": "1\n2"
+  }
+ ],
+ "issingle": 1,
+ "links": [],
+ "modified": "2026-10-25 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "ERPNext Iran",
+ "name": "Iran Localization Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "read": 1,
+   "role": "Accounts Manager",
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

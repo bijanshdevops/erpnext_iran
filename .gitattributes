@@ -1,0 +1,4 @@
+# Frappe runs on Linux; keep LF everywhere regardless of local core.autocrlf
+* text=auto eol=lf
+*.png binary
+*.jpg binary

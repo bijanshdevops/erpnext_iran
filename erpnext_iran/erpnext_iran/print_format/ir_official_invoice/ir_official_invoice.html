@@ -1,0 +1,119 @@
+{%- set company = frappe.get_doc("Company", doc.company) -%}
+{%- set customer = frappe.get_doc("Customer", doc.customer) -%}
+{%- set seller_address = frappe.get_doc("Address", doc.company_address) if doc.company_address else None -%}
+{%- set buyer_address = frappe.get_doc("Address", doc.customer_address) if doc.customer_address else None -%}
+{%- set lines = ir_invoice_lines(doc) -%}
+{%- set totals = ir_invoice_totals(lines) -%}
+{%- macro n(value) -%}{{ "{:,.0f}".format(value or 0) }}{%- endmacro -%}
+{%- macro addr(a) -%}
+	{%- if a -%}{{ a.state or "" }} {{ a.city or "" }} {{ a.address_line1 or "" }} {{ a.address_line2 or "" }}{%- endif -%}
+{%- endmacro -%}
+<style>
+	.ir-invoice { direction: rtl; text-align: right; font-family: Vazirmatn, Tahoma, sans-serif; font-size: 9pt; }
+	.ir-invoice table { width: 100%; border-collapse: collapse; margin-bottom: 6px; }
+	.ir-invoice td, .ir-invoice th { border: 1px solid #333; padding: 3px 5px; vertical-align: middle; }
+	.ir-invoice th { background: #eee; text-align: center; font-weight: bold; }
+	.ir-invoice .title { text-align: center; font-size: 13pt; font-weight: bold; border: none; }
+	.ir-invoice .band { background: #ddd; text-align: center; font-weight: bold; }
+	.ir-invoice .num { text-align: left; direction: ltr; white-space: nowrap; }
+	.ir-invoice .meta td { border: none; }
+	.ir-invoice .sign { height: 70px; vertical-align: top; }
+</style>
+<div class="ir-invoice">
+	<table class="meta">
+		<tr>
+			<td style="width: 30%"></td>
+			<td class="title">صورتحساب فروش کالا و خدمات</td>
+			<td style="width: 30%">
+				شماره: <b>{{ doc.name }}</b><br>
+				تاریخ: <b>{{ jalali_date(doc.posting_date) }}</b>
+				{%- if doc.ir_tax_id %}<br>شماره مالیاتی: <span class="num">{{ doc.ir_tax_id }}</span>{% endif %}
+			</td>
+		</tr>
+	</table>
+
+	<table>
+		<tr><td class="band" colspan="4">مشخصات فروشنده</td></tr>
+		<tr>
+			<td colspan="2">نام شخص حقیقی / حقوقی: <b>{{ company.company_name }}</b></td>
+			<td>شماره اقتصادی: {{ company.ir_economic_code or "" }}</td>
+			<td>شماره / شناسه ملی: {{ company.ir_national_id or "" }}</td>
+		</tr>
+		<tr>
+			<td colspan="2">نشانی: {{ addr(seller_address) }}</td>
+			<td>کد پستی: {{ seller_address.pincode if seller_address else "" }}</td>
+			<td>تلفن: {{ (seller_address.phone if seller_address else "") or company.phone_no or "" }}</td>
+		</tr>
+	</table>
+
+	<table>
+		<tr><td class="band" colspan="4">مشخصات خریدار</td></tr>
+		<tr>
+			<td colspan="2">نام شخص حقیقی / حقوقی: <b>{{ doc.customer_name }}</b></td>
+			<td>شماره اقتصادی: {{ customer.ir_economic_code or "" }}</td>
+			<td>شماره / شناسه ملی: {{ customer.ir_national_id or "" }}</td>
+		</tr>
+		<tr>
+			<td colspan="2">نشانی: {{ addr(buyer_address) }}</td>
+			<td>کد پستی: {{ buyer_address.pincode if buyer_address else "" }}</td>
+			<td>تلفن: {{ buyer_address.phone if buyer_address else "" }}</td>
+		</tr>
+	</table>
+
+	<table>
+		<tr><td class="band" colspan="11">مشخصات کالا یا خدمات مورد معامله</td></tr>
+		<tr>
+			<th>ردیف</th>
+			<th>کد کالا</th>
+			<th>شرح کالا یا خدمات</th>
+			<th>مقدار</th>
+			<th>واحد</th>
+			<th>مبلغ واحد (ریال)</th>
+			<th>مبلغ کل (ریال)</th>
+			<th>مبلغ تخفیف</th>
+			<th>مبلغ کل پس از تخفیف</th>
+			<th>جمع مالیات و عوارض</th>
+			<th>جمع کل پس از تخفیف و مالیات</th>
+		</tr>
+		{%- for line in lines %}
+		<tr>
+			<td style="text-align: center">{{ loop.index }}</td>
+			<td class="num">{{ line.stuff_id or line.item_code or "" }}</td>
+			<td>{{ line.description or "" }}</td>
+			<td class="num">{{ "{:g}".format(line.qty) }}</td>
+			<td>{{ _(line.uom) if line.uom else "" }}</td>
+			<td class="num">{{ n(line.unit_price) }}</td>
+			<td class="num">{{ n(line.before_discount) }}</td>
+			<td class="num">{{ n(line.discount) }}</td>
+			<td class="num">{{ n(line.after_discount) }}</td>
+			<td class="num">{{ n(line.vat_amount) }}</td>
+			<td class="num">{{ n(line.total) }}</td>
+		</tr>
+		{%- endfor %}
+		<tr>
+			<td colspan="6" style="text-align: center"><b>جمع کل</b></td>
+			<td class="num"><b>{{ n(totals.before_discount) }}</b></td>
+			<td class="num"><b>{{ n(totals.discount) }}</b></td>
+			<td class="num"><b>{{ n(totals.after_discount) }}</b></td>
+			<td class="num"><b>{{ n(totals.vat_amount) }}</b></td>
+			<td class="num"><b>{{ n(totals.total) }}</b></td>
+		</tr>
+		<tr>
+			<td colspan="11">مبلغ قابل پرداخت به حروف: <b>{{ amount_in_words_fa(totals.total) }}</b></td>
+		</tr>
+		<tr>
+			<td colspan="11">
+				شرایط و نحوه فروش:
+				{{ "نقدی" if (doc.is_pos and not doc.outstanding_amount) else "غیرنقدی" }}
+				{%- if doc.remarks and doc.remarks != "No Remarks" %} — توضیحات: {{ doc.remarks }}{% endif %}
+			</td>
+		</tr>
+	</table>
+
+	<table>
+		<tr>
+			<td class="sign" style="width: 50%">مهر و امضای فروشنده</td>
+			<td class="sign">مهر و امضای خریدار</td>
+		</tr>
+	</table>
+</div>
