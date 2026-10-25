@@ -25,6 +25,33 @@
 	unicode-range: U+0600-06FF, U+0750-077F, U+0870-089F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF, U+200C-200F;
 }
 
+{#- Persian digits everywhere: the Farsi-Digits edition draws 0-9 as Persian digits -#}
+{%- set fa_digits = frappe.db.get_single_value("Iran Localization Settings", "persian_digits_everywhere") %}
+{%- if fa_digits %}
+@font-face {
+	font-family: "Vazirmatn Digits";
+	src: url("{{ base_url }}/assets/erpnext_iran/fonts/vazirmatn/Vazirmatn-FD-Regular.woff2") format("woff2"),
+		url("{{ base_url }}/assets/erpnext_iran/fonts/vazirmatn/Vazirmatn-FD-Regular.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
+	unicode-range: U+0030-0039;
+}
+
+@font-face {
+	font-family: "Vazirmatn Digits";
+	src: url("{{ base_url }}/assets/erpnext_iran/fonts/vazirmatn/Vazirmatn-FD-Bold.woff2") format("woff2"),
+		url("{{ base_url }}/assets/erpnext_iran/fonts/vazirmatn/Vazirmatn-FD-Bold.ttf") format("truetype");
+	font-weight: bold;
+	font-style: normal;
+	unicode-range: U+0030-0039;
+}
+{%- endif %}
+
 .print-format {
+	font-family: {% if fa_digits %}"Vazirmatn Digits", {% endif %}"Vazirmatn", {{ font }};
+}
+
+{#- Codes and identifiers (tax ID, document number, goods code) keep their own digits -#}
+.print-format .ir-latin-digits {
 	font-family: "Vazirmatn", {{ font }};
 }

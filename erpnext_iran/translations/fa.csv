@@ -105,6 +105,15 @@ Show Partner Logo on Loading Screen,نمایش لوگوی همکار در صفح
 Shown next to the ERPNext logo while the desk loads,هنگام بارگذاری نرم‌افزار کنار لوگوی ERPNext نمایش داده می‌شود
 Partner Logo,لوگوی همکار
 Leave empty to use the Green Lantern of Communications logo,برای استفاده از لوگوی فانوس سبز ارتباطات خالی بگذارید
+Persian Name,نام فارسی
+Rename default warehouses to Persian,تغییر نام انبارهای پیش‌فرض به فارسی
+"Stores, Finished Goods, Work In Progress, Goods In Transit and All Warehouses",انبار اصلی، انبار محصول، کالای در جریان ساخت، کالای در راه و همه انبارها
+Apply Iranian system defaults,اعمال تنظیمات پیش‌فرض ایران
+"For the whole site: time zone Asia/Tehran, currency IRR, date format yyyy-mm-dd, week starting Saturday. Existing date-times are not converted.",برای کل سایت: منطقه زمانی Asia/Tehran، واحد پول IRR، قالب تاریخ yyyy-mm-dd و شروع هفته از شنبه. تاریخ و زمان‌های ثبت‌شده قبلی تبدیل نمی‌شوند.
+Iranian system defaults,تنظیمات پیش‌فرض ایران
+Warehouses: {0},انبارها: {0}
+Persian Digits Everywhere,اعداد فارسی در همه جا
+"Digits 0-9 are drawn as ۰-۹ in the desk, prints and PDFs. Display only: stored values, calculations, exports and typing stay as they are.",ارقام ۰ تا ۹ در محیط نرم‌افزار، چاپ و PDF به شکل فارسی نمایش داده می‌شوند. فقط نمایش تغییر می‌کند و مقادیر ذخیره‌شده، محاسبات، خروجی‌ها و تایپ همان‌طور می‌مانند.
 "
 			The Batch {0} of an item {1} has negative stock in the warehouse {2}{3}.
 			Please add a stock quantity of {4} to proceed with this entry.
@@ -1964,6 +1973,7 @@ UOM,واحد
 UOM Conversion Factor,ضریب تبدیل واحد
 Uncancelled Serial and Batch Bundle,بسته سریال و بچ لغونشده
 Unit of Measure (UOM),واحد اندازه‌گیری (UOM)
+Update Stock,به‌روزرسانی موجودی انبار
 Update Stock Opening Balance,ثبت موجودی افتتاحیه
 Update frequency of Project,تناوب به‌روزرسانی پروژه
 Updating Opening Balances,ثبت مانده‌های افتتاحیه
@@ -2064,10 +2074,3 @@ wkhtmltopdf 0.12.x (with patched qt).,wkhtmltopdf 0.12.x (با qt وصله‌ش�
 {0} {1} is not linked to Supplier {2},{0} {1} به تأمین‌کننده {2} متصل نیست
 {0}: Link field cannot reference DocType {1} without Guest read permission,{0}: فیلد پیوند نمی‌تواند به نوع سند {1} بدون مجوز خواندن مهمان ارجاع دهد
 {} Published,{} منتشر شده
-Persian Name,نام فارسی
-Rename default warehouses to Persian,تغییر نام انبارهای پیش‌فرض به فارسی
-"Stores, Finished Goods, Work In Progress, Goods In Transit and All Warehouses",انبار اصلی، انبار محصول، کالای در جریان ساخت، کالای در راه و همه انبارها
-Apply Iranian system defaults,اعمال تنظیمات پیش‌فرض ایران
-"For the whole site: time zone Asia/Tehran, currency IRR, date format yyyy-mm-dd, week starting Saturday. Existing date-times are not converted.",برای کل سایت: منطقه زمانی Asia/Tehran، واحد پول IRR، قالب تاریخ yyyy-mm-dd و شروع هفته از شنبه. تاریخ و زمان‌های ثبت‌شده قبلی تبدیل نمی‌شوند.
-Iranian system defaults,تنظیمات پیش‌فرض ایران
-Warehouses: {0},انبارها: {0}

@@ -169,6 +169,7 @@ CORRECTIONS = {
 	"Unit of Measure (UOM)": "واحد اندازه‌گیری (UOM)",
 	"UOM Conversion Factor": "ضریب تبدیل واحد",
 	"Stock Reconciliation": "انبارگردانی",
+	"Update Stock": "به‌روزرسانی موجودی انبار",
 	"Stock Settings": "تنظیمات انبار",
 	"Stock Transactions": "تراکنش‌های انبار",
 	"Stock Entry": "سند انبار",

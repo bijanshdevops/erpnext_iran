@@ -9,6 +9,7 @@ def boot_session(bootinfo):
 	bootinfo.erpnext_iran = {
 		"jalali_display": settings.get("jalali_display") or "Off",
 		"persian_digits": settings.get("persian_digits") or 0,
+		"persian_digits_everywhere": settings.get("persian_digits_everywhere") or 0,
 	}
 
 

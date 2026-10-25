@@ -16,6 +16,42 @@
 		"Helvetica Neue", sans-serif;
 }
 
+// Persian digits everywhere (setting "Persian Digits Everywhere", class set in desk.js): the
+// Farsi-Digits edition of Vazirmatn draws 0-9 as ۰-۹. Only the glyphs change; the text stays
+// ASCII digits, so stored values, copy/paste and calculations are unaffected.
+@font-face {
+	font-family: "Vazirmatn Digits";
+	src: url("/assets/erpnext_iran/fonts/vazirmatn/Vazirmatn-FD-Regular.woff2") format("woff2");
+	font-weight: 100 500;
+	font-display: swap;
+	unicode-range: U+0030-0039;
+}
+
+@font-face {
+	font-family: "Vazirmatn Digits";
+	src: url("/assets/erpnext_iran/fonts/vazirmatn/Vazirmatn-FD-Bold.woff2") format("woff2");
+	font-weight: 600 900;
+	font-display: swap;
+	unicode-range: U+0030-0039;
+}
+
+html.ir-fa-digits {
+	--font-stack: "Vazirmatn Digits", "Vazirmatn", "InterVariable", "Inter", "-apple-system",
+		"BlinkMacSystemFont", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+		"Droid Sans", "Helvetica Neue", sans-serif;
+
+	// Codes and identifiers keep their own digits: a tax ID read as «A۱B۲C۳…» is easy to mistype
+	.ir-latin-digits,
+	.frappe-control[data-fieldname="naming_series"] select,
+	.frappe-control[data-fieldname="naming_series"] .control-value,
+	.frappe-control[data-fieldname="ir_tax_id"] input,
+	.frappe-control[data-fieldname="ir_tax_id"] .control-value,
+	.frappe-control[data-fieldname="iban"] input,
+	.frappe-control[data-fieldname="iban"] .control-value {
+		font-family: "Vazirmatn", "InterVariable", "Inter", sans-serif;
+	}
+}
+
 .ir-jalali-hint {
 	margin-top: 4px;
 	display: flex;

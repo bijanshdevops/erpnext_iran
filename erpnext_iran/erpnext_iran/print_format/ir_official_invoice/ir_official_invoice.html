@@ -9,7 +9,7 @@
 	{%- if a -%}{{ a.state or "" }} {{ a.city or "" }} {{ a.address_line1 or "" }} {{ a.address_line2 or "" }}{%- endif -%}
 {%- endmacro -%}
 <style>
-	.ir-invoice { direction: rtl; text-align: right; font-family: Vazirmatn, Tahoma, sans-serif; font-size: 9pt; }
+	.ir-invoice { direction: rtl; text-align: right; font-family: inherit; font-size: 9pt; } /* font: print stylesheet (Vazirmatn, Persian digits) */
 	.ir-invoice table { width: 100%; border-collapse: collapse; margin-bottom: 6px; }
 	.ir-invoice td, .ir-invoice th { border: 1px solid #333; padding: 3px 5px; vertical-align: middle; }
 	.ir-invoice th { background: #eee; text-align: center; font-weight: bold; }
@@ -32,9 +32,9 @@
 			<td style="width: 30%"></td>
 			<td class="title">صورتحساب فروش کالا و خدمات</td>
 			<td style="width: 30%">
-				شماره: <b>{{ doc.name }}</b><br>
+				شماره: <b class="ir-latin-digits" dir="ltr">{{ doc.name }}</b><br>
 				تاریخ: <b>{{ jalali_date(doc.posting_date) }}</b>
-				{%- if doc.ir_tax_id %}<br>شماره مالیاتی: <span class="num">{{ doc.ir_tax_id }}</span>{% endif %}
+				{%- if doc.ir_tax_id %}<br>شماره مالیاتی: <span class="num ir-latin-digits">{{ doc.ir_tax_id }}</span>{% endif %}
 			</td>
 		</tr>
 	</table>
@@ -90,7 +90,7 @@
 		{%- for line in lines %}
 		<tr>
 			<td style="text-align: center">{{ loop.index }}</td>
-			<td class="num code">{{ line.stuff_id or line.item_code or "" }}</td>
+			<td class="num code ir-latin-digits">{{ line.stuff_id or line.item_code or "" }}</td>
 			<td>{{ line.description or "" }}</td>
 			<td class="num">{{ "{:g}".format(line.qty) }}</td>
 			<td>{{ _(line.uom) if line.uom else "" }}</td>

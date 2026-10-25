@@ -7,6 +7,7 @@
   "calendar_section",
   "jalali_display",
   "persian_digits",
+  "persian_digits_everywhere",
   "validation_section",
   "validate_national_id",
   "validate_iban",
@@ -43,6 +44,13 @@
    "fieldname": "persian_digits",
    "fieldtype": "Check",
    "label": "Show Jalali Dates With Persian Digits"
+  },
+  {
+   "default": "1",
+   "description": "Digits 0-9 are drawn as ۰-۹ in the desk, prints and PDFs. Display only: stored values, calculations, exports and typing stay as they are.",
+   "fieldname": "persian_digits_everywhere",
+   "fieldtype": "Check",
+   "label": "Persian Digits Everywhere"
   },
   {
    "fieldname": "validation_section",
