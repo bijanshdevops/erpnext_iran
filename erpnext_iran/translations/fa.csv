@@ -2065,3 +2065,9 @@ wkhtmltopdf 0.12.x (with patched qt).,wkhtmltopdf 0.12.x (با qt وصله‌ش�
 {0}: Link field cannot reference DocType {1} without Guest read permission,{0}: فیلد پیوند نمی‌تواند به نوع سند {1} بدون مجوز خواندن مهمان ارجاع دهد
 {} Published,{} منتشر شده
 Persian Name,نام فارسی
+Rename default warehouses to Persian,تغییر نام انبارهای پیش‌فرض به فارسی
+"Stores, Finished Goods, Work In Progress, Goods In Transit and All Warehouses",انبار اصلی، انبار محصول، کالای در جریان ساخت، کالای در راه و همه انبارها
+Apply Iranian system defaults,اعمال تنظیمات پیش‌فرض ایران
+"For the whole site: time zone Asia/Tehran, currency IRR, date format yyyy-mm-dd, week starting Saturday. Existing date-times are not converted.",برای کل سایت: منطقه زمانی Asia/Tehran، واحد پول IRR، قالب تاریخ yyyy-mm-dd و شروع هفته از شنبه. تاریخ و زمان‌های ثبت‌شده قبلی تبدیل نمی‌شوند.
+Iranian system defaults,تنظیمات پیش‌فرض ایران
+Warehouses: {0},انبارها: {0}

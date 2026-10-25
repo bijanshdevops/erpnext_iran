@@ -20,6 +20,22 @@ erpnext_iran.company_setup_dialog = function (frm) {
 					"Deletes the current accounts and tax templates. Only possible before any transaction."
 				),
 			},
+			{
+				fieldname: "rename_warehouses",
+				fieldtype: "Check",
+				label: __("Rename default warehouses to Persian"),
+				description: __("Stores, Finished Goods, Work In Progress, Goods In Transit and All Warehouses"),
+				default: 1,
+			},
+			{
+				fieldname: "system_defaults",
+				fieldtype: "Check",
+				label: __("Apply Iranian system defaults"),
+				description: __(
+					"For the whole site: time zone Asia/Tehran, currency IRR, date format yyyy-mm-dd, week starting Saturday. Existing date-times are not converted."
+				),
+				default: 1,
+			},
 			{ fieldtype: "Section Break", label: __("Value Added Tax") },
 			{ fieldname: "create_taxes", fieldtype: "Check", label: __("Create VAT templates"), default: 1 },
 			{ fieldname: "vat_rate", fieldtype: "Percent", label: __("VAT Rate"), depends_on: "create_taxes" },

@@ -4,7 +4,7 @@ import frappe
 from frappe import _
 from frappe.utils import cint
 
-from erpnext_iran.setup import chart_of_accounts, iran_calendar, taxes
+from erpnext_iran.setup import chart_of_accounts, iran_calendar, localization, taxes
 from erpnext_iran.utils.settings import get_settings
 
 
@@ -19,10 +19,21 @@ def setup_company(
 	jalali_year=None,
 	create_holiday_list=0,
 	include_thursday=0,
+	rename_warehouses=0,
+	system_defaults=0,
 ):
 	frappe.only_for(("System Manager", "Accounts Manager"))
 	frappe.has_permission("Company", "write", company, throw=True)
 	done = []
+
+	if cint(system_defaults):
+		frappe.only_for("System Manager")
+		done.append(localization.apply_system_defaults())
+
+	if cint(rename_warehouses):
+		renamed = localization.rename_default_warehouses(company)
+		if renamed:
+			done.append(_("Warehouses: {0}").format("، ".join(renamed)))
 
 	if cint(apply_chart):
 		chart_of_accounts.apply_chart(company)

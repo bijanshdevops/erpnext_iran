@@ -98,6 +98,22 @@ class TestIranLocalization(FrappeTestCase):
 		self.assertEqual(frappe.db.get_value("Currency", "IRR", "number_format"), "#,###")
 		self.assertEqual(frappe.db.get_value("Currency", "IRR", "enabled"), 1)
 
+	def test_warehouses_and_system_defaults(self):
+		from erpnext_iran.setup.localization import apply_system_defaults, rename_default_warehouses
+
+		rename_default_warehouses(COMPANY)
+		names = set(frappe.get_all("Warehouse", filters={"company": COMPANY}, pluck="warehouse_name"))
+		self.assertTrue({"همه انبارها", "انبار اصلی", "انبار محصول", "کالای در راه"} <= names, names)
+		stores = frappe.db.get_value("Warehouse", {"company": COMPANY, "warehouse_name": "انبار اصلی"})
+		self.assertEqual(frappe.db.get_value("Warehouse", stores, "parent_warehouse"), f"همه انبارها - {ABBR}")
+		self.assertEqual(rename_default_warehouses(COMPANY), [])  # idempotent
+
+		apply_system_defaults()
+		values = frappe.db.get_values(
+			"System Settings", "System Settings", ["time_zone", "currency", "date_format", "first_day_of_the_week"]
+		)[0]
+		self.assertEqual(tuple(values), ("Asia/Tehran", "IRR", "yyyy-mm-dd", "Saturday"))
+
 	def test_rial_found_by_persian_name(self):
 		from frappe.desk.search import search_link
 
