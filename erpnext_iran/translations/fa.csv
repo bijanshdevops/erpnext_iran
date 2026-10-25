@@ -2064,3 +2064,4 @@ wkhtmltopdf 0.12.x (with patched qt).,wkhtmltopdf 0.12.x (با qt وصله‌ش�
 {0} {1} is not linked to Supplier {2},{0} {1} به تأمین‌کننده {2} متصل نیست
 {0}: Link field cannot reference DocType {1} without Guest read permission,{0}: فیلد پیوند نمی‌تواند به نوع سند {1} بدون مجوز خواندن مهمان ارجاع دهد
 {} Published,{} منتشر شده
+Persian Name,نام فارسی

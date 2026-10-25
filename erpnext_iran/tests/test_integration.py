@@ -96,6 +96,15 @@ class TestIranLocalization(FrappeTestCase):
 		]:
 			self.assertTrue(frappe.get_meta(doctype).has_field(fieldname), f"{doctype}.{fieldname}")
 		self.assertEqual(frappe.db.get_value("Currency", "IRR", "number_format"), "#,###")
+		self.assertEqual(frappe.db.get_value("Currency", "IRR", "enabled"), 1)
+
+	def test_rial_found_by_persian_name(self):
+		from frappe.desk.search import search_link
+
+		results = search_link("Currency", "ریال", page_length=20)
+		self.assertIn("IRR", [r["value"] for r in results])
+		irr = next(r for r in results if r["value"] == "IRR")
+		self.assertIn("ریال ایران", irr.get("description") or "")
 		self.assertTrue(frappe.db.exists("Print Format", "IR Official Invoice"))
 
 	def test_company_name_normalized(self):
