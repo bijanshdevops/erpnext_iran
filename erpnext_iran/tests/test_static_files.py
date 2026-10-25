@@ -88,6 +88,23 @@ class TestShippedFiles(unittest.TestCase):
 		html = (folder / "ir_official_invoice.html").read_text(encoding="utf-8")
 		self.assertEqual(doc["html"], html, "run tools/build_print_format.py")
 
+	def test_override_placeholders_and_tags(self):
+		"""Every Persian override keeps the source's {0}/{}/%s placeholders and HTML tags."""
+		import re
+		import sys
+
+		sys.path.insert(0, str(APP.parent / "tools"))
+		from fa_missing import MISSING
+		from fa_overrides import CORRECTIONS, FORM_TOURS
+
+		placeholder = re.compile(r"\{\{.*?\}\}|\{[^{}]*\}|%s|%\(\w+\)s")
+		tag = re.compile(r"</?[a-zA-Z][^>]*>")
+		for table in (MISSING, CORRECTIONS, FORM_TOURS):
+			for key, persian in table.items():
+				source = key[0] if isinstance(key, tuple) else key
+				self.assertEqual(sorted(placeholder.findall(source)), sorted(placeholder.findall(persian)), source)
+				self.assertEqual(sorted(tag.findall(source)), sorted(tag.findall(persian)), source)
+
 	def test_translations(self):
 		with open(APP / "translations" / "fa.csv", encoding="utf-8", newline="") as f:
 			rows = list(csv.reader(f))

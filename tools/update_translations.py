@@ -1,4 +1,4 @@
-"""Merge tools/fa_overrides.py into erpnext_iran/translations/fa.csv.
+"""Merge tools/fa_missing.py and tools/fa_overrides.py into erpnext_iran/translations/fa.csv.
 
 Needs a site (onboarding English is read from its records):
 
@@ -16,6 +16,7 @@ APP = pathlib.Path(__file__).resolve().parent.parent
 CSV_PATH = APP / "erpnext_iran" / "translations" / "fa.csv"
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+from fa_missing import MISSING  # noqa: E402
 from fa_overrides import CORRECTIONS, FORM_TOURS, ONBOARDING  # noqa: E402
 
 
@@ -40,7 +41,9 @@ def main(site):
 	frappe.connect()
 	sources = onboarding_sources(frappe)
 
-	new_rows = dict(CORRECTIONS)
+	# MISSING first so that hand-picked CORRECTIONS win where both define a string
+	new_rows = dict(MISSING)
+	new_rows.update(CORRECTIONS)
 	new_rows.update(FORM_TOURS)
 	stale = []
 	for key, persian in ONBOARDING.items():
@@ -58,6 +61,12 @@ def main(site):
 
 	def row_key(row):
 		return (row[0], row[2]) if len(row) > 2 and row[2] else row[0]
+
+	# frappe._() strips its input before the lookup, desk JS does not: give padded strings
+	# (e.g. "Date: ") a stripped key too
+	for key, persian in list(new_rows.items()):
+		if isinstance(key, str) and key != key.strip() and key.strip() not in new_rows:
+			new_rows[key.strip()] = persian.strip()
 
 	with open(CSV_PATH, encoding="utf-8", newline="") as f:
 		kept = [row for row in csv.reader(f) if row and row_key(row) not in new_rows]

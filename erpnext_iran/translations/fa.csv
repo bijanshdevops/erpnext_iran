@@ -105,6 +105,17 @@ Show Partner Logo on Loading Screen,نمایش لوگوی همکار در صفح
 Shown next to the ERPNext logo while the desk loads,هنگام بارگذاری نرم‌افزار کنار لوگوی ERPNext نمایش داده می‌شود
 Partner Logo,لوگوی همکار
 Leave empty to use the Green Lantern of Communications logo,برای استفاده از لوگوی فانوس سبز ارتباطات خالی بگذارید
+"
+			The Batch {0} of an item {1} has negative stock in the warehouse {2}{3}.
+			Please add a stock quantity of {4} to proceed with this entry.
+			If it is not possible to make an adjustment entry, please enable 'Allow Negative Stock for Batch' in the batch {0} or Stock Settings to proceed.
+			However, enabling this setting may lead to negative stock in the system.
+			So please ensure the stock levels are adjusted as soon as possible to maintain the correct valuation rate.","
+بچ {0} کالای {1} در انبار {2}{3} موجودی منفی دارد.
+برای ادامه این سند، {4} واحد موجودی اضافه کنید.
+اگر ثبت اصلاحی ممکن نیست، «اجازه موجودی منفی برای بچ» را در بچ {0} یا در تنظیمات انبار فعال کنید.
+البته فعال کردن این تنظیم ممکن است به موجودی منفی در سیستم منجر شود.
+پس موجودی را هر چه زودتر اصلاح کنید تا نرخ ارزش‌گذاری درست بماند."
 "# Account Settings
 
 In ERPNext, Accounting features are configurable as per your business needs. Accounts Settings is the place to define some of your accounting preferences like:
@@ -133,6 +144,29 @@ In ERPNext, Accounting features are configurable as per your business needs. Acc
  - ترجیحات مالیاتی
  - ترجیحات حسابداری معوق
 "
+"# Account Settings
+
+This is a crucial piece of configuration. There are various account settings in ERPNext to restrict and configure actions in the Accounting module.
+
+The following settings are avaialble for you to configure
+
+1. Account Freezing 
+2. Credit and Overbilling
+3. Invoicing and Tax Automations
+4. Balance Sheet configurations
+
+There's much more, you can check it all out in this step","# تنظیمات حسابداری
+
+این یکی از مهم‌ترین تنظیمات است. در ERPNext تنظیمات مختلفی برای محدود کردن و پیکربندی کارها در ماژول حسابداری وجود دارد.
+
+تنظیمات قابل پیکربندی:
+
+1. مسدود کردن حساب‌ها
+2. اعتبار و صورتحساب بیش از سفارش
+3. خودکارسازی صدور فاکتور و مالیات
+4. تنظیمات ترازنامه
+
+موارد بیشتری هم هست که در این مرحله می‌بینید"
 "# Add an Existing Asset
 
 If you are just starting with ERPNext, you will need to enter Assets you already possess. You can add them as existing fixed assets in ERPNext. Please note that you will have to make a Journal Entry separately updating the opening balance in the fixed asset account.","# افزودن دارایی موجود
@@ -143,6 +177,21 @@ If you are just starting with ERPNext, you will need to enter Assets you already
 A Sales Invoice is a bill that you send to your Customers against which the Customer makes the payment. Sales Invoice is an accounting transaction. On submission of Sales Invoice, the system updates the receivable and books income against a Customer Account.","# درباره فاکتور فروش
 
 فاکتور فروش صورتحسابی است که برای مشتری می‌فرستید و مشتری بر اساس آن پرداخت می‌کند. فاکتور فروش یک سند حسابداری است؛ با ثبت آن، سیستم حساب دریافتنی را به‌روز و درآمد را به حساب مشتری ثبت می‌کند."
+"# All about sales invoice
+
+A Sales Invoice is a bill that you send to your Customers against which the Customer makes the payment. Sales Invoice is an accounting transaction. On submission of Sales Invoice, the system updates the receivable and books income against a Customer Account.
+
+Here's the flow of how a sales invoice is generally created
+
+
+![Sales Flow](https://docs.erpnext.com/docs/assets/img/accounts/so-flow.png)","# درباره فاکتور فروش
+
+فاکتور فروش صورتحسابی است که برای مشتری می‌فرستید و مشتری بر اساس آن پرداخت می‌کند. فاکتور فروش یک سند حسابداری است؛ با ثبت آن، سیستم حساب دریافتنی را به‌روز و درآمد را به حساب مشتری ثبت می‌کند.
+
+روند معمول ایجاد فاکتور فروش:
+
+
+![روند فروش](https://docs.erpnext.com/docs/assets/img/accounts/so-flow.png)"
 "# Asset Category
 
 An Asset Category classifies different assets of a Company.
@@ -310,6 +359,58 @@ Through Customer’s master, you can effectively track essentials like:
  - حساب‌های دریافتنی
  - سقف و مهلت اعتبار
 "
+"# Create a Letter Head
+
+A Letter Head contains your organization's name, logo, address, etc which appears at the header and footer portion in documents. You can learn more about Setting up Letter Head in ERPNext here.","# ایجاد سربرگ
+
+سربرگ شامل نام، لوگو، نشانی و ... سازمان شماست که در بالا و پایین اسناد نمایش داده می‌شود. درباره تنظیم سربرگ در ERPNext می‌توانید اینجا بیشتر بخوانید."
+"# Create a Letter Head
+
+A Letter Head contains your organization's name, logo, address, etc which appears at the header and footer portion in documents. You can learn more about Setting up Letter Head in ERPNext here.
+","# ایجاد سربرگ
+
+سربرگ شامل نام، لوگو، نشانی و ... سازمان شماست که در بالا و پایین اسناد نمایش داده می‌شود. درباره تنظیم سربرگ در ERPNext می‌توانید اینجا بیشتر بخوانید.
+"
+"# Create a Quotation
+
+Let’s get started with business transactions by creating your first Quotation. You can create a Quotation for an existing customer or a prospect. It will be an approved document, with items you sell and the proposed price + taxes applied. After completing the instructions, you will get a Quotation in a ready to share print format.","# ایجاد پیش‌فاکتور
+
+معاملات را با ایجاد اولین پیش‌فاکتور شروع کنیم. پیش‌فاکتور را می‌توانید برای مشتری فعلی یا مشتری بالقوه بسازید. این سند شامل کالاهای فروشی، قیمت پیشنهادی و مالیات‌هاست و پس از تکمیل مراحل، پیش‌فاکتوری آماده چاپ و ارسال خواهید داشت."
+"# Create a Supplier
+
+Also known as Vendor, is a master at the center of your purchase transactions. Suppliers are linked in Request for Quotation, Purchase Orders, Receipts, and Payments. Suppliers can be either numbered or identified by name.
+
+Through Supplier’s master, you can effectively track essentials like:
+ - Supplier’s multiple address and contacts
+ - Account Receivables
+ - Credit Limit and Credit Period","# ایجاد تأمین‌کننده
+
+تأمین‌کننده (فروشنده) اطلاعات پایه‌ای است که در مرکز معاملات خرید قرار دارد و در درخواست استعلام قیمت، سفارش خرید، رسید و پرداخت به کار می‌رود. تأمین‌کنندگان را می‌توان با شماره یا با نام شناسایی کرد.
+
+با اطلاعات پایه تأمین‌کننده می‌توانید موارد زیر را پیگیری کنید:
+ - نشانی‌ها و مخاطبان متعدد تأمین‌کننده
+ - حساب‌های پرداختنی
+ - سقف و مهلت اعتبار"
+"# Create a Supplier
+
+Also known as Vendor, is a master at the center of your purchase transactions. Suppliers are linked in Request for Quotation, Purchase Orders, Receipts, and Payments. Suppliers can be either numbered or identified by name.
+
+Through Supplier’s master, you can effectively track essentials like:
+ - Supplier’s multiple address and contacts
+ - Account Receivables
+ - Credit Limit and Credit Period
+","# ایجاد تأمین‌کننده
+
+تأمین‌کننده (فروشنده) اطلاعات پایه‌ای است که در مرکز معاملات خرید قرار دارد و در درخواست استعلام قیمت، سفارش خرید، رسید و پرداخت به کار می‌رود. تأمین‌کنندگان را می‌توان با شماره یا با نام شناسایی کرد.
+
+با اطلاعات پایه تأمین‌کننده می‌توانید موارد زیر را پیگیری کنید:
+ - نشانی‌ها و مخاطبان متعدد تأمین‌کننده
+ - حساب‌های پرداختنی
+ - سقف و مهلت اعتبار
+"
+"# Create a Supplier
+In this step we will create a **Supplier**. If you have already created a **Supplier** you can skip this step.","# ایجاد تأمین‌کننده
+در این مرحله یک **تأمین‌کننده** می‌سازیم. اگر قبلاً **تأمین‌کننده** ساخته‌اید، می‌توانید این مرحله را رد کنید."
 "# Create a Work Order
 
 A Work Order or a Job order is given to the manufacturing shop floor by the Production Manager to initiate the manufacturing of a certain quantity of an item. Work Order carriers details of production Item, its BOM, quantities to be manufactured, and operations.
@@ -366,6 +467,13 @@ Items are integral to everything you do in ERPNext - from billing, purchasing to
 
 کالاها در همه کارهای ERPNext نقش اصلی دارند؛ از صدور صورتحساب و خرید تا مدیریت موجودی. هر چیزی که می‌خرید یا می‌فروشید، چه محصول فیزیکی و چه خدمت، یک کالاست. کالا می‌تواند انبارشی، غیرانبارشی، دارای گونه، سریال‌دار، بچ‌دار، دارایی و ... باشد.
 "
+"# Create an Item
+The Stock module deals with the movement of items.
+
+In this step we will create an  [**Item**](https://docs.erpnext.com/docs/user/manual/en/stock/item).","# ایجاد کالا
+ماژول انبار با جابه‌جایی کالاها سروکار دارد.
+
+در این مرحله یک [**کالا**](https://docs.erpnext.com/docs/user/manual/en/stock/item) می‌سازیم."
 "# Create first Purchase Order
 
 Purchase Order is at the heart of your buying transactions. In ERPNext, Purchase Order can can be created against a Purchase Material Request (indent) and Supplier Quotation as well.  Purchase Orders is also linked to Purchase Receipt and Purchase Invoices, allowing you to keep a birds-eye view on your purchase deals.","# ایجاد اولین سفارش خرید
@@ -423,6 +531,14 @@ Production Plan helps in production and material planning for the Items planned 
 
 برنامه تولید به برنامه‌ریزی تولید و مواد برای کالاهای در دست تولید کمک می‌کند. این کالاها می‌توانند از طریق سفارش فروش (برای مشتری) یا درخواست کالا (داخلی) تعهد شوند.
 "
+"# Import Data from Spreadsheet
+
+In ERPNext, you can easily migrate your historical data using spreadsheets. You can use it for migrating not just masters (like Customer, Supplier, Items), but also for transactions like (outstanding invoices, opening stock and accounting entries, etc).","# ورود داده از صفحه‌گسترده
+
+در ERPNext به‌راحتی می‌توانید داده‌های قبلی را با صفحه‌گسترده منتقل کنید؛ نه فقط اطلاعات پایه (مانند مشتری، تأمین‌کننده و کالا) بلکه تراکنش‌هایی مانند فاکتورهای باز، موجودی افتتاحیه و اسناد حسابداری."
+"# Introduction to Stock Entry
+This video will give a quick introduction to [**Stock Entry**](https://docs.erpnext.com/docs/user/manual/en/stock/stock-entry).","# آشنایی با سند انبار
+این ویدیو معرفی کوتاهی از [**سند انبار**](https://docs.erpnext.com/docs/user/manual/en/stock/stock-entry) است."
 "# Manage Stock Movements
 Stock entry allows you to register the movement of stock for various purposes like transfer, received, issues, repacked, etc. To address issues related to theft and pilferages,  you can always ensure that the movement of goods happens against a document reference Stock Entry in ERPNext.
 
@@ -430,6 +546,11 @@ Let’s get a quick walk-through on the various scenarios covered in Stock Entry
 با ثبت انبار، جابه‌جایی موجودی را برای اهدافی مانند انتقال، دریافت، صدور، بسته‌بندی مجدد و ... ثبت می‌کنید. برای جلوگیری از سرقت و کسری، می‌توانید مطمئن شوید که هر جابه‌جایی کالا با یک سند ثبت انبار در ERPNext انجام می‌شود.
 
 برای آشنایی سریع با حالت‌های مختلف ثبت انبار، [*این ویدیو*](https://www.youtube.com/watch?v=Njt107hlY3I) را ببینید."
+"# Navigation in ERPNext
+
+Ease of navigating and browsing around the ERPNext is one of our core strengths. In the following video, you will learn how to reach a specific feature in ERPNext via module page or AwesomeBar.","# جابه‌جایی در ERPNext
+
+سادگی جابه‌جایی و گشتن در ERPNext یکی از نقاط قوت اصلی آن است. در ویدیوی زیر می‌بینید چگونه از صفحه ماژول یا نوار جستجو به هر بخش ERPNext برسید."
 "# Purchase an Asset
 
 Assets purchases process if done following the standard Purchase cycle. If capital work in progress is enabled in Asset Category, Asset will be created as soon as Purchase Receipt is created for it. You can quickly create a Purchase Receipt for Asset and see its impact on books of accounts.","# خرید دارایی
@@ -505,6 +626,26 @@ CRM and Selling module’s features are configurable as per your business needs.
  - نام‌گذاری مشتریان و مقادیر پیش‌فرض
  - ترجیحات صورتحساب و ارسال در معاملات فروش
 "
+"# Set Up a Company
+
+A company is a legal entity for which you will set up your books of account and create accounting transactions. In ERPNext, you can create multiple companies, and establish relationships (group/subsidiary) among them.
+
+Within the company master, you can capture various default accounts for that Company and set crucial settings related to the accounting methodology followed for a company.","# راه‌اندازی شرکت
+
+شرکت شخصیت حقوقی‌ای است که دفاتر حسابداری و اسناد حسابداری آن را در نرم‌افزار ثبت می‌کنید. در ERPNext می‌توانید چند شرکت بسازید و رابطه گروه و زیرمجموعه بین آن‌ها تعریف کنید.
+
+در اطلاعات پایه شرکت، حساب‌های پیش‌فرض و تنظیمات مهم مربوط به روش حسابداری شرکت را تعیین می‌کنید."
+"# Set Up a Company
+
+A company is a legal entity for which you will set up your books of account and create accounting transactions. In ERPNext, you can create multiple companies, and establish relationships (group/subsidiary) among them.
+
+Within the company master, you can capture various default accounts for that Company and set crucial settings related to the accounting methodology followed for a company.
+","# راه‌اندازی شرکت
+
+شرکت شخصیت حقوقی‌ای است که دفاتر حسابداری و اسناد حسابداری آن را در نرم‌افزار ثبت می‌کنید. در ERPNext می‌توانید چند شرکت بسازید و رابطه گروه و زیرمجموعه بین آن‌ها تعریف کنید.
+
+در اطلاعات پایه شرکت، حساب‌های پیش‌فرض و تنظیمات مهم مربوط به روش حسابداری شرکت را تعیین می‌کنید.
+"
 "# Setting up Taxes
 
 ERPNext lets you configure your taxes so that they are automatically applied in your buying and selling transactions. You can configure them globally or even on Items. ERPNext taxes are pre-configured for most regions.","# تنظیم مالیات‌ها
@@ -552,36 +693,317 @@ Once opening stocks are updated, you can create transactions like manufacturing 
 Once you close the financial statement in previous accounting software, you can update the same as opening in your ERPNext's Balance Sheet accounts. This will allow you to get complete financial statements from ERPNext in the coming years, and discontinue the parallel accounting system right away.","# ثبت مانده‌های افتتاحیه
 
 پس از بستن حساب‌ها در نرم‌افزار حسابداری قبلی، همان مانده‌ها را به‌عنوان افتتاحیه در حساب‌های ترازنامه ERPNext ثبت کنید. به این ترتیب صورت‌های مالی کامل سال‌های آینده را از ERPNext می‌گیرید و می‌توانید فوراً سیستم حسابداری موازی را کنار بگذارید."
+"# View Warehouse
+In ERPNext the term 'warehouse' can be thought of as a storage location.
+
+Warehouses are arranged in ERPNext in a tree like structure, where multiple sub-warehouses can be grouped under a single warehouse.
+
+In this step we will view the [**Warehouse Tree**](https://docs.erpnext.com/docs/user/manual/en/stock/warehouse#21-tree-view) to view the [**Warehouses**](https://docs.erpnext.com/docs/user/manual/en/stock/warehouse) that are set by default.","# مشاهده انبارها
+در ERPNext «انبار» را می‌توان محل نگهداری کالا دانست.
+
+انبارها در ERPNext ساختار درختی دارند و چند زیرانبار می‌توانند زیر یک انبار گروه شوند.
+
+در این مرحله [**درخت انبارها**](https://docs.erpnext.com/docs/user/manual/en/stock/warehouse#21-tree-view) را باز می‌کنیم تا [**انبارهای**](https://docs.erpnext.com/docs/user/manual/en/stock/warehouse) پیش‌فرض را ببینیم."
+"## Products and Services
+
+Depending on the nature of your business, you might be selling products or services to your clients or even both. 
+ERPNext is optimized for itemized management of your sales and purchase.
+
+The **Item Master**  is where you can add all your sales items. If you are in services, you can create an Item for each service that you offer. If you run a manufacturing business, the same master is used for keeping a record of raw materials, sub-assemblies etc.
+
+Completing the Item Master is very essential for the successful implementation of ERPNext. We have a brief video introducing the item master for you, you can watch it in the next step.","## محصولات و خدمات
+
+بسته به نوع کسب‌وکار، ممکن است به مشتریان محصول، خدمت یا هر دو بفروشید.
+ERPNext برای مدیریت تفکیکی فروش و خرید کالاها طراحی شده است.
+
+در **اطلاعات پایه کالا** همه کالاهای فروشی را اضافه می‌کنید. اگر کارتان خدماتی است، برای هر خدمت یک کالا بسازید. در کسب‌وکار تولیدی هم همین اطلاعات پایه برای مواد اولیه، قطعات نیمه‌ساخته و ... به کار می‌رود.
+
+تکمیل اطلاعات پایه کالا برای پیاده‌سازی موفق ERPNext بسیار مهم است. در مرحله بعد ویدیوی کوتاهی درباره آن می‌بینید."
+"## Who is a Customer?
+
+A customer, who is sometimes known as a client, buyer, or purchaser is the one who receives goods, services, products, or ideas, from a seller for a monetary consideration.
+
+Every customer needs to be assigned a unique id. Customer name itself can be the id or you can set a naming series for ids to be generated in Selling Settings.
+
+Just like the supplier, let's quickly create a customer.","## مشتری کیست؟
+
+مشتری، که خریدار یا ارباب‌رجوع هم نامیده می‌شود، کسی است که در برابر پرداخت وجه، کالا، خدمت یا محصولی از فروشنده دریافت می‌کند.
+
+هر مشتری باید شناسه یکتایی داشته باشد. نام مشتری می‌تواند خودش شناسه باشد، یا در تنظیمات فروش سری شماره‌گذاری برای ساخت شناسه تعیین کنید.
+
+مانند تأمین‌کننده، سریع یک مشتری بسازیم."
+"## Who is a Supplier?
+
+Suppliers are companies or individuals who provide you with products or services. ERPNext has comprehensive features for purchase cycles. 
+
+Let's quickly create a supplier with the minimal details required. You need the name of the supplier, assign the supplier to a group, and select the type of the supplier, viz. Company or Individual.","## تأمین‌کننده کیست؟
+
+تأمین‌کنندگان شرکت‌ها یا اشخاصی هستند که کالا یا خدمات در اختیار شما می‌گذارند. ERPNext امکانات کاملی برای چرخه خرید دارد.
+
+سریع یک تأمین‌کننده با حداقل اطلاعات لازم بسازیم: نام تأمین‌کننده، گروه آن و نوع آن (شرکت یا فرد)."
+% Complete must be between 0 and 100,درصد پیشرفت باید بین ۰ و ۱۰۰ باشد
 % Ordered,٪ سفارش داده شده
 % Received,٪ دریافت شده
+% of Lost Quotations,درصد پیش‌فاکتورهای از دست رفته
+'Days Since Last Order' must be greater than zero,«روزهای پس از آخرین سفارش» باید بیشتر از صفر باشد
+'Verification Link Expiry Duration' must be between 15 to 60 minutes.,«مدت اعتبار پیوند تأیید» باید بین ۱۵ تا ۶۰ دقیقه باشد.
+"<div class=""well"">
+    Edit list of Series in the box. Rules:
+    <ul>
+        <li>Each Series Prefix on a new line.</li>
+        <li>Allowed special characters are ""/"" and ""-""</li>
+        <li>
+            Optionally, set the number of digits in the series using dot (.)
+            followed by hashes (#). For example, "".####"" means that the series
+            will have four digits. Default is five digits.
+        </li>
+        <li>
+            You can also use variables in the series name by putting them
+            between (.) dots
+            <br>
+            Supported Variables:
+            <ul>
+                <li><code>.YYYY.</code> - Year in 4 digits</li>
+                <li><code>.YY.</code> - Year in 2 digits</li>
+                <li><code>.MM.</code> - Month</li>
+                <li><code>.DD.</code> - Day of month</li>
+                <li><code>.WW.</code> - Week of the year</li>
+                <li><code>.FY.</code> - Fiscal Year</li>
+                <li>
+                    <code>.{fieldname}.</code> - fieldname on the document e.g.
+                    <code>branch</code>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    Examples:
+    <ul>
+        <li>INV-</li>
+        <li>INV-10-</li>
+        <li>INVK-</li>
+        <li>INV-.YYYY.-.{branch}.-.MM.-.####</li>
+    </ul>
+</div>
+<br>","<div class=""well"">
+    فهرست سری‌ها را در کادر ویرایش کنید. قواعد:
+    <ul>
+        <li>هر پیشوند سری در یک خط جداگانه.</li>
+        <li>نویسه‌های ویژه مجاز «/» و «-» هستند</li>
+        <li>
+            می‌توانید تعداد رقم‌های سری را با نقطه (.) و پس از آن علامت # تعیین کنید.
+            مثلاً «.####» یعنی سری چهار رقمی است. پیش‌فرض پنج رقم است.
+        </li>
+        <li>
+            می‌توانید متغیرها را بین دو نقطه (.) در نام سری بگذارید
+            <br>
+            متغیرهای پشتیبانی‌شده:
+            <ul>
+                <li><code>.YYYY.</code> - سال چهار رقمی</li>
+                <li><code>.YY.</code> - سال دو رقمی</li>
+                <li><code>.MM.</code> - ماه</li>
+                <li><code>.DD.</code> - روز ماه</li>
+                <li><code>.WW.</code> - هفته سال</li>
+                <li><code>.FY.</code> - سال مالی</li>
+                <li>
+                    <code>.{fieldname}.</code> - نام فیلدی از سند، مثلاً
+                    <code>branch</code>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    مثال‌ها:
+    <ul>
+        <li>INV-</li>
+        <li>INV-10-</li>
+        <li>INVK-</li>
+        <li>INV-.YYYY.-.{branch}.-.MM.-.####</li>
+    </ul>
+</div>
+<br>"
+"<div class=""well"">
+    Edit list of Series in the box. Rules:
+    <ul>
+        <li>Each Series Prefix on a new line.</li>
+        <li>Allowed special characters are ""/"" and ""-""</li>
+        <li>
+            Optionally, set the number of digits in the series using dot (.)
+            followed by hashes (#). For example, "".####"" means that the series
+            will have four digits. Default is five digits.
+        </li>
+        <li>
+            You can also use variables in the series name by putting them
+            between (.) dots
+            <br>
+            Supported Variables:
+            <ul>
+                <li><code>.YYYY.</code> - Year in 4 digits</li>
+                <li><code>.YY.</code> - Year in 2 digits</li>
+                <li><code>.MM.</code> - Month</li>
+                <li><code>.DD.</code> - Day of month</li>
+                <li><code>.WW.</code> - Week of the year</li>
+                <li><code>.FY.</code> - Fiscal Year</li>
+                <li>
+                    <code>.{fieldname}.</code> - fieldname on the document e.g.
+                    <code>branch</code>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    Examples:
+    <ul>
+        <li>INV-</li>
+        <li>INV-10-</li>
+        <li>INVK-</li>
+        <li>INV-.YYYY.-.{branch}.-.MM.-.####</li>
+    </ul>
+</div>
+<br>
+","<div class=""well"">
+    فهرست سری‌ها را در کادر ویرایش کنید. قواعد:
+    <ul>
+        <li>هر پیشوند سری در یک خط جداگانه.</li>
+        <li>نویسه‌های ویژه مجاز «/» و «-» هستند</li>
+        <li>
+            می‌توانید تعداد رقم‌های سری را با نقطه (.) و پس از آن علامت # تعیین کنید.
+            مثلاً «.####» یعنی سری چهار رقمی است. پیش‌فرض پنج رقم است.
+        </li>
+        <li>
+            می‌توانید متغیرها را بین دو نقطه (.) در نام سری بگذارید
+            <br>
+            متغیرهای پشتیبانی‌شده:
+            <ul>
+                <li><code>.YYYY.</code> - سال چهار رقمی</li>
+                <li><code>.YY.</code> - سال دو رقمی</li>
+                <li><code>.MM.</code> - ماه</li>
+                <li><code>.DD.</code> - روز ماه</li>
+                <li><code>.WW.</code> - هفته سال</li>
+                <li><code>.FY.</code> - سال مالی</li>
+                <li>
+                    <code>.{fieldname}.</code> - نام فیلدی از سند، مثلاً
+                    <code>branch</code>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    مثال‌ها:
+    <ul>
+        <li>INV-</li>
+        <li>INV-10-</li>
+        <li>INVK-</li>
+        <li>INV-.YYYY.-.{branch}.-.MM.-.####</li>
+    </ul>
+</div>
+<br>
+"
+"<p><strong>{{ __(""Condition Examples"") }}:</strong></p>
+<pre><code class=""language-python"">doc.status==""Open""<br>doc.due_date==nowdate()<br>doc.total &gt; 40000
+</code></pre>","<p><strong>{{ __(""Condition Examples"") }}:</strong></p>
+<pre><code class=""language-python"">doc.status==""Open""<br>doc.due_date==nowdate()<br>doc.total &gt; 40000
+</code></pre>"
+"<p><strong>{{ __(""Condition Examples"") }}:</strong></p>
+<pre><code class=""language-python"">doc.status==""Open""<br>doc.due_date==nowdate()<br>doc.total &gt; 40000
+</code></pre>
+","<p><strong>{{ __(""Condition Examples"") }}:</strong></p>
+<pre><code class=""language-python"">doc.status==""Open""<br>doc.due_date==nowdate()<br>doc.total &gt; 40000
+</code></pre>
+"
+"<p><strong>{{ __(""Condition Examples"") }}:</strong></p>
+<pre>doc.status==""Open""<br>doc.due_date==nowdate()<br>doc.total &gt; 40000
+</pre>","<p><strong>{{ __(""Condition Examples"") }}:</strong></p>
+<pre>doc.status==""Open""<br>doc.due_date==nowdate()<br>doc.total &gt; 40000
+</pre>"
+"<span class=""h4""><b>Integrations</b></span>","<span class=""h4""><b>یکپارچه‌سازی‌ها</b></span>"
 "<span class=""h4""><b>Masters &amp; Reports</b></span>","<span class=""h4""><b>اطلاعات پایه و گزارش‌ها</b></span>"
 "<span class=""h4""><b>Reports & Masters</b></span>","<span class=""h4""><b>گزارش‌ها و اطلاعات پایه</b></span>"
 "<span class=""h4""><b>Reports &amp; Masters</b></span>","<span class=""h4""><b>گزارش‌ها و اطلاعات پایه</b></span>"
 "A Field (or a docfield) defines a property of a DocType. You can define the column name, label, datatype and more for DocFields. For instance, a ToDo doctype has fields description, status and priority. These ultimately become columns in the database table tabToDo.",هر فیلد یکی از ویژگی‌های نوع سند است و نام ستون، برچسب، نوع داده و موارد دیگر آن قابل تعریف است. مثلاً نوع سند «کار» فیلدهای شرح، وضعیت و اولویت دارد که ستون‌های جدول tabToDo در پایگاه داده می‌شوند.
+"A Sales Order is a confirmation of an order from your customer. It is also referred to as Proforma Invoice.
+
+Sales Order at the heart of your sales and purchase transactions. Sales Orders are linked in Delivery Note, Sales Invoices, Material Request, and Maintenance transactions. Through Sales Order, you can track fulfillment of the overall deal towards the customer.","سفارش فروش تأیید سفارش مشتری است و به آن پیش‌فاکتور هم گفته می‌شود.
+
+سفارش فروش قلب معاملات فروش و خرید شماست و به حواله خروج، فاکتور فروش، درخواست کالا و معاملات نگهداری متصل است. با سفارش فروش می‌توانید انجام کامل معامله با مشتری را پیگیری کنید."
+A draft reverse journal for {0} has been created: {1},سند معکوس پیش‌نویس برای {0} ایجاد شد: {1}
+A folder cannot have a File URL,پوشه نمی‌تواند نشانی فایل داشته باشد
 A name by which you will identify this template. You can change this later.,نامی برای شناسایی این الگو؛ بعداً قابل تغییر است.
+A verified appointment cannot be moved back to 'Unverified' status.,قرار ملاقات تأییدشده را نمی‌توان به وضعیت «تأییدنشده» برگرداند.
+Account for Return Entries,حساب اسناد برگشتی
 Accounting Dimension,بُعد حسابداری
 Accounting Masters,اطلاعات پایه حسابداری
 Accounting Period,دوره حسابداری
 Accounts Frozen Upto,حساب‌ها مسدود تا تاریخ
 Accounts Payable,حساب‌های پرداختنی
+Accounts Payable Summary,خلاصه حساب‌های پرداختنی
 Accounts Receivable,حساب‌های دریافتنی
+Accounts Receivable Summary,خلاصه حساب‌های دریافتنی
 Accounts Settings,تنظیمات حسابداری
+"Accounts cannot be removed, as user doesn't have access to all the accounts of {0}.",حساب‌ها قابل حذف نیستند، چون کاربر به همه حساب‌های {0} دسترسی ندارد.
 "Accounts, Invoices, Taxation, and more.",حساب‌ها، فاکتورها، مالیات و بیشتر.
 Action If Same Rate is Not Maintained,اقدام در صورت حفظ نشدن نرخ یکسان
+Action for Expired Unverified Appointments,اقدام برای قرارهای ملاقات تأییدنشده منقضی‌شده
+Action if Same Rate is Not Maintained Throughout  Internal Transaction,اقدام در صورت حفظ نشدن نرخ یکسان در کل تراکنش داخلی
 Actual Qty,مقدار واقعی
+Add Aggregate,افزودن تجمیع
+Add Group By,افزودن گروه‌بندی
 Add Sales Taxes and Charges,افزودن مالیات و هزینه‌های فروش
 Add a row to define Depreciation Method and other details. Note that you can leave Finance Book blank to have it's accounting done in the primary books of accounts.,یک ردیف برای تعیین روش استهلاک و سایر جزئیات اضافه کنید. اگر دفتر مالی را خالی بگذارید، حسابداری در دفاتر اصلی انجام می‌شود.
 Add an Existing Asset,افزودن دارایی موجود
 Add an existing Asset,افزودن دارایی موجود
+Add atleast one voucher to repost.,دست‌کم یک سند برای بازثبت اضافه کنید.
 Add items in the table,کالاها را در جدول اضافه کنید
+Additional Discount has been removed as Pricing Rule {0} is no longer applicable,تخفیف اضافی حذف شد، چون قاعده قیمت‌گذاری {0} دیگر اعمال نمی‌شود
+Additional Discount per Stock Unit,تخفیف اضافی به ازای هر واحد انبار
 Address,نشانی
+Address And Contacts,نشانی و مخاطبان
+Advance Booking Days is mandatory for Appointment Scheduling.,تعداد روزهای رزرو پیش از موعد برای زمان‌بندی قرار ملاقات الزامی است.
+Age as on,سن بدهی در تاریخ
+Ageing Report based on,گزارش سن بدهی بر اساس
+Ageing Report based on ,گزارش سن بدهی بر اساس 
+Aggregate,تجمیع
+Alerts and Notifications,هشدارها و اعلان‌ها
+All Results,همه نتایج
+All Sales Transactions can be tagged against multiple Sales Persons so that you can set and monitor targets.,همه معاملات فروش را می‌توان به چند کارشناس فروش نسبت داد تا اهداف را تعیین و پیگیری کنید.
+All Stock Ledger Entries and Serial and Batch Bundles of the selected vouchers will be cancelled and reposting will be queued. Continue?,همه ثبت‌های دفتر انبار و بسته‌های سریال و بچ اسناد انتخاب‌شده لغو و بازثبت در صف قرار می‌گیرد. ادامه می‌دهید؟
 All Supplier Groups,همه گروه‌های تأمین‌کننده
 Allow Item To Be Added Multiple Times in a Transaction,اجازه افزودن یک کالا در چند ردیف یک تراکنش
 Allow Request for Quotation with Zero Quantity,اجازه درخواست استعلام قیمت با مقدار صفر
 Allow Supplier Quotation with Zero Quantity,اجازه ثبت استعلام قیمت تأمین‌کننده با مقدار صفر
+Allowed Doctypes for Guest Uploads,انواع سند مجاز برای بارگذاری مهمان
+Allowed Users is not required as Frappe CRM is already installed on the site.,چون Frappe CRM روی همین سایت نصب است، «کاربران مجاز» لازم نیست.
+Allowed Users is required for data synchronization from remote Frappe CRM site.,برای همگام‌سازی داده‌ها از سایت Frappe CRM دیگر، «کاربران مجاز» الزامی است.
+Allows printing or PDF download of documents.,اجازه چاپ یا دریافت PDF اسناد را می‌دهد.
+Allows sharing document access with other users.,اجازه اشتراک دسترسی سند با کاربران دیگر را می‌دهد.
+Allows the user to access reports related to the document.,اجازه دسترسی کاربر به گزارش‌های مربوط به سند را می‌دهد.
+Allows the user to create new documents.,اجازه ایجاد سند جدید را به کاربر می‌دهد.
+Allows the user to delete documents.,اجازه حذف اسناد را به کاربر می‌دهد.
+Allows the user to edit existing records they have access to.,اجازه ویرایش رکوردهای موجودی را که کاربر به آن‌ها دسترسی دارد می‌دهد.
+Allows the user to email from the document.,اجازه ارسال ایمیل از سند را به کاربر می‌دهد.
+Allows the user to export data from the Report view.,اجازه خروجی گرفتن از نمای گزارش را به کاربر می‌دهد.
+Allows the user to search and see records.,اجازه جستجو و دیدن رکوردها را به کاربر می‌دهد.
+Allows the user to use Data Import tool to create / update records.,اجازه استفاده از ابزار ورود داده برای ایجاد یا به‌روزرسانی رکوردها را می‌دهد.
+Allows the user to view the document.,اجازه مشاهده سند را به کاربر می‌دهد.
+Allows users to enable the mask property for any field of the respective doctype.,اجازه فعال کردن ویژگی پنهان‌سازی را برای هر فیلد این نوع سند می‌دهد.
 Allows users to submit Request for Quotations with zero quantity. Useful when rates are fixed but the quantities are not. Eg. Rate Contracts.,کاربران می‌توانند درخواست استعلام قیمت را با مقدار صفر ثبت کنند. برای وقتی که نرخ ثابت است اما مقدار هنوز معلوم نیست، مانند قراردادهای نرخ ثابت.
 Allows users to submit Supplier Quotations with zero quantity. Useful when rates are fixed but the quantities are not. Eg. Rate Contracts.,کاربران می‌توانند استعلام قیمت تأمین‌کننده را با مقدار صفر ثبت کنند. برای وقتی که نرخ ثابت است اما مقدار هنوز معلوم نیست، مانند قراردادهای نرخ ثابت.
 Amount,مبلغ
+An appointment booked through the portal can only be opened via email verification.,قرار ملاقات رزروشده از پورتال فقط با تأیید ایمیل باز می‌شود.
+An error occured for certain Items while creating Material Requests based on Re-order level. Please rectify these issues :,هنگام ایجاد درخواست کالا بر اساس نقطه سفارش، برای برخی کالاها خطا رخ داد. این موارد را اصلاح کنید:
+App that produced this notification; used to scope app-specific panels. Derived from the reference document when not set explicitly.,اپی که این اعلان را ایجاد کرده؛ برای محدود کردن پنل‌های مخصوص اپ به کار می‌رود. اگر تعیین نشود، از سند مرجع گرفته می‌شود.
+App {} is not installed,اپ {} نصب نشده است
+Appointment,قرار ملاقات
+Appointment Booking Portal Settings,تنظیمات پورتال رزرو قرار ملاقات
+Appointment Confirmed,قرار ملاقات تأیید شد
+Appointment Scheduling,زمان‌بندی قرار ملاقات
+Appointment Scheduling needs to be enabled for Appointment Booking through portal.,برای رزرو قرار ملاقات از پورتال، زمان‌بندی قرار ملاقات باید فعال باشد.
+Appointment can only be scheduled up to {0} day(s) in advance.,قرار ملاقات را فقط تا {0} روز آینده می‌توان تعیین کرد.
+Appointment cannot be scheduled for a past time.,قرار ملاقات را نمی‌توان برای زمان گذشته تعیین کرد.
+Appointment cannot be scheduled on a holiday.,قرار ملاقات را نمی‌توان در روز تعطیل تعیین کرد.
+Appointment has been closed. Please book the appointment again.,قرار ملاقات بسته شده است. دوباره رزرو کنید.
+Appointment is already verified.,قرار ملاقات قبلاً تأیید شده است.
+Appointment must be scheduled within the available slot timings.,قرار ملاقات باید در بازه‌های زمانی در دسترس تعیین شود.
+Appointments created manually cannot have 'Unverified' status.,قرارهای ملاقاتی که دستی ایجاد می‌شوند نمی‌توانند وضعیت «تأییدنشده» داشته باشند.
+Are you sure you want to log out?,آیا مطمئنید که می‌خواهید از حساب کاربری خارج شوید؟
+Are you sure you want to relink this communication?,آیا مطمئنید که می‌خواهید این ارتباط را دوباره پیوند دهید؟
+Are you sure you want to resend the invitation?,آیا مطمئنید که می‌خواهید دعوت‌نامه را دوباره بفرستید؟
 Asset Capitalization,سرمایه‌ای کردن دارایی
 Asset Category,گروه دارایی
 Asset Depreciation Ledger,دفتر استهلاک دارایی
@@ -596,27 +1018,70 @@ Asset Repair,تعمیر دارایی
 Asset Value Analytics,تحلیل ارزش دارایی‌ها
 Assets,دارایی‌ها
 "Assets, Depreciations, Repairs, and more.",دارایی‌ها، استهلاک، تعمیرات و بیشتر.
+Asset{is_plural} {assets_link} created for {item_code},دارایی{is_plural} {assets_link} برای {item_code} ایجاد شد
+Assignment Rule,قاعده تخصیص
+"At row #{0}: the Difference Account must not be a Stock type account, please change the Account Type for the account {1} or select a different account",در ردیف #{0}: حساب تفاوت نباید از نوع موجودی باشد؛ نوع حساب {1} را تغییر دهید یا حساب دیگری انتخاب کنید
+Attending,شرکت می‌کنم
+Authorization POST requests must use application/x-www-form-urlencoded,درخواست‌های POST مجوزدهی باید از application/x-www-form-urlencoded استفاده کنند
 Auto Create Asset on Purchase,ایجاد خودکار دارایی هنگام خرید
 Auto Create Subcontracting Order,ایجاد خودکار سفارش پیمانکاری
+Auto Email Report,گزارش ایمیلی خودکار
+Automatically Fetch Payment Terms from Order/Quotation,دریافت خودکار شرایط پرداخت از سفارش / پیش‌فاکتور
 Available Stock for Packing Items,موجودی در دسترس کالاهای بسته‌بندی
+BOM,فهرست مواد
+BOM Comparison Tool,ابزار مقایسه فهرست مواد
+BOM Creator,سازنده فهرست مواد
+BOM Creator Item {0} does not exist,کالای سازنده فهرست مواد {0} وجود ندارد
 BOM No,شماره فهرست مواد
+BOM Operations Time,زمان عملیات فهرست مواد
+BOM Search,جستجوی فهرست مواد
+BOM Stock Report,گزارش موجودی فهرست مواد
+BOM Update Tool,ابزار به‌روزرسانی فهرست مواد
+BOM Update Tool Log with job status maintained,سابقه ابزار به‌روزرسانی فهرست مواد همراه با وضعیت کار
+BOM {0} must be active and submitted.,فهرست مواد {0} باید فعال و ثبت‌شده باشد.
 Backflush Raw Materials of Subcontract Based On,کسر خودکار مواد اولیه پیمانکاری بر اساس
+Backup,پشتیبان‌گیری
+Bank Account {} in Bank Transaction {} is not matching with Bank Account {},حساب بانکی {} در تراکنش بانکی {} با حساب بانکی {} مطابقت ندارد
 Bank Clearance,تسویه بانکی
 Bank Reconciliation Statement,صورت مغایرت بانکی
 Bank Reconciliation Tool,ابزار مغایرت‌گیری بانکی
+Basis for tax calculation,مبنای محاسبه مالیات
 Batch,بچ
 Batch Item Expiry Status,وضعیت انقضای کالاهای بچ‌دار
 Batch-Wise Balance History,سابقه موجودی به تفکیک بچ
+Bill of Materials,فهرست مواد (BOM)
+Bin Qty Recalculated,مقدار موجودی انبار دوباره محاسبه شد
 Blanket Order,سفارش کلی
 Blanket Order Allowance (%),حد مجاز بیش از سفارش کلی (٪)
+Blogger,نویسنده وبلاگ
+Books have been closed till the period ending on {0}.,دفاتر تا پایان دوره {0} بسته شده‌اند.
+Browse Apps,مرور اپ‌ها
 "By default, the Customer Name is set as per the Full Name entered. If you want Customers to be named by a <a href=""https://docs.erpnext.com/docs/user/manual/en/setting-up/settings/naming-series"" target=""_blank"">Naming Series</a>. Choose the 'Naming Series' option.","به‌طور پیش‌فرض نام مشتری همان نام کاملی است که وارد می‌کنید. اگر می‌خواهید مشتریان با <a href=""https://docs.erpnext.com/docs/user/manual/en/setting-up/settings/naming-series"" target=""_blank"">سری شماره‌گذاری</a> نام‌گذاری شوند، گزینه «سری شماره‌گذاری» را انتخاب کنید."
 "By default, the Item Name is set as per the Item Code entered. If you want Items to be named by a Naming Series choose the 'Naming Series' option.",به‌طور پیش‌فرض نام کالا همان کد کالاست. اگر می‌خواهید کالاها با سری شماره‌گذاری نام‌گذاری شوند، گزینه «سری شماره‌گذاری» را انتخاب کنید.
+Campaign Efficiency,کارایی کمپین
+Cancel Maintenance Visits {0} before cancelling this Maintenance Visit,پیش از لغو این بازدید نگهداری، بازدیدهای نگهداری {0} را لغو کنید
+Cancel Scheduling,لغو زمان‌بندی
+Cancel Stock Ledger Entries,لغو ثبت‌های دفتر انبار
+Cannot Combine Orders,سفارش‌ها قابل ترکیب نیستند
+Cannot add an open task under completed Parent Task {0}.,زیر وظیفه والد تکمیل‌شده {0} نمی‌توان وظیفه باز اضافه کرد.
+Cannot create Intercompany {0}. All items in the source {1} have already been fully ordered. Please check the existing linked {2}s.,ایجاد {0} بین‌شرکتی ممکن نیست. همه کالاهای {1} مبنا قبلاً کامل سفارش داده شده‌اند. {2}های مرتبط موجود را بررسی کنید.
+Cannot create a Subcontracting Order against Purchase Order {0} because it is {1}.,برای سفارش خرید {0} نمی‌توان سفارش پیمانکاری ایجاد کرد، چون وضعیت آن {1} است.
+Cannot declare as Lost because an active Quotation exists.,به دلیل وجود پیش‌فاکتور فعال، نمی‌توان آن را «از دست رفته» اعلام کرد.
+Cannot delete Exchange Gain/Loss row,ردیف سود و زیان تسعیر ارز قابل حذف نیست
+"Cannot find a default warehouse for item {0}. Please select one in the Update Items dialog, or set a default in the Item Master or in Stock Settings.",انبار پیش‌فرضی برای کالای {0} پیدا نشد. در پنجره «به‌روزرسانی کالاها» انباری انتخاب کنید یا در فرم کالا یا تنظیمات انبار پیش‌فرض تعیین کنید.
+Cannot repost more than {0} vouchers at once. Split them into multiple documents.,بیش از {0} سند را نمی‌توان یکجا بازثبت کرد. آن‌ها را در چند سند تقسیم کنید.
+Cannot set Project to Completed,پروژه را نمی‌توان «تکمیل‌شده» کرد
+Cannot set the status of a Purchase Order to {0}.,وضعیت سفارش خرید را نمی‌توان به {0} تغییر داد.
+Cannot set the status of a Subcontracting Order to {0}.,وضعیت سفارش پیمانکاری را نمی‌توان به {0} تغییر داد.
+Cannot update items of Purchase Order {0} because it is {1}.,کالاهای سفارش خرید {0} قابل به‌روزرسانی نیستند، چون وضعیت آن {1} است.
+Category for the in-app notification. Used for filtering and per-user email preferences.,دسته اعلان داخل برنامه؛ برای فیلتر و ترجیحات ایمیل هر کاربر به کار می‌رود.
 Chart of Accounts,سرفصل حساب‌ها
 Chart of Accounts Importer,ورود سرفصل حساب‌ها
 Chart of Cost Centers,درخت مراکز هزینه
 Check Calculate Depreciation,گزینه «محاسبه استهلاک» را انتخاب کنید
 Check Is Existing Asset,گزینه «دارایی موجود» را انتخاب کنید
 Check Stock Ledger,بررسی دفتر انبار
+Check Stock Projected Qty,بررسی مقدار پیش‌بینی‌شده موجودی
 Check help to setup Routing,راهنمای تنظیم مسیر تولید
 Check this field to make this an Asset Item,برای تبدیل این کالا به کالای دارایی انتخاب کنید
 Check this if you want to add custom Jinja Code or JavaScript to your Print Format,اگر می‌خواهید در قالب چاپ کد Jinja یا JavaScript بنویسید انتخاب کنید
@@ -624,58 +1089,133 @@ Check this to make it a mandatory field,برای اجباری کردن این ف
 Check this to make the DocType as Custom,برای سفارشی کردن این نوع سند انتخاب کنید
 Check to enable Capital Work in Progress accounting,برای فعال‌سازی حسابداری دارایی در جریان تکمیل انتخاب کنید
 "Choose between FIFO and Moving Average Valuation Methods. Click <a href=""https://docs.erpnext.com/docs/user/manual/en/stock/articles/item-valuation-fifo-and-moving-average"" target=""_blank"">here</a> to know more about them.","روش ارزش‌گذاری FIFO یا میانگین متحرک را انتخاب کنید. برای توضیح بیشتر <a href=""https://docs.erpnext.com/docs/user/manual/en/stock/articles/item-valuation-fifo-and-moving-average"" target=""_blank"">اینجا</a> را ببینید."
+Choose which notification types are emailed to you. Unchecked types still show as in-app notifications.,انتخاب کنید کدام نوع اعلان‌ها برایتان ایمیل شود. انواع انتخاب‌نشده همچنان به‌صورت اعلان داخل برنامه نمایش داده می‌شوند.
+Clear Grouping,حذف گروه‌بندی
+Clear Link,پاک کردن پیوند
+Clear grouping,حذف گروه‌بندی
+Cleared auto-assigned serial numbers and batch numbers for manual picking,شماره سریال‌ها و بچ‌های تخصیص‌یافته خودکار برای برداشت دستی پاک شدند
+Communication Channels,کانال‌های ارتباطی
 Company for which this tax template will be applicable,شرکتی که این الگوی مالیاتی برای آن است
+Company {0} does not match the company {1} of {2} {3},شرکت {0} با شرکت {1} در {2} {3} مطابقت ندارد
 Completed Qty,مقدار تکمیل‌شده
+Configure Account Settings,پیکربندی تنظیمات حسابداری
+Configure Buying Settings.,پیکربندی تنظیمات خرید.
+Configure columns for {0},تنظیم ستون‌های {0}
 Configure the default Price List when creating a new Sales transaction. Item prices will be fetched from this Price List.,فهرست قیمت پیش‌فرض معاملات فروش جدید را تعیین کنید؛ قیمت کالاها از این فهرست خوانده می‌شود.
 Configure what should be the default value of Supplier Group when creating a new Supplier.,گروهی را که هنگام ایجاد تأمین‌کننده جدید به‌طور پیش‌فرض انتخاب می‌شود تعیین کنید.
+Consolidated Financial Statement,صورت‌های مالی تلفیقی
+Consumed Stock Items or Consumed Asset Items are mandatory for creating new composite asset,برای ایجاد دارایی ترکیبی جدید، کالاهای انبار مصرف‌شده یا دارایی‌های مصرف‌شده الزامی است
 Cost Center,مرکز هزینه
 Cost Center and Budgeting,مرکز هزینه و بودجه‌بندی
 Cost Centers for Budgeting and Analysis,مراکز هزینه برای بودجه‌بندی و تحلیل
+Costing and Billing fields has been updated,فیلدهای بها و صورتحساب به‌روز شدند
 Create Blogger,ایجاد نویسنده وبلاگ
+Create Raw Materials,ایجاد مواد اولیه
 Create Your First Purchase Invoice,ایجاد اولین فاکتور خرید
 Create Your First Purchase Invoice ,ایجاد اولین فاکتور خرید
 Create Your First Sales Invoice,ایجاد اولین فاکتور فروش
 Create Your First Sales Invoice ,ایجاد اولین فاکتور فروش
 Create a Customer,ایجاد مشتری
+Create a Finished Good,ایجاد کالای ساخته‌شده
+Create a Fixed Asset Item,ایجاد کالای دارایی ثابت
 Create a Material Transfer Entry,ایجاد سند انتقال کالا
+Create a Product,ایجاد محصول
+Create a Quotation,ایجاد پیش‌فاکتور
+Create a Sales Item,ایجاد کالای فروشی
+Create a Sales Order,ایجاد سفارش فروش
+Create a Supplier,ایجاد تأمین‌کننده
+Create a Warehouse,ایجاد انبار
 Create a new Item,ایجاد کالای جدید
+Create an Asset,ایجاد دارایی
+Create an Asset Category,ایجاد گروه دارایی
 Create an Asset Item,ایجاد کالای دارایی
 Create an Item,ایجاد کالا
 Create and Send Quotation,ایجاد و ارسال پیش‌فاکتور
 Create first Purchase Order,ایجاد اولین سفارش خرید
+Create new forms and views with doctypes. Set up multi-level workflows for approval,فرم‌ها و نماهای جدید با انواع سند بسازید. گردش کار تأیید چندمرحله‌ای تعریف کنید
 Create your first Bill of Materials,ایجاد اولین فهرست مواد
+Create your first Quotation,ایجاد اولین پیش‌فاکتور
+Create your first Sales Order,ایجاد اولین سفارش فروش
 Create your first Work Order,ایجاد اولین دستور تولید
 Credit Controller,کنترل‌کننده اعتبار
 Currency Exchange,نرخ تبدیل ارز
+Currency must be {0} to match {1} {2},ارز باید {0} باشد تا با {1} {2} مطابقت داشته باشد
 Customer Acquisition and Loyalty,جذب و وفاداری مشتری
 Customer Addresses And Contacts,نشانی و مخاطبان مشتریان
 Customer Credit Balance,مانده اعتبار مشتری
+Customer Ledger Summary,خلاصه دفتر مشتریان
 Customer Provided,تأمین‌شده توسط مشتری
+Customer {0} does not match the customer of Maintenance Schedule {1},مشتری {0} با مشتری برنامه نگهداری {1} مطابقت ندارد
 Customers Without Any Sales Transactions,مشتریان بدون معامله فروش
 Customs Tariff Number,شماره تعرفه گمرکی
+DB Tables,جدول‌های پایگاه داده
+Daily Timesheet Summary,خلاصه روزانه برگه‌های زمان
 Data Import and Settings,ورود داده‌ها و تنظیمات
+Date:,تاریخ:
+Date: ,تاریخ: 
+Days Since Last {0},روزهای پس از آخرین {0}
 Default Buying Price List,فهرست قیمت پیش‌فرض خرید
 Default Selling Price List,فهرست قیمت پیش‌فرض فروش
 Default Supplier Group,گروه پیش‌فرض تأمین‌کننده
 Default Unit of Measurement,واحد اندازه‌گیری پیش‌فرض
 Define Asset Category,تعریف گروه دارایی
+Delayed Tasks Summary,خلاصه وظایف معوق
+Delete Gravatar URLs,حذف نشانی‌های Gravatar
+Deleted all documents successfully,همه اسناد با موفقیت حذف شدند
+Delivered Items To Be Billed,کالاهای تحویلی صورتحساب‌نشده
 Delivery Note,حواله خروج
 Delivery Note Required for Sales Invoice Creation,الزام حواله خروج برای ایجاد فاکتور فروش
 Delivery Note Trends,روند حواله خروج
 Delivery Trends,روند تحویل
+"Difference Account must be a Asset/Liability type account (Temporary Opening), since this Stock Entry is an Opening Entry",چون این سند انبار سند افتتاحیه است، حساب تفاوت باید از نوع دارایی یا بدهی (افتتاحیه موقت) باشد
+Different Customer,مشتری متفاوت
 Disable Last Purchase Rate,غیرفعال کردن نرخ آخرین خرید
+Disable Prepared Report Automation,غیرفعال کردن خودکار گزارش آماده
+Disable auto setting Grand Total to default Payment Mode,غیرفعال کردن تخصیص خودکار جمع کل به روش پرداخت پیش‌فرض
+Disabled Item {0} cannot be used in BOMs.,کالای غیرفعال {0} را نمی‌توان در فهرست مواد به کار برد.
+Disabled Price List,فهرست قیمت غیرفعال
+Discount Removed,تخفیف حذف شد
+Discounts Cannot Be Combined,تخفیف‌ها قابل ترکیب نیستند
 Dismiss,بستن
 Dismiss,بستن,Stop showing the onboarding widget.
+Doc Values,مقادیر سند
+DocType can be one of them {0},نوع سند می‌تواند یکی از این‌ها باشد: {0}
 Doctype,نوع سند
+Doctype To Sync,نوع سند برای همگام‌سازی
+Downtime Analysis,تحلیل توقف تولید
+Downtime Entry,ثبت توقف تولید
+Drag columns to set order. Column width is set in percentage. The total width should not be more than 100. Columns marked in red will be removed.,ستون‌ها را برای تعیین ترتیب بکشید. عرض ستون به درصد است و جمع عرض‌ها نباید بیش از ۱۰۰ شود. ستون‌های قرمز حذف می‌شوند.
+Drag elements from the sidebar to add. Drag them back to trash.,برای افزودن، اجزا را از نوار کناری بکشید و برای حذف، به سطل زباله برگردانید.
+Dropbox Settings,تنظیمات Dropbox
+DuckDB Sync,همگام‌سازی DuckDB
+DuckDB Sync Item,ردیف همگام‌سازی DuckDB
+Dunning,مطالبه بدهی
+Dunning Type,نوع مطالبه بدهی
+EAN-12,EAN-12
 ERPNext Integrations,یکپارچه‌سازی‌های ERPNext
 Each Transaction,با هر تراکنش
 "Each document created in ERPNext can have a unique ID generated for it, using a prefix defined for it. Though each document has some prefix pre-configured, you can further customize it using tools like Naming Series Tool and Document Naming Rule.",هر سند در ERPNext می‌تواند شناسه یکتایی با پیشوند تعریف‌شده داشته باشد. هر سند پیشوند پیش‌فرضی دارد، اما می‌توانید با ابزار سری شماره‌گذاری و قاعده نام‌گذاری اسناد آن را تغییر دهید.
 "Each document created in ERPNext can have a unique ID generated for it, using a prefix defined for it. Though each document has some prefix pre-configured, you can further customize it using tools like Naming Series Tool and Document Naming Rule.
 ","هر سند در ERPNext می‌تواند شناسه یکتایی با پیشوند تعریف‌شده داشته باشد. هر سند پیشوند پیش‌فرضی دارد، اما می‌توانید با ابزار سری شماره‌گذاری و قاعده نام‌گذاری اسناد آن را تغییر دهید.
 "
+Edit Filter,ویرایش فیلتر
+Edit Footer,ویرایش پاصفحه
+Edit Qty,ویرایش مقدار
 Edit the Posting Date by clicking on the Edit Posting Date and Time checkbox below.,برای تغییر تاریخ ثبت، گزینه «ویرایش تاریخ و زمان ثبت» را در پایین انتخاب کنید.
+Email / Notifications,ایمیل / اعلان‌ها
 Email Account,حساب ایمیل
+Email Verified,ایمیل تأیید شده
+Email couldn't be sent.,ایمیل ارسال نشد.
+Email everyone for <b>{0}</b> notifications? This adds it to every user's email preferences. Users can still opt out individually afterwards.,برای اعلان‌های <b>{0}</b> به همه ایمیل زده شود؟ این نوع به ترجیحات ایمیل همه کاربران اضافه می‌شود. کاربران بعداً می‌توانند جداگانه آن را لغو کنند.
+Email me for these notification types,برای این نوع اعلان‌ها به من ایمیل بزن
+Enable Automatically Create New Batch when entering Opening Stock for a batched item.,برای ثبت موجودی افتتاحیه کالای بچ‌دار، «ایجاد خودکار بچ جدید» را فعال کنید.
 Enable CWIP Accounting,فعال‌سازی حسابداری دارایی در جریان تکمیل
+Enable Email Notifications for All Users,فعال‌سازی اعلان ایمیلی برای همه کاربران
+Enable Snapshot Reports,فعال‌سازی گزارش‌های لحظه‌ای
+Enable the notification type before emailing it to users.,پیش از ارسال ایمیل به کاربران، نوع اعلان را فعال کنید.
+Enabling email for {0} across all users in the background.,فعال‌سازی ایمیل برای {0} برای همه کاربران در پس‌زمینه.
+"Enabling this will register your site on a central relay server to send push notifications for all installed apps through Firebase Cloud Messaging. This server only stores user tokens and error logs, and no messages are saved.",با فعال کردن این گزینه، سایت شما روی یک سرور رله مرکزی ثبت می‌شود تا اعلان‌های همه اپ‌های نصب‌شده را از طریق Firebase Cloud Messaging بفرستد. این سرور فقط توکن کاربران و سوابق خطا را نگه می‌دارد و هیچ پیامی ذخیره نمی‌شود.
+"Enabling this will register your site on a central relay server to send push notifications for all installed apps through Firebase Cloud Messaging. This server only stores user tokens and error logs, and no messages are saved. ",با فعال کردن این گزینه، سایت شما روی یک سرور رله مرکزی ثبت می‌شود تا اعلان‌های همه اپ‌های نصب‌شده را از طریق Firebase Cloud Messaging بفرستد. این سرور فقط توکن کاربران و سوابق خطا را نگه می‌دارد و هیچ پیامی ذخیره نمی‌شود. 
 Enter Quantity,ورود مقدار
 Enter Rate,ورود نرخ
 Enter a Label for this field,برچسب این فیلد را وارد کنید
@@ -692,6 +1232,11 @@ Enter the Item Code.,کد کالا را وارد کنید.
 Enter the code based on the Print Format Type you selected above,کد را متناسب با نوع قالب چاپ انتخاب‌شده وارد کنید
 Enter the quantity,مقدار را وارد کنید
 Enter the required quantity for the material.,مقدار مورد نیاز را وارد کنید.
+"Error: This asset already has {0} depreciation periods booked.
+				The `depreciation start` date must be at least {1} periods after the `available for use` date.
+				Please correct the dates accordingly.",خطا: برای این دارایی از قبل {0} دوره استهلاک ثبت شده است. تاریخ «شروع استهلاک» باید دست‌کم {1} دوره بعد از تاریخ «آماده بهره‌برداری» باشد. تاریخ‌ها را اصلاح کنید.
+Event Notifications,اعلان‌های رویداد
+Every day from {0} to {1} is a holiday for Sales Person {2}.,همه روزهای {0} تا {1} برای کارشناس فروش {2} تعطیل است.
 "Every form in ERPNext has a standard set of fields. If you need to capture some information, but there is no standard Field available for it, you can insert Custom Field for it.
 
 Once custom fields are added, you can use them for reports and analytics charts as well.","هر فرم در ERPNext مجموعه‌ای از فیلدهای استاندارد دارد. اگر باید اطلاعاتی را ثبت کنید که فیلد استانداردی برای آن نیست، فیلد سفارشی اضافه کنید.
@@ -705,35 +1250,108 @@ Once custom fields are added, you can use them for reports and analytics charts 
 پس از افزودن فیلدهای سفارشی، می‌توانید از آن‌ها در گزارش‌ها و نمودارهای تحلیلی هم استفاده کنید.
 "
 Exchange Rate Revaluation,تسعیر ارز
+Existing Gravatar URLs may still be stored on User and Contact records. Do you want to delete these URLs now?,ممکن است نشانی‌های Gravatar هنوز در رکوردهای کاربر و مخاطب ذخیره باشند. می‌خواهید اکنون حذف شوند؟
+"Existing Gravatar URLs may still be stored on User, Contact, and Lead records. Do you want to delete these URLs now?",ممکن است نشانی‌های Gravatar هنوز در رکوردهای کاربر، مخاطب و سرنخ ذخیره باشند. می‌خواهید اکنون حذف شوند؟
+Export Data,خروجی داده‌ها
+FG Qty from Transferred Raw Materials,مقدار کالای ساخته‌شده از مواد اولیه انتقال‌یافته
+Failed to delete {0} documents: {1},حذف {0} سند ناموفق بود: {1}
+Field Orientation (Left-Right),چیدمان فیلد (چپ به راست)
+Field Orientation (Top-Down),چیدمان فیلد (بالا به پایین)
+Files,فایل‌ها
 Finance Book,دفتر مالی
 Financial Reports,گزارش‌های مالی
 Financial Statements,صورت‌های مالی
+Finished Good Quantity Exceeded,مقدار کالای ساخته‌شده بیش از حد مجاز است
 Finished Items,کالاهای ساخته‌شده
+First Response Time for Issues,زمان اولین پاسخ به درخواست‌های پشتیبانی
+First Response Time for Opportunity,زمان اولین پاسخ به فرصت
+First Used On,اولین استفاده در
 Fixed Asset Register,دفتر دارایی‌های ثابت
+For Item {0} cannot be received more than {1} qty against the {2} {3},برای کالای {0} بیش از {1} واحد در برابر {2} {3} قابل دریافت نیست
+"For Links, enter the DocType as range.
+For Select, enter list of Options, each on a new line.","برای پیوندها، نوع سند را به‌عنوان محدوده وارد کنید.
+برای فهرست انتخابی، گزینه‌ها را هر کدام در یک خط وارد کنید."
+"For item <b>{0}</b>, only <b>{1}</b> asset have been created or linked to <b>{2}</b>. Please create or link <b>{3}</b> more asset with the respective document.",برای کالای <b>{0}</b> فقط <b>{1}</b> دارایی ایجاد یا به <b>{2}</b> متصل شده است. <b>{3}</b> دارایی دیگر را با سند مربوط ایجاد یا متصل کنید.
+Forecasting,پیش‌بینی
+Frappe CRM,Frappe CRM
+"Frappe no longer uses Gravatar because it can disclose hashed email addresses to a third-party service. To fully stop this behavior, existing Gravatar image URLs must be deleted.",Frappe دیگر از Gravatar استفاده نمی‌کند، چون ممکن است نشانی ایمیل درهم‌سازی‌شده را برای سرویس شخص ثالث آشکار کند. برای توقف کامل این رفتار، نشانی‌های تصویر Gravatar موجود باید حذف شوند.
 "Freeze accounting transactions up to specified date, nobody can make/modify entry except the specified Role.",اسناد حسابداری تا این تاریخ مسدود می‌شوند و جز نقش تعیین‌شده، کسی نمی‌تواند سندی ثبت یا ویرایش کند.
+From Prospect,از مشتری بالقوه
+From Reference Date cannot be greater than To Reference Date,«از تاریخ مرجع» نمی‌تواند بعد از «تا تاریخ مرجع» باشد
+Genderqueer,جنسیت‌کوئیر
 General Ledger,دفتر کل
+Get Header and Footer wkhtmltopdf variables,دریافت متغیرهای سرصفحه و پاصفحه wkhtmltopdf
 Get Items From,دریافت کالاها از
+Global Defaults,پیش‌فرض‌های عمومی
+Go to Access Control section,رفتن به بخش کنترل دسترسی
+"Google Calendar - Could not find Calendar for {0}, error code {1}.",تقویم گوگل - تقویم {0} پیدا نشد، کد خطا {1}.
+Gravatar URL deletion has been queued.,حذف نشانی‌های Gravatar در صف قرار گرفت.
+Gravatar URLs will not be deleted.,نشانی‌های Gravatar حذف نمی‌شوند.
+Gross Purchase Amount Too Low: {0} cannot be depreciated over {1} cycles with a frequency of {2} depreciations.,مبلغ ناخالص خرید بسیار کم است: {0} را نمی‌توان در {1} دوره با تناوب {2} استهلاک کرد.
+Grouped by {0},گروه‌بندی بر اساس {0}
+Guests are not allowed to upload files for {0} Doctype,مهمان‌ها مجاز به بارگذاری فایل برای نوع سند {0} نیستند
+Headline of the in-app notification. Falls back to Subject if left blank. Supports Jinja.,عنوان اعلان داخل برنامه؛ اگر خالی بماند از موضوع استفاده می‌شود. از Jinja پشتیبانی می‌کند.
 Help,راهنما
+Helps you distribute the Budget/Target across months if you have seasonality in your business.,اگر کسب‌وکار شما فصلی است، بودجه یا هدف را بین ماه‌ها توزیع می‌کند.
 "Here, you can add multiple addresses of the company",در این بخش می‌توانید چند نشانی برای شرکت اضافه کنید
 "Here, you can set default Accounts, which will ease the creation of accounting entries.",در این بخش حساب‌های پیش‌فرض را تعیین کنید تا ثبت اسناد حسابداری ساده‌تر شود.
 How often should Project be updated of Total Purchase Cost ?,بهای کل خرید پروژه هر چند وقت یک‌بار به‌روز شود؟
+How to Navigate in ERPNext,جابه‌جایی در ERPNext
+"If checked, <i>Prepared Report</i> will not be enabled automatically on slow runs.",در صورت انتخاب، <i>گزارش آماده</i> در اجراهای کند به‌طور خودکار فعال نمی‌شود.
 "If checked, system will unlink the payment against the respective invoice.",در صورت انتخاب، با لغو فاکتور، پرداخت ثبت‌شده از آن جدا می‌شود.
+"If enabled, the web form can only be used with a <i>Key</i> from a corresponding <b>Web Form Request</b>.",در صورت فعال بودن، فرم وب فقط با <i>کلید</i> یک <b>درخواست فرم وب</b> مربوط قابل استفاده است.
+"If it's empty, it will backup to the root of the bucket.",اگر خالی باشد، پشتیبان در ریشه bucket ذخیره می‌شود.
+If the condition is satisfied user will be rewarded with the points. eg. doc.status == 'Closed',اگر شرط برقرار باشد، به کاربر امتیاز داده می‌شود. مثلاً doc.status == 'Closed'
+"If the condition is satisfied user will be rewarded with the points. eg. doc.status == 'Closed'
+","اگر شرط برقرار باشد، به کاربر امتیاز داده می‌شود. مثلاً doc.status == 'Closed'
+"
+"If the user enables the mask property for the phone number field, the value will be displayed in a masked format (e.g., 811XXXXXXX).",اگر کاربر پنهان‌سازی را برای فیلد شماره تلفن فعال کند، مقدار به‌صورت پنهان نمایش داده می‌شود (مثلاً 811XXXXXXX).
+"If the user has access to Employee and Report is enabled, they can view Employee-based reports.",اگر کاربر به کارمند دسترسی داشته باشد و گزارش فعال باشد، می‌تواند گزارش‌های مبتنی بر کارمند را ببیند.
 "If this option is configured ""Yes"", ERPNext will prevent you from creating a Purchase Invoice or a Purchase Receipt directly without creating a Purchase Order first.",اگر «بله» باشد، بدون سفارش خرید نمی‌توان فاکتور خرید یا رسید خرید ایجاد کرد.
 "If this option is configured ""Yes"", ERPNext will prevent you from creating a Purchase Invoice without creating a Purchase Receipt first.",اگر «بله» باشد، بدون رسید خرید نمی‌توان فاکتور خرید ایجاد کرد.
 "If this option is configured 'Yes', ERPNext will prevent you from creating a Sales Invoice or Delivery Note without creating a Sales Order first. This configuration can be overridden for a particular Customer by enabling the 'Allow Sales Invoice Creation Without Sales Order' checkbox in the Customer master.",اگر «بله» باشد، بدون سفارش فروش نمی‌توان فاکتور فروش یا حواله خروج ایجاد کرد. برای یک مشتری خاص می‌توانید با فعال کردن «اجازه ایجاد فاکتور فروش بدون سفارش فروش» در فرم مشتری، این محدودیت را بردارید.
 "If this option is configured 'Yes', ERPNext will prevent you from creating a Sales Invoice without creating a Delivery Note first. This configuration can be overridden for a particular Customer by enabling the 'Allow Sales Invoice Creation Without Delivery Note' checkbox in the Customer master.",اگر «بله» باشد، بدون حواله خروج نمی‌توان فاکتور فروش ایجاد کرد. برای یک مشتری خاص می‌توانید با فعال کردن «اجازه ایجاد فاکتور فروش بدون حواله خروج» در فرم مشتری، این محدودیت را بردارید.
 Import Data,ورود داده‌ها
+Import Data from Spreadsheet,ورود داده از صفحه‌گسترده
 Import Supplier Invoice,ورود فاکتور تأمین‌کننده
 "In ERPNext, you can add your Employees as Users, and give them restricted access. Tools like Role Permission and User Permission allow you to define rules which give restricted access to the user to masters and transactions.",در ERPNext می‌توانید کارکنان را به‌عنوان کاربر اضافه کنید و دسترسی محدود به آن‌ها بدهید. ابزارهای مجوز نقش و مجوز کاربر امکان تعریف قواعدی را می‌دهند که دسترسی کاربر به اطلاعات پایه و تراکنش‌ها را محدود می‌کنند.
 "In each module, you will find a host of single-click reports, ranging from financial statements to sales and purchase analytics and stock tracking reports. If a required new report is not available out-of-the-box, you can create custom reports in ERPNext by pulling values from the same multiple ERPNext tables.",در هر ماژول گزارش‌های آماده بسیاری وجود دارد؛ از صورت‌های مالی تا تحلیل فروش و خرید و گزارش‌های انبار. اگر گزارشی که لازم دارید آماده نیست، می‌توانید با گرفتن داده از جدول‌های مختلف ERPNext گزارش سفارشی بسازید.
 "In each module, you will find a host of single-click reports, ranging from financial statements to sales and purchase analytics and stock tracking reports. If a required new report is not available out-of-the-box, you can create custom reports in ERPNext by pulling values from the same multiple ERPNext tables.
 ","در هر ماژول گزارش‌های آماده بسیاری وجود دارد؛ از صورت‌های مالی تا تحلیل فروش و خرید و گزارش‌های انبار. اگر گزارشی که لازم دارید آماده نیست، می‌توانید با گرفتن داده از جدول‌های مختلف ERPNext گزارش سفارشی بسازید.
 "
+"In {0}, {1} is required in row {2}.",در {0}، {1} در ردیف {2} الزامی است.
+"In {0}, {1} is required in rows {2}.",در {0}، {1} در ردیف‌های {2} الزامی است.
+"In {0}, {1} is required in {2} rows.",در {0}، {1} در {2} ردیف الزامی است.
 Inactive Customers,مشتریان غیرفعال
+Include Revaluation Journals,شامل اسناد تسعیر ارز
+Instagram,Instagram
 Installation Note,یادداشت نصب
 Integrations,یکپارچه‌سازی‌ها
+Interval,فاصله
+Introduction to Assets,آشنایی با دارایی‌ها
 Introduction to CRM,آشنایی با CRM
+Introduction to Selling,آشنایی با فروش
+Introduction to Stock Entry,آشنایی با سند انبار
+Invalid Company,شرکت نامعتبر
+Invalid Filter,فیلتر نامعتبر
+Invalid JSON,JSON نامعتبر
+Invalid Package Name,نام بسته نامعتبر
+Invalid Parent Task,وظیفه والد نامعتبر
+Invalid Project,پروژه نامعتبر
+Invalid Shipping Account,حساب حمل نامعتبر
+Invalid UOM,واحد نامعتبر
+Invalid Web Form Request,درخواست فرم وب نامعتبر
+Invalid Website Theme Name,نام پوسته وب‌سایت نامعتبر
+Invalid action,اقدام نامعتبر
+Invalid aggregate function: {0},تابع تجمیعی نامعتبر: {0}
+Invalid field for grouping,فیلد نامعتبر برای گروه‌بندی
+Invalid include path,مسیر include نامعتبر
+Invalid or expired key,کلید نامعتبر یا منقضی‌شده
+Invalid sort order,ترتیب مرتب‌سازی نامعتبر
 "Inventory, Warehouses, Analysis, and more.",موجودی، انبارها، تحلیل و بیشتر.
+Invitation resent,دعوت‌نامه دوباره ارسال شد
+Invoice is not blocked. Block the invoice to change the release date.,فاکتور مسدود نیست. برای تغییر تاریخ آزادسازی، فاکتور را مسدود کنید.
+Invoicing,صدور صورتحساب
 Is Existing Asset?,دارایی موجود است؟
 Is Group,گروهی
 Is Purchase Item,کالای خریدنی
@@ -741,7 +1359,11 @@ Is Purchase Order Required for Purchase Invoice & Receipt Creation?,آیا بر�
 Is Purchase Receipt Required for Purchase Invoice Creation?,آیا برای ایجاد فاکتور خرید، رسید خرید لازم است؟
 Is this Default Tax Template?,الگوی مالیاتی پیش‌فرض است؟
 Is this a Fixed Asset?,دارایی ثابت است؟
+Issue,درخواست پشتیبانی
+Issue Priority,اولویت درخواست پشتیبانی
+Issue Type,نوع درخواست پشتیبانی
 Issued,صادر شده
+Issues,درخواست‌های پشتیبانی
 Item,کالا
 Item Alternative,کالای جایگزین
 Item Attribute,ویژگی کالا
@@ -759,7 +1381,9 @@ Item Variant Settings,تنظیمات گونه کالا
 Item prices will be fetched from this Price List.,قیمت کالاها از این فهرست قیمت خوانده می‌شود.
 "Item, Customer, Supplier and Quotation",کالا، مشتری، تأمین‌کننده و پیش‌فاکتور
 Item-wise Purchase History,سابقه خرید به تفکیک کالا
+Item-wise Purchase Register,دفتر خرید به تفکیک کالا
 Item-wise Sales History,سابقه فروش به تفکیک کالا
+Item-wise Sales Register,دفتر فروش به تفکیک کالا
 Items,کالاها
 Items & Pricing,کالاها و قیمت‌گذاری
 Items Catalogue,کاتالوگ کالاها
@@ -770,23 +1394,43 @@ Items table,جدول کالاها
 Items to Order and Receive,کالاهای قابل سفارش و دریافت
 Items to be purchased can be added here.,کالاهای مورد خرید را اینجا اضافه کنید.
 Itemwise Recommended Reorder Level,نقطه سفارش پیشنهادی به تفکیک کالا
+JSON value must be an object,مقدار JSON باید یک شیء باشد
 Job Card Item,ردیف کارت کار
+Job Card Summary,خلاصه کارت‌های کار
 Journal Entry,سند حسابداری
 Journal Entry Template,الگوی سند حسابداری
+Keep Gravatar URLs,نگه داشتن نشانی‌های Gravatar
 Key Reports,گزارش‌های کلیدی
+Key Required,کلید الزامی است
+Key required,کلید الزامی است
+Knowledge Base,پایگاه دانش
 Landed Cost Voucher,سند هزینه‌های جانبی خرید
+Last GL Entry update was done {}. This operation is not allowed while system is actively being used. Please wait for 5 minutes before retrying.,آخرین به‌روزرسانی دفتر کل در {} انجام شد. این عملیات هنگام استفاده فعال از سیستم مجاز نیست؛ ۵ دقیقه صبر کنید و دوباره تلاش کنید.
 Last synced {0},آخرین همگام‌سازی {0}
+Last {0} Amount,مبلغ آخرین {0}
+Last {0} Date,تاریخ آخرین {0}
 Lead,سرنخ
+Lead / Customer / Supplier,سرنخ / مشتری / تأمین‌کننده
+Lead Details,مشخصات سرنخ
+Lead Owner Efficiency,کارایی مسئول سرنخ
 Lead Source,منبع سرنخ
 Lead Time Date,تاریخ تأمین
 "Lead, Opportunity, Customer, and more.",سرنخ، فرصت، مشتری و بیشتر.
 Learn Accounting,آموزش حسابداری
 Learn Inventory Management,آموزش مدیریت موجودی
+Learn Manufacturing,آموزش تولید
 Learn Procurement,آموزش تدارکات
+Learn Project Management,آموزش مدیریت پروژه
 Learn Sales Management,آموزش مدیریت فروش
+Learn about  Navigation options,آشنایی با روش‌های جابه‌جایی
+"Learn about <a href=""https://docs.erpnext.com/docs/v13/user/manual/en/accounts/articles/common_party_accounting#:~:text=Common%20Party%20Accounting%20in%20ERPNext,Invoice%20against%20a%20primary%20Supplier."">Common Party</a>","آشنایی با <a href=""https://docs.erpnext.com/docs/v13/user/manual/en/accounts/articles/common_party_accounting#:~:text=Common%20Party%20Accounting%20in%20ERPNext,Invoice%20against%20a%20primary%20Supplier."">طرف حساب مشترک</a>"
 Learn how to update opening balances,آموزش ثبت مانده‌های افتتاحیه
 Learn more about Chart of Accounts,آشنایی بیشتر با سرفصل حساب‌ها
 Learn more about Production Planning,آشنایی بیشتر با برنامه‌ریزی تولید
+Learn more about data migration,آشنایی بیشتر با انتقال داده
+Ledgers,دفاتر
+Left,چپ
+Left,چپ,alignment
 Let's Set Up Your Accounts and Taxes.,حساب‌ها و مالیات‌ها را راه‌اندازی کنیم.
 Let's Set Up Your CRM.,CRM را راه‌اندازی کنیم.
 Let's Set Up the Assets Module.,ماژول دارایی‌ها را راه‌اندازی کنیم.
@@ -799,6 +1443,7 @@ Let's create a Purchase Receipt,ایجاد رسید خرید
 Let's create a new Asset item,ایجاد کالای دارایی جدید
 Let's name your first Letter Head with your company's name,نام اولین سربرگ را همان نام شرکت بگذارید
 Let's review existing Asset Category,بررسی گروه‌های دارایی موجود
+Let's review your Company,شرکت خود را بررسی کنیم
 Let's walk-through Chart of Accounts to review setup,مرور سرفصل حساب‌ها برای بررسی تنظیمات
 Let’s convert your first Sales Order against a Quotation,تبدیل اولین پیش‌فاکتور به سفارش فروش
 Let’s create a Workstation,ایجاد ایستگاه کاری
@@ -810,47 +1455,109 @@ Let’s create your first Customer,ایجاد اولین مشتری
 Let’s create your first Material Request,ایجاد اولین درخواست کالا
 Let’s create your first Purchase Invoice,ایجاد اولین فاکتور خرید
 Let’s create your first Purchase Order,ایجاد اولین سفارش خرید
+Let’s create your first Quotation,ایجاد اولین پیش‌فاکتور
+Let’s create your first Supplier,ایجاد اولین تأمین‌کننده
+Let’s setup your first Letter Head,ایجاد اولین سربرگ
 Let’s walk-through Selling Settings,مرور تنظیمات فروش
 Let’s walk-through few Buying Settings,مرور چند تنظیم خرید
 List of Items,فهرست کالاها
 List of items,فهرست کالاها
+Log the selling and buying rate of an Item,ثبت نرخ فروش و خرید کالا
+Login or a request key is required to see web form list view. Enable {0} to see list settings,برای دیدن فهرست فرم وب، ورود یا کلید درخواست لازم است. برای دیدن تنظیمات فهرست، {0} را فعال کنید
+Login with Frappe Cloud,ورود با Frappe Cloud
 Loyalty Point Entry,ثبت امتیاز وفاداری
+Madam,بانو
+Maintain Same Rate Throughout Internal Transaction,حفظ نرخ یکسان در کل تراکنش داخلی
 Maintain Same Rate Throughout the Purchase Cycle,حفظ نرخ یکسان در کل چرخه خرید
+Maintenance Schedule,برنامه نگهداری
+Maintenance Visit,بازدید نگهداری
+Malformed Address Header,سرآیند نشانی نامعتبر
 Manage Sales Tax Templates,مدیریت الگوهای مالیات فروش
 Manage Stock Movements,مدیریت جابه‌جایی موجودی
 Manual,دستی
 Manufacture,تولید
 Manufacturer Part Number,شماره قطعه سازنده
 Manufacturing,تولید
+Manufacturing Settings,تنظیمات تولید
 Manufacturing module is all set up!,ماژول تولید آماده است!
+Mark as Closed,علامت‌گذاری به‌عنوان بسته
+Master,آقا
+Masters,اطلاعات پایه
 Material Issue,صدور کالا
 Material Request,درخواست کالا
 Material Request Plan Item,ردیف برنامه درخواست کالا
 Material Requests for which Supplier Quotations are not created,درخواست‌های کالای بدون استعلام قیمت تأمین‌کننده
 Material Transfer,انتقال کالا
 Material Transferred for Subcontract,مواد انتقال‌یافته برای پیمانکاری
+Meaning of Different Permission Types,معنای انواع مجوز
 Min Order Qty,حداقل مقدار سفارش
+Miss,دوشیزه
 Mode of Payment,روش پرداخت
+Module Profile,پروفایل ماژول
+Move the current field and the following fields to a new column,انتقال این فیلد و فیلدهای بعدی به یک ستون جدید
+Mr,آقای
+Mrs,خانم
+Ms,خانم
 Multi Currency,چندارزی
+Mx,Mx
 "Name Asset category. You can create categories based on Asset Types like Furniture, Property, Electronics etc.",نام گروه دارایی را وارد کنید. گروه‌ها را بر اساس نوع دارایی بسازید، مانند اثاثه، ساختمان یا تجهیزات الکترونیکی.
+"Naming Options:
+<ol><li><b>field:[fieldname]</b> - By Field</li><li><b>autoincrement</b> - Uses Databases' Auto Increment feature</li><li><b>naming_series:</b> - By Naming Series (field called naming_series must be present)</li><li><b>Prompt</b> - Prompt user for a name</li><li><b>[series]</b> - Series by prefix (separated by a dot); for example PRE.#####</li>
+<li><b>format:EXAMPLE-{MM}morewords{fieldname1}-{fieldname2}-{#####}</b> - Replace all braced words (fieldnames, date words (DD, MM, YY), series) with their value. Outside braces, any characters can be used.</li></ol>","گزینه‌های نام‌گذاری:
+<ol><li><b>field:[fieldname]</b> - بر اساس فیلد</li><li><b>autoincrement</b> - استفاده از افزایش خودکار پایگاه داده</li><li><b>naming_series:</b> - بر اساس سری شماره‌گذاری (فیلدی به نام naming_series لازم است)</li><li><b>Prompt</b> - پرسیدن نام از کاربر</li><li><b>[series]</b> - سری با پیشوند (جداشده با نقطه)؛ مثلاً PRE.#####</li>
+<li><b>format:EXAMPLE-{MM}morewords{fieldname1}-{fieldname2}-{#####}</b> - همه واژه‌های داخل آکولاد (نام فیلدها، واژه‌های تاریخ مانند DD، MM، YY و سری) با مقدارشان جایگزین می‌شوند. بیرون آکولاد هر نویسه‌ای مجاز است.</li></ol>"
 Naming Series,سری شماره‌گذاری
 Naming Series and Price Defaults,سری شماره‌گذاری و پیش‌فرض‌های قیمت
+Need Workspace Manager role to edit public workspaces.,برای ویرایش صفحه‌های کار عمومی، نقش مدیر صفحه کار لازم است.
+No availability of slots are found. Please add on Appointment Booking Settings.,هیچ بازه زمانی در دسترسی پیدا نشد. آن را در تنظیمات رزرو قرار ملاقات اضافه کنید.
+No expense accounts found for Purchase Invoice {0},برای فاکتور خرید {0} حساب هزینه‌ای پیدا نشد
+No records,رکوردی وجود ندارد
+Noop Source,Noop Source
+Not Used,استفاده‌نشده
+Not permitted to update Serial No,مجوز به‌روزرسانی شماره سریال را ندارید
+Note: Please create Sales Orders from individual Quotations to select from among Alternative Items.,توجه: برای انتخاب بین کالاهای جایگزین، سفارش فروش را از روی هر پیش‌فاکتور جداگانه ایجاد کنید.
+Notification Type,نوع اعلان
+Notification Type Preference,ترجیح نوع اعلان
+Number of {0}s,تعداد {0}
+OAuth Client,کلاینت OAuth
+OAuth Provider Settings,تنظیمات ارائه‌دهنده OAuth
 "On checking it, the system will create an Asset automatically on purchase",در صورت انتخاب، با خرید این کالا دارایی به‌طور خودکار ایجاد می‌شود
+Only a Stock Manager or System Manager can repair Stock Ledger Entries,فقط مدیر انبار یا مدیر سیستم می‌تواند ثبت‌های دفتر انبار را اصلاح کند
+"Only a submitted Purchase Order can be held, closed or re-opened.",فقط سفارش خرید ثبت‌شده را می‌توان متوقف، بسته یا دوباره باز کرد.
+Only a submitted Subcontracting Order can be closed or re-opened.,فقط سفارش پیمانکاری ثبت‌شده را می‌توان بست یا دوباره باز کرد.
+Only payment entries with apply tax withholding unchecked will be considered for checking cumulative threshold breach,برای بررسی عبور از سقف تجمعی، فقط ثبت‌های پرداختی که گزینه اعمال مالیات تکلیفی در آن‌ها خاموش است در نظر گرفته می‌شوند
+Only pending invitations can be resent,فقط دعوت‌نامه‌های در انتظار دوباره ارسال می‌شوند
+Open Projects,پروژه‌های باز
 Opening Invoice Creation Tool,ابزار ایجاد فاکتورهای افتتاحیه
 Opening and Closing,افتتاحیه و اختتامیه
+Operation & Workstation,عملیات و ایستگاه کاری
 Opportunity Trends,روند فرصت‌ها
+Optional body of the in-app notification. Supports Jinja.,متن اختیاری اعلان داخل برنامه. از Jinja پشتیبانی می‌کند.
 Ordered,سفارش داده شده
 Other Reports,سایر گزارش‌ها
 Over Billing Allowance Percentage,درصد مجاز صورتحساب بیش از سفارش
 Over Transfer Allowance (%),حد مجاز انتقال بیش از سفارش (٪)
+Overdue,سررسید گذشته
 POS Closing Entry,ثبت بستن صندوق
+POS Invoice,فاکتور صندوق فروش
 POS Opening Entry,ثبت افتتاح صندوق
+POS Profile doesn't match {},پروفایل صندوق فروش با {} مطابقت ندارد
+POS Profile {} does not belong to company {},پروفایل صندوق فروش {} متعلق به شرکت {} نیست
+Package contains disallowed path entry,بسته شامل مسیر غیرمجاز است
+Packages,بسته‌ها
 Packing Slip,برگه بسته‌بندی
 Page Break,صفحه جدید
+Paid From and Paid To accounts must be different for an Internal Transfer.,در انتقال داخلی، حساب مبدأ و مقصد باید متفاوت باشند.
+Parent Task {0} is not in Project {1}. Pick a group task of the same project.,وظیفه والد {0} در پروژه {1} نیست. یک وظیفه گروهی از همان پروژه انتخاب کنید.
 Partially Ordered,بخشی سفارش داده شده
 Partially Received,بخشی دریافت شده
+Partially Reposted,بخشی بازثبت شده
 Payables,حساب‌های پرداختنی
 Payment Entry,ثبت پرداخت
+Payment Entry Settings,تنظیمات ثبت پرداخت
+Payment Gateway Account,حساب درگاه پرداخت
+Payment Period Based On Invoice Date,دوره وصول بر اساس تاریخ فاکتور
+Payment Reconciliation,تطبیق پرداخت
 Payment Term,شرط پرداخت
 Payments,پرداخت‌ها
 Pending,در انتظار
@@ -859,61 +1566,160 @@ Percentage you are allowed to transfer more against the quantity ordered. For ex
 Period Closing Voucher,سند اختتامیه دوره
 Pharmaceutical,دارویی
 Pick List,فهرست برداشت
+Plant Floor,سالن تولید
+Please add a valid Holiday List on Appointment Booking Settings.,در تنظیمات رزرو قرار ملاقات یک فهرست تعطیلات معتبر تعیین کنید.
+Please contact your system manager to install correct version.,برای نصب نسخه درست با مدیر سیستم تماس بگیرید.
+Please fill up the Availability of Slots table to enable Appointment Scheduling.,برای فعال‌سازی زمان‌بندی قرار ملاقات، جدول بازه‌های در دسترس را پر کنید.
+"Please keep one Applicable Charges, when 'Distribute Charges Based On' is 'Distribute Manually'. For more charges, please create another Landed Cost Voucher.",وقتی «توزیع هزینه‌ها بر اساس» روی «توزیع دستی» است، فقط یک هزینه قابل اعمال نگه دارید. برای هزینه‌های بیشتر سند هزینه‌های جانبی خرید دیگری بسازید.
+Please select a warehouse first.,ابتدا یک انبار انتخاب کنید.
+Please select atleast one item to continue,برای ادامه دست‌کم یک کالا انتخاب کنید
+Please set Fiscal Code for the public administration '%s',کد مالیاتی را برای دستگاه دولتی «%s» وارد کنید
+Please set Opening Number of Booked Depreciations,تعداد استهلاک‌های ثبت‌شده افتتاحیه را وارد کنید
 Point of Sale,صندوق فروش (POS)
 Point-of-Sale Profile,پروفایل صندوق فروش
+Posting / Transaction Date,تاریخ ثبت / تراکنش
+Posting Date Inheritance for Exchange Gain / Loss,تاریخ ثبت سند سود و زیان تسعیر ارز
 Price List,فهرست قیمت
 Price List Rate,نرخ فهرست قیمت
+Price List {0} cannot be used in {1},فهرست قیمت {0} را نمی‌توان در {1} به کار برد
 Pricing Rule,قاعده قیمت‌گذاری
+Print Format Builder,سازنده قالب چاپ
+Print Format Builder (New),سازنده قالب چاپ (جدید)
+Print Format {0} is not valid for {1},قالب چاپ {0} برای {1} معتبر نیست
 Procurement Tracker,پیگیری تدارکات
 Product Bundle,بسته محصول
+Production Analytics,تحلیل تولید
 Production Planning,برنامه‌ریزی تولید
+Production Planning Report,گزارش برنامه‌ریزی تولید
 "Products, Purchases, Analysis, and more.",محصولات، خریدها، تحلیل و بیشتر.
 "Products, Raw Materials, BOM, Work Order, and more.",محصولات، مواد اولیه، فهرست مواد، دستور تولید و بیشتر.
 "Products, Sales, Analysis, and more.",محصولات، فروش، تحلیل و بیشتر.
 Profit and Loss,سود و زیان
+Profit and Loss Statement,صورت سود و زیان
+Progress % for a task must be between 0 and 100.,درصد پیشرفت وظیفه باید بین ۰ و ۱۰۰ باشد.
+Project Update,گزارش پیشرفت پروژه
+Project wise Stock Tracking,پیگیری موجودی به تفکیک پروژه
+Project {0} is only {1} complete. Complete or cancel its tasks first.,پروژه {0} فقط {1} پیشرفت دارد. ابتدا وظایف آن را تکمیل یا لغو کنید.
 Projected Qty,مقدار پیش‌بینی‌شده
 Projects,پروژه‌ها
+Projects Settings,تنظیمات پروژه‌ها
+Prospects Engaged But Not Converted,مشتریان بالقوه درگیر اما تبدیل‌نشده
 Purchase Analytics,تحلیل خرید
 Purchase Invoice,فاکتور خرید
 Purchase Invoice Trends,روند فاکتور خرید
+Purchase Invoice can be held after submitting.,فاکتور خرید را پس از ثبت می‌توان در حالت توقف قرار داد.
+Purchase Invoice without any outstanding amount cannot be held.,فاکتور خرید بدون مانده پرداخت‌نشده را نمی‌توان متوقف کرد.
 Purchase Order Analysis,تحلیل سفارش خرید
 Purchase Order Required,سفارش خرید الزامی است
 Purchase Order Trends,روند سفارش خرید
+"Purchase Orders {0} have different currencies, taxes or discounts, so they cannot share one Purchase Receipt. Make one Subcontracting Receipt for each Purchase Order.",سفارش‌های خرید {0} ارز، مالیات یا تخفیف متفاوت دارند و نمی‌توانند یک رسید خرید مشترک داشته باشند. برای هر سفارش خرید یک رسید پیمانکاری جداگانه بسازید.
 Purchase Receipt Required,رسید خرید الزامی است
 Purchase Receipt Trends,روند رسید خرید
+Purchase Receipt {0} is already made against Subcontracting Receipt {1},رسید خرید {0} قبلاً برای رسید پیمانکاری {1} ایجاد شده است
+Purchase Register,دفتر خرید
 Purchase Taxes and Charges Template,الگوی مالیات و هزینه‌های خرید
 Purchase an Asset,خرید دارایی
+Purchase an Asset Item,خرید کالای دارایی
 Purpose,هدف
+QZ Tray Failed:,خطای QZ Tray:
+QZ Tray Failed: ,خطای QZ Tray: 
+Quality Action,اقدام کیفی
 Quality Inspection Template,الگوی بازرسی کیفیت
 Quick Stock Balance,موجودی سریع انبار
 Quotation,پیش‌فاکتور
 Quotation Trends,روند پیش‌فاکتور
+Rate of '{}' items cannot be changed,نرخ کالاهای «{}» قابل تغییر نیست
+Recalculate Bin Qty,محاسبه دوباره مقدار موجودی انبار
 Receivables,حساب‌های دریافتنی
+Receive an email for notifications of these types. Remove a type to stop its emails (in-app notifications are unaffected).,برای اعلان‌های این نوع ایمیل دریافت کنید. با حذف یک نوع، ایمیل‌های آن قطع می‌شود (اعلان‌های داخل برنامه تغییری نمی‌کنند).
+Received Items To Be Billed,کالاهای دریافتی صورتحساب‌نشده
 Received Qty,مقدار دریافت‌شده
+Recipient & Status,گیرنده و وضعیت
 Reference,مرجع
+References,مراجع
 Regional,منطقه‌ای
+Rejected malformed encoded address header with synthesized '@': {0},سرآیند نشانی کدگذاری‌شده نامعتبر با «@» ساختگی رد شد: {0}
+"Replace a particular BOM in all other BOMs where it is used. It will replace the old BOM link, update cost and regenerate ""BOM Explosion Item"" table as per new BOM.
+It also updates latest price in all the BOMs.","یک فهرست مواد مشخص را در همه فهرست‌های مواد دیگری که در آن‌ها به کار رفته جایگزین می‌کند: پیوند فهرست مواد قدیم را جایگزین، بها را به‌روز و جدول «اقلام باز شده فهرست مواد» را بر اساس فهرست جدید بازسازی می‌کند.
+همچنین آخرین قیمت را در همه فهرست‌های مواد به‌روز می‌کند."
 Reports & Masters,گزارش‌ها و اطلاعات پایه
+Reposting can be started only for submitted document.,بازثبت فقط برای سند ثبت‌شده قابل شروع است.
+Reposting cannot be started when status is {0}.,وقتی وضعیت {0} است، بازثبت قابل شروع نیست.
+Reposting is still in progress in background.,بازثبت هنوز در پس‌زمینه در حال انجام است.
+Reposting {0} {1},در حال بازثبت {0} {1}
 Request for Quotation,درخواست استعلام قیمت
 Requested Items To Be Transferred,کالاهای درخواستی قابل انتقال
 Required By,تاریخ نیاز
+Return Purchase Invoice cannot be held.,فاکتور خرید برگشتی را نمی‌توان متوقف کرد.
+Reverse {0} already available in draft status: {1},سند معکوس {0} از قبل به‌صورت پیش‌نویس وجود دارد: {1}
 Review Chart of Accounts,بررسی سرفصل حساب‌ها
 Review Fixed Asset Accounts,بررسی حساب‌های دارایی ثابت
+Review Points,امتیازهای بازبینی
 Review Stock Settings,بررسی تنظیمات انبار
+Reviews,بازبینی‌ها
 Role Allowed to Over Bill,نقش مجاز به صورتحساب بیش از سفارش
 Role Allowed to Override Stop Action,نقش مجاز به نادیده گرفتن توقف
 Role Allowed to Set Frozen Accounts & Edit Frozen Entries,نقش مجاز به مسدود کردن حساب‌ها و ویرایش اسناد مسدود
+Role Profile,پروفایل نقش
+Routing,مسیر تولید
+"Row # {0}: Cannot return {1}, only {2} {3} of its component {4} is left to return",ردیف # {0}: {1} قابل برگشت نیست؛ از جزء {4} آن فقط {2} {3} قابل برگشت مانده است
+Row #{0}: Cannot change the UOM or conversion factor of Item {1} after part of it was received or delivered.,ردیف #{0}: پس از دریافت یا تحویل بخشی از کالای {1}، واحد یا ضریب تبدیل آن قابل تغییر نیست.
+"Row #{0}: Cannot return {1} of Batch {2}, only {3} was delivered and not returned yet.",ردیف #{0}: برگشت {1} از بچ {2} ممکن نیست؛ فقط {3} تحویل شده و هنوز برگشت نخورده است.
+"Row #{0}: Delivery of Item {1} is ensured by produced Serial No, but no Serial No is reserved against Sales Order {2}. Reserve the produced Serial Nos from the Sales Order.",ردیف #{0}: تحویل کالای {1} با شماره سریال تولیدشده تضمین شده، اما هیچ شماره سریالی برای سفارش فروش {2} رزرو نشده است. شماره سریال‌های تولیدشده را از سفارش فروش رزرو کنید.
+Row #{0}: For {1} Clearance date {2} cannot be before Cheque Date {3},ردیف #{0}: برای {1} تاریخ تسویه {2} نمی‌تواند پیش از تاریخ چک {3} باشد
+Row #{0}: Item {1} does not match the item of its schedule row,ردیف #{0}: کالای {1} با کالای ردیف برنامه آن مطابقت ندارد
+Row #{0}: Objective {1} is not part of Quality Goal {2},ردیف #{0}: هدف {1} جزو هدف کیفیت {2} نیست
+Row #{0}: Parameter {1} is already added,ردیف #{0}: پارامتر {1} قبلاً اضافه شده است
+Row #{0}: Parameter {1} is not part of Quality Feedback Template {2},ردیف #{0}: پارامتر {1} جزو الگوی بازخورد کیفیت {2} نیست
+Row #{0}: Quantity must be greater than 0 for Item {1},ردیف #{0}: مقدار کالای {1} باید بیشتر از ۰ باشد
+"Row #{0}: Selling rate for item {1} is lower than its {2}.
+					Selling {3} should be atleast {4}.<br><br>Alternatively,
+					you can disable '{5}' in {6} to bypass
+					this validation.",ردیف #{0}: نرخ فروش کالای {1} کمتر از {2} آن است. {3} فروش باید دست‌کم {4} باشد.<br><br>همچنین می‌توانید برای نادیده گرفتن این کنترل، «{5}» را در {6} غیرفعال کنید.
+Row #{0}: Serial No {1} is not reserved against Sales Order {2}. Deliver only the Serial Nos produced and reserved for it.,ردیف #{0}: شماره سریال {1} برای سفارش فروش {2} رزرو نشده است. فقط شماره سریال‌های تولیدشده و رزروشده برای آن را تحویل دهید.
+Row #{0}: Stock is not reserved for the Item {1} as its delivery is ensured based on the produced Serial Nos. Reserve the produced Serial Nos against the Sales Order after manufacture.,ردیف #{0}: موجودی برای کالای {1} رزرو نشده، چون تحویل آن با شماره سریال‌های تولیدشده تضمین می‌شود. پس از تولید، شماره سریال‌های تولیدشده را برای سفارش فروش رزرو کنید.
+Row #{}: The original Invoice {} of return invoice {} is not consolidated.,ردیف #{}: فاکتور اصلی {} مربوط به فاکتور برگشتی {} تجمیع نشده است.
+Row {0} is not part of Request for Quotation {1}.,ردیف {0} جزو درخواست استعلام قیمت {1} نیست.
+Row {0}: Account {1} is a Group Account,ردیف {0}: حساب {1} یک حساب گروهی است
+Row {0}: Account {1} must be a {2} account,ردیف {0}: حساب {1} باید از نوع {2} باشد
+Row {0}: Activity Type {1} is disabled,ردیف {0}: نوع فعالیت {1} غیرفعال است
+Row {0}: Conversion Factor must be greater than zero.,ردیف {0}: ضریب تبدیل باید بیشتر از صفر باشد.
+Row {0}: Item {1} is not the Finished Good of Purchase Order {2}.,ردیف {0}: کالای {1} کالای ساخته‌شده سفارش خرید {2} نیست.
+Row {0}: Number of visits can not be more than the {1} days between Start and End Date,ردیف {0}: تعداد بازدیدها نمی‌تواند بیش از {1} روز بین تاریخ شروع و پایان باشد
+Row {0}: Please select an active and submitted BOM for Item {1}.,ردیف {0}: یک فهرست مواد فعال و ثبت‌شده برای کالای {1} انتخاب کنید.
+Row {0}: Select the time log of Timesheet {1} that this amount bills,ردیف {0}: سابقه زمانی برگه زمان {1} را که این مبلغ برای آن صورتحساب می‌شود انتخاب کنید
+Row {0}: Service Item {1} and its rate must match Purchase Order {2}.,ردیف {0}: کالای خدماتی {1} و نرخ آن باید با سفارش خرید {2} مطابقت داشته باشد.
+Row {0}: Task {1} ends after its parent task {2},ردیف {0}: وظیفه {1} بعد از وظیفه والد خود {2} تمام می‌شود
+Row {0}: Task {1} is not a Template Task,ردیف {0}: وظیفه {1} از نوع وظیفه الگو نیست
+Row {0}: The same time log of Timesheet {1} is added more than once,ردیف {0}: یک سابقه زمانی از برگه زمان {1} بیش از یک بار اضافه شده است
+Row {0}: Timesheet {1} has no unbilled billable time logs,ردیف {0}: برگه زمان {1} سابقه زمانی صورتحساب‌نشده قابل صورتحساب ندارد
+Row {0}: Total Number of Depreciations cannot be less than or equal to Opening Number of Booked Depreciations,ردیف {0}: تعداد کل استهلاک‌ها نمی‌تواند کمتر یا مساوی تعداد استهلاک‌های ثبت‌شده افتتاحیه باشد
+Row {0}: {1} {2} visits need an End Date of {3}. Change the End Date or the Number of Visits.,ردیف {0}: {1} {2} بازدید به تاریخ پایان {3} نیاز دارد. تاریخ پایان یا تعداد بازدیدها را تغییر دهید.
+Row {0}: {3} Account {1} does not belong to Company {2},ردیف {0}: حساب {3} {1} متعلق به شرکت {2} نیست
+S3 Backup Settings,تنظیمات پشتیبان‌گیری S3
+SMS Center,مرکز پیامک
+SMS Log,سابقه پیامک
 Sales Analytics,تحلیل فروش
 Sales Invoice Trends,روند فاکتور فروش
 Sales Order Analysis,تحلیل سفارش فروش
 Sales Order Item,ردیف سفارش فروش
+Sales Order Item {0} does not belong to {1},ردیف سفارش فروش {0} متعلق به {1} نیست
 Sales Order Required for Sales Invoice & Delivery Note Creation,الزام سفارش فروش برای ایجاد فاکتور فروش و حواله خروج
 Sales Order Trends,روند سفارش فروش
 Sales Partner Target Variance Based On Item Group,انحراف از هدف شریک فروش بر اساس گروه کالا
 Sales Partners Commission,کمیسیون شرکای فروش
+Sales Payment Summary,خلاصه دریافت‌های فروش
 Sales Person,کارشناس فروش
 Sales Person Target Variance Based On Item Group,انحراف از هدف کارشناس فروش بر اساس گروه کالا
 Sales Person-wise Transaction Summary,خلاصه معاملات به تفکیک کارشناس فروش
+Sales Pipeline Analytics,تحلیل خط لوله فروش
+Sales Register,دفتر فروش
 Sales Taxes and Charges Template,الگوی مالیات و هزینه‌های فروش
+Save the Project before duplicating it,پیش از کپی کردن پروژه، آن را ذخیره کنید
+Schedule Conflict,تداخل زمان‌بندی
+Schedule rows {0} do not belong to Maintenance Schedule {1},ردیف‌های برنامه {0} متعلق به برنامه نگهداری {1} نیستند
+Schedule sending,زمان‌بندی ارسال
+Schedule sending at a later time,زمان‌بندی ارسال برای بعد
 Select Asset Supplier,تأمین‌کننده دارایی را انتخاب کنید
 Select Customer,انتخاب مشتری
 Select Item,انتخاب کالا
@@ -929,6 +1735,7 @@ Select a customer.,مشتری را انتخاب کنید.
 Select a name for the warehouse. This should reflect its location or purpose.,نامی برای انبار انتخاب کنید که محل یا کاربرد آن را نشان دهد.
 Select a naming series which will be used to create an Asset automatically,سری شماره‌گذاری دارایی‌هایی را که خودکار ایجاد می‌شوند انتخاب کنید
 Select a specific Customer to whom this quotation will be sent.,مشتری‌ای را که پیش‌فاکتور برای او ارسال می‌شود انتخاب کنید.
+Select a submitted Maintenance Schedule for the scheduled visits,برای بازدیدهای برنامه‌ریزی‌شده یک برنامه نگهداری ثبت‌شده انتخاب کنید
 Select a target warehouse where the stock will be received.,انبار مقصدی را که کالا به آن وارد می‌شود انتخاب کنید.
 Select an Asset Category for this Asset Item,گروه دارایی این کالا را انتخاب کنید
 Select an Asset Item,کالای دارایی را انتخاب کنید
@@ -941,6 +1748,7 @@ Select an item,یک کالا انتخاب کنید
 Select an item and entry quantity to be delivered.,کالا و مقدار را انتخاب کنید.
 Select an item for which you will be quoting a price.,کالایی را که برای آن قیمت می‌دهید انتخاب کنید.
 Select an item.,یک کالا انتخاب کنید.
+Select field,انتخاب فیلد
 Select item that you have sold along with quantity and rate.,کالای فروخته‌شده را همراه با مقدار و نرخ انتخاب کنید.
 Select taxes,انتخاب مالیات‌ها
 Select the Fixed Asset and Depreciation accounts applicable for this Asset Category type,حساب‌های دارایی ثابت و استهلاک این گروه دارایی را انتخاب کنید
@@ -951,45 +1759,79 @@ Select the role that is allowed to submit transactions that exceed credit limits
 Select the type of Print Format,نوع قالب چاپ را انتخاب کنید
 "Select the type of Stock Entry to be made. For now, to receive stock into a warehouses select <a href=""https://docs.erpnext.com/docs/v13/user/manual/en/stock/articles/stock-entry-purpose#2purpose-material-receipt"" target=""_blank"">Material Receipt.</a>","نوع سند انبار را انتخاب کنید. فعلاً برای ورود کالا به انبار، <a href=""https://docs.erpnext.com/docs/v13/user/manual/en/stock/articles/stock-entry-purpose#2purpose-material-receipt"" target=""_blank"">دریافت کالا</a> را انتخاب کنید."
 Selling Settings,تنظیمات فروش
+Sendgrid,Sendgrid
+Serial No Not Reserved,شماره سریال رزرو نشده
 Serial No Service Contract Expiry,انقضای قرارداد خدمات شماره سریال
 Serial No Status,وضعیت شماره سریال
 Serial No Warranty Expiry,انقضای گارانتی شماره سریال
 Serial No and Batch,شماره سریال و بچ
+Serial No status sync has been queued. Reload the report after a few minutes.,همگام‌سازی وضعیت شماره سریال در صف قرار گرفت. چند دقیقه بعد گزارش را دوباره بارگذاری کنید.
+Serial No {0} is still in stock in Warehouse {1},شماره سریال {0} هنوز در انبار {1} موجود است
+"Serial No {0} was sold to Customer {1}, not {2}",شماره سریال {0} به مشتری {1} فروخته شده است، نه {2}
+Serial Number Series is mandatory when entering Opening Stock for a serialized item.,برای ثبت موجودی افتتاحیه کالای سریال‌دار، سری شماره سریال الزامی است.
 Series,سری شماره‌گذاری
+Service Level Agreement,توافق‌نامه سطح خدمات
 Set Available for use date,تاریخ آماده بهره‌برداری را وارد کنید
 Set Gross purchase amount,مبلغ ناخالص خرید را وارد کنید
+Set Incoming Rate as Zero for Expired Batch,صفر کردن نرخ ورودی برای بچ منقضی‌شده
 Set Landed Cost Based on Purchase Invoice Rate,محاسبه بهای تمام‌شده بر اساس نرخ فاکتور خرید
 Set Purchase Date,تاریخ خرید را وارد کنید
 Set Purpose to Opening Stock to set the stock opening balance.,برای ثبت موجودی افتتاحیه، هدف را «موجودی افتتاحیه» قرار دهید.
 Set Source Warehouse,انبار مبدأ همه ردیف‌ها
 Set Target Warehouse,انبار مقصد همه ردیف‌ها
+Set Up a Company,راه‌اندازی شرکت
 Set Warehouse,انبار همه ردیف‌ها
 Set a Default Warehouse for Inventory Transactions. This will be fetched into the Default Warehouse in the Item master.,انبار پیش‌فرض تراکنش‌های انبار را تعیین کنید؛ در فرم کالا به‌عنوان انبار پیش‌فرض پر می‌شود.
 "Set the ""Required By"" date for the materials. This sets the ""Required By"" date for all the items.",«تاریخ نیاز» را وارد کنید؛ برای همه ردیف‌های کالا اعمال می‌شود.
 Set this template as the default for all sales transactions,این الگو را برای همه معاملات فروش پیش‌فرض کنید
+Set up your Warehouse,ایجاد انبار
 Setting the target warehouse sets it for all the items.,انبار مقصد انتخاب‌شده برای همه ردیف‌های کالا اعمال می‌شود.
 Setting up Taxes,تنظیم مالیات‌ها
+Settings to control blog categories and interactions like comments and likes,تنظیمات دسته‌بندی وبلاگ و تعامل‌هایی مانند دیدگاه و پسندیدن
 Setup Approval Workflows,تنظیم گردش کار تأیید
 Setup Limited Access for a User,دسترسی محدود برای کاربر
 Setup Naming Series,تنظیم سری شماره‌گذاری
 Setup Taxes,تنظیم مالیات‌ها
+Setup Your Letterhead,تنظیم سربرگ
 Setup a Warehouse,ایجاد انبار
 Share Balance,مانده سهام
 Share Ledger,دفتر سهام
 Share Management,مدیریت سهام
 Share Transfer,انتقال سهام
 Shareholder,سهامدار
+Shipping Account {0} does not belong to Company {1},حساب حمل {0} متعلق به شرکت {1} نیست
 Shipping Rule,قاعده حمل‌ونقل
+Show Account Balance,نمایش مانده حساب
+Show Completed Orders,نمایش سفارش‌های تکمیل‌شده
+Show More Activity,نمایش فعالیت‌های بیشتر
+Show Party Balance,نمایش مانده طرف حساب
+Show totals,نمایش جمع‌ها
 Show {0} List,نمایش فهرست {0}
 "Similar to the previous option, this unlinks any advance payments made against Purchase/Sales Orders.",مانند گزینه قبل، پیش‌پرداخت‌های ثبت‌شده برای سفارش‌های خرید و فروش را جدا می‌کند.
+"Simple Python Expression, Example: Status in (""Closed"", ""Cancelled"")","عبارت ساده پایتون، مثال: Status in (""Closed"", ""Cancelled"")"
+Single DocTypes cannot be renamed,انواع سند تک‌رکوردی قابل تغییر نام نیستند
 Skip,رد شدن
+Slack,Slack
+Slack Webhook URL,نشانی Webhook برای Slack
+Snapshot Report,گزارش لحظه‌ای
+Snapshot Reports,گزارش‌های لحظه‌ای
+Snippet and more variables:  {0},نمونه کد و متغیرهای بیشتر: {0}
+Social Login,ورود با حساب شبکه‌های اجتماعی
+Social Login Key,کلید ورود با شبکه‌های اجتماعی
+Some columns might get cut off when printing to PDF. Try to keep number of columns under 10.,ممکن است در چاپ PDF برخی ستون‌ها بریده شوند. تعداد ستون‌ها را زیر ۱۰ نگه دارید.
 Source Warehouse,انبار مبدأ
+SparkPost,SparkPost
+"Standard tax template that can be applied to all Purchase Transactions. This template can contain a list of tax heads and also other expense heads like ""Shipping"", ""Insurance"", ""Handling"", etc.",الگوی مالیاتی استاندارد برای همه معاملات خرید. این الگو می‌تواند فهرستی از سرفصل‌های مالیاتی و هزینه‌های دیگر مانند «حمل»، «بیمه» و «جابه‌جایی» داشته باشد.
+"Standard tax template that can be applied to all Sales Transactions. This template can contain a list of tax heads and also other expense/income heads like ""Shipping"", ""Insurance"", ""Handling"" etc.",الگوی مالیاتی استاندارد برای همه معاملات فروش. این الگو می‌تواند فهرستی از سرفصل‌های مالیاتی و سرفصل‌های هزینه یا درآمد دیگر مانند «حمل»، «بیمه» و «جابه‌جایی» داشته باشد.
 Stock,انبار
 Stock Ageing,سن موجودی
 Stock Analytics,تحلیل موجودی
 Stock Balance,موجودی انبار
 Stock Entry,سند انبار
 Stock Ledger,دفتر انبار
+Stock Ledger Entries of Cancelled Vouchers,ثبت‌های دفتر انبار اسناد لغوشده
+Stock Ledger Entries of the selected vouchers have been cancelled and reposting has been queued.,ثبت‌های دفتر انبار اسناد انتخاب‌شده لغو شدند و بازثبت در صف قرار گرفت.
+Stock Ledger report contains every submitted stock transaction. You can use filter to narrow down ledger entries.,گزارش دفتر انبار همه تراکنش‌های ثبت‌شده انبار را دارد. با فیلترها می‌توانید ثبت‌ها را محدود کنید.
 Stock Projected Qty,مقدار پیش‌بینی‌شده موجودی
 Stock Qty,مقدار به واحد انبار
 Stock Reconciliation,انبارگردانی
@@ -999,13 +1841,19 @@ Stock Summary,خلاصه موجودی
 Stock Transactions,تراکنش‌های انبار
 Stock UOM,واحد انبار
 Stop,توقف
+Sub Assembly,قطعه نیمه‌ساخته
+Sub Total,جمع جزء
 Subcontracted Item To Be Received,کالای پیمانکاری قابل دریافت
 Subcontracted Raw Materials To Be Transferred,مواد اولیه پیمانکاری قابل انتقال
 Subcontracting Settings,تنظیمات پیمانکاری
+Submit Subcontracting Receipt {0} before making a Purchase Receipt,پیش از ایجاد رسید خرید، رسید پیمانکاری {0} را ثبت کنید
 Submitted,ثبت‌شده
+"Successfully {0} {1} record out of {2}. Click on Export Errored Rows, fix the errors and import again.",{0} موفق {1} رکورد از {2}. «خروجی ردیف‌های خطادار» را بزنید، خطاها را اصلاح کنید و دوباره وارد کنید.
+"Successfully {0} {1} records out of {2}. Click on Export Errored Rows, fix the errors and import again.",{0} موفق {1} رکورد از {2}. «خروجی ردیف‌های خطادار» را بزنید، خطاها را اصلاح کنید و دوباره وارد کنید.
 Supplier,تأمین‌کننده
 Supplier Addresses And Contacts,نشانی و مخاطبان تأمین‌کنندگان
 Supplier Group,گروه تأمین‌کننده
+Supplier Ledger Summary,خلاصه دفتر تأمین‌کنندگان
 Supplier Name,نام تأمین‌کننده
 Supplier Naming By,نام‌گذاری تأمین‌کننده بر اساس
 Supplier Quotation,استعلام قیمت تأمین‌کننده
@@ -1014,54 +1862,154 @@ Supplier Scorecard,کارنامه تأمین‌کننده
 Supplier Scorecard Criteria,معیارهای کارنامه تأمین‌کننده
 Supplier Scorecard Standing,رتبه کارنامه تأمین‌کننده
 Supplier Scorecard Variable,متغیر کارنامه تأمین‌کننده
+Supplier Scorecard refresh failed,به‌روزرسانی کارنامه تأمین‌کننده ناموفق بود
+Supplier Scorecard standing of {0}: {1},رتبه کارنامه تأمین‌کننده {0}: {1}
+Supplier Scorecard {0} already has a submitted period overlapping {1} to {2},کارنامه تأمین‌کننده {0} از قبل دوره ثبت‌شده‌ای دارد که با بازه {1} تا {2} همپوشانی دارد
 Supplier-Wise Sales Analytics,تحلیل فروش به تفکیک تأمین‌کننده
+Sync Data,همگام‌سازی داده
+Sync Serial No Status,همگام‌سازی وضعیت شماره سریال
+Sync Timeout (Seconds),مهلت همگام‌سازی (ثانیه)
+Synced,همگام‌شده
+TCS Amount,مبلغ TCS
+TCS Rate %,نرخ TCS ٪
+TDS Amount,مبلغ TDS
 Take a quick walk-through of Accounts Settings,مرور سریع تنظیمات حسابداری
 Take a walk through Stock Settings,مرور تنظیمات انبار
 Take a walk-through of Manufacturing Settings,مرور تنظیمات تولید
 Target Warehouse,انبار مقصد
+Task,وظیفه
+Task {0} has child tasks in another project. Move them out of this group first.,وظیفه {0} زیروظایفی در پروژه دیگری دارد. ابتدا آن‌ها را از این گروه خارج کنید.
 Tax Category,دسته‌بندی مالیاتی
 Tax Masters,اطلاعات پایه مالیاتی
 Tax Rule,قاعده مالیاتی
 Tax Withholding Category,دسته‌بندی مالیات تکلیفی
 Tax category can be set on Addresses. An address can be Shipping or Billing address. Set which addres to select when applying Tax Category.,دسته‌بندی مالیاتی را می‌توان روی نشانی تعیین کرد. نشانی می‌تواند نشانی ارسال یا صورتحساب باشد؛ مشخص کنید هنگام اعمال دسته‌بندی مالیاتی کدام به کار رود.
+"Tax-exclusive additional discount carried from a source document, per stock unit.",تخفیف اضافی بدون مالیات که از سند مبنا آمده، به ازای هر واحد انبار.
 Taxes Table,جدول مالیات‌ها
 Terms and Conditions Content,متن شرایط و ضوابط
 Terms and Conditions Template,الگوی شرایط و ضوابط
 Territory Target Variance Based On Item Group,انحراف از هدف منطقه بر اساس گروه کالا
+Territory Wise Sales,فروش به تفکیک منطقه
 The Accounts Module is all set up!,ماژول حسابداری آماده است!
 The Assets Module is all set up!,ماژول دارایی‌ها آماده است!
+"The Batch {0} of an item {1} has negative stock in the warehouse {2}{3}.
+			Please add a stock quantity of {4} to proceed with this entry.
+			If it is not possible to make an adjustment entry, please enable 'Allow Negative Stock for Batch' in the batch {0} or Stock Settings to proceed.
+			However, enabling this setting may lead to negative stock in the system.
+			So please ensure the stock levels are adjusted as soon as possible to maintain the correct valuation rate.","بچ {0} کالای {1} در انبار {2}{3} موجودی منفی دارد.
+برای ادامه این سند، {4} واحد موجودی اضافه کنید.
+اگر ثبت اصلاحی ممکن نیست، «اجازه موجودی منفی برای بچ» را در بچ {0} یا در تنظیمات انبار فعال کنید.
+البته فعال کردن این تنظیم ممکن است به موجودی منفی در سیستم منجر شود.
+پس موجودی را هر چه زودتر اصلاح کنید تا نرخ ارزش‌گذاری درست بماند."
 The Buying Module is all set up!,ماژول خرید آماده است!
 The CRM Module is all set up!,ماژول CRM آماده است!
+The File URL does not belong to this File record,نشانی فایل متعلق به این رکورد فایل نیست
 The Selling Module is all set up!,ماژول فروش آماده است!
 The Stock Module is all set up!,ماژول انبار آماده است!
+The Supplier Scorecard standing of {0} is now {1}.,رتبه کارنامه تأمین‌کننده {0} اکنون {1} است.
+The account type of {0} cannot be changed from {1} because stock ledger entries exist against it.,نوع حساب {0} را نمی‌توان از {1} تغییر داد، چون ثبت‌های دفتر انبار روی آن وجود دارد.
+The cash or non-trade discount cannot be combined with discounts carried from other documents.,تخفیف نقدی یا غیرتجاری را نمی‌توان با تخفیف‌های آمده از اسناد دیگر ترکیب کرد.
+The cash or non-trade discount cannot be combined with the discount of {0}.,تخفیف نقدی یا غیرتجاری را نمی‌توان با تخفیف {0} ترکیب کرد.
+"The criteria formula fails when every variable is {0}. Check its syntax and guard divisions by a variable, for example: {1}",فرمول معیار وقتی همه متغیرها {0} هستند خطا می‌دهد. نگارش آن را بررسی کنید و از تقسیم بر متغیر محافظت کنید، مثلاً: {1}
+The email button is enabled for the user in the document.,دکمه ایمیل در سند برای کاربر فعال است.
+"The finished good rows receive {0}, which is more than the Finished Good Quantity {1}. Set Finished Good Quantity to {0} and get the items again, or reduce the finished good rows.",ردیف‌های کالای ساخته‌شده {0} دریافت می‌کنند که بیش از مقدار کالای ساخته‌شده {1} است. مقدار کالای ساخته‌شده را {0} کنید و کالاها را دوباره دریافت کنید، یا ردیف‌های کالای ساخته‌شده را کم کنید.
+The finished product {0} quantity {1} and For Quantity {2} cannot be different,مقدار محصول ساخته‌شده {0} یعنی {1} نمی‌تواند با «برای مقدار» {2} متفاوت باشد
 "The percentage by which you can overbill transactions. For example, if the order value is $100 for an Item and percentage here is set as 10% then you are allowed to bill for $110.",درصدی که می‌توانید بیش از مبلغ سفارش صورتحساب صادر کنید. مثلاً اگر مبلغ سفارش یک کالا ۱۰۰ و این درصد ۱۰ باشد، تا ۱۱۰ قابل صورتحساب است.
+The print button is enabled for the user in the document.,دکمه چاپ در سند برای کاربر فعال است.
 "The purpose of the material request can be selected here. For now select ""Purchase"" as the purpose.",هدف درخواست کالا را اینجا انتخاب کنید. فعلاً «خرید» را انتخاب کنید.
+The user can create a new Item but cannot edit existing items.,کاربر می‌تواند کالای جدید بسازد اما نمی‌تواند کالاهای موجود را ویرایش کند.
+The user can delete Draft / Cancelled documents.,کاربر می‌تواند اسناد پیش‌نویس یا لغوشده را حذف کند.
+The user can export report data.,کاربر می‌تواند از داده‌های گزارش خروجی بگیرد.
+The user can import new records or update existing data for the document.,کاربر می‌تواند رکوردهای جدید وارد یا داده‌های موجود سند را به‌روز کند.
+The user can select a Customer in Sales Order but cannot open the Customer master.,کاربر می‌تواند در سفارش فروش مشتری را انتخاب کند اما نمی‌تواند فرم مشتری را باز کند.
+The user can share document access with another user.,کاربر می‌تواند دسترسی سند را با کاربر دیگری به اشتراک بگذارد.
+The user can update a customer or any other fields in an existing Sales Order but cannot create a new Sales Order.,کاربر می‌تواند مشتری یا هر فیلد دیگری را در سفارش فروش موجود به‌روز کند اما نمی‌تواند سفارش فروش جدید بسازد.
+The user can view Sales Invoices but cannot modify any field values in them.,کاربر می‌تواند فاکتورهای فروش را ببیند اما نمی‌تواند هیچ مقداری را در آن‌ها تغییر دهد.
+Theme name cannot contain '/' or path separators,نام پوسته نمی‌تواند شامل «/» یا جداکننده مسیر باشد
+These announcements will appear inside a dismissible alert below the Navbar.,این اطلاعیه‌ها در کادر هشدار قابل بستنی زیر نوار بالا نمایش داده می‌شوند.
+This Web Form Request has already been used,این درخواست فرم وب قبلاً استفاده شده است
+This Web Form Request has expired,این درخواست فرم وب منقضی شده است
+This is a snapshot report generated {0}.,این گزارش لحظه‌ای است که {0} ایجاد شده است.
 This is the default currency for this company.,این ارز پیش‌فرض این شرکت است.
 "This is the default measuring unit that you will use for your product. It could be Nos, Kgs, Meters, etc.",واحد اندازه‌گیری اصلی کالا، مانند عدد، کیلوگرم یا متر.
 This setting is recommended if you wish to track the real-time stock balance in your books of account. This will allow the creation of a General Ledger entry for every stock transaction.,اگر می‌خواهید موجودی انبار به‌صورت لحظه‌ای در دفاتر منعکس شود، این تنظیم توصیه می‌شود؛ برای هر تراکنش انبار یک ثبت در دفتر کل ایجاد می‌شود.
+This will update the warehouse and status of Serial Nos counted in {0} to match the stock ledger. Continue?,انبار و وضعیت شماره سریال‌های شمارش‌شده در {0} مطابق دفتر انبار به‌روز می‌شود. ادامه می‌دهید؟
+Timesheet,برگه زمان کارکرد
+To Do,کارها
+To Time must be after From Time,«تا زمان» باید بعد از «از زمان» باشد
+"To use Slack Channel, add a <a href=""#List/Slack%20Webhook%20URL/List"">Slack Webhook URL</a>.","برای استفاده از کانال Slack، یک <a href=""#List/Slack%20Webhook%20URL/List"">نشانی Webhook برای Slack</a> اضافه کنید."
+ToDo,کارها
+Toggle Section: {0},باز و بسته کردن بخش: {0}
+Too many requests. Please try again later.,تعداد درخواست‌ها زیاد است. بعداً دوباره تلاش کنید.
 Total Active Items,تعداد کالاهای فعال
+Total Consumed Material Cost,کل بهای مواد مصرف‌شده
 Total Incoming Bills,جمع صورتحساب‌های دریافتی
 Total Incoming Payment,جمع دریافت‌ها
+Total Lost Quotations,کل پیش‌فاکتورهای از دست رفته
+Total Lost Value,ارزش کل از دست رفته
 Total Outgoing Bills,جمع صورتحساب‌های صادره
 Total Outgoing Payment,جمع پرداخت‌ها
+Total completed quantity: {0},کل مقدار تکمیل‌شده: {0}
+Total {0} Considered,کل {0} در نظر گرفته‌شده
+Total {0} Value,ارزش کل {0}
+Total:,جمع:
 Track Material Request,پیگیری درخواست کالا
+Tree of Procedures,درخت رویه‌ها
 Trial Balance,تراز آزمایشی
+Trial Balance for Party,تراز آزمایشی طرف حساب‌ها
+Try the new Print Designer,طراح چاپ جدید را امتحان کنید
+Type Distribution,توزیع بر اساس نوع
+Type Name,نام نوع
 UOM,واحد
 UOM Conversion Factor,ضریب تبدیل واحد
+Uncancelled Serial and Batch Bundle,بسته سریال و بچ لغونشده
 Unit of Measure (UOM),واحد اندازه‌گیری (UOM)
 Update Stock Opening Balance,ثبت موجودی افتتاحیه
 Update frequency of Project,تناوب به‌روزرسانی پروژه
 Updating Opening Balances,ثبت مانده‌های افتتاحیه
+Upgrade plan,ارتقای طرح
+Upgrade your support experience with Frappe Helpdesk,با Frappe Helpdesk تجربه پشتیبانی خود را ارتقا دهید
+Use Number Format from Currency,استفاده از قالب عدد واحد پول
+Use Prices from Default Price List as Fallback,استفاده از قیمت‌های فهرست قیمت پیش‌فرض در نبود قیمت
 Use Transaction Date Exchange Rate,استفاده از نرخ ارز تاریخ تراکنش
+User ID of a Blogger,شناسه کاربری نویسنده وبلاگ
+User {0} has no read or select permission on {1},کاربر {0} مجوز خواندن یا انتخاب {1} را ندارد
 Users with this Role are allowed to set frozen accounts and create/modify accounting entries against frozen accounts.,کاربران این نقش می‌توانند حساب‌ها را مسدود کنند و روی حساب‌های مسدود سند ثبت یا ویرایش کنند.
+Variant {0} and its template {1} cannot both be added to the same Pricing Rule,گونه {0} و الگوی آن {1} را نمی‌توان هم‌زمان به یک قاعده قیمت‌گذاری افزود
 View Cost Center Tree,نمایش درخت مراکز هزینه
+View Warehouses,مشاهده انبارها
+Views,نماها
 Warehouse Wise Stock Balance,موجودی به تفکیک انبار
 Warehouse wise Stock Value,ارزش موجودی به تفکیک انبار
 Warn,هشدار
+Watch Video,تماشای ویدیو
+Web Form Request,درخواست فرم وب
+Web Form Request key is required,کلید درخواست فرم وب الزامی است
+Web Form Request link copied,پیوند درخواست فرم وب کپی شد
+Web Form Values,مقادیر فرم وب
+Webhook,Webhook
+Website Route Meta,متادیتای مسیر وب‌سایت
+Website Script,اسکریپت وب‌سایت
+Website Settings,تنظیمات وب‌سایت
+Website Sidebar,نوار کناری وب‌سایت
+Website Slideshow,اسلایدشوی وب‌سایت
+Website Theme,پوسته وب‌سایت
+What the recipient receives by email when this notification fires. Mirrors Title/Description by default; set these to make the email differ from the in-app text.,متنی که گیرنده هنگام این اعلان با ایمیل دریافت می‌کند. به‌طور پیش‌فرض همان عنوان و شرح است؛ برای تفاوت ایمیل با متن داخل برنامه این‌ها را تعیین کنید.
 "When a Supplier is saved, system generates a unique identity or name for that Supplier which can be used to refer the Supplier in various Buying transactions.",با ذخیره تأمین‌کننده، سیستم یک شناسه یا نام یکتا برای او می‌سازد که در معاملات خرید به آن ارجاع داده می‌شود.
 "When creating an Item, entering a value for this field will automatically create an Item Price at the backend. Entering a value after the Item has been saved will not work. In this case, the Item Price is created from any transactions with the Item.",اگر هنگام ایجاد کالا این فیلد را پر کنید، قیمت کالا خودکار ساخته می‌شود. پر کردن آن پس از ذخیره کالا اثری ندارد؛ در آن حالت قیمت از تراکنش‌های کالا ساخته می‌شود.
 "While making a Purchase Receipt or Purchase Invoice from a Purchase Order, use the exchange rate on its posting date rather than inheriting it from the Purchase Order.",هنگام ایجاد رسید یا فاکتور خرید از روی سفارش خرید، نرخ ارز تاریخ همان سند به کار رود نه نرخ سفارش خرید.
 Work Order,دستور تولید
+Work Order Consumed Materials,مواد مصرفی دستور تولید
+Work Order Summary,خلاصه دستورهای تولید
+Workflow Action,اقدام گردش کار
+Workspace,صفحه کار
+Workstation,ایستگاه کاری
+Wrapping up,در حال اتمام
+Write Off Account must be a Profit and Loss account,حساب سوخت باید از حساب‌های سود و زیان باشد
+You are not allowed to update attendance for another user.,شما مجاز به تغییر حضور کاربر دیگری نیستید.
+You are not permitted to access Company {0},شما مجوز دسترسی به شرکت {0} را ندارید
+You are not permitted to repair the Stock Ledger Entries of {0} {1},شما مجوز اصلاح ثبت‌های دفتر انبار {0} {1} را ندارید
+You are not permitted to view the timesheets of this project.,شما مجوز دیدن برگه‌های زمان این پروژه را ندارید.
 "You can add a row for a tax rule here. These rules can be applied on the net total, or can be a flat amount.",برای هر قاعده مالیاتی یک ردیف اضافه کنید؛ مالیات می‌تواند درصدی از جمع خالص یا مبلغی ثابت باشد.
 You can add custom css for your Print Format from this section,CSS سفارشی قالب چاپ را در این بخش وارد کنید
 You can add items here.,کالاها را اینجا اضافه کنید.
@@ -1069,5 +2017,50 @@ You can add sales taxes and charges here.,مالیات و هزینه‌های ف
 You can add taxes here,مالیات‌ها را اینجا اضافه کنید
 You can mark the Letter Head as default,می‌توانید این سربرگ را پیش‌فرض کنید
 You can modify the style of the Print Format from this section,ظاهر قالب چاپ را در این بخش تغییر دهید
+You can only edit your own replies.,فقط پاسخ‌های خودتان را می‌توانید ویرایش کنید.
+You can only follow documents for yourself.,فقط برای خودتان می‌توانید اسناد را دنبال کنید.
+You can only unfollow documents for yourself.,فقط برای خودتان می‌توانید دنبال کردن اسناد را لغو کنید.
 You can select pre-populated Sales Taxes and Charges from here.,الگوی آماده مالیات و هزینه‌های فروش را اینجا انتخاب کنید.
+"You can set the filters to narrow the results, then click on Generate New Report to see the updated report.",با فیلترها نتایج را محدود کنید و سپس «ایجاد گزارش جدید» را بزنید تا گزارش به‌روز را ببینید.
+"You cannot outward following {0} as either they are Delivered, Inactive or located in a different warehouse.",{0} زیر را نمی‌توان خارج کرد، چون تحویل‌شده، غیرفعال یا در انبار دیگری هستند.
+You do not have permission to access this file,شما مجوز دسترسی به این فایل را ندارید
+You do not have permission to create or restore documents of type {0}.,شما مجوز ایجاد یا بازیابی اسناد نوع {0} را ندارید.
+You do not have permission to restore this document.,شما مجوز بازیابی این سند را ندارید.
+You don't have permission to create Report records.,شما مجوز ایجاد گزارش را ندارید.
+You don't have permission to create report for {0},شما مجوز ایجاد گزارش برای {0} را ندارید
+You don't have permission to read/attach the file {0}.,شما مجوز خواندن یا پیوست فایل {0} را ندارید.
+You must login to use this form,برای استفاده از این فرم باید وارد شوید
 You're ready to start your journey with ERPNext,آماده‌اید که کار با ERPNext را شروع کنید
+Your email has been verified and your appointment has been confirmed for {0},ایمیل شما تأیید شد و قرار ملاقات شما برای {0} قطعی شد
+`doctype` and `fieldname` are required for deleting property setters.,برای حذف تنظیمات ویژگی، `doctype` و `fieldname` الزامی است.
+added {0} row(s) to {1},{0} ردیف به {1} اضافه کرد
+changed {0},{0} را تغییر داد
+cleared {0},{0} را پاک کرد
+query-report,query-report
+removed {0} row(s) from {1},{0} ردیف از {1} حذف کرد
+set {0} to,{0} را قرار داد روی
+set {0} to {1} in row #{2},{0} را در ردیف #{2} روی {1} قرار داد
+up to,تا
+up to ,تا 
+updated {0},{0} را به‌روز کرد
+visible_types entries must be strings or {type: [fields]} maps,ورودی‌های visible_types باید رشته یا نگاشت {type: [fields]} باشند
+visible_types fields for {0} must be a list,فیلدهای visible_types برای {0} باید فهرست باشند
+visible_types is not valid JSON: {0},visible_types یک JSON معتبر نیست: {0}
+visible_types must be a list,visible_types باید فهرست باشد
+wkhtmltopdf 0.12.x (with patched qt).,wkhtmltopdf 0.12.x (با qt وصله‌شده).
+{0} cannot be a group,{0} نمی‌تواند گروهی باشد
+{0} cannot be reconciled against a Bank Transaction,{0} را نمی‌توان با تراکنش بانکی تطبیق داد
+{0} cannot be unreconciled,تطبیق {0} قابل لغو نیست
+{0} contains invalid field(s): {1},{0} شامل فیلدهای نامعتبر است: {1}
+{0} does not carry a serial and batch bundle,{0} بسته سریال و بچ ندارد
+{0} does not exist,{0} وجود ندارد
+{0} is a built-in Notification Type and cannot be deleted. Disable it instead.,{0} نوع اعلان داخلی سیستم است و قابل حذف نیست. به جای آن غیرفعالش کنید.
+{0} is not a valid reference field for {1},{0} فیلد مرجع معتبری برای {1} نیست
+{0} is not running. Cannot trigger events for this Document,{0} در حال اجرا نیست. نمی‌توان برای این سند رویداد اجرا کرد
+{0} must be the same as in Purchase Order {1}.,{0} باید مانند سفارش خرید {1} باشد.
+"{0} never sends email, so it cannot be enabled for users.",{0} هرگز ایمیل نمی‌فرستد، پس نمی‌توان آن را برای کاربران فعال کرد.
+{0} units of Item {1} is not available in any of the warehouses. Other Pick Lists exist for this item.,{0} واحد از کالای {1} در هیچ انباری موجود نیست. فهرست‌های برداشت دیگری برای این کالا وجود دارد.
+{0} was moved after the task it depends on. {1},{0} به بعد از وظیفه‌ای که به آن وابسته است منتقل شد. {1}
+{0} {1} is not linked to Supplier {2},{0} {1} به تأمین‌کننده {2} متصل نیست
+{0}: Link field cannot reference DocType {1} without Guest read permission,{0}: فیلد پیوند نمی‌تواند به نوع سند {1} بدون مجوز خواندن مهمان ارجاع دهد
+{} Published,{} منتشر شده
