@@ -22,6 +22,10 @@ before_uninstall = "erpnext_iran.install.before_uninstall"
 boot_session = "erpnext_iran.boot.boot_session"
 update_website_context = "erpnext_iran.boot.update_website_context"
 
+# Jalali-month periods in financial statements (see overrides/report_periods.py)
+before_request = ["erpnext_iran.overrides.report_periods.apply"]
+before_job = ["erpnext_iran.overrides.report_periods.apply"]
+
 doc_events = {
 	"Customer": {
 		"before_insert": "erpnext_iran.doc_events.party.normalize_names",

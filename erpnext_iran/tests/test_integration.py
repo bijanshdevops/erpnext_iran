@@ -125,6 +125,41 @@ class TestIranLocalization(FrappeTestCase):
 		self.assertEqual(loaded["time_zone"], "Asia/Tehran")
 		self.assertEqual(frappe.db.get_default("country"), "Iran")
 
+	def test_profit_and_loss_by_jalali_month(self):
+		from erpnext.accounts.report.profit_and_loss_statement import profit_and_loss_statement
+
+		from erpnext_iran.overrides import report_periods
+
+		report_periods.apply()
+		filters = frappe._dict(
+			company=COMPANY,
+			filter_based_on="Fiscal Year",
+			period_start_date="2026-03-21",
+			period_end_date="2027-03-20",
+			from_fiscal_year="1405",
+			to_fiscal_year="1405",
+			periodicity="Monthly",
+			presentation_currency="IRR",
+		)
+		columns, data = profit_and_loss_statement.execute(filters)[:2]
+		period_columns = [c for c in columns if c["fieldname"].startswith("j1405_")]
+		self.assertEqual(len(period_columns), 12)
+		self.assertEqual(period_columns[0]["label"], "فروردین 1405")
+		self.assertEqual(period_columns[7]["label"], "آبان 1405")
+
+		income = next(r for r in data if r.get("account", "").startswith("4 - "))
+		self.assertGreater(income["j1405_08"], 0)  # demo invoice of 3 Aban 1405 falls in Aban
+		self.assertEqual(income.get("j1405_07", 0), 0)
+		self.assertAlmostEqual(sum(income[c["fieldname"]] for c in period_columns), income["total"], places=2)
+
+		# switched off: ERPNext's own Gregorian months
+		frappe.db.set_single_value("Iran Localization Settings", "jalali_report_periods", 0)
+		frappe.clear_document_cache("Iran Localization Settings", "Iran Localization Settings")
+		columns = profit_and_loss_statement.execute(filters)[0]
+		self.assertFalse([c for c in columns if c["fieldname"].startswith("j1405_")])
+		frappe.db.set_single_value("Iran Localization Settings", "jalali_report_periods", 1)
+		frappe.clear_document_cache("Iran Localization Settings", "Iran Localization Settings")
+
 	def test_rial_found_by_persian_name(self):
 		from frappe.desk.search import search_link
 

@@ -3,3 +3,4 @@
 [post_model_sync]
 erpnext_iran.patches.enable_partner_logo
 erpnext_iran.patches.enable_persian_digits
+erpnext_iran.patches.enable_jalali_report_periods

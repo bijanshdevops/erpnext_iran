@@ -8,6 +8,7 @@
   "jalali_display",
   "persian_digits",
   "persian_digits_everywhere",
+  "jalali_report_periods",
   "validation_section",
   "validate_national_id",
   "validate_iban",
@@ -51,6 +52,13 @@
    "fieldname": "persian_digits_everywhere",
    "fieldtype": "Check",
    "label": "Persian Digits Everywhere"
+  },
+  {
+   "default": "1",
+   "description": "Monthly, quarterly and half-yearly columns of Profit and Loss, Balance Sheet, Cash Flow and other financial reports follow Jalali months (Farvardin, Ordibehesht, ...) instead of Gregorian months",
+   "fieldname": "jalali_report_periods",
+   "fieldtype": "Check",
+   "label": "Jalali Periods in Reports"
   },
   {
    "fieldname": "validation_section",

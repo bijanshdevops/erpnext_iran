@@ -6,6 +6,7 @@ DEFAULTS = {
 	"jalali_display": "Jalali and Gregorian",
 	"persian_digits": 0,
 	"persian_digits_everywhere": 1,
+	"jalali_report_periods": 1,
 	"validate_national_id": 1,
 	"validate_iban": 1,
 	"validate_postal_code": 1,
