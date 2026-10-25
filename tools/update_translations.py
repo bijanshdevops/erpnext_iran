@@ -16,7 +16,7 @@ APP = pathlib.Path(__file__).resolve().parent.parent
 CSV_PATH = APP / "erpnext_iran" / "translations" / "fa.csv"
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
-from fa_overrides import CORRECTIONS, ONBOARDING  # noqa: E402
+from fa_overrides import CORRECTIONS, FORM_TOURS, ONBOARDING  # noqa: E402
 
 
 def onboarding_sources(frappe):
@@ -41,6 +41,7 @@ def main(site):
 	sources = onboarding_sources(frappe)
 
 	new_rows = dict(CORRECTIONS)
+	new_rows.update(FORM_TOURS)
 	stale = []
 	for key, persian in ONBOARDING.items():
 		english = sources.get(key)
@@ -67,7 +68,7 @@ def main(site):
 	writer.writerows(sorted((as_row(k, v) for k, v in new_rows.items()), key=lambda r: (r[0], r[2:])))
 	CSV_PATH.write_text(out.getvalue(), encoding="utf-8", newline="\n")
 
-	print(f"kept {len(kept)}, wrote {len(new_rows)} ({len(new_rows) - len(CORRECTIONS)} onboarding)")
+	print(f"kept {len(kept)}, wrote {len(new_rows)} (corrections, form tours and onboarding)")
 	if stale:
 		print("no longer on this site (skipped):", stale)
 

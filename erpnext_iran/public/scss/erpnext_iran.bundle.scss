@@ -17,3 +17,18 @@
 .ir-gregorian {
 	font-size: 0.85em;
 }
+
+// Naming series such as "MAT-MR-.YYYY.-" are code, not text: in the right-to-left desk the
+// browser moves their edge punctuation ("-.MAT-MR-.YYYY"). Lay them out left-to-right,
+// still aligned to the right like the other fields. The rtl:ignore markers keep Frappe's
+// rtlcss step (css-rtl bundle) from mirroring these declarations back.
+[dir="rtl"] .frappe-control[data-fieldname="naming_series"] {
+	select,
+	.control-value {
+		/*!rtl:begin:ignore*/
+		direction: ltr;
+		text-align: right;
+		text-align-last: right;
+		/*!rtl:end:ignore*/
+	}
+}

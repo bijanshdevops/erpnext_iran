@@ -20,7 +20,6 @@ Invoice Subject,موضوع صورتحساب
 Tax ID,شماره منحصر به فرد مالیاتی
 Moadian Status,وضعیت در سامانه مودیان
 Moadian Reference,شماره پیگیری مودیان
-Pending,در انتظار ارسال
 Sent,ارسال شده
 Accepted,تایید شده
 Rejected,رد شده
@@ -101,6 +100,11 @@ Jalali Year,سال شمسی
 Moadian Payload,داده صورتحساب مودیان
 Ready to send,آماده ارسال
 Nos,عدد
+Branding,نشان تجاری
+Show Partner Logo on Loading Screen,نمایش لوگوی همکار در صفحه بارگذاری
+Shown next to the ERPNext logo while the desk loads,هنگام بارگذاری نرم‌افزار کنار لوگوی ERPNext نمایش داده می‌شود
+Partner Logo,لوگوی همکار
+Leave empty to use the Green Lantern of Communications logo,برای استفاده از لوگوی فانوس سبز ارتباطات خالی بگذارید
 "# Account Settings
 
 In ERPNext, Accounting features are configurable as per your business needs. Accounts Settings is the place to define some of your accounting preferences like:
@@ -548,23 +552,42 @@ Once opening stocks are updated, you can create transactions like manufacturing 
 Once you close the financial statement in previous accounting software, you can update the same as opening in your ERPNext's Balance Sheet accounts. This will allow you to get complete financial statements from ERPNext in the coming years, and discontinue the parallel accounting system right away.","# ثبت مانده‌های افتتاحیه
 
 پس از بستن حساب‌ها در نرم‌افزار حسابداری قبلی، همان مانده‌ها را به‌عنوان افتتاحیه در حساب‌های ترازنامه ERPNext ثبت کنید. به این ترتیب صورت‌های مالی کامل سال‌های آینده را از ERPNext می‌گیرید و می‌توانید فوراً سیستم حسابداری موازی را کنار بگذارید."
+% Ordered,٪ سفارش داده شده
+% Received,٪ دریافت شده
 "<span class=""h4""><b>Masters &amp; Reports</b></span>","<span class=""h4""><b>اطلاعات پایه و گزارش‌ها</b></span>"
 "<span class=""h4""><b>Reports & Masters</b></span>","<span class=""h4""><b>گزارش‌ها و اطلاعات پایه</b></span>"
 "<span class=""h4""><b>Reports &amp; Masters</b></span>","<span class=""h4""><b>گزارش‌ها و اطلاعات پایه</b></span>"
+"A Field (or a docfield) defines a property of a DocType. You can define the column name, label, datatype and more for DocFields. For instance, a ToDo doctype has fields description, status and priority. These ultimately become columns in the database table tabToDo.",هر فیلد یکی از ویژگی‌های نوع سند است و نام ستون، برچسب، نوع داده و موارد دیگر آن قابل تعریف است. مثلاً نوع سند «کار» فیلدهای شرح، وضعیت و اولویت دارد که ستون‌های جدول tabToDo در پایگاه داده می‌شوند.
+A name by which you will identify this template. You can change this later.,نامی برای شناسایی این الگو؛ بعداً قابل تغییر است.
 Accounting Dimension,بُعد حسابداری
 Accounting Masters,اطلاعات پایه حسابداری
 Accounting Period,دوره حسابداری
+Accounts Frozen Upto,حساب‌ها مسدود تا تاریخ
 Accounts Payable,حساب‌های پرداختنی
 Accounts Receivable,حساب‌های دریافتنی
 Accounts Settings,تنظیمات حسابداری
 "Accounts, Invoices, Taxation, and more.",حساب‌ها، فاکتورها، مالیات و بیشتر.
+Action If Same Rate is Not Maintained,اقدام در صورت حفظ نشدن نرخ یکسان
+Actual Qty,مقدار واقعی
+Add Sales Taxes and Charges,افزودن مالیات و هزینه‌های فروش
+Add a row to define Depreciation Method and other details. Note that you can leave Finance Book blank to have it's accounting done in the primary books of accounts.,یک ردیف برای تعیین روش استهلاک و سایر جزئیات اضافه کنید. اگر دفتر مالی را خالی بگذارید، حسابداری در دفاتر اصلی انجام می‌شود.
 Add an Existing Asset,افزودن دارایی موجود
 Add an existing Asset,افزودن دارایی موجود
+Add items in the table,کالاها را در جدول اضافه کنید
 Address,نشانی
+All Supplier Groups,همه گروه‌های تأمین‌کننده
+Allow Item To Be Added Multiple Times in a Transaction,اجازه افزودن یک کالا در چند ردیف یک تراکنش
+Allow Request for Quotation with Zero Quantity,اجازه درخواست استعلام قیمت با مقدار صفر
+Allow Supplier Quotation with Zero Quantity,اجازه ثبت استعلام قیمت تأمین‌کننده با مقدار صفر
+Allows users to submit Request for Quotations with zero quantity. Useful when rates are fixed but the quantities are not. Eg. Rate Contracts.,کاربران می‌توانند درخواست استعلام قیمت را با مقدار صفر ثبت کنند. برای وقتی که نرخ ثابت است اما مقدار هنوز معلوم نیست، مانند قراردادهای نرخ ثابت.
+Allows users to submit Supplier Quotations with zero quantity. Useful when rates are fixed but the quantities are not. Eg. Rate Contracts.,کاربران می‌توانند استعلام قیمت تأمین‌کننده را با مقدار صفر ثبت کنند. برای وقتی که نرخ ثابت است اما مقدار هنوز معلوم نیست، مانند قراردادهای نرخ ثابت.
+Amount,مبلغ
 Asset Capitalization,سرمایه‌ای کردن دارایی
 Asset Category,گروه دارایی
 Asset Depreciation Ledger,دفتر استهلاک دارایی
 Asset Depreciations and Balances,استهلاک و مانده دارایی‌ها
+Asset Item Code,کد کالای دارایی
+Asset Item Name,نام کالای دارایی
 Asset Maintenance,نگهداری دارایی
 Asset Maintenance Log,سابقه نگهداری دارایی
 Asset Maintenance Team,تیم نگهداری دارایی
@@ -573,7 +596,11 @@ Asset Repair,تعمیر دارایی
 Asset Value Analytics,تحلیل ارزش دارایی‌ها
 Assets,دارایی‌ها
 "Assets, Depreciations, Repairs, and more.",دارایی‌ها، استهلاک، تعمیرات و بیشتر.
+Auto Create Asset on Purchase,ایجاد خودکار دارایی هنگام خرید
+Auto Create Subcontracting Order,ایجاد خودکار سفارش پیمانکاری
 Available Stock for Packing Items,موجودی در دسترس کالاهای بسته‌بندی
+BOM No,شماره فهرست مواد
+Backflush Raw Materials of Subcontract Based On,کسر خودکار مواد اولیه پیمانکاری بر اساس
 Bank Clearance,تسویه بانکی
 Bank Reconciliation Statement,صورت مغایرت بانکی
 Bank Reconciliation Tool,ابزار مغایرت‌گیری بانکی
@@ -581,11 +608,27 @@ Batch,بچ
 Batch Item Expiry Status,وضعیت انقضای کالاهای بچ‌دار
 Batch-Wise Balance History,سابقه موجودی به تفکیک بچ
 Blanket Order,سفارش کلی
+Blanket Order Allowance (%),حد مجاز بیش از سفارش کلی (٪)
+"By default, the Customer Name is set as per the Full Name entered. If you want Customers to be named by a <a href=""https://docs.erpnext.com/docs/user/manual/en/setting-up/settings/naming-series"" target=""_blank"">Naming Series</a>. Choose the 'Naming Series' option.","به‌طور پیش‌فرض نام مشتری همان نام کاملی است که وارد می‌کنید. اگر می‌خواهید مشتریان با <a href=""https://docs.erpnext.com/docs/user/manual/en/setting-up/settings/naming-series"" target=""_blank"">سری شماره‌گذاری</a> نام‌گذاری شوند، گزینه «سری شماره‌گذاری» را انتخاب کنید."
+"By default, the Item Name is set as per the Item Code entered. If you want Items to be named by a Naming Series choose the 'Naming Series' option.",به‌طور پیش‌فرض نام کالا همان کد کالاست. اگر می‌خواهید کالاها با سری شماره‌گذاری نام‌گذاری شوند، گزینه «سری شماره‌گذاری» را انتخاب کنید.
 Chart of Accounts,سرفصل حساب‌ها
 Chart of Accounts Importer,ورود سرفصل حساب‌ها
 Chart of Cost Centers,درخت مراکز هزینه
+Check Calculate Depreciation,گزینه «محاسبه استهلاک» را انتخاب کنید
+Check Is Existing Asset,گزینه «دارایی موجود» را انتخاب کنید
 Check Stock Ledger,بررسی دفتر انبار
 Check help to setup Routing,راهنمای تنظیم مسیر تولید
+Check this field to make this an Asset Item,برای تبدیل این کالا به کالای دارایی انتخاب کنید
+Check this if you want to add custom Jinja Code or JavaScript to your Print Format,اگر می‌خواهید در قالب چاپ کد Jinja یا JavaScript بنویسید انتخاب کنید
+Check this to make it a mandatory field,برای اجباری کردن این فیلد انتخاب کنید
+Check this to make the DocType as Custom,برای سفارشی کردن این نوع سند انتخاب کنید
+Check to enable Capital Work in Progress accounting,برای فعال‌سازی حسابداری دارایی در جریان تکمیل انتخاب کنید
+"Choose between FIFO and Moving Average Valuation Methods. Click <a href=""https://docs.erpnext.com/docs/user/manual/en/stock/articles/item-valuation-fifo-and-moving-average"" target=""_blank"">here</a> to know more about them.","روش ارزش‌گذاری FIFO یا میانگین متحرک را انتخاب کنید. برای توضیح بیشتر <a href=""https://docs.erpnext.com/docs/user/manual/en/stock/articles/item-valuation-fifo-and-moving-average"" target=""_blank"">اینجا</a> را ببینید."
+Company for which this tax template will be applicable,شرکتی که این الگوی مالیاتی برای آن است
+Completed Qty,مقدار تکمیل‌شده
+Configure the default Price List when creating a new Sales transaction. Item prices will be fetched from this Price List.,فهرست قیمت پیش‌فرض معاملات فروش جدید را تعیین کنید؛ قیمت کالاها از این فهرست خوانده می‌شود.
+Configure what should be the default value of Supplier Group when creating a new Supplier.,گروهی را که هنگام ایجاد تأمین‌کننده جدید به‌طور پیش‌فرض انتخاب می‌شود تعیین کنید.
+Cost Center,مرکز هزینه
 Cost Center and Budgeting,مرکز هزینه و بودجه‌بندی
 Cost Centers for Budgeting and Analysis,مراکز هزینه برای بودجه‌بندی و تحلیل
 Create Blogger,ایجاد نویسنده وبلاگ
@@ -602,25 +645,53 @@ Create and Send Quotation,ایجاد و ارسال پیش‌فاکتور
 Create first Purchase Order,ایجاد اولین سفارش خرید
 Create your first Bill of Materials,ایجاد اولین فهرست مواد
 Create your first Work Order,ایجاد اولین دستور تولید
+Credit Controller,کنترل‌کننده اعتبار
 Currency Exchange,نرخ تبدیل ارز
 Customer Acquisition and Loyalty,جذب و وفاداری مشتری
 Customer Addresses And Contacts,نشانی و مخاطبان مشتریان
 Customer Credit Balance,مانده اعتبار مشتری
+Customer Provided,تأمین‌شده توسط مشتری
 Customers Without Any Sales Transactions,مشتریان بدون معامله فروش
 Customs Tariff Number,شماره تعرفه گمرکی
 Data Import and Settings,ورود داده‌ها و تنظیمات
+Default Buying Price List,فهرست قیمت پیش‌فرض خرید
+Default Selling Price List,فهرست قیمت پیش‌فرض فروش
+Default Supplier Group,گروه پیش‌فرض تأمین‌کننده
+Default Unit of Measurement,واحد اندازه‌گیری پیش‌فرض
 Define Asset Category,تعریف گروه دارایی
 Delivery Note,حواله خروج
+Delivery Note Required for Sales Invoice Creation,الزام حواله خروج برای ایجاد فاکتور فروش
 Delivery Note Trends,روند حواله خروج
 Delivery Trends,روند تحویل
+Disable Last Purchase Rate,غیرفعال کردن نرخ آخرین خرید
 Dismiss,بستن
 Dismiss,بستن,Stop showing the onboarding widget.
+Doctype,نوع سند
 ERPNext Integrations,یکپارچه‌سازی‌های ERPNext
+Each Transaction,با هر تراکنش
 "Each document created in ERPNext can have a unique ID generated for it, using a prefix defined for it. Though each document has some prefix pre-configured, you can further customize it using tools like Naming Series Tool and Document Naming Rule.",هر سند در ERPNext می‌تواند شناسه یکتایی با پیشوند تعریف‌شده داشته باشد. هر سند پیشوند پیش‌فرضی دارد، اما می‌توانید با ابزار سری شماره‌گذاری و قاعده نام‌گذاری اسناد آن را تغییر دهید.
 "Each document created in ERPNext can have a unique ID generated for it, using a prefix defined for it. Though each document has some prefix pre-configured, you can further customize it using tools like Naming Series Tool and Document Naming Rule.
 ","هر سند در ERPNext می‌تواند شناسه یکتایی با پیشوند تعریف‌شده داشته باشد. هر سند پیشوند پیش‌فرضی دارد، اما می‌توانید با ابزار سری شماره‌گذاری و قاعده نام‌گذاری اسناد آن را تغییر دهید.
 "
+Edit the Posting Date by clicking on the Edit Posting Date and Time checkbox below.,برای تغییر تاریخ ثبت، گزینه «ویرایش تاریخ و زمان ثبت» را در پایین انتخاب کنید.
 Email Account,حساب ایمیل
+Enable CWIP Accounting,فعال‌سازی حسابداری دارایی در جریان تکمیل
+Enter Quantity,ورود مقدار
+Enter Rate,ورود نرخ
+Enter a Label for this field,برچسب این فیلد را وارد کنید
+Enter code for Asset Item,کد کالای دارایی را وارد کنید
+Enter code for the Item,کد کالا را وارد کنید
+Enter depreciation which has already been booked for this asset,استهلاکی را که تاکنون برای این دارایی ثبت شده وارد کنید
+Enter name for Asset Item,نام کالای دارایی را وارد کنید
+Enter name for the Item,نام کالا را وارد کنید
+Enter quantity.,مقدار را وارد کنید.
+Enter rate of the item,نرخ کالا را وارد کنید
+Enter rate of the item.,نرخ کالا را وارد کنید.
+Enter the Full Name of the Customer,نام کامل مشتری را وارد کنید
+Enter the Item Code.,کد کالا را وارد کنید.
+Enter the code based on the Print Format Type you selected above,کد را متناسب با نوع قالب چاپ انتخاب‌شده وارد کنید
+Enter the quantity,مقدار را وارد کنید
+Enter the required quantity for the material.,مقدار مورد نیاز را وارد کنید.
 "Every form in ERPNext has a standard set of fields. If you need to capture some information, but there is no standard Field available for it, you can insert Custom Field for it.
 
 Once custom fields are added, you can use them for reports and analytics charts as well.","هر فرم در ERPNext مجموعه‌ای از فیلدهای استاندارد دارد. اگر باید اطلاعاتی را ثبت کنید که فیلد استانداردی برای آن نیست، فیلد سفارشی اضافه کنید.
@@ -639,8 +710,18 @@ Financial Reports,گزارش‌های مالی
 Financial Statements,صورت‌های مالی
 Finished Items,کالاهای ساخته‌شده
 Fixed Asset Register,دفتر دارایی‌های ثابت
+"Freeze accounting transactions up to specified date, nobody can make/modify entry except the specified Role.",اسناد حسابداری تا این تاریخ مسدود می‌شوند و جز نقش تعیین‌شده، کسی نمی‌تواند سندی ثبت یا ویرایش کند.
 General Ledger,دفتر کل
+Get Items From,دریافت کالاها از
 Help,راهنما
+"Here, you can add multiple addresses of the company",در این بخش می‌توانید چند نشانی برای شرکت اضافه کنید
+"Here, you can set default Accounts, which will ease the creation of accounting entries.",در این بخش حساب‌های پیش‌فرض را تعیین کنید تا ثبت اسناد حسابداری ساده‌تر شود.
+How often should Project be updated of Total Purchase Cost ?,بهای کل خرید پروژه هر چند وقت یک‌بار به‌روز شود؟
+"If checked, system will unlink the payment against the respective invoice.",در صورت انتخاب، با لغو فاکتور، پرداخت ثبت‌شده از آن جدا می‌شود.
+"If this option is configured ""Yes"", ERPNext will prevent you from creating a Purchase Invoice or a Purchase Receipt directly without creating a Purchase Order first.",اگر «بله» باشد، بدون سفارش خرید نمی‌توان فاکتور خرید یا رسید خرید ایجاد کرد.
+"If this option is configured ""Yes"", ERPNext will prevent you from creating a Purchase Invoice without creating a Purchase Receipt first.",اگر «بله» باشد، بدون رسید خرید نمی‌توان فاکتور خرید ایجاد کرد.
+"If this option is configured 'Yes', ERPNext will prevent you from creating a Sales Invoice or Delivery Note without creating a Sales Order first. This configuration can be overridden for a particular Customer by enabling the 'Allow Sales Invoice Creation Without Sales Order' checkbox in the Customer master.",اگر «بله» باشد، بدون سفارش فروش نمی‌توان فاکتور فروش یا حواله خروج ایجاد کرد. برای یک مشتری خاص می‌توانید با فعال کردن «اجازه ایجاد فاکتور فروش بدون سفارش فروش» در فرم مشتری، این محدودیت را بردارید.
+"If this option is configured 'Yes', ERPNext will prevent you from creating a Sales Invoice without creating a Delivery Note first. This configuration can be overridden for a particular Customer by enabling the 'Allow Sales Invoice Creation Without Delivery Note' checkbox in the Customer master.",اگر «بله» باشد، بدون حواله خروج نمی‌توان فاکتور فروش ایجاد کرد. برای یک مشتری خاص می‌توانید با فعال کردن «اجازه ایجاد فاکتور فروش بدون حواله خروج» در فرم مشتری، این محدودیت را بردارید.
 Import Data,ورود داده‌ها
 Import Supplier Invoice,ورود فاکتور تأمین‌کننده
 "In ERPNext, you can add your Employees as Users, and give them restricted access. Tools like Role Permission and User Permission allow you to define rules which give restricted access to the user to masters and transactions.",در ERPNext می‌توانید کارکنان را به‌عنوان کاربر اضافه کنید و دسترسی محدود به آن‌ها بدهید. ابزارهای مجوز نقش و مجوز کاربر امکان تعریف قواعدی را می‌دهند که دسترسی کاربر به اطلاعات پایه و تراکنش‌ها را محدود می‌کنند.
@@ -653,6 +734,14 @@ Installation Note,یادداشت نصب
 Integrations,یکپارچه‌سازی‌ها
 Introduction to CRM,آشنایی با CRM
 "Inventory, Warehouses, Analysis, and more.",موجودی، انبارها، تحلیل و بیشتر.
+Is Existing Asset?,دارایی موجود است؟
+Is Group,گروهی
+Is Purchase Item,کالای خریدنی
+Is Purchase Order Required for Purchase Invoice & Receipt Creation?,آیا برای ایجاد فاکتور و رسید خرید، سفارش خرید لازم است؟
+Is Purchase Receipt Required for Purchase Invoice Creation?,آیا برای ایجاد فاکتور خرید، رسید خرید لازم است؟
+Is this Default Tax Template?,الگوی مالیاتی پیش‌فرض است؟
+Is this a Fixed Asset?,دارایی ثابت است؟
+Issued,صادر شده
 Item,کالا
 Item Alternative,کالای جایگزین
 Item Attribute,ویژگی کالا
@@ -667,16 +756,21 @@ Item Shortage Report,گزارش کمبود کالا
 Item Tax Template,الگوی مالیات کالا
 Item Variant Details,جزئیات گونه‌های کالا
 Item Variant Settings,تنظیمات گونه کالا
+Item prices will be fetched from this Price List.,قیمت کالاها از این فهرست قیمت خوانده می‌شود.
 "Item, Customer, Supplier and Quotation",کالا، مشتری، تأمین‌کننده و پیش‌فاکتور
 Item-wise Purchase History,سابقه خرید به تفکیک کالا
 Item-wise Sales History,سابقه فروش به تفکیک کالا
 Items,کالاها
 Items & Pricing,کالاها و قیمت‌گذاری
 Items Catalogue,کاتالوگ کالاها
+Items Table,جدول کالاها
 Items To Be Requested,کالاهای نیازمند درخواست
 Items and Pricing,کالاها و قیمت‌گذاری
+Items table,جدول کالاها
 Items to Order and Receive,کالاهای قابل سفارش و دریافت
+Items to be purchased can be added here.,کالاهای مورد خرید را اینجا اضافه کنید.
 Itemwise Recommended Reorder Level,نقطه سفارش پیشنهادی به تفکیک کالا
+Job Card Item,ردیف کارت کار
 Journal Entry,سند حسابداری
 Journal Entry Template,الگوی سند حسابداری
 Key Reports,گزارش‌های کلیدی
@@ -684,6 +778,7 @@ Landed Cost Voucher,سند هزینه‌های جانبی خرید
 Last synced {0},آخرین همگام‌سازی {0}
 Lead,سرنخ
 Lead Source,منبع سرنخ
+Lead Time Date,تاریخ تأمین
 "Lead, Opportunity, Customer, and more.",سرنخ، فرصت، مشتری و بیشتر.
 Learn Accounting,آموزش حسابداری
 Learn Inventory Management,آموزش مدیریت موجودی
@@ -702,6 +797,7 @@ Let's Set Up the Stock Module.,ماژول انبار را راه‌اندازی 
 Let's begin your journey with ERPNext,سفر خود را با ERPNext آغاز کنید
 Let's create a Purchase Receipt,ایجاد رسید خرید
 Let's create a new Asset item,ایجاد کالای دارایی جدید
+Let's name your first Letter Head with your company's name,نام اولین سربرگ را همان نام شرکت بگذارید
 Let's review existing Asset Category,بررسی گروه‌های دارایی موجود
 Let's walk-through Chart of Accounts to review setup,مرور سرفصل حساب‌ها برای بررسی تنظیمات
 Let’s convert your first Sales Order against a Quotation,تبدیل اولین پیش‌فاکتور به سفارش فروش
@@ -716,32 +812,57 @@ Let’s create your first Purchase Invoice,ایجاد اولین فاکتور خ
 Let’s create your first Purchase Order,ایجاد اولین سفارش خرید
 Let’s walk-through Selling Settings,مرور تنظیمات فروش
 Let’s walk-through few Buying Settings,مرور چند تنظیم خرید
+List of Items,فهرست کالاها
+List of items,فهرست کالاها
 Loyalty Point Entry,ثبت امتیاز وفاداری
+Maintain Same Rate Throughout the Purchase Cycle,حفظ نرخ یکسان در کل چرخه خرید
 Manage Sales Tax Templates,مدیریت الگوهای مالیات فروش
 Manage Stock Movements,مدیریت جابه‌جایی موجودی
+Manual,دستی
+Manufacture,تولید
+Manufacturer Part Number,شماره قطعه سازنده
 Manufacturing,تولید
 Manufacturing module is all set up!,ماژول تولید آماده است!
+Material Issue,صدور کالا
 Material Request,درخواست کالا
+Material Request Plan Item,ردیف برنامه درخواست کالا
 Material Requests for which Supplier Quotations are not created,درخواست‌های کالای بدون استعلام قیمت تأمین‌کننده
+Material Transfer,انتقال کالا
+Material Transferred for Subcontract,مواد انتقال‌یافته برای پیمانکاری
+Min Order Qty,حداقل مقدار سفارش
 Mode of Payment,روش پرداخت
 Multi Currency,چندارزی
+"Name Asset category. You can create categories based on Asset Types like Furniture, Property, Electronics etc.",نام گروه دارایی را وارد کنید. گروه‌ها را بر اساس نوع دارایی بسازید، مانند اثاثه، ساختمان یا تجهیزات الکترونیکی.
+Naming Series,سری شماره‌گذاری
+Naming Series and Price Defaults,سری شماره‌گذاری و پیش‌فرض‌های قیمت
+"On checking it, the system will create an Asset automatically on purchase",در صورت انتخاب، با خرید این کالا دارایی به‌طور خودکار ایجاد می‌شود
 Opening Invoice Creation Tool,ابزار ایجاد فاکتورهای افتتاحیه
 Opening and Closing,افتتاحیه و اختتامیه
 Opportunity Trends,روند فرصت‌ها
+Ordered,سفارش داده شده
 Other Reports,سایر گزارش‌ها
+Over Billing Allowance Percentage,درصد مجاز صورتحساب بیش از سفارش
+Over Transfer Allowance (%),حد مجاز انتقال بیش از سفارش (٪)
 POS Closing Entry,ثبت بستن صندوق
 POS Opening Entry,ثبت افتتاح صندوق
 Packing Slip,برگه بسته‌بندی
+Page Break,صفحه جدید
+Partially Ordered,بخشی سفارش داده شده
+Partially Received,بخشی دریافت شده
 Payables,حساب‌های پرداختنی
 Payment Entry,ثبت پرداخت
 Payment Term,شرط پرداخت
 Payments,پرداخت‌ها
+Pending,در انتظار
 Pending SO Items For Purchase Request,کالاهای سفارش فروش در انتظار درخواست خرید
+Percentage you are allowed to transfer more against the quantity ordered. For example: If you have ordered 100 units. and your Allowance is 10% then you are allowed to transfer 110 units.,درصدی که می‌توانید بیش از مقدار سفارش انتقال دهید. مثلاً اگر ۱۰۰ واحد سفارش داده‌اید و حد مجاز ۱۰٪ است، تا ۱۱۰ واحد قابل انتقال است.
 Period Closing Voucher,سند اختتامیه دوره
+Pharmaceutical,دارویی
 Pick List,فهرست برداشت
 Point of Sale,صندوق فروش (POS)
 Point-of-Sale Profile,پروفایل صندوق فروش
 Price List,فهرست قیمت
+Price List Rate,نرخ فهرست قیمت
 Pricing Rule,قاعده قیمت‌گذاری
 Procurement Tracker,پیگیری تدارکات
 Product Bundle,بسته محصول
@@ -750,30 +871,42 @@ Production Planning,برنامه‌ریزی تولید
 "Products, Raw Materials, BOM, Work Order, and more.",محصولات، مواد اولیه، فهرست مواد، دستور تولید و بیشتر.
 "Products, Sales, Analysis, and more.",محصولات، فروش، تحلیل و بیشتر.
 Profit and Loss,سود و زیان
+Projected Qty,مقدار پیش‌بینی‌شده
 Projects,پروژه‌ها
 Purchase Analytics,تحلیل خرید
 Purchase Invoice,فاکتور خرید
 Purchase Invoice Trends,روند فاکتور خرید
 Purchase Order Analysis,تحلیل سفارش خرید
+Purchase Order Required,سفارش خرید الزامی است
 Purchase Order Trends,روند سفارش خرید
+Purchase Receipt Required,رسید خرید الزامی است
 Purchase Receipt Trends,روند رسید خرید
 Purchase Taxes and Charges Template,الگوی مالیات و هزینه‌های خرید
 Purchase an Asset,خرید دارایی
+Purpose,هدف
 Quality Inspection Template,الگوی بازرسی کیفیت
 Quick Stock Balance,موجودی سریع انبار
 Quotation,پیش‌فاکتور
 Quotation Trends,روند پیش‌فاکتور
 Receivables,حساب‌های دریافتنی
+Received Qty,مقدار دریافت‌شده
+Reference,مرجع
 Regional,منطقه‌ای
 Reports & Masters,گزارش‌ها و اطلاعات پایه
 Request for Quotation,درخواست استعلام قیمت
 Requested Items To Be Transferred,کالاهای درخواستی قابل انتقال
+Required By,تاریخ نیاز
 Review Chart of Accounts,بررسی سرفصل حساب‌ها
 Review Fixed Asset Accounts,بررسی حساب‌های دارایی ثابت
 Review Stock Settings,بررسی تنظیمات انبار
+Role Allowed to Over Bill,نقش مجاز به صورتحساب بیش از سفارش
+Role Allowed to Override Stop Action,نقش مجاز به نادیده گرفتن توقف
+Role Allowed to Set Frozen Accounts & Edit Frozen Entries,نقش مجاز به مسدود کردن حساب‌ها و ویرایش اسناد مسدود
 Sales Analytics,تحلیل فروش
 Sales Invoice Trends,روند فاکتور فروش
 Sales Order Analysis,تحلیل سفارش فروش
+Sales Order Item,ردیف سفارش فروش
+Sales Order Required for Sales Invoice & Delivery Note Creation,الزام سفارش فروش برای ایجاد فاکتور فروش و حواله خروج
 Sales Order Trends,روند سفارش فروش
 Sales Partner Target Variance Based On Item Group,انحراف از هدف شریک فروش بر اساس گروه کالا
 Sales Partners Commission,کمیسیون شرکای فروش
@@ -781,11 +914,60 @@ Sales Person,کارشناس فروش
 Sales Person Target Variance Based On Item Group,انحراف از هدف کارشناس فروش بر اساس گروه کالا
 Sales Person-wise Transaction Summary,خلاصه معاملات به تفکیک کارشناس فروش
 Sales Taxes and Charges Template,الگوی مالیات و هزینه‌های فروش
+Select Asset Supplier,تأمین‌کننده دارایی را انتخاب کنید
+Select Customer,انتخاب مشتری
+Select Item,انتخاب کالا
+Select Naming Series based on which Asset ID will be generated,سری شماره‌گذاری را که شناسه دارایی بر اساس آن ساخته می‌شود انتخاب کنید
+Select Supplier,انتخاب تأمین‌کننده
+Select a Doctype for which you want to create a Print Format,نوع سندی را که قالب چاپ برای آن است انتخاب کنید
+Select a Document for which you want the Custom Field,سندی را که فیلد سفارشی برای آن است انتخاب کنید
+Select a Location,مکان را انتخاب کنید
+Select a Module to which this DocType would belong,ماژولی را که این نوع سند به آن تعلق دارد انتخاب کنید
+Select a customer for whom this invoice is being prepared.,مشتری‌ای را که فاکتور برای اوست انتخاب کنید.
+Select a customer or lead for whom this quotation is being prepared. Let's select a Customer.,مشتری یا سرنخی را که پیش‌فاکتور برای اوست انتخاب کنید؛ فعلاً «مشتری» را انتخاب کنید.
+Select a customer.,مشتری را انتخاب کنید.
+Select a name for the warehouse. This should reflect its location or purpose.,نامی برای انبار انتخاب کنید که محل یا کاربرد آن را نشان دهد.
+Select a naming series which will be used to create an Asset automatically,سری شماره‌گذاری دارایی‌هایی را که خودکار ایجاد می‌شوند انتخاب کنید
+Select a specific Customer to whom this quotation will be sent.,مشتری‌ای را که پیش‌فاکتور برای او ارسال می‌شود انتخاب کنید.
+Select a target warehouse where the stock will be received.,انبار مقصدی را که کالا به آن وارد می‌شود انتخاب کنید.
+Select an Asset Category for this Asset Item,گروه دارایی این کالا را انتخاب کنید
+Select an Asset Item,کالای دارایی را انتخاب کنید
+"Select an Asset Item, Enter rate and quantity",کالای دارایی را انتخاب و نرخ و مقدار را وارد کنید
+Select an Item Group,گروه کالا را انتخاب کنید
+Select an Item code. Item details will be fetched automatically.,کد کالا را انتخاب کنید؛ مشخصات کالا خودکار پر می‌شود.
+Select an account to set a default account for all transactions with this warehouse.,حساب پیش‌فرض همه تراکنش‌های این انبار را انتخاب کنید.
+Select an appropriate Field Type that suits your requirements,نوع فیلد مناسب نیاز خود را انتخاب کنید
+Select an item,یک کالا انتخاب کنید
+Select an item and entry quantity to be delivered.,کالا و مقدار را انتخاب کنید.
+Select an item for which you will be quoting a price.,کالایی را که برای آن قیمت می‌دهید انتخاب کنید.
+Select an item.,یک کالا انتخاب کنید.
+Select item that you have sold along with quantity and rate.,کالای فروخته‌شده را همراه با مقدار و نرخ انتخاب کنید.
+Select taxes,انتخاب مالیات‌ها
+Select the Fixed Asset and Depreciation accounts applicable for this Asset Category type,حساب‌های دارایی ثابت و استهلاک این گروه دارایی را انتخاب کنید
+Select the image containing only header part of your letter Head.,تصویری را انتخاب کنید که فقط بخش بالای سربرگ را دارد.
+Select the items for which the opening stock has to be set.,کالاهایی را که موجودی افتتاحیه دارند انتخاب کنید.
+Select the role that is allowed to overbill a transactions.,نقشی را انتخاب کنید که مجاز است بیش از مبلغ سفارش صورتحساب صادر کند.
+Select the role that is allowed to submit transactions that exceed credit limits set. The credit limit can be set in the Customer form.,نقشی را انتخاب کنید که مجاز است تراکنش‌های بیش از سقف اعتبار را ثبت کند. سقف اعتبار در فرم مشتری تعیین می‌شود.
+Select the type of Print Format,نوع قالب چاپ را انتخاب کنید
+"Select the type of Stock Entry to be made. For now, to receive stock into a warehouses select <a href=""https://docs.erpnext.com/docs/v13/user/manual/en/stock/articles/stock-entry-purpose#2purpose-material-receipt"" target=""_blank"">Material Receipt.</a>","نوع سند انبار را انتخاب کنید. فعلاً برای ورود کالا به انبار، <a href=""https://docs.erpnext.com/docs/v13/user/manual/en/stock/articles/stock-entry-purpose#2purpose-material-receipt"" target=""_blank"">دریافت کالا</a> را انتخاب کنید."
 Selling Settings,تنظیمات فروش
 Serial No Service Contract Expiry,انقضای قرارداد خدمات شماره سریال
 Serial No Status,وضعیت شماره سریال
 Serial No Warranty Expiry,انقضای گارانتی شماره سریال
 Serial No and Batch,شماره سریال و بچ
+Series,سری شماره‌گذاری
+Set Available for use date,تاریخ آماده بهره‌برداری را وارد کنید
+Set Gross purchase amount,مبلغ ناخالص خرید را وارد کنید
+Set Landed Cost Based on Purchase Invoice Rate,محاسبه بهای تمام‌شده بر اساس نرخ فاکتور خرید
+Set Purchase Date,تاریخ خرید را وارد کنید
+Set Purpose to Opening Stock to set the stock opening balance.,برای ثبت موجودی افتتاحیه، هدف را «موجودی افتتاحیه» قرار دهید.
+Set Source Warehouse,انبار مبدأ همه ردیف‌ها
+Set Target Warehouse,انبار مقصد همه ردیف‌ها
+Set Warehouse,انبار همه ردیف‌ها
+Set a Default Warehouse for Inventory Transactions. This will be fetched into the Default Warehouse in the Item master.,انبار پیش‌فرض تراکنش‌های انبار را تعیین کنید؛ در فرم کالا به‌عنوان انبار پیش‌فرض پر می‌شود.
+"Set the ""Required By"" date for the materials. This sets the ""Required By"" date for all the items.",«تاریخ نیاز» را وارد کنید؛ برای همه ردیف‌های کالا اعمال می‌شود.
+Set this template as the default for all sales transactions,این الگو را برای همه معاملات فروش پیش‌فرض کنید
+Setting the target warehouse sets it for all the items.,انبار مقصد انتخاب‌شده برای همه ردیف‌های کالا اعمال می‌شود.
 Setting up Taxes,تنظیم مالیات‌ها
 Setup Approval Workflows,تنظیم گردش کار تأیید
 Setup Limited Access for a User,دسترسی محدود برای کاربر
@@ -799,7 +981,9 @@ Share Transfer,انتقال سهام
 Shareholder,سهامدار
 Shipping Rule,قاعده حمل‌ونقل
 Show {0} List,نمایش فهرست {0}
+"Similar to the previous option, this unlinks any advance payments made against Purchase/Sales Orders.",مانند گزینه قبل، پیش‌پرداخت‌های ثبت‌شده برای سفارش‌های خرید و فروش را جدا می‌کند.
 Skip,رد شدن
+Source Warehouse,انبار مبدأ
 Stock,انبار
 Stock Ageing,سن موجودی
 Stock Analytics,تحلیل موجودی
@@ -807,16 +991,23 @@ Stock Balance,موجودی انبار
 Stock Entry,سند انبار
 Stock Ledger,دفتر انبار
 Stock Projected Qty,مقدار پیش‌بینی‌شده موجودی
+Stock Qty,مقدار به واحد انبار
 Stock Reconciliation,انبارگردانی
 Stock Reports,گزارش‌های انبار
 Stock Settings,تنظیمات انبار
 Stock Summary,خلاصه موجودی
 Stock Transactions,تراکنش‌های انبار
+Stock UOM,واحد انبار
+Stop,توقف
 Subcontracted Item To Be Received,کالای پیمانکاری قابل دریافت
 Subcontracted Raw Materials To Be Transferred,مواد اولیه پیمانکاری قابل انتقال
+Subcontracting Settings,تنظیمات پیمانکاری
+Submitted,ثبت‌شده
 Supplier,تأمین‌کننده
 Supplier Addresses And Contacts,نشانی و مخاطبان تأمین‌کنندگان
 Supplier Group,گروه تأمین‌کننده
+Supplier Name,نام تأمین‌کننده
+Supplier Naming By,نام‌گذاری تأمین‌کننده بر اساس
 Supplier Quotation,استعلام قیمت تأمین‌کننده
 Supplier Quotation Comparison,مقایسه استعلام‌های قیمت تأمین‌کنندگان
 Supplier Scorecard,کارنامه تأمین‌کننده
@@ -827,10 +1018,14 @@ Supplier-Wise Sales Analytics,تحلیل فروش به تفکیک تأمین‌�
 Take a quick walk-through of Accounts Settings,مرور سریع تنظیمات حسابداری
 Take a walk through Stock Settings,مرور تنظیمات انبار
 Take a walk-through of Manufacturing Settings,مرور تنظیمات تولید
+Target Warehouse,انبار مقصد
 Tax Category,دسته‌بندی مالیاتی
 Tax Masters,اطلاعات پایه مالیاتی
 Tax Rule,قاعده مالیاتی
 Tax Withholding Category,دسته‌بندی مالیات تکلیفی
+Tax category can be set on Addresses. An address can be Shipping or Billing address. Set which addres to select when applying Tax Category.,دسته‌بندی مالیاتی را می‌توان روی نشانی تعیین کرد. نشانی می‌تواند نشانی ارسال یا صورتحساب باشد؛ مشخص کنید هنگام اعمال دسته‌بندی مالیاتی کدام به کار رود.
+Taxes Table,جدول مالیات‌ها
+Terms and Conditions Content,متن شرایط و ضوابط
 Terms and Conditions Template,الگوی شرایط و ضوابط
 Territory Target Variance Based On Item Group,انحراف از هدف منطقه بر اساس گروه کالا
 The Accounts Module is all set up!,ماژول حسابداری آماده است!
@@ -839,6 +1034,11 @@ The Buying Module is all set up!,ماژول خرید آماده است!
 The CRM Module is all set up!,ماژول CRM آماده است!
 The Selling Module is all set up!,ماژول فروش آماده است!
 The Stock Module is all set up!,ماژول انبار آماده است!
+"The percentage by which you can overbill transactions. For example, if the order value is $100 for an Item and percentage here is set as 10% then you are allowed to bill for $110.",درصدی که می‌توانید بیش از مبلغ سفارش صورتحساب صادر کنید. مثلاً اگر مبلغ سفارش یک کالا ۱۰۰ و این درصد ۱۰ باشد، تا ۱۱۰ قابل صورتحساب است.
+"The purpose of the material request can be selected here. For now select ""Purchase"" as the purpose.",هدف درخواست کالا را اینجا انتخاب کنید. فعلاً «خرید» را انتخاب کنید.
+This is the default currency for this company.,این ارز پیش‌فرض این شرکت است.
+"This is the default measuring unit that you will use for your product. It could be Nos, Kgs, Meters, etc.",واحد اندازه‌گیری اصلی کالا، مانند عدد، کیلوگرم یا متر.
+This setting is recommended if you wish to track the real-time stock balance in your books of account. This will allow the creation of a General Ledger entry for every stock transaction.,اگر می‌خواهید موجودی انبار به‌صورت لحظه‌ای در دفاتر منعکس شود، این تنظیم توصیه می‌شود؛ برای هر تراکنش انبار یک ثبت در دفتر کل ایجاد می‌شود.
 Total Active Items,تعداد کالاهای فعال
 Total Incoming Bills,جمع صورتحساب‌های دریافتی
 Total Incoming Payment,جمع دریافت‌ها
@@ -846,16 +1046,28 @@ Total Outgoing Bills,جمع صورتحساب‌های صادره
 Total Outgoing Payment,جمع پرداخت‌ها
 Track Material Request,پیگیری درخواست کالا
 Trial Balance,تراز آزمایشی
+UOM,واحد
 UOM Conversion Factor,ضریب تبدیل واحد
 Unit of Measure (UOM),واحد اندازه‌گیری (UOM)
 Update Stock Opening Balance,ثبت موجودی افتتاحیه
+Update frequency of Project,تناوب به‌روزرسانی پروژه
 Updating Opening Balances,ثبت مانده‌های افتتاحیه
+Use Transaction Date Exchange Rate,استفاده از نرخ ارز تاریخ تراکنش
+Users with this Role are allowed to set frozen accounts and create/modify accounting entries against frozen accounts.,کاربران این نقش می‌توانند حساب‌ها را مسدود کنند و روی حساب‌های مسدود سند ثبت یا ویرایش کنند.
 View Cost Center Tree,نمایش درخت مراکز هزینه
 Warehouse Wise Stock Balance,موجودی به تفکیک انبار
 Warehouse wise Stock Value,ارزش موجودی به تفکیک انبار
+Warn,هشدار
+"When a Supplier is saved, system generates a unique identity or name for that Supplier which can be used to refer the Supplier in various Buying transactions.",با ذخیره تأمین‌کننده، سیستم یک شناسه یا نام یکتا برای او می‌سازد که در معاملات خرید به آن ارجاع داده می‌شود.
+"When creating an Item, entering a value for this field will automatically create an Item Price at the backend. Entering a value after the Item has been saved will not work. In this case, the Item Price is created from any transactions with the Item.",اگر هنگام ایجاد کالا این فیلد را پر کنید، قیمت کالا خودکار ساخته می‌شود. پر کردن آن پس از ذخیره کالا اثری ندارد؛ در آن حالت قیمت از تراکنش‌های کالا ساخته می‌شود.
+"While making a Purchase Receipt or Purchase Invoice from a Purchase Order, use the exchange rate on its posting date rather than inheriting it from the Purchase Order.",هنگام ایجاد رسید یا فاکتور خرید از روی سفارش خرید، نرخ ارز تاریخ همان سند به کار رود نه نرخ سفارش خرید.
+Work Order,دستور تولید
+"You can add a row for a tax rule here. These rules can be applied on the net total, or can be a flat amount.",برای هر قاعده مالیاتی یک ردیف اضافه کنید؛ مالیات می‌تواند درصدی از جمع خالص یا مبلغی ثابت باشد.
+You can add custom css for your Print Format from this section,CSS سفارشی قالب چاپ را در این بخش وارد کنید
+You can add items here.,کالاها را اینجا اضافه کنید.
+You can add sales taxes and charges here.,مالیات و هزینه‌های فروش را اینجا اضافه کنید.
+You can add taxes here,مالیات‌ها را اینجا اضافه کنید
+You can mark the Letter Head as default,می‌توانید این سربرگ را پیش‌فرض کنید
+You can modify the style of the Print Format from this section,ظاهر قالب چاپ را در این بخش تغییر دهید
+You can select pre-populated Sales Taxes and Charges from here.,الگوی آماده مالیات و هزینه‌های فروش را اینجا انتخاب کنید.
 You're ready to start your journey with ERPNext,آماده‌اید که کار با ERPNext را شروع کنید
-Branding,نشان تجاری
-Show Partner Logo on Loading Screen,نمایش لوگوی همکار در صفحه بارگذاری
-Shown next to the ERPNext logo while the desk loads,هنگام بارگذاری نرم‌افزار کنار لوگوی ERPNext نمایش داده می‌شود
-Partner Logo,لوگوی همکار
-Leave empty to use the Green Lantern of Communications logo,برای استفاده از لوگوی فانوس سبز ارتباطات خالی بگذارید
