@@ -1,3 +1,21 @@
+// ---- Vazirmatn for Persian text (fonts/vazirmatn, SIL OFL 1.1 - see OFL.txt there) ----
+// Limited to Arabic-script characters (and ZWNJ/ZWJ), so Latin text keeps Frappe's Inter.
+@font-face {
+	font-family: "Vazirmatn";
+	src: url("/assets/erpnext_iran/fonts/vazirmatn/Vazirmatn-wght.woff2") format("woff2");
+	font-weight: 100 900;
+	font-style: normal;
+	font-display: swap;
+	unicode-range: U+0600-06FF, U+0750-077F, U+0870-089F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF,
+		U+200C-200F;
+}
+
+:root {
+	--font-stack: "Vazirmatn", "InterVariable", "Inter", "-apple-system", "BlinkMacSystemFont",
+		"Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+		"Helvetica Neue", sans-serif;
+}
+
 .ir-jalali-hint {
 	margin-top: 4px;
 	display: flex;

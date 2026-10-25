@@ -30,6 +30,8 @@ bench --site your-site.local migrate
 bench build --app erpnext_iran
 ```
 
+فونت فارسی **Vazirmatn** (مجوز SIL OFL 1.1، فایل مجوز در `public/fonts/vazirmatn`) همراه اپ است و برای متن فارسی محیط نرم‌افزار، همه قالب‌های چاپ و خروجی PDF به کار می‌رود؛ نیازی به نصب فونت روی سیستم کاربران نیست. برای PDF، سرور باید نشانی سایت خود (`host_name` در تنظیمات سایت) را در دسترس داشته باشد، چون wkhtmltopdf فونت را از همان نشانی می‌خواند.
+
 جاوااسکریپت و CSS با سیستم bundle فریم‌ورک Frappe ساخته می‌شوند؛ پس از هر به‌روزرسانی اپ، `bench build --app erpnext_iran` را اجرا کنید تا نشانی فایل‌ها عوض شود و مرورگر کاربران نسخه قدیمی را از حافظه نخواند.
 
 با Docker ([frappe_docker](https://github.com/frappe/frappe_docker))، فایل `docker/apps.json` را برای ساخت image سفارشی استفاده کنید.

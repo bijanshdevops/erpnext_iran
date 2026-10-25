@@ -1,0 +1,30 @@
+{#- Overrides frappe/templates/styles/standard.css (later-installed apps win in Frappe's template
+    loader): Frappe's print stylesheet, then Vazirmatn for Persian text in every print and PDF.
+    PDFs are made by wkhtmltopdf, whose old engine has no WOFF2, hence the TTF sources.
+    Font files: public/fonts/vazirmatn (SIL Open Font License 1.1, see OFL.txt there). -#}
+{% include "frappe/templates/styles/standard.css" %}
+{#- Full URLs: Frappe rewrites relative URLs in HTML attributes but not inside CSS, and
+    wkhtmltopdf runs with local file access disabled, so "/assets/..." would not load. -#}
+{%- set base_url = frappe.utils.get_url() %}
+
+@font-face {
+	font-family: "Vazirmatn";
+	src: url("{{ base_url }}/assets/erpnext_iran/fonts/vazirmatn/Vazirmatn-wght.woff2") format("woff2"),
+		url("{{ base_url }}/assets/erpnext_iran/fonts/vazirmatn/Vazirmatn-Regular.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
+	unicode-range: U+0600-06FF, U+0750-077F, U+0870-089F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF, U+200C-200F;
+}
+
+@font-face {
+	font-family: "Vazirmatn";
+	src: url("{{ base_url }}/assets/erpnext_iran/fonts/vazirmatn/Vazirmatn-wght.woff2") format("woff2"),
+		url("{{ base_url }}/assets/erpnext_iran/fonts/vazirmatn/Vazirmatn-Bold.ttf") format("truetype");
+	font-weight: bold;
+	font-style: normal;
+	unicode-range: U+0600-06FF, U+0750-077F, U+0870-089F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF, U+200C-200F;
+}
+
+.print-format {
+	font-family: "Vazirmatn", {{ font }};
+}

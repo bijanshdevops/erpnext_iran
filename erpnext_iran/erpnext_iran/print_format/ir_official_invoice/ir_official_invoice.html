@@ -18,6 +18,13 @@
 	.ir-invoice .num { text-align: left; direction: ltr; white-space: nowrap; }
 	.ir-invoice .meta td { border: none; }
 	.ir-invoice .sign { height: 70px; vertical-align: top; }
+	/* 11 columns must fit A4 in PDF (wkhtmltopdf): fixed widths that sum to 100% */
+	.ir-invoice table.items { table-layout: fixed; }
+	.ir-invoice table.items td, .ir-invoice table.items th { padding: 3px 2px; font-size: 8pt; word-wrap: break-word; }
+	.ir-invoice table.items .num { font-size: 7.5pt; }
+	.ir-invoice table.items th { font-size: 7pt; }
+	.ir-invoice table.items th.nowrap { white-space: nowrap; }
+	.ir-invoice table.items .code { font-size: 7pt; }
 </style>
 <div class="ir-invoice">
 	<table class="meta">
@@ -60,10 +67,15 @@
 		</tr>
 	</table>
 
-	<table>
+	<table class="items">
+		<colgroup>
+			{#- row, code, description, qty, unit | unit price, total, discount, after discount, VAT, grand total -#}
+			<col style="width: 5.5%"><col style="width: 12.5%"><col style="width: 9.5%"><col style="width: 6%"><col style="width: 6%">
+			<col style="width: 10%"><col style="width: 10.5%"><col style="width: 8.5%"><col style="width: 10.5%"><col style="width: 8.5%"><col style="width: 12.5%">
+		</colgroup>
 		<tr><td class="band" colspan="11">مشخصات کالا یا خدمات مورد معامله</td></tr>
 		<tr>
-			<th>ردیف</th>
+			<th class="nowrap">ردیف</th>
 			<th>کد کالا</th>
 			<th>شرح کالا یا خدمات</th>
 			<th>مقدار</th>
@@ -78,7 +90,7 @@
 		{%- for line in lines %}
 		<tr>
 			<td style="text-align: center">{{ loop.index }}</td>
-			<td class="num">{{ line.stuff_id or line.item_code or "" }}</td>
+			<td class="num code">{{ line.stuff_id or line.item_code or "" }}</td>
 			<td>{{ line.description or "" }}</td>
 			<td class="num">{{ "{:g}".format(line.qty) }}</td>
 			<td>{{ _(line.uom) if line.uom else "" }}</td>
