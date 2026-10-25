@@ -1,5 +1,5 @@
-// Desk integration: Jalali display for Date/Datetime values and a Jalali entry helper
-// under every date control. Display mode comes from Iran Localization Settings (boot).
+// Desk integration: Jalali display for Date/Datetime values and Jalali input and picker in
+// Date/Datetime controls. Display mode comes from Iran Localization Settings (boot).
 frappe.provide("erpnext_iran");
 
 (function () {
@@ -35,61 +35,99 @@ frappe.provide("erpnext_iran");
 	wrapFormatter("Date", false);
 	wrapFormatter("Datetime", true);
 
-	// ---- Hint + Jalali entry dialog under date inputs ----
-	erpnext_iran.prompt_jalali_date = function (control) {
-		const current = control.get_value();
-		frappe.prompt(
-			[
-				{
-					fieldname: "jalali",
-					fieldtype: "Data",
-					label: __("Jalali Date"),
-					description: __("Example: 1403/01/15"),
-					default: current ? J.format(current, "YYYY/MM/DD") : "",
-					reqd: 1,
-				},
-			],
-			(values) => {
-				const iso = J.parse(values.jalali);
-				if (!iso) {
-					frappe.msgprint(__("Invalid Jalali date"));
-					return;
-				}
-				control.set_value(iso);
-			},
-			__("Enter Jalali Date"),
-			__("Set")
-		);
-	};
+	// ---- Jalali Date / Datetime controls ----
+	// With Jalali display on, Date and Datetime inputs show and accept Jalali dates and open the
+	// Jalali picker (jalali_picker.js). The model value stays Gregorian, so nothing stored changes.
+	// Time controls (also ControlDate subclasses) keep Frappe's own picker.
+	const P = erpnext_iran.jalali_picker;
+	const jalaliControl = (control) =>
+		mode() !== "Off" && !control.timepicker_only && ["Date", "Datetime"].includes(control.df.fieldtype);
 
+	const digits = (text) => (usePersianDigits() ? J.toPersianDigits(text) : text);
+	const toIso = (value) => (value instanceof Date ? moment(value).format("YYYY-MM-DD HH:mm:ss") : String(value));
+
+	// Gregorian date (and weekday) under the input, since the input itself is now Jalali
 	function renderHint(control) {
-		if (mode() === "Off" || !control.$input || !control.$wrapper) return;
+		if (!jalaliControl(control) || !control.$input || !control.$wrapper) return;
 		let $hint = control.$wrapper.find(".ir-jalali-hint");
 		if (!$hint.length) {
-			$hint = $(`<div class="ir-jalali-hint text-muted small">
-				<span class="ir-jalali-text"></span>
-				<a class="ir-jalali-pick" title="${__("Enter Jalali Date")}">${__("Jalali")}</a>
-			</div>`);
-			$hint.insertAfter(control.$input);
-			$hint.find(".ir-jalali-pick").on("click", () => erpnext_iran.prompt_jalali_date(control));
+			$hint = $(`<div class="ir-jalali-hint text-muted small"></div>`).insertAfter(control.$input);
 		}
 		const value = control.get_value && control.get_value();
-		const text = value ? erpnext_iran.format_jalali(value, control.df.fieldtype === "Datetime") : "";
-		$hint.find(".ir-jalali-text").text(text ? J.format(value, "dddd") + " " + text : "");
-		$hint.toggle(!control.df.read_only);
+		let text = "";
+		if (value) {
+			text = J.format(String(value), "dddd");
+			if (mode() === "Jalali and Gregorian") {
+				const gregorian = frappe.datetime.str_to_user(value, false, control.df.fieldtype === "Date");
+				text += ` · <span class="ir-date" dir="ltr">${frappe.utils.escape_html(gregorian)}</span>`;
+			}
+		}
+		$hint.html(text).toggle(!!text && !control.df.read_only);
+	}
+
+	function override(Control, name, make) {
+		if (!Control) return;
+		const original = Control.prototype[name];
+		Control.prototype[name] = make(original);
 	}
 
 	const ControlDate = frappe.ui.form.ControlDate;
-	if (ControlDate) {
-		const original = ControlDate.prototype.set_formatted_input;
-		ControlDate.prototype.set_formatted_input = function () {
-			const result = original.apply(this, arguments);
-			try {
-				renderHint(this);
-			} catch (e) {
-				console.warn("erpnext_iran: jalali hint failed", e);
+	const ControlDatetime = frappe.ui.form.ControlDatetime;
+
+	// ControlDatetime.set_datepicker calls this through super, so one override covers both
+	override(ControlDate, "set_datepicker", (original) =>
+		function () {
+			if (!jalaliControl(this)) return original.apply(this, arguments);
+			P.attach(this);
+		}
+	);
+
+	override(ControlDate, "format_for_input", (original) =>
+		function (value) {
+			if (!jalaliControl(this) || !value) return original.apply(this, arguments);
+			return digits(J.format(toIso(value).slice(0, 10), "YYYY/MM/DD"));
+		}
+	);
+
+	override(ControlDate, "parse", (original) =>
+		function (value) {
+			const parsed = jalaliControl(this) && P.parseInput(value);
+			return parsed ? parsed.date : original.apply(this, arguments);
+		}
+	);
+
+	override(ControlDatetime, "format_for_input", (original) =>
+		function (value) {
+			const user_value = original.apply(this, arguments); // user time zone, user format
+			if (!jalaliControl(this) || !user_value) return user_value;
+			const iso = frappe.datetime.user_to_str(user_value, false);
+			return digits(`${J.format(iso.slice(0, 10), "YYYY/MM/DD")} ${iso.slice(11, 19)}`);
+		}
+	);
+
+	override(ControlDatetime, "parse", (original) =>
+		function (value) {
+			const parsed = jalaliControl(this) && P.parseInput(value);
+			if (!parsed) return original.apply(this, arguments);
+			let result = `${parsed.date} ${parsed.time || "00:00:00"}`;
+			if (!frappe.datetime.is_system_time_zone()) {
+				result = frappe.datetime.convert_to_system_tz(result, true);
 			}
 			return result;
-		};
+		}
+	);
+
+	for (const Control of [ControlDate, ControlDatetime]) {
+		override(Control, "set_formatted_input", (original) =>
+			function () {
+				const result = original.apply(this, arguments);
+				try {
+					renderHint(this);
+				} catch (e) {
+					console.warn("erpnext_iran: jalali hint failed", e);
+				}
+				return result;
+			}
+		);
 	}
 })();

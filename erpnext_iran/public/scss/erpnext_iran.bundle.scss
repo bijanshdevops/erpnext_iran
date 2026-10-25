@@ -5,8 +5,129 @@
 	align-items: center;
 }
 
-.ir-jalali-hint .ir-jalali-pick {
-	cursor: pointer;
+// ---- Jalali date picker (jalali_picker.js); positioned with inline left/top from JS ----
+.ir-jpicker {
+	position: fixed;
+	z-index: 1070; // above modals, like the stock datepicker
+	width: 256px;
+	padding: 8px;
+	background: var(--fg-color, #fff);
+	color: var(--text-color, #1f272e);
+	border: 1px solid var(--border-color, #ededed);
+	border-radius: var(--border-radius-md, 8px);
+	box-shadow: var(--shadow-lg, 0 8px 24px rgba(0, 0, 0, 0.12));
+	font-size: var(--text-sm, 13px);
+
+	button {
+		border: 0;
+		background: transparent;
+		color: inherit;
+		border-radius: var(--border-radius-sm, 4px);
+		cursor: pointer;
+	}
+
+	select {
+		border: 0;
+		background: var(--control-bg, #f4f5f6);
+		color: inherit;
+		border-radius: var(--border-radius-sm, 4px);
+		padding: 2px 4px;
+	}
+}
+
+.ir-jp-head {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	margin-bottom: 6px;
+
+	.ir-jp-month {
+		flex: 1;
+	}
+
+	.ir-jp-nav {
+		width: 28px;
+		height: 28px;
+		font-size: 18px;
+		line-height: 1;
+
+		&:hover {
+			background: var(--control-bg, #f4f5f6);
+		}
+	}
+}
+
+.ir-jp-week,
+.ir-jp-days {
+	display: grid;
+	grid-template-columns: repeat(7, 1fr);
+	text-align: center;
+}
+
+.ir-jp-week span {
+	padding: 4px 0;
+	color: var(--text-muted, #7c7c7c);
+	font-size: 11px;
+}
+
+.ir-jp-day {
+	height: 30px;
+
+	&:hover:not([disabled]) {
+		background: var(--control-bg, #f4f5f6);
+	}
+
+	&.ir-jp-other {
+		color: var(--text-light, #b0b0b0);
+	}
+
+	&.ir-jp-friday {
+		color: var(--red-500, #e24c4c);
+	}
+
+	&.ir-jp-today {
+		font-weight: 600;
+		box-shadow: inset 0 0 0 1px var(--border-color, #d1d8dd);
+	}
+
+	&.ir-jp-selected,
+	&.ir-jp-selected:hover {
+		background: var(--primary, #171717);
+		color: var(--neutral-white, #fff);
+	}
+
+	&[disabled] {
+		opacity: 0.35;
+		cursor: not-allowed;
+	}
+}
+
+.ir-jp-time {
+	margin-top: 6px;
+
+	input {
+		width: 100%;
+		border: 0;
+		background: var(--control-bg, #f4f5f6);
+		color: inherit;
+		border-radius: var(--border-radius-sm, 4px);
+		padding: 4px 6px;
+	}
+}
+
+.ir-jp-foot {
+	margin-top: 6px;
+	padding-top: 6px;
+	border-top: 1px solid var(--border-color, #ededed);
+	text-align: center;
+
+	.ir-jp-now {
+		padding: 2px 12px;
+
+		&:hover {
+			background: var(--control-bg, #f4f5f6);
+		}
+	}
 }
 
 .ir-date {
