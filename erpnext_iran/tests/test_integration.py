@@ -108,11 +108,22 @@ class TestIranLocalization(FrappeTestCase):
 		self.assertEqual(frappe.db.get_value("Warehouse", stores, "parent_warehouse"), f"همه انبارها - {ABBR}")
 		self.assertEqual(rename_default_warehouses(COMPANY), [])  # idempotent
 
+		# record already Tehran but site defaults stale: the form would show the stale value
+		frappe.db.set_single_value("System Settings", "time_zone", "Asia/Tehran")
+		frappe.db.set_default("time_zone", "America/New_York")
 		apply_system_defaults()
-		values = frappe.db.get_values(
-			"System Settings", "System Settings", ["time_zone", "currency", "date_format", "first_day_of_the_week"]
-		)[0]
-		self.assertEqual(tuple(values), ("Asia/Tehran", "IRR", "yyyy-mm-dd", "Saturday"))
+		fields = ["time_zone", "currency", "date_format", "first_day_of_the_week", "country"]
+		values = frappe.db.get_values("System Settings", "System Settings", fields)[0]
+		self.assertEqual(tuple(values), ("Asia/Tehran", "IRR", "yyyy-mm-dd", "Saturday", "Iran"))
+		# what the System Settings form loads
+		from frappe.core.doctype.system_settings.system_settings import load
+
+		loaded = load()["defaults"]  # only Select / Data fields (time zone, date format, week start)
+		for fieldname, value in zip(fields, values):
+			if fieldname in loaded:
+				self.assertEqual(loaded[fieldname], value, fieldname)
+		self.assertEqual(loaded["time_zone"], "Asia/Tehran")
+		self.assertEqual(frappe.db.get_default("country"), "Iran")
 
 	def test_rial_found_by_persian_name(self):
 		from frappe.desk.search import search_link

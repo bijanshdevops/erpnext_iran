@@ -47,6 +47,13 @@ def apply_system_defaults():
 			settings.set(fieldname, value)
 	settings.flags.ignore_mandatory = True
 	settings.save(ignore_permissions=True)
+	# System Settings.set_defaults copies only changed fields into the site defaults, and the
+	# System Settings form (and frappe.boot.sysdefaults) read those copies: a value that was
+	# already set in the record but not in the defaults (e.g. time_zone set directly) would
+	# keep showing the old one. Write them all.
+	for fieldname, value in SYSTEM_DEFAULTS.items():
+		if settings.meta.has_field(fieldname):
+			frappe.db.set_default(fieldname, value)
 
 	if frappe.db.exists("Currency", "IRR"):
 		frappe.db.set_single_value("Global Defaults", "default_currency", "IRR")
