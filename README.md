@@ -24,7 +24,7 @@ Frappe روی ویندوز به‌طور مستقیم اجرا نمی‌شود؛
 
 ```bash
 cd frappe-bench
-bench get-app https://github.com/YOUR-ORG/erpnext_iran
+bench get-app https://github.com/bijanshdevops/erpnext_iran
 bench --site your-site.local install-app erpnext_iran
 bench --site your-site.local migrate
 bench build --app erpnext_iran
