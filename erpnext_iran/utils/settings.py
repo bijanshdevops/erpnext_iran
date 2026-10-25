@@ -13,6 +13,8 @@ DEFAULTS = {
 	"moadian_enabled": 0,
 	"moadian_memory_id": "",
 	"moadian_invoice_type": "1",
+	"show_partner_logo": 1,
+	"partner_logo": "",
 }
 
 

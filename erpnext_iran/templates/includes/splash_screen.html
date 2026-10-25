@@ -1,0 +1,13 @@
+{#- Overrides frappe/templates/includes/splash_screen.html: the desk loading screen.
+    Shows the partner logo (Iran Localization Settings) next to the ERPNext logo. -#}
+<div class="centered splash">
+	<div style="display: flex; align-items: center; justify-content: center; gap: 28px;">
+		<img src="{{ splash_image or "/assets/frappe/images/frappe-framework-logo.png" }}"
+			style="max-width: 100px; max-height: 100px;">
+		{%- if ir_partner_logo %}
+		<span aria-hidden="true" style="width: 1px; height: 72px; background: #d1d5db;"></span>
+		<img src="{{ ir_partner_logo }}" alt="{{ ir_partner_name or '' }}"
+			style="max-width: 100px; max-height: 100px;">
+		{%- endif %}
+	</div>
+</div>

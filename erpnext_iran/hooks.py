@@ -20,6 +20,7 @@ after_migrate = "erpnext_iran.install.after_migrate"
 before_uninstall = "erpnext_iran.install.before_uninstall"
 
 boot_session = "erpnext_iran.boot.boot_session"
+update_website_context = "erpnext_iran.boot.update_website_context"
 
 doc_events = {
 	"Customer": {

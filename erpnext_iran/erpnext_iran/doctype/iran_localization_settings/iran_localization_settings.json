@@ -19,7 +19,10 @@
   "moadian_enabled",
   "moadian_memory_id",
   "column_break_moa",
-  "moadian_invoice_type"
+  "moadian_invoice_type",
+  "branding_section",
+  "show_partner_logo",
+  "partner_logo"
  ],
  "fields": [
   {
@@ -121,6 +124,25 @@
    "fieldtype": "Select",
    "label": "Default Invoice Type",
    "options": "1\n2"
+  },
+  {
+   "fieldname": "branding_section",
+   "fieldtype": "Section Break",
+   "label": "Branding"
+  },
+  {
+   "default": "1",
+   "description": "Shown next to the ERPNext logo while the desk loads",
+   "fieldname": "show_partner_logo",
+   "fieldtype": "Check",
+   "label": "Show Partner Logo on Loading Screen"
+  },
+  {
+   "depends_on": "show_partner_logo",
+   "description": "Leave empty to use the Green Lantern of Communications logo",
+   "fieldname": "partner_logo",
+   "fieldtype": "Attach Image",
+   "label": "Partner Logo"
   }
  ],
  "issingle": 1,
