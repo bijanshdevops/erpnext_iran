@@ -2076,3 +2076,35 @@ wkhtmltopdf 0.12.x (with patched qt).,wkhtmltopdf 0.12.x (با qt وصله‌ش�
 {} Published,{} منتشر شده
 Jalali Periods in Reports,دوره‌های شمسی در گزارش‌ها
 "Monthly, quarterly and half-yearly columns of Profit and Loss, Balance Sheet, Cash Flow and other financial reports follow Jalali months (Farvardin, Ordibehesht, ...) instead of Gregorian months",ستون‌های ماهانه، فصلی و شش‌ماهه سود و زیان، ترازنامه، جریان وجوه نقد و سایر گزارش‌های مالی بر اساس ماه‌های شمسی (فروردین، اردیبهشت، ...) به جای ماه‌های میلادی تنظیم می‌شوند
+IR VAT Return,گزارش فصلی مالیات بر ارزش افزوده
+Season,فصل
+Spring,بهار
+Summer,تابستان
+Autumn,پاییز
+Winter,زمستان
+Whole Year,کل سال
+Sales by Party,فروش به تفکیک مشتری
+Purchases by Party,خرید به تفکیک تأمین‌کننده
+Jalali Year is required,سال شمسی الزامی است
+{0} to {1},از {0} تا {1}
+VAT and Levy,مالیات و عوارض
+Taxable Sales,فروش مشمول
+Exempt and Zero-Rated Sales,فروش معاف و نرخ صفر
+Total Sales,جمع فروش
+Taxable Purchases,خرید مشمول
+Exempt Purchases,خرید معاف
+Total Purchases,جمع خرید
+VAT Payable,مالیات بر ارزش افزوده پرداختنی
+VAT Credit Carried Forward,اعتبار مالیاتی منتقل به دوره بعد
+Check Against the Ledger,تطبیق با دفتر کل
+Output VAT per Ledger,مالیات فروش طبق دفتر کل
+Input VAT per Ledger,مالیات خرید طبق دفتر کل
+Difference From Invoices,مغایرت با صورتحساب‌ها
+Output VAT,مالیات فروش
+Input VAT,مالیات خرید
+Taxable Amount,مبلغ مشمول
+Exempt Amount,مبلغ معاف
+Total With VAT,جمع با مالیات
+Invoices,تعداد صورتحساب
+{0} has no VAT output account (210201). Select it in the report filters.,شرکت {0} حساب مالیات بر ارزش افزوده فروش (۲۱۰۲۰۱) ندارد. آن را در فیلترهای گزارش انتخاب کنید.
+{0} has no VAT input account (110401). Select it in the report filters.,شرکت {0} حساب مالیات بر ارزش افزوده خرید (۱۱۰۴۰۱) ندارد. آن را در فیلترهای گزارش انتخاب کنید.

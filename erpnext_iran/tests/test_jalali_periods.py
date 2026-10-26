@@ -7,6 +7,7 @@ from erpnext_iran.utils.jalali_periods import (
 	jalali_periods,
 	period_key,
 	range_label,
+	season_range,
 	year_label,
 )
 
@@ -60,3 +61,17 @@ class TestJalaliPeriods(unittest.TestCase):
 		start, end = jalali.jalali_year_range(1405)
 		keys = [period_key(t) for _, t in jalali_periods(start, end, 1)]
 		self.assertEqual(len(keys), len(set(keys)))
+
+
+class TestSeasonRange(unittest.TestCase):
+	def test_seasons_of_1405(self):
+		self.assertEqual(season_range(1405, 1), (D(2026, 3, 21), D(2026, 6, 21)))  # Farvardin to Khordad 31
+		self.assertEqual(season_range(1405, 2), (D(2026, 6, 22), D(2026, 9, 22)))  # Tir to Shahrivar 31
+		self.assertEqual(season_range(1405, 3), (D(2026, 9, 23), D(2026, 12, 21)))  # Mehr to Azar 30
+		self.assertEqual(season_range(1405, 4), (D(2026, 12, 22), D(2027, 3, 20)))  # Dey to Esfand 29
+
+	def test_winter_of_leap_year(self):
+		self.assertTrue(jalali.is_leap_jalali_year(1403))
+		start, end = season_range(1403, 4)
+		self.assertEqual(jalali.to_jalali(end), (1403, 12, 30))
+		self.assertEqual(end, jalali.jalali_year_range(1403)[1])

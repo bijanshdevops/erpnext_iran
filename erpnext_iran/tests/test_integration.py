@@ -12,6 +12,7 @@ except ImportError:
 	raise unittest.SkipTest("frappe is not installed") from None
 
 from erpnext.controllers.accounts_controller import get_taxes_and_charges
+from frappe import _
 from frappe.utils import getdate
 
 from erpnext_iran.moadian.api import get_moadian_payload
@@ -313,3 +314,98 @@ class TestIranLocalization(FrappeTestCase):
 		self.assertIn("سه میلیون و سیصد هزار ریال", html)
 		self.assertIn("3,300,000", html)
 		self.assertIn(si.ir_tax_id, html)
+
+	def test_vat_return(self):
+		from erpnext_iran.erpnext_iran.report.ir_vat_return import ir_vat_return
+
+		filters = {"company": COMPANY, "jalali_year": 1405, "season": "Autumn"}
+
+		def summary():
+			rows = ir_vat_return.execute(filters)[1]
+			return {r["description"]: (r["base_amount"] or 0, r["vat_amount"] or 0) for r in rows}
+
+		before = summary()
+		ensure_item("IR-VAT-ITEM", "کالای مشمول")
+		exempt_template = frappe.db.get_value("Item Tax Template", {"company": COMPANY}, "name")
+		ensure_item("IR-EXEMPT-ITEM", "کالای معاف", [{"item_tax_template": exempt_template}])
+		customer = frappe.get_doc(
+			{"doctype": "Customer", "customer_name": "مشتری ارزش افزوده", "customer_group": CUSTOMER_GROUP,
+			 "ir_economic_code": "411111111111"}
+		).insert()  # fmt: skip
+		if not frappe.db.exists("Supplier Group", "IR Test Suppliers"):
+			frappe.get_doc(
+				{"doctype": "Supplier Group", "supplier_group_name": "IR Test Suppliers",
+				 "parent_supplier_group": "All Supplier Groups"}
+			).insert()  # fmt: skip
+		supplier = frappe.get_doc(
+			{"doctype": "Supplier", "supplier_name": "تامین کننده ارزش افزوده", "supplier_group": "IR Test Suppliers"}
+		).insert()
+
+		# Aban 1405: 2,000,000 taxable + 500,000 exempt sold, 1,000,000 taxable bought
+		sales_template = frappe.db.get_value("Sales Taxes and Charges Template", {"company": COMPANY}, "name")
+		si = frappe.get_doc(
+			{
+				"doctype": "Sales Invoice",
+				"company": COMPANY,
+				"customer": customer.name,
+				"posting_date": "2026-11-01",
+				"set_posting_time": 1,
+				"due_date": "2026-11-30",
+				"taxes_and_charges": sales_template,
+				"items": [
+					{"item_code": "IR-VAT-ITEM", "qty": 1, "rate": 2_000_000},
+					{"item_code": "IR-EXEMPT-ITEM", "qty": 1, "rate": 500_000},
+				],
+			}
+		)  # fmt: skip
+		si.extend("taxes", get_taxes_and_charges("Sales Taxes and Charges Template", sales_template))
+		si.insert()
+		self.assertEqual(si.total_taxes_and_charges, 200_000)
+		si.submit()
+
+		purchase_template = frappe.db.get_value("Purchase Taxes and Charges Template", {"company": COMPANY}, "name")
+		pi = frappe.get_doc(
+			{
+				"doctype": "Purchase Invoice",
+				"company": COMPANY,
+				"supplier": supplier.name,
+				"posting_date": "2026-11-02",
+				"set_posting_time": 1,
+				"due_date": "2026-11-30",
+				"taxes_and_charges": purchase_template,
+				"items": [{"item_code": "IR-VAT-ITEM", "qty": 1, "rate": 1_000_000}],
+			}
+		)
+		pi.extend("taxes", get_taxes_and_charges("Purchase Taxes and Charges Template", purchase_template))
+		pi.insert()
+		pi.submit()
+
+		after = summary()
+
+		def delta(label):
+			return tuple(round(a - b, 2) for a, b in zip(after[label], before.get(label, (0, 0))))
+
+		self.assertEqual(delta(_("Taxable Sales")), (2_000_000, 200_000))
+		self.assertEqual(delta(_("Exempt and Zero-Rated Sales")), (500_000, 0))
+		self.assertEqual(delta(_("Taxable Purchases")), (1_000_000, 100_000))
+		# invoices and the ledger agree
+		self.assertEqual(after[_("Difference From Invoices")][1], 0)
+
+		# by party: the customer's economic code is listed
+		columns, rows = ir_vat_return.execute(dict(filters, view="Sales by Party"))[:2]
+		row = next(r for r in rows if r["party"] == customer.name)
+		self.assertEqual((row["taxable"], row["exempt"], row["vat"]), (2_000_000, 500_000, 200_000))
+		self.assertEqual(row["ir_economic_code"], "411111111111")
+		self.assertEqual(row["grand_total"], 2_700_000)
+
+		# a season without these invoices
+		spring = ir_vat_return.execute(dict(filters, season="Spring", view="Purchases by Party"))[1]
+		self.assertFalse([r for r in spring if r["party"] == supplier.name])
+
+
+def ensure_item(item_code, item_name, taxes=None):
+	if not frappe.db.exists("Item", item_code):
+		frappe.get_doc(
+			{"doctype": "Item", "item_code": item_code, "item_name": item_name, "item_group": ITEM_GROUP,
+			 "stock_uom": "Nos", "is_stock_item": 0, "taxes": taxes or []}
+		).insert()  # fmt: skip

@@ -50,3 +50,10 @@ def range_label(from_date, to_date):
 def year_label(from_date, to_date):
 	start_year, end_year = to_jalali(from_date)[0], to_jalali(to_date)[0]
 	return str(start_year) if start_year == end_year else f"{start_year}-{end_year}"
+
+
+def season_range(jy, season):
+	"""First and last Gregorian dates of Jalali season 1-4 (1 = Spring, Farvardin to Khordad)."""
+	first_month = 3 * (season - 1) + 1
+	next_year, next_month = add_jalali_months(jy, first_month, 3)
+	return to_gregorian(jy, first_month, 1), to_gregorian(next_year, next_month, 1) - ONE_DAY
