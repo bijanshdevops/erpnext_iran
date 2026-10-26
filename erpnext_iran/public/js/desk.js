@@ -123,6 +123,38 @@ frappe.provide("erpnext_iran");
 		}
 	);
 
+	// ---- Jalali DateRange control (list filter "Between", report date ranges) ----
+	const ControlDateRange = frappe.ui.form.ControlDateRange;
+	const jalaliRange = () => mode() !== "Off";
+	// "از ۱۴۰۵/۰۸/۰۱ تا ۱۴۰۵/۰۸/۳۰", "1405/8/1, 1405/8/30": the two dates, whatever the separator
+	const rangeDates = (text) => J.toEnglishDigits(text).match(/\d{4}[\/\-.]\d{1,2}[\/\-.]\d{1,2}/g) || [];
+
+	override(ControlDateRange, "set_datepicker", (original) =>
+		function () {
+			if (!jalaliRange()) return original.apply(this, arguments);
+			P.attach(this);
+		}
+	);
+
+	override(ControlDateRange, "format_for_input", (original) =>
+		function (value1, value2) {
+			if (!jalaliRange() || !value1 || !value2) return original.apply(this, arguments);
+			const jalali = (value) => digits(J.format(toIso(value).slice(0, 10), "YYYY/MM/DD"));
+			return __("{0} to {1}", [jalali(value1), jalali(value2)]);
+		}
+	);
+
+	override(ControlDateRange, "parse", (original) =>
+		function (value) {
+			if (!jalaliRange() || typeof value !== "string") return original.apply(this, arguments);
+			const dates = rangeDates(value);
+			const from = dates.length === 2 && P.parseInput(dates[0]);
+			const to = dates.length === 2 && P.parseInput(dates[1]);
+			if (!from || !to) return original.apply(this, arguments);
+			return from.date <= to.date ? [from.date, to.date] : [to.date, from.date];
+		}
+	);
+
 	for (const Control of [ControlDate, ControlDatetime]) {
 		override(Control, "set_formatted_input", (original) =>
 			function () {

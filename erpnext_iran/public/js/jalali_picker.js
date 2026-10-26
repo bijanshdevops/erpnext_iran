@@ -1,6 +1,7 @@
-// Jalali date picker for the desk's Date and Datetime controls.
-// Calendar math (monthGrid, parseInput) is DOM-free and exported for node tests; the popup
-// works on the control's model value, which stays a Gregorian "YYYY-MM-DD[ HH:mm:ss]".
+// Jalali date picker for the desk's Date, Datetime and DateRange controls.
+// Calendar math (monthGrid, parseInput, rangeShortcut) is DOM-free and exported for node tests;
+// the popup works on the control's model value, which stays Gregorian: "YYYY-MM-DD[ HH:mm:ss]",
+// or ["YYYY-MM-DD", "YYYY-MM-DD"] for a range.
 (function (root) {
 	"use strict";
 
@@ -45,7 +46,33 @@
 		return { date: isoOf(g.gy, g.gm, g.gd), time };
 	}
 
-	const api = { monthGrid, parseInput, WEEKDAY_SHORT };
+	const addMonths = (jy, jm, n) => {
+		const index = jy * 12 + (jm - 1) + n;
+		return { jy: Math.floor(index / 12), jm: (index % 12) + 1 };
+	};
+
+	function monthRange(jy, jm, months) {
+		const g1 = J.toGregorian(jy, jm, 1);
+		const last = addMonths(jy, jm, months - 1);
+		const g2 = J.toGregorian(last.jy, last.jm, J.monthLength(last.jy, last.jm));
+		return [isoOf(g1.gy, g1.gm, g1.gd), isoOf(g2.gy, g2.gm, g2.gd)];
+	}
+
+	// Gregorian [from, to] of a Jalali period around todayIso ("YYYY-MM-DD")
+	const SHORTCUTS = ["this_month", "last_month", "this_season", "this_year"];
+	function rangeShortcut(name, todayIso) {
+		const { jy, jm } = J.fromISO(todayIso);
+		if (name === "this_month") return monthRange(jy, jm, 1);
+		if (name === "last_month") {
+			const prev = addMonths(jy, jm, -1);
+			return monthRange(prev.jy, prev.jm, 1);
+		}
+		if (name === "this_season") return monthRange(jy, Math.floor((jm - 1) / 3) * 3 + 1, 3);
+		if (name === "this_year") return monthRange(jy, 1, 12);
+		return null;
+	}
+
+	const api = { monthGrid, parseInput, rangeShortcut, SHORTCUTS, WEEKDAY_SHORT };
 	if (typeof module !== "undefined" && module.exports) module.exports = api;
 	if (!root || !root.document) return;
 
@@ -86,10 +113,11 @@
 	}
 
 	const isDatetime = (control) => control.df.fieldtype === "Datetime";
+	const isRange = (control) => control.df.fieldtype === "DateRange";
 
 	function selectedIso(control) {
 		const value = control.get_value && control.get_value();
-		if (!value) return "";
+		if (!value || isRange(control)) return "";
 		return isDatetime(control) ? value.slice(0, 10) : String(value).slice(0, 10);
 	}
 
@@ -103,30 +131,66 @@
 		};
 	}
 
-	function render() {
-		const { control, view } = active;
-		const today = frappe.datetime.get_today();
-		const selected = selectedIso(control);
-		const lim = limits(control);
-		const years = [];
-		for (let y = view.jy - 60; y <= view.jy + 20; y++) years.push(y);
+	const SHORTCUT_LABELS = {
+		this_month: "This Month",
+		last_month: "Last Month",
+		this_season: "This Season",
+		this_year: "This Year",
+	};
 
-		const days = monthGrid(view.jy, view.jm)
+	function monthHtml(jy, jm, ctx) {
+		return monthGrid(jy, jm)
 			.map((c) => {
 				const off =
-					(lim.min && c.iso < lim.min) || (lim.max && c.iso > lim.max) || lim.disabled.includes(c.iso);
+					(ctx.lim.min && c.iso < ctx.lim.min) ||
+					(ctx.lim.max && c.iso > ctx.lim.max) ||
+					ctx.lim.disabled.includes(c.iso);
+				const { start, end } = ctx.range || {};
+				const edge = ctx.range ? c.inMonth && (c.iso === start || c.iso === end) : c.iso === ctx.selected;
+				const inside = ctx.range && c.inMonth && start && end && c.iso > start && c.iso < end;
 				const cls = [
 					"ir-jp-day",
 					c.inMonth ? "" : "ir-jp-other",
-					c.iso === today ? "ir-jp-today" : "",
-					c.iso === selected ? "ir-jp-selected" : "",
+					c.iso === ctx.today ? "ir-jp-today" : "",
+					edge ? "ir-jp-selected" : "",
+					inside ? "ir-jp-inrange" : "",
 					c.column === 6 ? "ir-jp-friday" : "",
 				].join(" ");
 				return `<button type="button" class="${cls}" data-iso="${c.iso}" ${off ? "disabled" : ""}>${fa(c.jd)}</button>`;
 			})
 			.join("");
+	}
 
-		popup.innerHTML = `
+	function render() {
+		const { control, view } = active;
+		const range = isRange(control);
+		const ctx = {
+			today: frappe.datetime.get_today(),
+			selected: selectedIso(control),
+			lim: limits(control),
+			range: range ? active.range : null,
+		};
+		const years = [];
+		for (let y = view.jy - 60; y <= view.jy + 20; y++) years.push(y);
+		const week = `<div class="ir-jp-week">${WEEKDAY_SHORT.map((d) => `<span>${d}</span>`).join("")}</div>`;
+		const second = addMonths(view.jy, view.jm, 1);
+		const grid = (jy, jm) =>
+			`<div class="ir-jp-month-grid">${week}<div class="ir-jp-days">${monthHtml(jy, jm, ctx)}</div></div>`;
+
+		const foot = range
+			? SHORTCUTS.map(
+					(name) =>
+						`<button type="button" class="ir-jp-now" data-range="${name}">${__(SHORTCUT_LABELS[name])}</button>`
+			  ).join("")
+			: `<button type="button" class="ir-jp-now">${isDatetime(control) ? __("Now") : __("Today")}</button>`;
+		const hint =
+			range && active.range.start && !active.range.end
+				? `<div class="ir-jp-hint text-muted">${__("Pick the last day of the range")}</div>`
+				: "";
+
+		popup.classList.toggle("ir-jpicker-range", range);
+		// the ".datepicker" wrapper makes Frappe's filter popover treat clicks here as its own
+		popup.innerHTML = `<div class="datepicker ir-jp-inner">
 			<div class="ir-jp-head">
 				<button type="button" class="ir-jp-nav" data-step="-1" aria-label="${__("Previous")}">›</button>
 				<select class="ir-jp-month" aria-label="${__("Month")}">${J.MONTH_NAMES.map(
@@ -135,18 +199,18 @@
 				<select class="ir-jp-year" aria-label="${__("Year")}">${years
 					.map((y) => `<option value="${y}" ${y === view.jy ? "selected" : ""}>${fa(y)}</option>`)
 					.join("")}</select>
+				${range ? `<span class="ir-jp-second">${J.MONTH_NAMES[second.jm - 1]} ${fa(second.jy)}</span>` : ""}
 				<button type="button" class="ir-jp-nav" data-step="1" aria-label="${__("Next")}">‹</button>
 			</div>
-			<div class="ir-jp-week">${WEEKDAY_SHORT.map((d) => `<span>${d}</span>`).join("")}</div>
-			<div class="ir-jp-days">${days}</div>
+			<div class="ir-jp-months">${grid(view.jy, view.jm)}${range ? grid(second.jy, second.jm) : ""}</div>
+			${hint}
 			${
 				isDatetime(control)
 					? `<div class="ir-jp-time"><input type="time" step="1" class="ir-jp-time-input" dir="ltr" value="${active.time}"></div>`
 					: ""
 			}
-			<div class="ir-jp-foot">
-				<button type="button" class="ir-jp-now">${isDatetime(control) ? __("Now") : __("Today")}</button>
-			</div>`;
+			<div class="ir-jp-foot">${foot}</div>
+		</div>`;
 	}
 
 	function position() {
@@ -161,14 +225,15 @@
 	function open(control) {
 		if (control.df.read_only || control.disp_status === "Read") return;
 		ensurePopup();
-		const iso = selectedIso(control) || frappe.datetime.get_today();
-		const j = J.fromISO(iso);
 		const value = control.get_value && control.get_value();
+		const pair = isRange(control) && Array.isArray(value) ? value : [];
+		const iso = pair[0] || selectedIso(control) || frappe.datetime.get_today();
+		const j = J.fromISO(iso);
 		const time =
 			isDatetime(control) && value && value.length > 10
 				? frappe.datetime.convert_to_user_tz(value).slice(11, 19)
 				: moment().format("HH:mm:ss");
-		active = { control, view: { jy: j.jy, jm: j.jm }, time };
+		active = { control, view: { jy: j.jy, jm: j.jm }, time, range: { start: pair[0] || "", end: pair[1] || "" } };
 		render();
 		popup.hidden = false;
 		position();
@@ -188,7 +253,16 @@
 	}
 
 	function choose(iso) {
-		const { control, time } = active;
+		const { control, time, range } = active;
+		if (isRange(control)) {
+			// first click starts the range, the second closes it (in either order)
+			if (!range.start || range.end) {
+				active.range = { start: iso, end: "" };
+				return render();
+			}
+			control.set_value(iso < range.start ? [iso, range.start] : [range.start, iso]);
+			return close();
+		}
 		control.set_value(toModel(control, iso, time));
 		close();
 	}
@@ -204,6 +278,10 @@
 			if (jm > 12) [jy, jm] = [jy + 1, 1];
 			active.view = { jy, jm };
 			return render();
+		}
+		if (btn.dataset.range) {
+			active.control.set_value(rangeShortcut(btn.dataset.range, frappe.datetime.get_today()));
+			return close();
 		}
 		if (btn.classList.contains("ir-jp-now")) {
 			const { control } = active;

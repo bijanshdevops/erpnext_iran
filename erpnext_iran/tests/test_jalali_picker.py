@@ -71,3 +71,25 @@ class TestJalaliPicker(unittest.TestCase):
 		)
 		for (text, expected), got in zip(cases.items(), results):
 			self.assertEqual(got, expected, text)
+
+	def test_range_shortcuts(self):
+		from erpnext_iran.utils.jalali_periods import period_range
+
+		days = [datetime.date(2024, 3, 1) + datetime.timedelta(days=n) for n in range(0, 365 * 3, 5)]
+		results = run_node(
+			"const days = JSON.parse(require('fs').readFileSync(0, 'utf8'));"
+			"console.log(JSON.stringify(days.map((d) => P.SHORTCUTS.map((n) => P.rangeShortcut(n, d)))));",
+			[d.isoformat() for d in days],
+		)
+		seasons = ["Spring", "Summer", "Autumn", "Winter"]
+		for day, (this_month, last_month, this_season, this_year) in zip(days, results):
+			jy, jm, _ = jalali.to_jalali(day)
+			prev_y, prev_m = (jy, jm - 1) if jm > 1 else (jy - 1, 12)
+			expected = [
+				period_range(jy, str(jm)),
+				period_range(prev_y, str(prev_m)),
+				period_range(jy, seasons[(jm - 1) // 3]),
+				period_range(jy, "Whole Year"),
+			]
+			got = [this_month, last_month, this_season, this_year]
+			self.assertEqual([[d.isoformat() for d in pair] for pair in expected], got, day)
