@@ -26,6 +26,9 @@ update_website_context = "erpnext_iran.boot.update_website_context"
 before_request = ["erpnext_iran.overrides.report_periods.apply"]
 before_job = ["erpnext_iran.overrides.report_periods.apply"]
 
+# send pending invoices to Moadian and follow their status (when automatic sending is on)
+scheduler_events = {"cron": {"*/5 * * * *": ["erpnext_iran.moadian.sender.process_queue"]}}
+
 doc_events = {
 	"Customer": {
 		"before_insert": "erpnext_iran.doc_events.party.normalize_names",

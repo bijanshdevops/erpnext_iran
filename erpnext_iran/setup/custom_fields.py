@@ -167,6 +167,15 @@ def get_custom_fields():
 				"allow_on_submit": 1,
 				"insert_after": "ir_moadian_status",
 			},
+			{
+				"fieldname": "ir_moadian_error",
+				"label": "Moadian Messages",
+				"fieldtype": "Small Text",
+				"read_only": 1,
+				"no_copy": 1,
+				"allow_on_submit": 1,
+				"insert_after": "ir_moadian_reference",
+			},
 		],
 	}
 

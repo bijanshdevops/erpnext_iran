@@ -15,6 +15,10 @@ DEFAULTS = {
 	"moadian_enabled": 0,
 	"moadian_memory_id": "",
 	"moadian_invoice_type": "1",
+	"moadian_api_url": "https://tp.tax.gov.ir/requestsmanager/api/v2/",
+	"moadian_private_key_path": "",
+	"moadian_certificate_path": "",
+	"moadian_auto_send": 0,
 	"show_partner_logo": 1,
 	"partner_logo": "",
 }

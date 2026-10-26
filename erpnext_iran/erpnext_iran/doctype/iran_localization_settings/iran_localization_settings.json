@@ -22,6 +22,12 @@
   "moadian_memory_id",
   "column_break_moa",
   "moadian_invoice_type",
+  "moadian_connection_section",
+  "moadian_api_url",
+  "moadian_private_key_path",
+  "moadian_certificate_path",
+  "column_break_conn",
+  "moadian_auto_send",
   "branding_section",
   "show_partner_logo",
   "partner_logo"
@@ -140,6 +146,43 @@
    "fieldtype": "Select",
    "label": "Default Invoice Type",
    "options": "1\n2"
+  },
+  {
+   "fieldname": "moadian_connection_section",
+   "fieldtype": "Section Break",
+   "label": "Moadian Connection",
+   "depends_on": "moadian_enabled",
+   "description": "Sending directly to the Tax Organization with the taxpayer's own key. Register the public key of this key pair in the Moadian portal (کارپوشه) first."
+  },
+  {
+   "fieldname": "moadian_api_url",
+   "fieldtype": "Data",
+   "label": "API URL",
+   "default": "https://tp.tax.gov.ir/requestsmanager/api/v2/",
+   "description": "Moadian API v2. Change only for a test environment."
+  },
+  {
+   "fieldname": "moadian_private_key_path",
+   "fieldtype": "Data",
+   "label": "Private Key File",
+   "description": "Absolute path on the server of the taxpayer's private key (PEM, unencrypted). Keep it outside the site folders, readable only by the bench user."
+  },
+  {
+   "fieldname": "moadian_certificate_path",
+   "fieldtype": "Data",
+   "label": "Certificate File",
+   "description": "Absolute path on the server of the certificate (PEM) issued for that key"
+  },
+  {
+   "fieldname": "column_break_conn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "moadian_auto_send",
+   "fieldtype": "Check",
+   "label": "Send Automatically",
+   "default": "0",
+   "description": "Every 5 minutes: send submitted invoices that are Pending and check the status of sent ones"
   },
   {
    "fieldname": "branding_section",

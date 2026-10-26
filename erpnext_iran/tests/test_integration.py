@@ -662,6 +662,106 @@ class TestIranLocalization(FrappeTestCase):
 		self.assertEqual(frappe.db.get_value("IR Cheque", issued.name, "status"), "Cancelled")
 		self.assertEqual(frappe.db.get_value("IR Cheque Book", book.name, "used_leaves"), 0)
 
+	def test_moadian_sending(self):
+		import tempfile
+		from unittest.mock import patch
+
+		from erpnext_iran.moadian import sender
+		from erpnext_iran.tests.moadian_mock import MockMoadianServer
+
+		server = MockMoadianServer("A1B2C3")
+		key_path, cert_path = server.install_keys(tempfile.mkdtemp())
+		settings = frappe.get_doc("Iran Localization Settings")
+		saved = {f: settings.get(f) for f in ("moadian_private_key_path", "moadian_certificate_path", "moadian_auto_send")}
+		settings.update({"moadian_private_key_path": key_path, "moadian_certificate_path": cert_path})
+		settings.save()
+
+		def restore():
+			doc = frappe.get_doc("Iran Localization Settings")
+			doc.update(saved)
+			doc.save()
+
+		self.addCleanup(restore)
+
+		def invoice(rate):
+			customer = frappe.db.get_value("Customer", {"customer_name": "مشتری مودیان"}) or frappe.get_doc(
+				{"doctype": "Customer", "customer_name": "مشتری مودیان", "customer_group": CUSTOMER_GROUP,
+				 "customer_type": "Individual", "ir_national_id": VALID_NATIONAL_CODE}
+			).insert().name  # fmt: skip
+			template = frappe.db.get_value("Sales Taxes and Charges Template", {"company": COMPANY}, "name")
+			si = frappe.get_doc(
+				{
+					"doctype": "Sales Invoice",
+					"company": COMPANY,
+					"customer": customer,
+					"posting_date": "2026-11-10",
+					"set_posting_time": 1,
+					"due_date": "2026-12-10",
+					"currency": "IRR",
+					"conversion_rate": 1,
+					"taxes_and_charges": template,
+					"items": [{"item_code": "IR-MOADIAN-ITEM", "qty": 1, "rate": rate}],
+				}
+			)
+			si.extend("taxes", get_taxes_and_charges("Sales Taxes and Charges Template", template))
+			si.insert()
+			si.submit()
+			return si.name
+
+		status = lambda name: frappe.db.get_value(  # noqa: E731
+			"Sales Invoice", name, ["ir_moadian_status", "ir_moadian_reference", "ir_moadian_error", "ir_tax_id"], as_dict=True
+		)
+		frappe.db.set_value("UOM", "Nos", "ir_moadian_unit_code", "1627")
+		if not frappe.db.exists("Item", "IR-MOADIAN-ITEM"):
+			frappe.get_doc(
+				{"doctype": "Item", "item_code": "IR-MOADIAN-ITEM", "item_name": "کالای مودیان", "item_group": ITEM_GROUP,
+				 "stock_uom": "Nos", "is_stock_item": 0, "ir_stuff_id": "2710000138624"}
+			).insert()  # fmt: skip
+
+		# accepted: sent with the tax ID, checked, accepted
+		accepted = invoice(1_000_000)
+		self.assertEqual(status(accepted).ir_moadian_status, "Pending")
+		self.assertEqual(sender.send_invoices([accepted], session=server), {accepted: "Sent"})
+		sent = status(accepted)
+		self.assertTrue(sent.ir_moadian_reference)
+		received = server.invoices[sent.ir_moadian_reference]["invoice"]
+		self.assertEqual(received["header"]["taxid"], sent.ir_tax_id)  # decrypted and verified by the server
+		self.assertEqual(sender.check_status([accepted], session=server), {accepted: "Accepted"})
+
+		# rejected with the organization's message, then sent again once fixed
+		rejected = invoice(2_000_000)
+		reject = [{"code": "0200", "message": "کد کالا نامعتبر است", "errorType": "ERROR"}]
+		with patch.object(MockMoadianServer, "check_invoice", staticmethod(lambda inv: reject)):
+			sender.send_invoices([rejected], session=server)
+		sender.check_status([rejected], session=server)
+		self.assertEqual(status(rejected).ir_moadian_status, "Rejected")
+		self.assertIn("کد کالا نامعتبر است", status(rejected).ir_moadian_error)
+		sender.send_invoices([rejected], session=server)
+		sender.check_status([rejected], session=server)
+		self.assertEqual(status(rejected).ir_moadian_status, "Accepted")
+		self.assertEqual(status(rejected).ir_moadian_error, "")
+
+		# no key file: stays Pending with the reason
+		missing = invoice(3_000_000)
+		frappe.db.set_single_value("Iran Localization Settings", "moadian_private_key_path", "/nonexistent/key.pem")
+		frappe.clear_document_cache("Iran Localization Settings", "Iran Localization Settings")
+		sender.send_invoices([missing], session=server)
+		self.assertEqual(status(missing).ir_moadian_status, "Pending")
+		self.assertIn("/nonexistent/key.pem", status(missing).ir_moadian_error)
+		frappe.db.set_single_value("Iran Localization Settings", "moadian_private_key_path", key_path)
+		frappe.clear_document_cache("Iran Localization Settings", "Iran Localization Settings")
+
+		# the 5-minute job sends and checks only when automatic sending is on
+		original = sender.get_client
+		with patch.object(sender, "get_client", lambda company, session=None: original(company, server)):
+			sender.process_queue()
+			self.assertEqual(status(missing).ir_moadian_status, "Pending")
+			frappe.db.set_single_value("Iran Localization Settings", "moadian_auto_send", 1)
+			frappe.clear_document_cache("Iran Localization Settings", "Iran Localization Settings")
+			sender.process_queue()  # sends
+			sender.process_queue()  # checks
+		self.assertEqual(status(missing).ir_moadian_status, "Accepted")
+
 def ensure_item(item_code, item_name, taxes=None):
 	if not frappe.db.exists("Item", item_code):
 		frappe.get_doc(

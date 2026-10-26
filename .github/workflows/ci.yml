@@ -23,7 +23,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
-      - run: pip install pytest
+      - run: pip install pytest cryptography requests
       # integration tests skip themselves without frappe; node runs the JS calendar tests
       - run: python -m pytest erpnext_iran/tests -q
 

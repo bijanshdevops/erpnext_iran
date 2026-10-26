@@ -1,9 +1,4 @@
-"""Frappe adapter: Sales Invoice -> Moadian payload.
-
-Sending to the Tax Organization requires signing (JWS) with the taxpayer's private key and
-encryption (JWE) with the organization's public key, usually via a licensed TSP (شرکت معتمد).
-This module produces and validates the payload; plug a sender into send_invoice().
-"""
+"""Frappe adapter: Sales Invoice -> Moadian payload. Sending: erpnext_iran.moadian.sender."""
 
 from zoneinfo import ZoneInfo
 
@@ -89,7 +84,3 @@ def get_moadian_payload(sales_invoice):
 	payload = make_payload(doc)
 	return {"payload": payload, "problems": validate_payload(payload)}
 
-
-def send_invoice(doc):
-	"""Hook point for a TSP / SDK integration. Expected to return a reference number."""
-	raise NotImplementedError(_("No Moadian sender is configured"))
