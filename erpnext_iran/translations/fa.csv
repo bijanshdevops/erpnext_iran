@@ -2226,7 +2226,6 @@ Cannot read the {0} at {1}: {2},{0} در مسیر {1} خوانده نشد: {2}
 Not sent: {0},ارسال نشد: {0}
 Moadian sending failed,ارسال به سامانه مودیان ناموفق بود
 Moadian inquiry failed,استعلام از سامانه مودیان ناموفق بود
-Only Pending or Rejected invoices can be sent,فقط صورتحساب‌های در انتظار ارسال یا ردشده قابل ارسال‌اند
 Test Moadian Connection,آزمایش اتصال به سامانه مودیان
 Connecting to Moadian...,در حال اتصال به سامانه مودیان...
 Connected to Moadian,اتصال به سامانه مودیان برقرار شد
@@ -2234,3 +2233,17 @@ Moadian Status: {0},وضعیت در سامانه مودیان: {0}
 Send to Moadian,ارسال به سامانه مودیان
 Check Moadian Status,استعلام وضعیت از سامانه مودیان
 Moadian,سامانه مودیان
+Corrected,اصلاح‌شده
+Cancellation Pending,در انتظار ابطال
+Cancellation Sent,ابطال ارسال‌شده
+Cancellation Rejected,ابطال ردشده
+Reference Tax ID,شماره مالیاتی مرجع
+Tax ID of the invoice this one corrects or returns,شماره مالیاتی صورتحسابی که این صورتحساب اصلاحیه یا برگشت آن است
+Cancellation Tax ID,شماره مالیاتی ابطال
+Cancellation Reference,شماره مرجع ابطال
+Corrected by {0},با {0} اصلاح شد
+"This invoice was sent to Moadian and its answer is not in yet. Use Check Moadian Status, then cancel.",این صورتحساب به سامانه مودیان ارسال شده و پاسخ آن هنوز نرسیده است. ابتدا «استعلام وضعیت از سامانه مودیان» را بزنید، سپس لغو کنید.
+Cancelled before Moadian accepted it: nothing to send.,پیش از پذیرش در سامانه مودیان لغو شد؛ چیزی برای ارسال نیست.
+Waiting until Moadian accepts the invoice with tax ID {0},در انتظار پذیرش صورتحساب با شماره مالیاتی {0} در سامانه مودیان
+Nothing to send to Moadian for this invoice,برای این صورتحساب چیزی برای ارسال به سامانه مودیان نیست
+Send Cancellation to Moadian,ارسال ابطال به سامانه مودیان

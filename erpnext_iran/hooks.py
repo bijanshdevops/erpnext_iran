@@ -48,6 +48,8 @@ doc_events = {
 	"Sales Invoice": {
 		"validate": "erpnext_iran.doc_events.sales_invoice.validate",
 		"on_submit": "erpnext_iran.doc_events.sales_invoice.on_submit",
+		"before_cancel": "erpnext_iran.doc_events.sales_invoice.before_cancel",
+		"on_cancel": "erpnext_iran.doc_events.sales_invoice.on_cancel",
 	},
 }
 

@@ -1,7 +1,9 @@
 frappe.ui.form.on("Sales Invoice", {
 	refresh(frm) {
-		if (frm.doc.docstatus !== 1 || !frm.doc.ir_tax_id) return;
+		// submitted invoices, and cancelled ones that owe Moadian a cancellation
+		if (frm.doc.docstatus === 0 || !frm.doc.ir_tax_id) return;
 		const status = frm.doc.ir_moadian_status;
+		const colors = { Accepted: "green", Cancelled: "green", Rejected: "red", "Cancellation Rejected": "red" };
 		const run = (method, label) =>
 			frm.add_custom_button(
 				__(label),
@@ -13,14 +15,17 @@ frappe.ui.form.on("Sales Invoice", {
 					});
 					frappe.show_alert({
 						message: __("Moadian Status: {0}", [__(message.ir_moadian_status || "")]),
-						indicator: { Accepted: "green", Rejected: "red", Sent: "blue" }[message.ir_moadian_status] || "orange",
+						indicator: colors[message.ir_moadian_status] || "blue",
 					});
 					frm.reload_doc();
 				},
 				__("Moadian")
 			);
 		if (["Pending", "Rejected"].includes(status)) run("send_to_moadian", "Send to Moadian");
-		if (status === "Sent") run("check_moadian_status", "Check Moadian Status");
+		if (["Cancellation Pending", "Cancellation Rejected"].includes(status)) {
+			run("send_to_moadian", "Send Cancellation to Moadian");
+		}
+		if (["Sent", "Cancellation Sent"].includes(status)) run("check_moadian_status", "Check Moadian Status");
 		frm.add_custom_button(__("Moadian Payload"), () => {
 			frappe
 				.call({

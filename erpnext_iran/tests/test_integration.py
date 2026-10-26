@@ -662,11 +662,11 @@ class TestIranLocalization(FrappeTestCase):
 		self.assertEqual(frappe.db.get_value("IR Cheque", issued.name, "status"), "Cancelled")
 		self.assertEqual(frappe.db.get_value("IR Cheque Book", book.name, "used_leaves"), 0)
 
-	def test_moadian_sending(self):
+	def moadian_env(self):
+		"""(mock server, key path, invoice(rate) -> submitted invoice name, status(name)) with the
+		settings pointing at a fresh taxpayer key; restored after the test."""
 		import tempfile
-		from unittest.mock import patch
 
-		from erpnext_iran.moadian import sender
 		from erpnext_iran.tests.moadian_mock import MockMoadianServer
 
 		server = MockMoadianServer("A1B2C3")
@@ -709,8 +709,12 @@ class TestIranLocalization(FrappeTestCase):
 			return si.name
 
 		status = lambda name: frappe.db.get_value(  # noqa: E731
-			"Sales Invoice", name, ["ir_moadian_status", "ir_moadian_reference", "ir_moadian_error", "ir_tax_id"], as_dict=True
-		)
+			"Sales Invoice",
+			name,
+			["ir_moadian_status", "ir_moadian_reference", "ir_moadian_error", "ir_tax_id", "ir_invoice_subject",
+			 "ir_reference_tax_id", "ir_cancel_tax_id", "ir_cancel_reference"],
+			as_dict=True,
+		)  # fmt: skip
 		frappe.db.set_value("UOM", "Nos", "ir_moadian_unit_code", "1627")
 		if not frappe.db.exists("Item", "IR-MOADIAN-ITEM"):
 			frappe.get_doc(
@@ -718,10 +722,20 @@ class TestIranLocalization(FrappeTestCase):
 				 "stock_uom": "Nos", "is_stock_item": 0, "ir_stuff_id": "2710000138624"}
 			).insert()  # fmt: skip
 
+		return server, key_path, invoice, status
+
+	def test_moadian_sending(self):
+		from unittest.mock import patch
+
+		from erpnext_iran.moadian import sender
+		from erpnext_iran.tests.moadian_mock import MockMoadianServer
+
+		server, key_path, invoice, status = self.moadian_env()
+
 		# accepted: sent with the tax ID, checked, accepted
 		accepted = invoice(1_000_000)
 		self.assertEqual(status(accepted).ir_moadian_status, "Pending")
-		self.assertEqual(sender.send_invoices([accepted], session=server), {accepted: "Sent"})
+		self.assertEqual(sender.send_invoices([accepted], session=server), {accepted: "Sent"}, status(accepted).ir_moadian_error)
 		sent = status(accepted)
 		self.assertTrue(sent.ir_moadian_reference)
 		received = server.invoices[sent.ir_moadian_reference]["invoice"]
@@ -761,6 +775,102 @@ class TestIranLocalization(FrappeTestCase):
 			sender.process_queue()  # sends
 			sender.process_queue()  # checks
 		self.assertEqual(status(missing).ir_moadian_status, "Accepted")
+
+	def test_moadian_cancel_correct_return(self):
+		from erpnext.accounts.doctype.sales_invoice.sales_invoice import make_sales_return
+
+		from erpnext_iran.moadian import sender
+
+		server, _key, invoice, status = self.moadian_env()
+
+		def accept(name):
+			sender.send_invoices([name], session=server)
+			sender.check_status([name], session=server)
+			self.assertEqual(status(name).ir_moadian_status, "Accepted")
+
+		def received(reference):
+			return server.invoices[reference]["invoice"]["header"]
+
+		# return of an accepted invoice: subject 4, refers to the original's tax ID
+		original = invoice(1_000_000)
+		accept(original)
+		credit_note = make_sales_return(original)
+		credit_note.posting_date = "2026-11-11"  # after its invoice
+		credit_note.insert()
+		credit_note.submit()
+		note = status(credit_note.name)
+		self.assertEqual((note.ir_invoice_subject, note.ir_reference_tax_id), ("4", status(original).ir_tax_id))
+		accept(credit_note.name)
+		header = received(status(credit_note.name).ir_moadian_reference)
+		self.assertEqual((header["ins"], header["irtaxid"]), (4, status(original).ir_tax_id))
+
+		# a return waits until its invoice is accepted
+		unsent = invoice(1_500_000)
+		early = make_sales_return(unsent)
+		early.posting_date = "2026-11-11"
+		early.insert()
+		early.submit()
+		sender.send_invoices([early.name], session=server)
+		self.assertEqual(status(early.name).ir_moadian_status, "Pending")
+		self.assertIn(status(unsent).ir_tax_id, status(early.name).ir_moadian_error)
+
+		# not cancellable while Moadian's answer is outstanding
+		in_flight = invoice(2_000_000)
+		sender.send_invoices([in_flight], session=server)
+		self.assertRaises(frappe.ValidationError, frappe.get_doc("Sales Invoice", in_flight).cancel)
+
+		# cancelling an accepted invoice sends a cancellation (subject 3) with its own tax ID
+		cancelled = invoice(2_500_000)
+		accept(cancelled)
+		frappe.get_doc("Sales Invoice", cancelled).cancel()
+		pending = status(cancelled)
+		self.assertEqual(pending.ir_moadian_status, "Cancellation Pending")
+		self.assertEqual(len(pending.ir_cancel_tax_id), 22)
+		self.assertNotEqual(pending.ir_cancel_tax_id, pending.ir_tax_id)
+		self.assertEqual(sender.send_invoices([cancelled], session=server), {cancelled: "Cancellation Sent"})
+		header = received(status(cancelled).ir_cancel_reference)
+		self.assertEqual((header["ins"], header["taxid"], header["irtaxid"]), (3, pending.ir_cancel_tax_id, pending.ir_tax_id))
+		self.assertEqual(sender.check_status([cancelled], session=server), {cancelled: "Cancelled"})
+
+		# cancelled then amended before the cancellation went out: a correction (subject 2) instead
+		corrected = invoice(3_000_000)
+		accept(corrected)
+		old = frappe.get_doc("Sales Invoice", corrected)
+		old.cancel()
+		amendment = frappe.copy_doc(old)  # what the form's Amend button does
+		amendment.docstatus = 0
+		amendment.amended_from = old.name
+		amendment.items[0].rate = 3_300_000
+		amendment.insert()
+		amendment.submit()
+		new = status(amendment.name)
+		self.assertEqual((new.ir_invoice_subject, new.ir_reference_tax_id), ("2", old.ir_tax_id))
+		self.assertEqual(status(corrected).ir_moadian_status, "Corrected")
+		accept(amendment.name)
+		header = received(status(amendment.name).ir_moadian_reference)
+		self.assertEqual((header["ins"], header["irtaxid"], header["tadis"]), (2, old.ir_tax_id, 3_300_000))
+
+		# never accepted: nothing to cancel in Moadian
+		never = invoice(3_500_000)
+		frappe.get_doc("Sales Invoice", never).cancel()
+		self.assertEqual(status(never).ir_moadian_status, "")
+
+		# the queue gives a cancellation time to be amended before sending it
+		late = invoice(4_000_000)
+		accept(late)
+		frappe.get_doc("Sales Invoice", late).cancel()
+		frappe.db.set_single_value("Iran Localization Settings", "moadian_auto_send", 1)
+		frappe.clear_document_cache("Iran Localization Settings", "Iran Localization Settings")
+		original_client = sender.get_client
+		from unittest.mock import patch
+
+		with patch.object(sender, "get_client", lambda company, session=None: original_client(company, server)):
+			sender.process_queue()
+			self.assertEqual(status(late).ir_moadian_status, "Cancellation Pending")
+			frappe.db.set_value("Sales Invoice", late, "modified", frappe.utils.add_to_date(None, hours=-1), update_modified=False)
+			sender.process_queue()  # sends
+			sender.process_queue()  # checks
+		self.assertEqual(status(late).ir_moadian_status, "Cancelled")
 
 def ensure_item(item_code, item_name, taxes=None):
 	if not frappe.db.exists("Item", item_code):
