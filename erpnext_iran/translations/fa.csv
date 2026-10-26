@@ -96,7 +96,6 @@ Done,انجام شد
 All existing accounts of {0} will be deleted. Continue?,همه حساب‌های فعلی {0} حذف می‌شوند. ادامه می‌دهید؟
 Add Iranian Holidays,افزودن تعطیلات رسمی ایران
 Jalali Year,سال شمسی
-{0} holidays added. Add lunar holidays manually.,{0} روز تعطیل اضافه شد. تعطیلات قمری را دستی وارد کنید.
 Moadian Payload,داده صورتحساب مودیان
 Ready to send,آماده ارسال
 Nos,عدد
@@ -2202,3 +2201,6 @@ Last Month,ماه گذشته
 This Season,این فصل
 This Year,امسال
 Pick the last day of the range,روز پایان بازه را انتخاب کنید
+Lunar holidays are estimated,تعطیلات قمری پیش‌بینی است
+"{0} holidays added. The official calendar of {1} is not in the system yet, so the lunar holidays (marked «پیش‌بینی») are estimated and can be a day off. Check them against the official calendar once it is published.",{0} تعطیلی اضافه شد. تقویم رسمی سال {1} هنوز در سیستم نیست، پس تعطیلات قمری (با برچسب «پیش‌بینی») تخمینی است و ممکن است یک روز جابه‌جا باشد. پس از انتشار تقویم رسمی آن‌ها را بررسی کنید.
+"{0} holidays added, lunar holidays from the official calendar.",{0} تعطیلی اضافه شد؛ تعطیلات قمری از تقویم رسمی است.

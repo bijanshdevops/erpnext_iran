@@ -26,10 +26,22 @@ frappe.ui.form.on("Holiday List", {
 							freeze: true,
 						})
 						.then((r) => {
-							frappe.show_alert({
-								message: __("{0} holidays added. Add lunar holidays manually.", [r.message]),
-								indicator: "green",
-							});
+							const { added, lunar_estimated } = r.message;
+							if (lunar_estimated) {
+								frappe.msgprint({
+									title: __("Lunar holidays are estimated"),
+									message: __(
+										"{0} holidays added. The official calendar of {1} is not in the system yet, so the lunar holidays (marked «پیش‌بینی») are estimated and can be a day off. Check them against the official calendar once it is published.",
+										[added, values.jalali_year]
+									),
+									indicator: "orange",
+								});
+							} else {
+								frappe.show_alert({
+									message: __("{0} holidays added, lunar holidays from the official calendar.", [added]),
+									indicator: "green",
+								});
+							}
 							frm.reload_doc();
 						});
 				},

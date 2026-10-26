@@ -196,12 +196,32 @@ class TestIranLocalization(FrappeTestCase):
 		fy = frappe.get_doc("Fiscal Year", "1405")
 		self.assertEqual(getdate(fy.year_start_date), getdate("2026-03-21"))
 		self.assertEqual(getdate(fy.year_end_date), getdate("2027-03-20"))
+		from erpnext_iran.setup.iran_calendar import add_iran_holidays, create_iran_holiday_list
+
 		holiday_list = frappe.db.get_value("Company", COMPANY, "default_holiday_list")
-		holidays = frappe.get_all(
-			"Holiday", filters={"parent": holiday_list}, fields=["holiday_date", "weekly_off"]
+		# a list made before the lunar holidays existed gets the missing days; running again adds none
+		add_iran_holidays(holiday_list, 1405)
+		self.assertEqual(add_iran_holidays(holiday_list, 1405), {"added": 0, "lunar_estimated": False})
+		holidays = {
+			str(h.holiday_date): h
+			for h in frappe.get_all(
+				"Holiday", filters={"parent": holiday_list}, fields=["holiday_date", "weekly_off", "description"]
+			)
+		}
+		self.assertEqual(sum(1 for h in holidays.values() if not h.weekly_off), 26)  # official 1405 calendar
+		self.assertEqual(holidays["2026-06-24"].description, "تاسوعای حسینی")  # 3 Tir 1405
+		new_year = holidays["2026-03-21"].description  # 1 Farvardin: Nowruz and Eid al-Fitr
+		self.assertIn("نوروز", new_year)
+		self.assertIn("عید سعید فطر", new_year)
+		self.assertEqual(holidays["2026-06-05"].weekly_off, 0)  # 15 Khordad, a Friday, counts as official
+
+		# no official calendar for 1406 yet: estimated lunar days, marked as such
+		estimated = frappe.get_all(
+			"Holiday",
+			filters={"parent": create_iran_holiday_list(1406), "description": ["like", "%پیش‌بینی%"]},
+			pluck="holiday_date",
 		)
-		self.assertEqual(sum(1 for h in holidays if not h.weekly_off), 10)
-		self.assertIn(getdate("2026-03-21"), [getdate(h.holiday_date) for h in holidays])  # 1 Farvardin
+		self.assertGreaterEqual(len(estimated), 16)
 
 	def test_customer_validation(self):
 		customer = frappe.get_doc(

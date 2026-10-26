@@ -6,10 +6,10 @@ import frappe
 from frappe import _
 from frappe.utils import getdate
 
+from erpnext_iran.utils.hijri import lunar_holidays
 from erpnext_iran.utils.jalali import jalali_year_range, to_gregorian
 
-# Fixed (solar) official holidays. Lunar holidays move every year and must be added
-# from the official calendar published for that year.
+# Fixed (solar) official holidays. Lunar ones: erpnext_iran.utils.hijri.
 SOLAR_HOLIDAYS = [
 	(1, 1, "نوروز"),
 	(1, 2, "نوروز"),
@@ -52,40 +52,66 @@ def create_jalali_fiscal_year(jalali_year, company=None):
 	return fy.name
 
 
+ESTIMATED_SUFFIX = " (پیش‌بینی)"
+
+
 def get_iran_holidays(jalali_year, include_thursday=False):
-	"""[(date, description, weekly_off)] for the Jalali year, sorted by date."""
+	"""([(date, description, weekly_off)] sorted by date, lunar_estimated) for the Jalali year.
+
+	Official holidays (solar and lunar) falling on the same day share one row; lunar_estimated is
+	True when the year's lunar dates are estimates (their descriptions end in "(پیش‌بینی)")."""
 	jalali_year = int(jalali_year)
 	start, end = jalali_year_range(jalali_year)
-	holidays = {}
+	weekly = {}
+	official = {}
 
 	day = start
 	while day <= end:
 		if day.weekday() == FRIDAY:
-			holidays[day] = (_("Friday"), 1)
+			weekly[day] = _("Friday")
 		elif include_thursday and day.weekday() == THURSDAY:
-			holidays[day] = (_("Thursday"), 1)
+			weekly[day] = _("Thursday")
 		day += datetime.timedelta(days=1)
 
 	for jm, jd, description in SOLAR_HOLIDAYS:
-		holidays[to_gregorian(jalali_year, jm, jd)] = (description, 0)
+		official.setdefault(to_gregorian(jalali_year, jm, jd), []).append(description)
+	lunar, estimated = lunar_holidays(jalali_year)
+	for day, _key, name in lunar:
+		official.setdefault(day, []).append(name + (ESTIMATED_SUFFIX if estimated else ""))
 
-	return [(d, desc, weekly) for d, (desc, weekly) in sorted(holidays.items())]
+	holidays = {day: (description, 1) for day, description in weekly.items()}
+	for day, names in official.items():
+		holidays[day] = ("؛ ".join(names), 0)
+	return [(d, desc, weekly_off) for d, (desc, weekly_off) in sorted(holidays.items())], estimated
 
 
 def add_iran_holidays(holiday_list, jalali_year, include_thursday=False):
+	"""Add the year's missing holidays to a Holiday List: {"added": n, "lunar_estimated": bool}.
+	Days already in the list keep their row; a weekly-off row (a Friday) on an official holiday
+	becomes that holiday, and an official row gains the occasions now known for its day."""
 	doc = frappe.get_doc("Holiday List", holiday_list)
 	from_date, to_date = getdate(doc.from_date), getdate(doc.to_date)
-	existing = {getdate(row.holiday_date) for row in doc.holidays}
+	existing = {getdate(row.holiday_date): row for row in doc.holidays}
 
+	holidays, estimated = get_iran_holidays(jalali_year, include_thursday)
 	added = 0
-	for day, description, weekly_off in get_iran_holidays(jalali_year, include_thursday):
-		if from_date <= day <= to_date and day not in existing:
+	for day, description, weekly_off in holidays:
+		if not from_date <= day <= to_date:
+			continue
+		row = existing.get(day)
+		if row is None:
 			doc.append(
 				"holidays", {"holiday_date": day, "description": description, "weekly_off": weekly_off}
 			)
 			added += 1
+		elif row.weekly_off and not weekly_off:
+			row.description, row.weekly_off = description, 0
+			added += 1
+		elif not weekly_off and row.description != description and (row.description or "") in description:
+			row.description = description  # e.g. "نوروز" -> "نوروز؛ عید سعید فطر"; edited text stays
+			added += 1
 	doc.save()
-	return added
+	return {"added": added, "lunar_estimated": estimated}
 
 
 def create_iran_holiday_list(jalali_year, include_thursday=False):
