@@ -872,6 +872,75 @@ class TestIranLocalization(FrappeTestCase):
 			sender.process_queue()  # checks
 		self.assertEqual(status(late).ir_moadian_status, "Cancelled")
 
+	def test_payroll(self):
+		if "hrms" not in frappe.get_installed_apps():
+			self.skipTest("Frappe HR (hrms) is not installed")
+		from erpnext_iran.erpnext_iran.report.ir_insurance_list import ir_insurance_list
+		from erpnext_iran.erpnext_iran.report.ir_salary_tax_list import ir_salary_tax_list
+		from erpnext_iran.payroll.setup import setup_iran_payroll
+
+		structure = setup_iran_payroll(COMPANY)
+		self.assertEqual(setup_iran_payroll(COMPANY), structure)  # running it again changes nothing
+		employee = frappe.get_doc(
+			{"doctype": "Employee", "first_name": "علی", "last_name": "رضایی", "gender": "Male",
+			 "date_of_birth": "1990-01-01", "date_of_joining": "2023-05-01", "company": COMPANY,
+			 "marital_status": "Married", "ir_children": 2, "ir_national_id": VALID_NATIONAL_CODE,
+			 "ir_insurance_number": "1234567890", "status": "Active"}
+		).insert()  # fmt: skip
+		assignment = frappe.get_doc(
+			{"doctype": "Salary Structure Assignment", "employee": employee.name, "salary_structure": structure,
+			 "company": COMPANY, "from_date": "2026-03-21", "base": 10_000_000, "currency": "IRR"}
+		).insert()  # fmt: skip
+		assignment.submit()
+
+		# Aban 1405: 30 days, 10 hours of overtime
+		slip = frappe.get_doc(
+			{"doctype": "Salary Slip", "employee": employee.name, "posting_date": "2026-11-21",
+			 "start_date": "2026-10-23", "end_date": "2026-11-21", "payroll_frequency": "Monthly",
+			 "ir_overtime_hours": 10}
+		).insert()  # fmt: skip
+		amounts = {row.abbr: row.amount for row in slip.earnings + slip.deductions}
+		self.assertEqual(slip.total_working_days, 30)
+		self.assertEqual(amounts["IR_B"], 300_000_000)  # daily wage x 30
+		self.assertEqual(amounts["IR_H"], 30_000_000)
+		self.assertEqual(amounts["IR_F"], 22_000_000)
+		self.assertEqual(amounts["IR_M"], 5_000_000)  # married
+		self.assertEqual(amounts["IR_C"], 2 * 3 * 5_541_850)  # two children, 3 days of minimum wage each
+		self.assertEqual(amounts["IR_S"], 3 * 5_000_000)  # three full years of service
+		self.assertEqual(amounts["IR_OT"], round(10 * 10_000_000 / 7.33 * 1.4))
+		gross = sum(amounts[a] for a in ("IR_B", "IR_H", "IR_F", "IR_M", "IR_C", "IR_S", "IR_OT"))
+		self.assertEqual(slip.gross_pay, gross)
+
+		insurable = gross - amounts["IR_C"]  # child allowance is not insurable
+		self.assertEqual(slip.ir_insurable_wage, insurable)
+		self.assertEqual(amounts["IR_SS"], round(insurable * 0.07))
+		self.assertEqual(slip.ir_employer_insurance, round(insurable * 0.23))
+		taxable = gross - round(amounts["IR_SS"] * 0.285714)
+		self.assertEqual(slip.ir_taxable_income, taxable)
+		self.assertEqual(amounts["IR_TAX"], round((taxable - 400_000_000) * 0.10))  # first taxed step
+		self.assertEqual(slip.net_pay, gross - amounts["IR_SS"] - amounts["IR_TAX"])
+		slip.submit()
+
+		filters = {"company": COMPANY, "jalali_year": 1405, "month": "8"}
+		row = next(r for r in ir_insurance_list.execute(filters)[1] if r.get("name") == slip.name)
+		self.assertEqual((row["payment_days"], row["daily_wage"], row["ir_insurance_number"]), (30, 10_000_000, "1234567890"))
+		self.assertEqual(row["insurable_benefits"], insurable - 300_000_000)
+		self.assertEqual(row["total_insurance"], amounts["IR_SS"] + slip.ir_employer_insurance)
+		row = next(r for r in ir_salary_tax_list.execute(filters)[1] if r.get("name") == slip.name)
+		self.assertEqual((row["ir_taxable_income"], row["ir_salary_tax"]), (taxable, amounts["IR_TAX"]))
+
+		# above the insurance ceiling: 7 daily minimum wages per day
+		assignment.cancel()
+		frappe.get_doc(
+			{"doctype": "Salary Structure Assignment", "employee": employee.name, "salary_structure": structure,
+			 "company": COMPANY, "from_date": "2026-11-22", "base": 60_000_000, "currency": "IRR"}
+		).insert().submit()  # fmt: skip
+		high = frappe.get_doc(
+			{"doctype": "Salary Slip", "employee": employee.name, "posting_date": "2026-12-21",
+			 "start_date": "2026-11-22", "end_date": "2026-12-21", "payroll_frequency": "Monthly"}
+		).insert()  # fmt: skip
+		self.assertEqual(high.ir_insurable_wage, 7 * 5_541_850 * 30)
+
 def ensure_item(item_code, item_name, taxes=None):
 	if not frappe.db.exists("Item", item_code):
 		frappe.get_doc(

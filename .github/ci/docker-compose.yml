@@ -19,3 +19,9 @@ services:
     depends_on: [db, redis]
     volumes:
       - ../..:/home/frappe/frappe-bench/apps/erpnext_iran
+      # built assets of its own: run locally, the build must not replace the files a test site
+      # sharing this checkout (test-env/) serves. tmpfs, writable by the container's frappe user.
+      - type: tmpfs
+        target: /home/frappe/frappe-bench/apps/erpnext_iran/erpnext_iran/public/dist
+        tmpfs:
+          mode: 01777

@@ -2247,3 +2247,67 @@ Cancelled before Moadian accepted it: nothing to send.,پیش از پذیرش د
 Waiting until Moadian accepts the invoice with tax ID {0},در انتظار پذیرش صورتحساب با شماره مالیاتی {0} در سامانه مودیان
 Nothing to send to Moadian for this invoice,برای این صورتحساب چیزی برای ارسال به سامانه مودیان نیست
 Send Cancellation to Moadian,ارسال ابطال به سامانه مودیان
+IR Payroll Year,پارامترهای حقوق سال
+IR Salary Tax Bracket,پله مالیات حقوق
+IR Insurance List,لیست بیمه
+IR Salary Tax List,لیست مالیات حقوق
+Wages and Allowances,مزد و مزایا
+Monthly amounts for 30 days; slips scale them by payment days,مبالغ ماهانه برای ۳۰ روز؛ در فیش به نسبت روزهای کارکرد محاسبه می‌شوند
+Daily Minimum Wage,حداقل مزد روزانه
+Housing Allowance,حق مسکن
+Food Allowance (Consumer Goods),بن خواربار (کمک‌هزینه اقلام مصرفی)
+Marital Allowance,حق تأهل
+Child Allowance (Days of Minimum Wage per Child),حق اولاد (روز حداقل مزد برای هر فرزند)
+"Child allowance per child per month, in daily minimum wages",حق اولاد ماهانه هر فرزند، برحسب چند روز حداقل مزد
+Seniority Increment per Year of Service,پایه سنوات برای هر سال سابقه
+Overtime Premium,فوق‌العاده اضافه‌کار
+Social Security,تأمین اجتماعی
+Employee Share,سهم بیمه‌شده
+Employer Share,سهم کارفرما
+20% plus 3% unemployment insurance,۲۰ درصد به‌علاوه ۳ درصد بیمه بیکاری
+Insurable Wage Ceiling (Daily Minimum Wages per Day),سقف دستمزد مشمول بیمه (برابر حداقل مزد روزانه)
+Tax-Exempt Part of Employee Insurance,بخش معاف از مالیات حق بیمه سهم بیمه‌شده
+2/7 of the employee's insurance share is deducted from taxable pay,دو هفتم حق بیمه سهم بیمه‌شده از درآمد مشمول مالیات کسر می‌شود
+Salary Tax (Monthly Brackets),مالیات حقوق (پله‌های ماهانه)
+Brackets,پله‌ها
+"Each rate applies to the part of monthly taxable pay above its amount, up to the next row",هر نرخ به بخشی از درآمد ماهانه مشمول مالیات تعلق می‌گیرد که از مبلغ آن ردیف بیشتر و تا ردیف بعد است
+From Monthly Amount,از مبلغ ماهانه
+Source,منبع
+Two salary tax brackets start at the same amount,دو پله مالیات حقوق از یک مبلغ شروع می‌شوند
+Iran Payroll,حقوق و دستمزد ایران
+Social Security Number,شماره بیمه
+Children for Child Allowance,تعداد فرزندان مشمول حق اولاد
+Overtime Hours,ساعت اضافه‌کار
+Payroll Year,سال حقوق
+Years of Service,سال‌های سابقه
+Child Allowance per Child,حق اولاد هر فرزند
+Insurable Wage,دستمزد مشمول بیمه
+Employee Insurance,حق بیمه سهم بیمه‌شده
+Employer Insurance,حق بیمه سهم کارفرما
+Taxable Income,درآمد مشمول مالیات
+Salary Tax,مالیات حقوق
+Iranian Payroll Role,نقش در حقوق و دستمزد ایران
+Employee Insurance and Salary Tax amounts are calculated by erpnext_iran,مبلغ حق بیمه و مالیات حقوق را erpnext_iran محاسبه می‌کند
+Subject to Social Security,مشمول بیمه
+Subject to Salary Tax,مشمول مالیات حقوق
+Base Wage,حقوق پایه
+Housing,مسکن
+Food,خواربار
+Marital,تأهل
+Child,اولاد
+Seniority,سنوات
+Overtime,اضافه‌کار
+Iran Standard Salary - {0},حقوق استاندارد ایران - {0}
+Install the Frappe HR (hrms) app first,ابتدا اپ Frappe HR (hrms) را نصب کنید
+Set Up Iranian Payroll,راه‌اندازی حقوق و دستمزد ایران
+Iranian Payroll,حقوق و دستمزد ایران
+Salary components and the salary structure {0} are ready. Assign it to employees with their daily wage as the base.,اجزای حقوق و ساختار حقوق {0} آماده است. آن را با مزد روزانه هر کارمند به‌عنوان «پایه» به کارمندان تخصیص دهید.
+"Company, Jalali Year and Month are required",شرکت، سال شمسی و ماه الزامی است
+Include Draft Slips,شامل فیش‌های پیش‌نویس
+Days Worked,روزهای کارکرد
+Daily Wage,مزد روزانه
+Monthly Wage,مزد ماهانه
+Insurable Benefits,مزایای مشمول بیمه
+Total Premium,جمع حق بیمه
+Gross Pay,جمع حقوق و مزایا
+Exempt Part of Insurance,معافیت حق بیمه

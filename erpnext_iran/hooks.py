@@ -45,6 +45,11 @@ doc_events = {
 	"Item": {"validate": "erpnext_iran.doc_events.item.validate_item"},
 	"Bank Account": {"validate": "erpnext_iran.doc_events.bank.validate_bank_account"},
 	"Address": {"validate": "erpnext_iran.doc_events.address.validate_address"},
+	# Iranian payroll (HRMS installed): parameters before HRMS calculates, insurance and tax after
+	"Salary Slip": {
+		"before_validate": "erpnext_iran.payroll.salary_slip.before_validate",
+		"validate": "erpnext_iran.payroll.salary_slip.validate",
+	},
 	"Sales Invoice": {
 		"validate": "erpnext_iran.doc_events.sales_invoice.validate",
 		"on_submit": "erpnext_iran.doc_events.sales_invoice.on_submit",

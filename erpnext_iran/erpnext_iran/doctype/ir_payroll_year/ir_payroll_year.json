@@ -1,0 +1,193 @@
+{
+ "actions": [],
+ "creation": "2026-10-26 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "jalali_year",
+  "wages_section",
+  "daily_minimum_wage",
+  "housing_allowance",
+  "food_allowance",
+  "column_break_w",
+  "marital_allowance",
+  "child_allowance_days",
+  "seniority_monthly",
+  "overtime_premium",
+  "insurance_section",
+  "employee_insurance_rate",
+  "employer_insurance_rate",
+  "column_break_i",
+  "insurance_ceiling_days",
+  "exempt_insurance_fraction",
+  "tax_section",
+  "tax_brackets",
+  "source"
+ ],
+ "fields": [
+  {
+   "fieldname": "jalali_year",
+   "fieldtype": "Int",
+   "label": "Jalali Year",
+   "reqd": 1,
+   "unique": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "wages_section",
+   "fieldtype": "Section Break",
+   "label": "Wages and Allowances",
+   "description": "Monthly amounts for 30 days; slips scale them by payment days"
+  },
+  {
+   "fieldname": "daily_minimum_wage",
+   "label": "Daily Minimum Wage",
+   "reqd": 1,
+   "in_list_view": 1,
+   "fieldtype": "Currency",
+   "options": "IRR"
+  },
+  {
+   "fieldname": "housing_allowance",
+   "label": "Housing Allowance",
+   "fieldtype": "Currency",
+   "options": "IRR"
+  },
+  {
+   "fieldname": "food_allowance",
+   "label": "Food Allowance (Consumer Goods)",
+   "fieldtype": "Currency",
+   "options": "IRR"
+  },
+  {
+   "fieldname": "column_break_w",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "marital_allowance",
+   "label": "Marital Allowance",
+   "fieldtype": "Currency",
+   "options": "IRR"
+  },
+  {
+   "fieldname": "child_allowance_days",
+   "fieldtype": "Float",
+   "label": "Child Allowance (Days of Minimum Wage per Child)",
+   "default": "3",
+   "description": "Child allowance per child per month, in daily minimum wages"
+  },
+  {
+   "fieldname": "seniority_monthly",
+   "label": "Seniority Increment per Year of Service",
+   "fieldtype": "Currency",
+   "options": "IRR"
+  },
+  {
+   "fieldname": "overtime_premium",
+   "fieldtype": "Percent",
+   "label": "Overtime Premium",
+   "default": "40"
+  },
+  {
+   "fieldname": "insurance_section",
+   "fieldtype": "Section Break",
+   "label": "Social Security"
+  },
+  {
+   "fieldname": "employee_insurance_rate",
+   "fieldtype": "Percent",
+   "label": "Employee Share",
+   "default": "7"
+  },
+  {
+   "fieldname": "employer_insurance_rate",
+   "fieldtype": "Percent",
+   "label": "Employer Share",
+   "default": "23",
+   "description": "20% plus 3% unemployment insurance"
+  },
+  {
+   "fieldname": "column_break_i",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "insurance_ceiling_days",
+   "fieldtype": "Float",
+   "label": "Insurable Wage Ceiling (Daily Minimum Wages per Day)",
+   "default": "7"
+  },
+  {
+   "fieldname": "exempt_insurance_fraction",
+   "fieldtype": "Float",
+   "label": "Tax-Exempt Part of Employee Insurance",
+   "default": "0.285714",
+   "precision": "6",
+   "description": "2/7 of the employee's insurance share is deducted from taxable pay"
+  },
+  {
+   "fieldname": "tax_section",
+   "fieldtype": "Section Break",
+   "label": "Salary Tax (Monthly Brackets)"
+  },
+  {
+   "fieldname": "tax_brackets",
+   "fieldtype": "Table",
+   "label": "Brackets",
+   "options": "IR Salary Tax Bracket",
+   "description": "Each rate applies to the part of monthly taxable pay above its amount, up to the next row"
+  },
+  {
+   "fieldname": "source",
+   "fieldtype": "Small Text",
+   "label": "Source"
+  }
+ ],
+ "links": [],
+ "modified": "2026-10-26 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "ERPNext Iran",
+ "name": "IR Payroll Year",
+ "owner": "Administrator",
+ "sort_field": "jalali_year",
+ "sort_order": "DESC",
+ "states": [],
+ "autoname": "field:jalali_year",
+ "permissions": [
+  {
+   "role": "HR Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "print": 1,
+   "report": 1,
+   "export": 1,
+   "share": 1
+  },
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "print": 1,
+   "report": 1,
+   "export": 1,
+   "share": 1
+  },
+  {
+   "role": "Accounts Manager",
+   "read": 1,
+   "print": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "HR User",
+   "read": 1,
+   "print": 1,
+   "report": 1
+  }
+ ],
+ "track_changes": 1
+}

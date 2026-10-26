@@ -213,14 +213,27 @@ def get_custom_fields():
 	}
 
 
+def all_custom_fields():
+	"""get_custom_fields() plus payroll fields (those on HRMS doctypes only with HRMS installed)."""
+	import frappe
+
+	from erpnext_iran.payroll.fields import employee_fields, hrms_fields
+
+	fields = get_custom_fields()
+	fields["Employee"] = employee_fields()
+	if "hrms" in frappe.get_installed_apps():
+		fields.update(hrms_fields())
+	return fields
+
+
 def setup_custom_fields():
-	create_custom_fields(get_custom_fields(), ignore_validate=True, update=True)
+	create_custom_fields(all_custom_fields(), ignore_validate=True, update=True)
 
 
 def delete_custom_fields():
 	import frappe
 
-	for doctype, fields in get_custom_fields().items():
+	for doctype, fields in all_custom_fields().items():
 		for field in fields:
 			frappe.db.delete("Custom Field", {"dt": doctype, "fieldname": field["fieldname"]})
 		frappe.clear_cache(doctype=doctype)

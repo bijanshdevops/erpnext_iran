@@ -1,6 +1,7 @@
 import frappe
 from frappe.custom.doctype.property_setter.property_setter import make_property_setter
 
+from erpnext_iran.payroll.setup import ensure_payroll_years
 from erpnext_iran.setup.custom_fields import delete_custom_fields, setup_custom_fields
 
 # Persian names for the Rial and the currencies Iranian businesses deal in most. Stored in the
@@ -39,11 +40,13 @@ def after_install():
 	setup_custom_fields()
 	setup_currency()
 	setup_currency_names()
+	ensure_payroll_years()
 
 
 def after_migrate():
 	setup_custom_fields()
 	setup_currency_names()
+	ensure_payroll_years()
 
 
 def before_uninstall():
