@@ -404,13 +404,46 @@ class TestIranLocalization(FrappeTestCase):
 		pi.insert()
 		pi.submit()
 
+		# an invoice to a customer abroad is an export sale
+		abroad = frappe.get_doc(
+			{"doctype": "Customer", "customer_name": "Hamburg Trading GmbH", "customer_group": CUSTOMER_GROUP}
+		).insert()
+		address = frappe.get_doc(
+			{
+				"doctype": "Address",
+				"address_title": abroad.name,
+				"address_type": "Billing",
+				"address_line1": "Hafenstrasse 1",
+				"city": "Hamburg",
+				"country": "Germany",
+				"links": [{"link_doctype": "Customer", "link_name": abroad.name}],
+			}
+		).insert()
+		export = frappe.get_doc(
+			{
+				"doctype": "Sales Invoice",
+				"company": COMPANY,
+				"customer": abroad.name,
+				"customer_address": address.name,
+				"posting_date": "2026-11-03",
+				"set_posting_time": 1,
+				"due_date": "2026-11-30",
+				"currency": "IRR",
+				"conversion_rate": 1,
+				"items": [{"item_code": "IR-VAT-ITEM", "qty": 2, "rate": 2_000_000}],
+			}
+		).insert()
+		self.assertEqual(export.ir_is_export, 1)
+		export.submit()
+
 		after = summary()
 
 		def delta(label):
 			return tuple(round(a - b, 2) for a, b in zip(after[label], before.get(label, (0, 0))))
 
 		self.assertEqual(delta(_("Taxable Sales")), (2_000_000, 200_000))
-		self.assertEqual(delta(_("Exempt and Zero-Rated Sales")), (500_000, 0))
+		self.assertEqual(delta(_("Exempt Sales")), (500_000, 0))
+		self.assertEqual(delta(_("Export Sales (Zero-Rated)")), (4_000_000, 0))
 		self.assertEqual(delta(_("Taxable Purchases")), (1_000_000, 100_000))
 		# invoices and the ledger agree
 		self.assertEqual(after[_("Difference From Invoices")][1], 0)
@@ -421,6 +454,8 @@ class TestIranLocalization(FrappeTestCase):
 		self.assertEqual((row["taxable"], row["exempt"], row["vat"]), (2_000_000, 500_000, 200_000))
 		self.assertEqual(row["ir_economic_code"], "411111111111")
 		self.assertEqual(row["grand_total"], 2_700_000)
+		row = next(r for r in rows if r["party"] == abroad.name)
+		self.assertEqual((row["taxable"], row["exempt"], row["export"]), (0, 0, 4_000_000))
 
 		# a season without these invoices
 		spring = ir_vat_return.execute(dict(filters, season="Spring", view="Purchases by Party"))[1]

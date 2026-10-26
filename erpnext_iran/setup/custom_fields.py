@@ -127,6 +127,13 @@ def get_custom_fields():
 				"insert_after": "ir_jalali_posting_date",
 			},
 			{
+				"fieldname": "ir_is_export",
+				"label": "Export Sale",
+				"fieldtype": "Check",
+				"description": "Reported as an export (zero-rated) sale in the VAT return. Ticked automatically on a new invoice whose billing address is outside Iran.",
+				"insert_after": "ir_invoice_subject",
+			},
+			{
 				"fieldname": "ir_column_break",
 				"fieldtype": "Column Break",
 				"insert_after": "ir_invoice_subject",

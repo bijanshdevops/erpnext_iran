@@ -2088,7 +2088,6 @@ Jalali Year is required,سال شمسی الزامی است
 {0} to {1},از {0} تا {1}
 VAT and Levy,مالیات و عوارض
 Taxable Sales,فروش مشمول
-Exempt and Zero-Rated Sales,فروش معاف و نرخ صفر
 Total Sales,جمع فروش
 Taxable Purchases,خرید مشمول
 Exempt Purchases,خرید معاف
@@ -2204,3 +2203,10 @@ Pick the last day of the range,روز پایان بازه را انتخاب کن
 Lunar holidays are estimated,تعطیلات قمری پیش‌بینی است
 "{0} holidays added. The official calendar of {1} is not in the system yet, so the lunar holidays (marked «پیش‌بینی») are estimated and can be a day off. Check them against the official calendar once it is published.",{0} تعطیلی اضافه شد. تقویم رسمی سال {1} هنوز در سیستم نیست، پس تعطیلات قمری (با برچسب «پیش‌بینی») تخمینی است و ممکن است یک روز جابه‌جا باشد. پس از انتشار تقویم رسمی آن‌ها را بررسی کنید.
 "{0} holidays added, lunar holidays from the official calendar.",{0} تعطیلی اضافه شد؛ تعطیلات قمری از تقویم رسمی است.
+Exempt Sales,فروش معاف
+Export Sales (Zero-Rated),فروش صادراتی (نرخ صفر)
+Export Sales,فروش صادراتی
+Export Amount,مبلغ صادراتی
+Export Sale,فروش صادراتی
+Reported as an export (zero-rated) sale in the VAT return. Ticked automatically on a new invoice whose billing address is outside Iran.,در گزارش ارزش افزوده به‌عنوان فروش صادراتی (نرخ صفر) می‌آید. برای فاکتور جدیدی که نشانی صورتحساب آن خارج از ایران است خودکار علامت می‌خورد.
+This is an export sale but it charges VAT. Exports are zero-rated: remove the VAT row if it does not apply.,این فروش صادراتی است ولی مالیات بر ارزش افزوده دارد. صادرات نرخ صفر دارد؛ اگر مالیات شامل نمی‌شود، ردیف آن را حذف کنید.

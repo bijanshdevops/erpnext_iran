@@ -13,7 +13,7 @@ from erpnext_iran.setup.chart_of_accounts import get_account
 from erpnext_iran.setup.taxes import VAT_INPUT_ACCOUNT_NUMBER, VAT_OUTPUT_ACCOUNT_NUMBER
 from erpnext_iran.utils.jalali import format_jalali
 from erpnext_iran.utils.jalali_periods import period_range
-from erpnext_iran.utils.vat import split_invoice
+from erpnext_iran.utils.vat import classify_invoice
 
 SIDES = {
 	"Sales": {
@@ -79,10 +79,13 @@ def get_date_range(filters):
 
 def get_invoices(side, company, from_date, to_date, vat_account):
 	doctype = side["doctype"]
+	fields = ["name", f"{side['party_field']} as party", "base_net_total"]
+	if frappe.get_meta(doctype).has_field("ir_is_export"):
+		fields.append("ir_is_export")
 	invoices = frappe.get_all(
 		doctype,
 		filters={"company": company, "docstatus": 1, "posting_date": ["between", [from_date, to_date]]},
-		fields=["name", f"{side['party_field']} as party", "base_net_total"],
+		fields=fields,
 		order_by="posting_date, name",
 	)
 	if not invoices:
@@ -111,8 +114,8 @@ def get_invoices(side, company, from_date, to_date, vat_account):
 
 	for inv in invoices:
 		inv.vat = vat[inv.name]
-		inv.taxable, inv.exempt = split_invoice(
-			flt(inv.base_net_total), inv.vat, lines[inv.name], vat_account
+		inv.taxable, inv.exempt, inv.export = classify_invoice(
+			flt(inv.base_net_total), inv.vat, lines[inv.name], vat_account, inv.get("ir_is_export")
 		)
 	return invoices
 
@@ -138,7 +141,7 @@ def get_ledger_vat(company, from_date, to_date, accounts):
 def totals(invoices):
 	return {
 		key: sum(inv[key] for inv in invoices)
-		for key in ("taxable", "exempt", "vat")
+		for key in ("taxable", "exempt", "export", "vat")
 	}
 
 
@@ -169,8 +172,9 @@ def summary_rows(invoices, ledger, currency):
 	return [
 		row(_("Sales"), bold=1),
 		row(_("Taxable Sales"), sales["taxable"], sales["vat"], indent=1),
-		row(_("Exempt and Zero-Rated Sales"), sales["exempt"], 0, indent=1),
-		row(_("Total Sales"), sales["taxable"] + sales["exempt"], sales["vat"], indent=1, bold=1),
+		row(_("Exempt Sales"), sales["exempt"], 0, indent=1),
+		row(_("Export Sales (Zero-Rated)"), sales["export"], 0, indent=1),
+		row(_("Total Sales"), sales["taxable"] + sales["exempt"] + sales["export"], sales["vat"], indent=1, bold=1),
 		row(_("Purchases"), bold=1),
 		row(_("Taxable Purchases"), purchases["taxable"], purchases["vat"], indent=1),
 		row(_("Exempt Purchases"), purchases["exempt"], 0, indent=1),
@@ -186,8 +190,10 @@ def summary_rows(invoices, ledger, currency):
 def report_summary(invoices, currency):
 	output_vat = totals(invoices["Sales"])["vat"]
 	input_vat = totals(invoices["Purchases"])["vat"]
+	export = totals(invoices["Sales"])["export"]
 	payable = output_vat - input_vat
-	return [
+	cards = [{"label": _("Export Sales"), "value": export, "datatype": "Currency", "currency": currency}] if export else []
+	return cards + [
 		{"label": _("Output VAT"), "value": output_vat, "datatype": "Currency", "currency": currency},
 		{"label": _("Input VAT"), "value": input_vat, "datatype": "Currency", "currency": currency},
 		{
@@ -210,6 +216,11 @@ def party_columns(side):
 		{"fieldname": "invoices", "label": _("Invoices"), "fieldtype": "Int", "width": 80},
 		{"fieldname": "taxable", "label": _("Taxable Amount"), "fieldtype": "Currency", "options": "currency", "width": 150},
 		{"fieldname": "exempt", "label": _("Exempt Amount"), "fieldtype": "Currency", "options": "currency", "width": 150},
+		*(
+			[{"fieldname": "export", "label": _("Export Amount"), "fieldtype": "Currency", "options": "currency", "width": 150}]
+			if side["party_type"] == "Customer"
+			else []
+		),
 		{"fieldname": "vat", "label": _("VAT and Levy"), "fieldtype": "Currency", "options": "currency", "width": 140},
 		{"fieldname": "grand_total", "label": _("Total With VAT"), "fieldtype": "Currency", "options": "currency", "width": 150},
 		{"fieldname": "currency", "label": _("Currency"), "fieldtype": "Link", "options": "Currency", "hidden": 1},
@@ -221,10 +232,10 @@ def party_rows(side, invoices, currency):
 	for inv in invoices:
 		row = by_party.setdefault(
 			inv.party,
-			{"party": inv.party, "invoices": 0, "taxable": 0.0, "exempt": 0.0, "vat": 0.0, "currency": currency},
+			{"party": inv.party, "invoices": 0, "taxable": 0.0, "exempt": 0.0, "export": 0.0, "vat": 0.0, "currency": currency},
 		)
 		row["invoices"] += 1
-		for key in ("taxable", "exempt", "vat"):
+		for key in ("taxable", "exempt", "export", "vat"):
 			row[key] += inv[key]
 	if not by_party:
 		return []
@@ -239,8 +250,8 @@ def party_rows(side, invoices, currency):
 			ir_economic_code=party.ir_economic_code,
 		)
 
-	rows = sorted(by_party.values(), key=lambda r: -(r["taxable"] + r["exempt"]))
+	rows = sorted(by_party.values(), key=lambda r: -(r["taxable"] + r["exempt"] + r["export"]))
 	for row in rows:
-		row["grand_total"] = row["taxable"] + row["exempt"] + row["vat"]
+		row["grand_total"] = row["taxable"] + row["exempt"] + row["export"] + row["vat"]
 	return rows
 

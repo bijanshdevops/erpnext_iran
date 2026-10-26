@@ -21,3 +21,10 @@ def split_invoice(net_total, vat, lines, vat_account):
 		return 0.0, float(net_total)
 	taxable = sum(float(amount) for amount, rate in lines if not is_exempt_line(rate, vat_account))
 	return taxable, float(net_total) - taxable
+
+
+def classify_invoice(net_total, vat, lines, vat_account, is_export=False):
+	"""(taxable, exempt, export) part of an invoice's net total: an export invoice reports what is
+	not taxed as export (zero-rated) instead of exempt."""
+	taxable, exempt = split_invoice(net_total, vat, lines, vat_account)
+	return (taxable, 0.0, exempt) if is_export else (taxable, exempt, 0.0)
