@@ -2108,3 +2108,31 @@ Total With VAT,جمع با مالیات
 Invoices,تعداد صورتحساب
 {0} has no VAT output account (210201). Select it in the report filters.,شرکت {0} حساب مالیات بر ارزش افزوده فروش (۲۱۰۲۰۱) ندارد. آن را در فیلترهای گزارش انتخاب کنید.
 {0} has no VAT input account (110401). Select it in the report filters.,شرکت {0} حساب مالیات بر ارزش افزوده خرید (۱۱۰۴۰۱) ندارد. آن را در فیلترهای گزارش انتخاب کنید.
+IR Journal Book,دفتر روزنامه
+IR General Ledger Book,دفتر کل
+Journal Book,دفتر روزنامه
+General Ledger Book,دفتر کل
+Journal No.,شماره سند
+Account Code,کد حساب
+Debit,بدهکار
+Credit,بستانکار
+Balance,مانده
+Dr,بد
+Cr,بس
+Dr / Cr,تشخیص
+Voucher No,شماره سند مرجع
+Voucher Type,نوع سند مرجع
+Total and Balance,جمع و مانده
+Balance Brought Forward,مانده از قبل
+Brought Forward From Previous Page,جمع نقل از صفحه قبل
+Carried Forward To Next Page,جمع نقل به صفحه بعد
+Print Legal Book,چاپ دفتر قانونی
+Account Level,سطح حساب
+General Account,حساب کل
+Subsidiary Account,حساب معین
+Printed on,تاریخ چاپ
+Prepared By,تهیه‌کننده
+Finance Manager,مدیر مالی
+Managing Director,مدیرعامل
+Unknown book {0},دفتر ناشناخته {0}
+Company is required,شرکت الزامی است

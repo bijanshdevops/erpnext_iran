@@ -1,0 +1,161 @@
+{#- Statutory journal / general ledger PDF (erpnext_iran.books.api.render_book). Fixed rows per page
+    and nowrap cells, so a page never overflows and its carry-forward totals stay true. -#}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>{{ title }} - {{ company.name }}</title>
+<style>
+{{ css }}
+body { margin: 0; }
+.print-format { direction: rtl; text-align: right; font-size: 8pt; padding: 0; max-width: none; }
+.book-page { page-break-after: always; }
+.book-page.last { page-break-after: auto; }
+.book-head { width: 100%; border-collapse: collapse; margin-bottom: 6px; }
+.book-head td { vertical-align: top; width: 33%; padding: 0; }
+.book-head .center { text-align: center; }
+.book-head .left { text-align: left; }
+.book-head h2 { font-size: 13pt; margin: 0 0 2px; font-weight: bold; }
+.account-title { font-size: 10pt; font-weight: bold; margin: 4px 0; }
+table.book { width: 100%; border-collapse: collapse; table-layout: fixed; }
+/* Frappe's print style pads every cell by 10px !important */
+.print-format table.book th, .print-format table.book td {
+	border: 1px solid #555; padding: 2px 4px !important; height: 18px; vertical-align: middle !important;
+	white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.print-format table.book th { background: #eee; color: #000; text-align: center; font-weight: bold; white-space: normal; }
+.print-format .book-head td { padding: 0 !important; }
+table.book td.num { text-align: left; direction: ltr; }
+table.book td.center { text-align: center; }
+table.book td.date { text-align: center; direction: ltr; }
+table.book tr.carry td { background: #f5f5f5; font-weight: bold; }
+.signatures { width: 100%; margin-top: 30px; border-collapse: collapse; }
+.signatures td { width: 33%; text-align: center; padding-top: 40px; }
+</style>
+</head>
+<body>
+<div class="print-format">
+{%- set state = namespace(page=0) %}
+{%- for section in sections %}
+{%- set section_last = loop.last %}
+{%- for page in section.pages %}
+{%- set state.page = state.page + 1 %}
+<div class="book-page{% if section_last and page.last %} last{% endif %}">
+	<table class="book-head">
+		<tr>
+			<td>
+				<b>{{ company.name }}</b><br>
+				{%- if company.ir_national_id %}{{ _("National ID") }}: <span>{{ company.ir_national_id }}</span><br>{% endif %}
+				{%- if company.ir_economic_code %}{{ _("Economic Code") }}: <span>{{ company.ir_economic_code }}</span><br>{% endif %}
+				{%- if company.ir_registration_number %}{{ _("Registration Number") }}: <span>{{ company.ir_registration_number }}</span>{% endif %}
+			</td>
+			<td class="center">
+				<h2>{{ title }}</h2>
+				{{ period }}
+			</td>
+			<td class="left">
+				{{ _("Page") }} {{ state.page }}<br>
+				{{ _("Printed on") }} {{ printed_on }}
+			</td>
+		</tr>
+	</table>
+	{%- if section.title %}
+	<div class="account-title">{{ _("Account") }}: {{ section.title }}</div>
+	{%- endif %}
+
+	{%- if book == "journal" %}
+	<table class="book">
+		<colgroup>
+			<col style="width: 7%"><col style="width: 10%"><col style="width: 8%"><col style="width: 21%">
+			<col style="width: 30%"><col style="width: 12%"><col style="width: 12%">
+		</colgroup>
+		<thead>
+			<tr>
+				<th>{{ _("Journal No.") }}</th><th>{{ _("Date") }}</th><th>{{ _("Account Code") }}</th>
+				<th>{{ _("Account") }}</th><th>{{ _("Description") }}</th><th>{{ _("Debit") }}</th><th>{{ _("Credit") }}</th>
+			</tr>
+		</thead>
+		<tbody>
+			{%- if not page.first %}
+			<tr class="carry">
+				<td colspan="5">{{ _("Brought Forward From Previous Page") }}</td>
+				<td class="num">{{ amount(page.brought_forward.debit) }}</td>
+				<td class="num">{{ amount(page.brought_forward.credit) }}</td>
+			</tr>
+			{%- endif %}
+			{%- for row in page.rows %}
+			{%- set head = row.first or loop.first %}
+			<tr>
+				<td class="center">{% if head %}{{ row.voucher_number }}{% endif %}</td>
+				<td class="date">{% if head %}{{ row.jalali_date }}{% endif %}</td>
+				<td class="center">{{ row.account_number }}</td>
+				<td{% if row.credit %} style="padding-right: 14px"{% endif %}>{{ row.account_name }}</td>
+				<td>{% if head %}{{ row.description }}{% endif %}</td>
+				<td class="num">{{ amount(row.debit) }}</td>
+				<td class="num">{{ amount(row.credit) }}</td>
+			</tr>
+			{%- endfor %}
+			<tr class="carry">
+				<td colspan="5">{% if page.last %}{{ _("Total") }}{% else %}{{ _("Carried Forward To Next Page") }}{% endif %}</td>
+				<td class="num">{{ amount(page.carried_forward.debit) }}</td>
+				<td class="num">{{ amount(page.carried_forward.credit) }}</td>
+			</tr>
+		</tbody>
+	</table>
+	{%- else %}
+	<table class="book">
+		<colgroup>
+			<col style="width: 10%"><col style="width: 8%"><col style="width: 39%"><col style="width: 13%">
+			<col style="width: 13%"><col style="width: 5%"><col style="width: 12%">
+		</colgroup>
+		<thead>
+			<tr>
+				<th>{{ _("Date") }}</th><th>{{ _("Journal No.") }}</th><th>{{ _("Description") }}</th>
+				<th>{{ _("Debit") }}</th><th>{{ _("Credit") }}</th><th>{{ _("Dr / Cr") }}</th><th>{{ _("Balance") }}</th>
+			</tr>
+		</thead>
+		<tbody>
+			{%- if not page.first %}
+			{%- set balance = page.brought_forward.debit - page.brought_forward.credit %}
+			<tr class="carry">
+				<td colspan="3">{{ _("Brought Forward From Previous Page") }}</td>
+				<td class="num">{{ amount(page.brought_forward.debit) }}</td>
+				<td class="num">{{ amount(page.brought_forward.credit) }}</td>
+				<td class="center">{{ dr_cr(balance) }}</td>
+				<td class="num">{{ amount(balance) }}</td>
+			</tr>
+			{%- endif %}
+			{%- for row in page.rows %}
+			<tr>
+				<td class="date">{{ row.jalali_date or "" }}</td>
+				<td class="center">{{ row.voucher_number or "" }}</td>
+				<td>{{ row.description }}</td>
+				<td class="num">{{ amount(row.debit) }}</td>
+				<td class="num">{{ amount(row.credit) }}</td>
+				<td class="center">{{ dr_cr(row.balance) }}</td>
+				<td class="num">{{ amount(row.balance) }}</td>
+			</tr>
+			{%- endfor %}
+			{%- set balance = page.carried_forward.debit - page.carried_forward.credit %}
+			<tr class="carry">
+				<td colspan="3">{% if page.last %}{{ _("Total and Balance") }}{% else %}{{ _("Carried Forward To Next Page") }}{% endif %}</td>
+				<td class="num">{{ amount(page.carried_forward.debit) }}</td>
+				<td class="num">{{ amount(page.carried_forward.credit) }}</td>
+				<td class="center">{{ dr_cr(balance) }}</td>
+				<td class="num">{{ amount(balance) }}</td>
+			</tr>
+		</tbody>
+	</table>
+	{%- endif %}
+
+	{%- if section_last and page.last %}
+	<table class="signatures">
+		<tr><td>{{ _("Prepared By") }}</td><td>{{ _("Finance Manager") }}</td><td>{{ _("Managing Director") }}</td></tr>
+	</table>
+	{%- endif %}
+</div>
+{%- endfor %}
+{%- endfor %}
+</div>
+</body>
+</html>

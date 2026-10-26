@@ -57,3 +57,18 @@ def season_range(jy, season):
 	first_month = 3 * (season - 1) + 1
 	next_year, next_month = add_jalali_months(jy, first_month, 3)
 	return to_gregorian(jy, first_month, 1), to_gregorian(next_year, next_month, 1) - ONE_DAY
+
+
+SEASONS = {"Spring": 1, "Summer": 2, "Autumn": 3, "Winter": 4}
+
+
+def period_range(jy, period):
+	"""Gregorian dates of a report period of Jalali year jy: "Whole Year", a season name
+	("Spring" .. "Winter") or a month "1" .. "12"."""
+	if period in SEASONS:
+		return season_range(jy, SEASONS[period])
+	if str(period).isdigit() and 1 <= int(period) <= 12:
+		next_year, next_month = add_jalali_months(jy, int(period), 1)
+		return to_gregorian(jy, int(period), 1), to_gregorian(next_year, next_month, 1) - ONE_DAY
+	first = to_gregorian(jy, 1, 1)
+	return first, to_gregorian(jy + 1, 1, 1) - ONE_DAY

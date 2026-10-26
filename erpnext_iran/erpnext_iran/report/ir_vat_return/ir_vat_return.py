@@ -11,11 +11,9 @@ from frappe.utils import flt
 
 from erpnext_iran.setup.chart_of_accounts import get_account
 from erpnext_iran.setup.taxes import VAT_INPUT_ACCOUNT_NUMBER, VAT_OUTPUT_ACCOUNT_NUMBER
-from erpnext_iran.utils.jalali import format_jalali, jalali_year_range
-from erpnext_iran.utils.jalali_periods import season_range
+from erpnext_iran.utils.jalali import format_jalali
+from erpnext_iran.utils.jalali_periods import period_range
 from erpnext_iran.utils.vat import split_invoice
-
-SEASONS = {"Spring": 1, "Summer": 2, "Autumn": 3, "Winter": 4}
 
 SIDES = {
 	"Sales": {
@@ -76,9 +74,7 @@ def get_date_range(filters):
 	jy = int(filters.jalali_year or 0)
 	if not jy:
 		frappe.throw(_("Jalali Year is required"))
-	if filters.season in SEASONS:
-		return season_range(jy, SEASONS[filters.season])
-	return jalali_year_range(jy)
+	return period_range(jy, filters.season or "Whole Year")
 
 
 def get_invoices(side, company, from_date, to_date, vat_account):

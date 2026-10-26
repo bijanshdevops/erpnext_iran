@@ -403,6 +403,84 @@ class TestIranLocalization(FrappeTestCase):
 		self.assertFalse([r for r in spring if r["party"] == supplier.name])
 
 
+	def test_legal_books(self):
+		from erpnext_iran.books import api
+		from erpnext_iran.books.data import get_journal, get_ledger
+
+		cash, bank, sales = (get_account(COMPANY, n) for n in ("110101", "110103", "4101"))
+		general_cash = frappe.db.get_value("Account", cash, "parent_account")  # 1101
+		filters = frappe._dict(company=COMPANY, jalali_year=1405, period="9", level="General")  # Azar
+
+		opening = get_ledger(filters)[0].get(general_cash, {}).get("balance", 0)
+		vouchers_before = {r["voucher_number"] for r in get_journal(dict(filters, period="Whole Year"))[0]
+						   if str(r["posting_date"]) < "2026-11-22"}  # fmt: skip
+
+		def journal_entry(date, debit_account, amount, remark):
+			je = frappe.get_doc(
+				{
+					"doctype": "Journal Entry",
+					"company": COMPANY,
+					"posting_date": date,
+					"user_remark": remark,
+					"accounts": [
+						{"account": debit_account, "debit_in_account_currency": amount},
+						{"account": sales, "credit_in_account_currency": amount},
+					],
+				}
+			).insert()
+			je.submit()
+			return je
+
+		first = journal_entry("2026-11-25", cash, 1_000_000, "فروش نقدی")  # 4 Azar 1405
+		second = journal_entry("2026-12-01", bank, 500_000, "فروش بانکی")  # 10 Azar 1405
+		transfer = frappe.get_doc(
+			{"doctype": "Journal Entry", "company": COMPANY, "posting_date": "2026-12-02", "accounts": [
+				{"account": bank, "debit_in_account_currency": 200_000},
+				{"account": cash, "credit_in_account_currency": 200_000}]}
+		).insert()  # fmt: skip
+		transfer.submit()
+
+		rows = get_journal(filters)[0]
+		mine = [r for r in rows if r["voucher_no"] in (first.name, second.name, transfer.name)]
+		# cash to bank inside general account 1101 nets to nothing at the general level
+		self.assertEqual({r["voucher_no"] for r in mine}, {first.name, second.name})
+		self.assertEqual([(r["first"], r["debit"], r["credit"]) for r in mine],
+						 [(True, 1_000_000, 0), (False, 0, 1_000_000), (True, 500_000, 0), (False, 0, 500_000)])  # fmt: skip
+		self.assertEqual(mine[0]["jalali_date"], "1405/09/04")
+		self.assertEqual(mine[0]["account_number"], "1101")
+		self.assertIn("فروش نقدی", mine[0]["description"])
+		# numbering continues the fiscal year's
+		self.assertGreater(mine[0]["voucher_number"], max(vouchers_before, default=0))
+		self.assertEqual(mine[2]["voucher_number"], mine[0]["voucher_number"] + 1)
+		self.assertEqual(sum(r["debit"] for r in rows), sum(r["credit"] for r in rows))
+
+		# subsidiary level shows the transfer
+		subsidiary = get_journal(dict(filters, level="Subsidiary"))[0]
+		self.assertIn(transfer.name, {r["voucher_no"] for r in subsidiary})
+
+		ledger = get_ledger(filters)[0]
+		self.assertAlmostEqual(ledger[general_cash]["balance"], opening + 1_500_000)
+		bank_ledger = get_ledger(dict(filters, level="Subsidiary", account=bank))[0]
+		self.assertEqual(list(bank_ledger), [bank])
+		self.assertEqual([r["debit"] for r in bank_ledger[bank]["rows"] if not r.get("opening")], [500_000, 200_000])
+
+		# PDF pages carry their totals forward (rendered in Persian, as for a Persian user)
+		lang, frappe.local.lang = frappe.local.lang, "fa"
+		self.addCleanup(setattr, frappe.local, "lang", lang)
+		api.ROWS_PER_PAGE = 2
+		try:
+			html = api.render_book("journal", filters)
+		finally:
+			api.ROWS_PER_PAGE = 30
+		self.assertIn("دفتر روزنامه", html)
+		self.assertIn("جمع نقل به صفحه بعد", html)
+		self.assertIn("جمع نقل از صفحه قبل", html)
+		html = api.render_book("ledger", filters)
+		self.assertIn("دفتر کل", html)
+		self.assertIn("جمع و مانده", html)
+		api.download_pdf("ledger", frappe.as_json(filters))
+		self.assertTrue(frappe.local.response.filecontent.startswith(b"%PDF"))
+
 def ensure_item(item_code, item_name, taxes=None):
 	if not frappe.db.exists("Item", item_code):
 		frappe.get_doc(
