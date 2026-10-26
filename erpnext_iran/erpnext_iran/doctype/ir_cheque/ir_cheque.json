@@ -1,0 +1,291 @@
+{
+ "actions": [],
+ "creation": "2026-10-26 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "cheque_type",
+  "company",
+  "party_type",
+  "party",
+  "party_name",
+  "column_break_1",
+  "amount",
+  "issue_date",
+  "due_date",
+  "status",
+  "cheque_section",
+  "sayad_id",
+  "series",
+  "serial",
+  "cheque_book",
+  "column_break_2",
+  "bank",
+  "branch",
+  "account_holder",
+  "accounts_section",
+  "notes_account",
+  "in_collection_account",
+  "column_break_3",
+  "bank_account",
+  "endorsed_to",
+  "history_section",
+  "movements",
+  "remarks",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "cheque_type",
+   "fieldtype": "Select",
+   "label": "Cheque Type",
+   "options": "Received\nIssued",
+   "default": "Received",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1,
+   "remember_last_selected_value": 1
+  },
+  {
+   "fieldname": "party_type",
+   "fieldtype": "Select",
+   "label": "Party Type",
+   "options": "Customer\nSupplier",
+   "reqd": 1
+  },
+  {
+   "fieldname": "party",
+   "fieldtype": "Dynamic Link",
+   "label": "Party",
+   "options": "party_type",
+   "reqd": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "party_name",
+   "fieldtype": "Data",
+   "label": "Party Name",
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "label": "Amount",
+   "reqd": 1,
+   "in_list_view": 1,
+   "options": "Company:company:default_currency"
+  },
+  {
+   "fieldname": "issue_date",
+   "fieldtype": "Date",
+   "label": "Issue Date"
+  },
+  {
+   "fieldname": "due_date",
+   "fieldtype": "Date",
+   "label": "Due Date",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Draft\nReceived\nDeposited\nCleared\nBounced\nEndorsed\nIssued\nCancelled",
+   "default": "Draft",
+   "read_only": 1,
+   "allow_on_submit": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "cheque_section",
+   "fieldtype": "Section Break",
+   "label": "Cheque Details"
+  },
+  {
+   "fieldname": "sayad_id",
+   "fieldtype": "Data",
+   "label": "Sayad ID",
+   "reqd": 1,
+   "length": 16,
+   "unique": 0,
+   "in_standard_filter": 1,
+   "description": "16 digit ID printed on the cheque leaf and registered in the Sayad system"
+  },
+  {
+   "fieldname": "series",
+   "fieldtype": "Data",
+   "label": "Cheque Series"
+  },
+  {
+   "fieldname": "serial",
+   "fieldtype": "Data",
+   "label": "Cheque Serial"
+  },
+  {
+   "fieldname": "cheque_book",
+   "fieldtype": "Link",
+   "label": "Cheque Book",
+   "options": "IR Cheque Book",
+   "depends_on": "eval:doc.cheque_type=='Issued'"
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "bank",
+   "fieldtype": "Link",
+   "label": "Bank",
+   "options": "Bank"
+  },
+  {
+   "fieldname": "branch",
+   "fieldtype": "Data",
+   "label": "Branch"
+  },
+  {
+   "fieldname": "account_holder",
+   "fieldtype": "Data",
+   "label": "Account Holder",
+   "depends_on": "eval:doc.cheque_type=='Received'"
+  },
+  {
+   "fieldname": "accounts_section",
+   "fieldtype": "Section Break",
+   "label": "Accounts",
+   "collapsible": 1
+  },
+  {
+   "fieldname": "notes_account",
+   "fieldtype": "Link",
+   "label": "Notes Account",
+   "options": "Account",
+   "description": "Notes receivable for received cheques, notes payable for issued ones. Empty: account 110302 / 210102 of the Iranian chart"
+  },
+  {
+   "fieldname": "in_collection_account",
+   "fieldtype": "Link",
+   "label": "Cheques in Collection Account",
+   "options": "Account",
+   "depends_on": "eval:doc.cheque_type=='Received'",
+   "description": "Empty: account 110303 of the Iranian chart"
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "bank_account",
+   "fieldtype": "Link",
+   "label": "Bank Account",
+   "options": "Account",
+   "allow_on_submit": 1,
+   "description": "Ledger account of the bank the cheque is deposited to or drawn on"
+  },
+  {
+   "fieldname": "endorsed_to",
+   "fieldtype": "Link",
+   "label": "Endorsed To",
+   "options": "Supplier",
+   "read_only": 1,
+   "allow_on_submit": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "history_section",
+   "fieldtype": "Section Break",
+   "label": "History"
+  },
+  {
+   "fieldname": "movements",
+   "fieldtype": "Table",
+   "label": "Movements",
+   "options": "IR Cheque Movement",
+   "read_only": 1,
+   "allow_on_submit": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "options": "IR Cheque",
+   "read_only": 1,
+   "no_copy": 1,
+   "print_hide": 1
+  }
+ ],
+ "links": [],
+ "modified": "2026-10-26 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "ERPNext Iran",
+ "name": "IR Cheque",
+ "owner": "Administrator",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "is_submittable": 1,
+ "autoname": "IR-CHQ-.#####",
+ "title_field": "party_name",
+ "search_fields": "sayad_id,party_name,serial",
+ "show_title_field_in_link": 0,
+ "permissions": [
+  {
+   "role": "Accounts User",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "print": 1,
+   "email": 1,
+   "report": 1,
+   "export": 1,
+   "share": 1,
+   "submit": 1,
+   "cancel": 1
+  },
+  {
+   "role": "Accounts Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "print": 1,
+   "email": 1,
+   "report": 1,
+   "export": 1,
+   "share": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1
+  },
+  {
+   "role": "Auditor",
+   "read": 1,
+   "print": 1,
+   "report": 1,
+   "export": 1
+  }
+ ],
+ "track_changes": 1
+}

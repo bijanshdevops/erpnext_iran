@@ -2136,3 +2136,64 @@ Finance Manager,مدیر مالی
 Managing Director,مدیرعامل
 Unknown book {0},دفتر ناشناخته {0}
 Company is required,شرکت الزامی است
+Party,طرف حساب
+Party Type,نوع طرف حساب
+Party Name,نام طرف حساب
+Remarks,توضیحات
+Posting Date,تاریخ ثبت
+Bounced,برگشتی
+IR Cheque,چک
+IR Cheque Book,دسته‌چک
+IR Cheque Movement,گردش چک
+IR Cheque Register,گزارش چک‌ها
+Cheque Type,نوع چک
+Deposited,در جریان وصول
+Cleared,وصول‌شده
+Endorsed,خرج‌شده
+Cheque Details,مشخصات چک
+Sayad ID,شناسه صیادی
+16 digit ID printed on the cheque leaf and registered in the Sayad system,شناسه ۱۶ رقمی چاپ‌شده روی برگ چک که در سامانه صیاد ثبت می‌شود
+Cheque Series,سری چک
+Cheque Serial,سریال چک
+Cheque Book,دسته‌چک
+Account Holder,صاحب حساب
+Notes Account,حساب اسناد
+"Notes receivable for received cheques, notes payable for issued ones. Empty: account 110302 / 210102 of the Iranian chart",اسناد دریافتنی برای چک‌های دریافتی و اسناد پرداختنی برای چک‌های پرداختی. خالی: حساب ۱۱۰۳۰۲ / ۲۱۰۱۰۲ کدینگ ایرانی
+Cheques in Collection Account,حساب چک‌های در جریان وصول
+Empty: account 110303 of the Iranian chart,خالی: حساب ۱۱۰۳۰۳ کدینگ ایرانی
+Ledger account of the bank the cheque is deposited to or drawn on,حساب دفتر کل بانکی که چک به آن خوابانده می‌شود یا از آن کشیده شده است
+Ledger account of the bank account this cheque book belongs to,حساب دفتر کل حساب بانکی که این دسته‌چک متعلق به آن است
+Endorsed To,خرج‌شده به
+History,سابقه
+Movements,گردش‌ها
+From Status,از وضعیت
+To Status,به وضعیت
+First Serial,سریال اولین برگ
+Number of Leaves,تعداد برگ
+Used Leaves,برگ‌های مصرف‌شده
+Deposit to Bank,خواباندن به حساب
+Clear Cheque,وصول چک
+Bounce Cheque,برگشت چک
+Endorse to Supplier,خرج چک به تأمین‌کننده
+Register Cheque,ثبت چک
+Sayad ID must be 16 digits,شناسه صیادی باید ۱۶ رقم باشد
+Sayad ID {0} is already used by {1},شناسه صیادی {0} قبلاً در {1} ثبت شده است
+Amount must be greater than zero,مبلغ باید بیشتر از صفر باشد
+Due Date cannot be before Issue Date,تاریخ سررسید نمی‌تواند پیش از تاریخ صدور باشد
+Account {0} does not belong to company {1},حساب {0} متعلق به شرکت {1} نیست
+Cheque Book {0} belongs to another company,دسته‌چک {0} متعلق به شرکت دیگری است
+Serial {0} is not a leaf of cheque book {1} ({2} to {3}),سریال {0} از برگ‌های دسته‌چک {1} ({2} تا {3}) نیست
+Leaf {0} of this cheque book is already used by {1},برگ {0} این دسته‌چک قبلاً در {1} استفاده شده است
+Set {0},{0} را مشخص کنید
+Cannot {0}: the cheque is {1},«{0}» ممکن نیست؛ وضعیت چک {1} است
+Select the supplier the cheque is endorsed to,تأمین‌کننده‌ای را که چک به او خرج می‌شود انتخاب کنید
+"Cheque {0}: {1}, Sayad ID {2}, due {3}",چک {0}: {1}، شناسه صیادی {2}، سررسید {3}
+Submit the cheque first,ابتدا چک را ثبت نهایی کنید
+Submitting registers the cheque and books it into the notes account.,با ثبت نهایی، چک ثبت و در حساب اسناد منظور می‌شود.
+Cheque is now {0}; Journal Entry {1},وضعیت چک: {0}؛ سند حسابداری {1}
+First Serial must be zero or more,سریال اولین برگ نمی‌تواند منفی باشد
+Number of Leaves must be greater than zero,تعداد برگ باید بیشتر از صفر باشد
+Days to Due,روز تا سررسید
+Open Cheques,چک‌های باز
+Due From,سررسید از
+Due To,سررسید تا

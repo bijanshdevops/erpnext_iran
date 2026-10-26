@@ -462,7 +462,8 @@ class TestIranLocalization(FrappeTestCase):
 		self.assertAlmostEqual(ledger[general_cash]["balance"], opening + 1_500_000)
 		bank_ledger = get_ledger(dict(filters, level="Subsidiary", account=bank))[0]
 		self.assertEqual(list(bank_ledger), [bank])
-		self.assertEqual([r["debit"] for r in bank_ledger[bank]["rows"] if not r.get("opening")], [500_000, 200_000])
+		mine = [r["debit"] for r in bank_ledger[bank]["rows"] if r.get("voucher_no") in (second.name, transfer.name)]
+		self.assertEqual(mine, [500_000, 200_000])
 
 		# PDF pages carry their totals forward (rendered in Persian, as for a Persian user)
 		lang, frappe.local.lang = frappe.local.lang, "fa"
@@ -480,6 +481,127 @@ class TestIranLocalization(FrappeTestCase):
 		self.assertIn("جمع و مانده", html)
 		api.download_pdf("ledger", frappe.as_json(filters))
 		self.assertTrue(frappe.local.response.filecontent.startswith(b"%PDF"))
+
+	def test_cheques(self):
+		from erpnext.accounts.utils import get_balance_on
+
+		from erpnext_iran.erpnext_iran.doctype.ir_cheque.ir_cheque import get_actions, make_movement
+		from erpnext_iran.erpnext_iran.report.ir_cheque_register import ir_cheque_register
+
+		notes_receivable, in_collection, notes_payable, bank = (
+			get_account(COMPANY, n) for n in ("110302", "110303", "210102", "110103")
+		)
+		customer = frappe.get_doc(
+			{"doctype": "Customer", "customer_name": "مشتری چک", "customer_group": CUSTOMER_GROUP}
+		).insert()
+		if not frappe.db.exists("Supplier Group", "IR Test Suppliers"):
+			frappe.get_doc(
+				{"doctype": "Supplier Group", "supplier_group_name": "IR Test Suppliers",
+				 "parent_supplier_group": "All Supplier Groups"}
+			).insert()  # fmt: skip
+		supplier = frappe.get_doc(
+			{"doctype": "Supplier", "supplier_name": "تامین کننده چک", "supplier_group": "IR Test Suppliers"}
+		).insert()
+
+		def balances():
+			return {
+				"notes_receivable": get_balance_on(notes_receivable, "2027-03-20"),
+				"in_collection": get_balance_on(in_collection, "2027-03-20"),
+				"notes_payable": get_balance_on(notes_payable, "2027-03-20"),
+				"bank": get_balance_on(bank, "2027-03-20"),
+				"customer": get_balance_on(party_type="Customer", party=customer.name, company=COMPANY, date="2027-03-20"),
+				"supplier": get_balance_on(party_type="Supplier", party=supplier.name, company=COMPANY, date="2027-03-20"),
+			}
+
+		def changes(before):
+			after = balances()
+			return {key: round(after[key] - before[key]) for key in after if round(after[key] - before[key])}
+
+		def cheque(cheque_type, sayad_id, amount, **extra):
+			doc = frappe.get_doc(
+				{
+					"doctype": "IR Cheque",
+					"cheque_type": cheque_type,
+					"company": COMPANY,
+					"party_type": "Customer" if cheque_type == "Received" else "Supplier",
+					"party": customer.name if cheque_type == "Received" else supplier.name,
+					"sayad_id": sayad_id,
+					"amount": amount,
+					"issue_date": "2026-10-25",
+					"due_date": "2026-12-15",
+					**extra,
+				}
+			)
+			return doc.insert()
+
+		# received cheque: register, deposit, clear
+		before = balances()
+		received = cheque("Received", "۱۱۱۱۲۲۲۲۳۳۳۳۴۴۴۴", 5_000_000, serial="۱۲۳۴۵")
+		self.assertEqual(received.sayad_id, "1111222233334444")
+		self.assertEqual(received.notes_account, notes_receivable)
+		received.submit()
+		self.assertEqual(received.status, "Received")
+		self.assertEqual(changes(before), {"notes_receivable": 5_000_000, "customer": -5_000_000})
+		self.assertEqual(get_actions(received.name), ["deposit", "clear", "bounce", "endorse"])
+
+		make_movement(received.name, "deposit", "2026-12-14", bank_account=bank)
+		self.assertEqual(changes(before), {"in_collection": 5_000_000, "customer": -5_000_000})
+		result = make_movement(received.name, "clear", "2026-12-16")
+		self.assertEqual(result["status"], "Cleared")
+		self.assertEqual(changes(before), {"bank": 5_000_000, "customer": -5_000_000})
+		received.reload()
+		self.assertEqual([m.to_status for m in received.movements], ["Received", "Deposited", "Cleared"])
+		self.assertEqual(get_actions(received.name), [])
+		self.assertRaises(frappe.ValidationError, make_movement, received.name, "bounce")
+
+		# same Sayad ID twice, or a malformed one
+		self.assertRaises(frappe.ValidationError, cheque, "Received", "1111222233334444", 1_000)
+		self.assertRaises(frappe.ValidationError, cheque, "Received", "12345", 1_000)
+
+		# endorsed to the supplier, then handed back bounced
+		before = balances()
+		endorsed = cheque("Received", "5555666677778888", 2_000_000)
+		endorsed.submit()
+		self.assertRaises(frappe.ValidationError, make_movement, endorsed.name, "endorse")  # no supplier
+		make_movement(endorsed.name, "endorse", "2026-11-01", endorsee=supplier.name)
+		self.assertEqual(changes(before), {"customer": -2_000_000, "supplier": 2_000_000})
+		make_movement(endorsed.name, "bounce", "2026-12-20")
+		self.assertEqual(changes(before), {})  # the customer owes again, so do we
+		self.assertEqual(frappe.db.get_value("IR Cheque", endorsed.name, "status"), "Bounced")
+
+		# issued cheque from a cheque book
+		book = frappe.get_doc(
+			{"doctype": "IR Cheque Book", "company": COMPANY, "bank_account": bank, "series": "۱۲/ب",
+			 "first_serial": 1000, "leaves": 25}
+		).insert()  # fmt: skip
+		self.assertRaises(frappe.ValidationError, cheque, "Issued", "9999000011112222", 1_000,
+						  cheque_book=book.name, serial="1025")  # fmt: skip
+		before = balances()
+		issued = cheque("Issued", "9999000011112222", 3_000_000, cheque_book=book.name, serial="1001")
+		self.assertEqual((issued.bank_account, issued.notes_account), (bank, notes_payable))
+		issued.submit()
+		self.assertEqual(frappe.db.get_value("IR Cheque Book", book.name, "used_leaves"), 1)
+		self.assertRaises(frappe.ValidationError, cheque, "Issued", "9999000011113333", 1_000,
+						  cheque_book=book.name, serial="1001")  # fmt: skip
+		self.assertEqual(changes(before), {"notes_payable": -3_000_000, "supplier": 3_000_000})
+		make_movement(issued.name, "clear", "2026-12-15")
+		self.assertEqual(changes(before), {"bank": -3_000_000, "supplier": 3_000_000})
+
+		# the register lists open cheques by due date
+		pending = cheque("Received", "1212343456567878", 700_000)
+		pending.submit()
+		rows = ir_cheque_register.execute({"company": COMPANY, "status": "Open"})[1]
+		self.assertIn(pending.name, [r.name for r in rows])
+		self.assertNotIn(received.name, [r.name for r in rows])
+
+		# cancelling undoes every step
+		before = balances()
+		entries = [m.journal_entry for m in frappe.get_doc("IR Cheque", issued.name).movements]
+		frappe.get_doc("IR Cheque", issued.name).cancel()
+		self.assertEqual(changes(before), {"bank": 3_000_000, "supplier": -3_000_000})
+		self.assertEqual({frappe.db.get_value("Journal Entry", je, "docstatus") for je in entries}, {2})
+		self.assertEqual(frappe.db.get_value("IR Cheque", issued.name, "status"), "Cancelled")
+		self.assertEqual(frappe.db.get_value("IR Cheque Book", book.name, "used_leaves"), 0)
 
 def ensure_item(item_code, item_name, taxes=None):
 	if not frappe.db.exists("Item", item_code):

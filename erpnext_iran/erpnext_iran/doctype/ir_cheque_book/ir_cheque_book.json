@@ -1,0 +1,123 @@
+{
+ "actions": [],
+ "creation": "2026-10-26 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "company",
+  "bank_account",
+  "bank",
+  "column_break_1",
+  "series",
+  "first_serial",
+  "leaves",
+  "used_leaves",
+  "disabled"
+ ],
+ "fields": [
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1,
+   "remember_last_selected_value": 1
+  },
+  {
+   "fieldname": "bank_account",
+   "fieldtype": "Link",
+   "label": "Bank Account",
+   "options": "Account",
+   "reqd": 1,
+   "description": "Ledger account of the bank account this cheque book belongs to"
+  },
+  {
+   "fieldname": "bank",
+   "fieldtype": "Link",
+   "label": "Bank",
+   "options": "Bank"
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "series",
+   "fieldtype": "Data",
+   "label": "Cheque Series",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "first_serial",
+   "fieldtype": "Int",
+   "label": "First Serial",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "leaves",
+   "fieldtype": "Int",
+   "label": "Number of Leaves",
+   "reqd": 1,
+   "default": "25",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "used_leaves",
+   "fieldtype": "Int",
+   "label": "Used Leaves",
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "disabled",
+   "fieldtype": "Check",
+   "label": "Disabled"
+  }
+ ],
+ "links": [],
+ "modified": "2026-10-26 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "ERPNext Iran",
+ "name": "IR Cheque Book",
+ "owner": "Administrator",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "autoname": "hash",
+ "title_field": "series",
+ "search_fields": "series,bank_account",
+ "permissions": [
+  {
+   "role": "Accounts User",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "print": 1,
+   "email": 1,
+   "report": 1,
+   "export": 1,
+   "share": 1
+  },
+  {
+   "role": "Accounts Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "print": 1,
+   "email": 1,
+   "report": 1,
+   "export": 1,
+   "share": 1
+  },
+  {
+   "role": "Auditor",
+   "read": 1,
+   "print": 1,
+   "report": 1,
+   "export": 1
+  }
+ ],
+ "track_changes": 1
+}

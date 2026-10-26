@@ -1,0 +1,65 @@
+{
+ "actions": [],
+ "creation": "2026-10-26 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "posting_date",
+  "action",
+  "from_status",
+  "to_status",
+  "journal_entry",
+  "cancelled"
+ ],
+ "fields": [
+  {
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "label": "Posting Date",
+   "in_list_view": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "action",
+   "fieldtype": "Data",
+   "label": "Action",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "from_status",
+   "fieldtype": "Data",
+   "label": "From Status",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "to_status",
+   "fieldtype": "Data",
+   "label": "To Status",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "journal_entry",
+   "fieldtype": "Link",
+   "label": "Journal Entry",
+   "options": "Journal Entry",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "cancelled",
+   "fieldtype": "Check",
+   "label": "Cancelled"
+  }
+ ],
+ "links": [],
+ "modified": "2026-10-26 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "ERPNext Iran",
+ "name": "IR Cheque Movement",
+ "owner": "Administrator",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "istable": 1,
+ "editable_grid": 0,
+ "permissions": []
+}
