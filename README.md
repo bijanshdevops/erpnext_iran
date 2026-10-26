@@ -1,5 +1,7 @@
 # ERPNext Iran — بومی‌سازی ERPNext برای کسب‌وکارهای ایرانی
 
+[![CI](https://github.com/bijanshdevops/erpnext_iran/actions/workflows/ci.yml/badge.svg)](https://github.com/bijanshdevops/erpnext_iran/actions/workflows/ci.yml)
+
 یک اپ Frappe که کنار ERPNext نصب می‌شود (بدون فورک و تغییر در کد ERPNext)، تا ارتقای نسخه‌های ERPNext بدون دردسر باقی بماند.
 سازگار با ERPNext / Frappe نسخه ۱۵ (و برای ۱۶ طراحی شده، ولی هنوز روی آن تست نشده است).
 
@@ -88,8 +90,14 @@ python -m pytest erpnext_iran/tests
 
 ```bash
 bench --site your-site.local set-config allow_tests true
+bench --site your-site.local execute erpnext_iran.tests.demo.make   # داده نمونه، فقط روی سایت آزمایشی (تست‌ها به آن نیاز دارند)
 bench --site your-site.local run-tests --module erpnext_iran.tests.test_integration
-bench --site your-site.local execute erpnext_iran.tests.demo.make   # داده نمونه، فقط روی سایت آزمایشی
+```
+
+همین تست‌ها روی یک سایت تازه ERPNext v15 در Docker با یک دستور اجرا می‌شوند؛ GitHub Actions هم روی هر push و pull request همین کار را می‌کند (`.github/workflows/ci.yml`):
+
+```bash
+bash .github/ci/integration.sh
 ```
 
 ترجمه‌ها در `tools/fa_overrides.py` نگهداری می‌شوند و با دستور زیر در `fa.csv` ادغام می‌شوند (متن انگلیسی راهنماها از سایت خوانده می‌شود تا کلیدها دقیقاً منطبق باشند):

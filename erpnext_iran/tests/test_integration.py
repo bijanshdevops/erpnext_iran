@@ -351,6 +351,8 @@ class TestIranLocalization(FrappeTestCase):
 				"posting_date": "2026-11-01",
 				"set_posting_time": 1,
 				"due_date": "2026-11-30",
+				"currency": "IRR",  # a fresh site's price lists are in USD
+				"conversion_rate": 1,
 				"taxes_and_charges": sales_template,
 				"items": [
 					{"item_code": "IR-VAT-ITEM", "qty": 1, "rate": 2_000_000},
@@ -372,6 +374,8 @@ class TestIranLocalization(FrappeTestCase):
 				"posting_date": "2026-11-02",
 				"set_posting_time": 1,
 				"due_date": "2026-11-30",
+				"currency": "IRR",
+				"conversion_rate": 1,
 				"taxes_and_charges": purchase_template,
 				"items": [{"item_code": "IR-VAT-ITEM", "qty": 1, "rate": 1_000_000}],
 			}

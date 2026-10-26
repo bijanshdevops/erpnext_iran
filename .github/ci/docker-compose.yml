@@ -1,0 +1,21 @@
+# Throwaway ERPNext v15 for the integration tests (CI and `bash .github/ci/integration.sh` locally).
+# The same image as test-env/, so CI runs what was tested by hand. No published ports.
+services:
+  db:
+    image: mariadb:10.6
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --skip-character-set-client-handshake
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+
+  redis:
+    image: redis:6.2-alpine
+
+  erpnext:
+    image: frappe/erpnext:version-15
+    command: ["sleep", "infinity"]
+    depends_on: [db, redis]
+    volumes:
+      - ../..:/home/frappe/frappe-bench/apps/erpnext_iran

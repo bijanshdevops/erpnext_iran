@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  unit:
+    name: Unit tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - run: pip install pytest
+      # integration tests skip themselves without frappe; node runs the JS calendar tests
+      - run: python -m pytest erpnext_iran/tests -q
+
+  integration:
+    name: Integration tests (ERPNext v15)
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      # the container user (frappe, uid 1000) installs and builds from the checkout
+      - run: chmod -R a+rwX .
+      - run: bash .github/ci/integration.sh
