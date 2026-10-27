@@ -9,9 +9,14 @@ USER frappe
 WORKDIR /home/frappe/frappe-bench
 COPY --chown=frappe:frappe . apps/erpnext_iran
 
-# erpnext_iran is installed first: bench imports every app under apps/ when it builds
+# erpnext_iran is installed first: bench imports every app under apps/ when it builds.
+# The image serves the assets baked in /home/frappe/frappe-bench/assets (its entrypoint links
+# sites/assets there on start), so the builds must write there too.
 RUN bash -lc '\
 	set -e; \
+	source ~/.nvm/nvm.sh; \
+	rm -rf sites/assets; \
+	ln -s /home/frappe/frappe-bench/assets sites/assets; \
 	./env/bin/pip install --no-cache-dir -e apps/erpnext_iran; \
 	yarn config set network-timeout 600000 > /dev/null; \
 	bench get-app hrms --branch "$ERPNEXT_VERSION"; \
