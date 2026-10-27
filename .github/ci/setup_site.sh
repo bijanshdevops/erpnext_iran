@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# Runs inside the erpnext container: a fresh site with erpnext and erpnext_iran, built assets.
+# Runs inside the erpnext container: a fresh site with erpnext, hrms and erpnext_iran, built
+# assets. ERPNEXT_VERSION (version-15 / version-16) picks the Frappe HR branch.
 set -euo pipefail
 cd /home/frappe/frappe-bench
 
@@ -23,7 +24,7 @@ source ~/.nvm/nvm.sh
 yarn config set network-timeout 600000 > /dev/null # its frontend pulls many packages
 for attempt in 1 2 3; do
 	[ -d apps/hrms ] && break
-	bench get-app hrms --branch version-15 && break
+	bench get-app hrms --branch "${ERPNEXT_VERSION:-version-15}" && break
 	echo "get-app hrms failed (attempt $attempt), retrying"
 	rm -rf apps/hrms
 	sed -i '/^hrms$/d' sites/apps.txt
@@ -34,7 +35,8 @@ done
 grep -qx erpnext_iran sites/apps.txt || printf '\nerpnext_iran\n' >> sites/apps.txt
 sed -i '/^$/d' sites/apps.txt
 
-bench new-site test.localhost --mariadb-root-password admin --admin-password admin \
+# --force: a rerun with KEEP=1 replaces the site a failed run left
+bench new-site test.localhost --force --mariadb-root-password admin --admin-password admin \
 	--mariadb-user-host-login-scope='%' --install-app erpnext --install-app hrms --install-app erpnext_iran
 bench use test.localhost
 bench --site test.localhost set-config allow_tests true

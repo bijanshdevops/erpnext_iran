@@ -52,6 +52,7 @@ def setup_company(
 			holiday_list = iran_calendar.create_iran_holiday_list(jalali_year, cint(include_thursday))
 			if not frappe.db.get_value("Company", company, "default_holiday_list"):
 				frappe.db.set_value("Company", company, "default_holiday_list", holiday_list)
+			iran_calendar.assign_to_company(company, holiday_list)
 			done.append(_("Holiday List {0}").format(holiday_list))
 
 	return done

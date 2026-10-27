@@ -3,7 +3,7 @@
 [![CI](https://github.com/bijanshdevops/erpnext_iran/actions/workflows/ci.yml/badge.svg)](https://github.com/bijanshdevops/erpnext_iran/actions/workflows/ci.yml)
 
 یک اپ Frappe که کنار ERPNext نصب می‌شود (بدون فورک و تغییر در کد ERPNext)، تا ارتقای نسخه‌های ERPNext بدون دردسر باقی بماند.
-سازگار با ERPNext / Frappe نسخه ۱۵ (و برای ۱۶ طراحی شده، ولی هنوز روی آن تست نشده است).
+سازگار با ERPNext / Frappe نسخه‌های ۱۵ و ۱۶؛ CI همه تست‌ها را روی هر دو نسخه اجرا می‌کند.
 
 ## امکانات
 
@@ -43,7 +43,7 @@ bench build --app erpnext_iran
 
 جاوااسکریپت و CSS با سیستم bundle فریم‌ورک Frappe ساخته می‌شوند؛ پس از هر به‌روزرسانی اپ، `bench build --app erpnext_iran` را اجرا کنید تا نشانی فایل‌ها عوض شود و مرورگر کاربران نسخه قدیمی را از حافظه نخواند.
 
-با Docker ([frappe_docker](https://github.com/frappe/frappe_docker))، فایل `docker/apps.json` را برای ساخت image سفارشی استفاده کنید.
+با Docker: image آماده `ghcr.io/bijanshdevops/erpnext_iran:v15` (یا `:v16`) شامل ERPNext، Frappe HR و این اپ است؛ آن را در فایل‌های compose پروژه [frappe_docker](https://github.com/frappe/frappe_docker) به‌جای `frappe/erpnext` بگذارید. برای ساخت image سفارشی با اپ‌های دیگر، `docker/apps.json` یا `docker/Dockerfile` را به کار ببرید.
 
 ## راه‌اندازی پس از نصب
 
@@ -101,7 +101,10 @@ bench --site your-site.local run-tests --module erpnext_iran.tests.test_integrat
 
 ```bash
 bash .github/ci/integration.sh
+ERPNEXT_VERSION=version-16 bash .github/ci/integration.sh
 ```
+
+با push یک tag نسخه (مثلاً `v0.1.0`)، workflow «Release» تست‌ها را اجرا می‌کند، Docker image هر نسخه ERPNext را در ghcr.io منتشر می‌کند و Release گیت‌هاب را از بخش همان نسخه در `CHANGELOG.md` می‌سازد.
 
 ترجمه‌ها در `tools/fa_overrides.py` نگهداری می‌شوند و با دستور زیر در `fa.csv` ادغام می‌شوند (متن انگلیسی راهنماها از سایت خوانده می‌شود تا کلیدها دقیقاً منطبق باشند):
 

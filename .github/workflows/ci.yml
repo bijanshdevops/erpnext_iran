@@ -5,9 +5,10 @@ on:
     branches: [main]
   pull_request:
   workflow_dispatch:
+  workflow_call: # release.yml tests before it publishes
 
 concurrency:
-  group: ci-${{ github.ref }}
+  group: ci-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -28,11 +29,17 @@ jobs:
       - run: python -m pytest erpnext_iran/tests -q
 
   integration:
-    name: Integration tests (ERPNext v15)
+    name: Integration tests (ERPNext ${{ matrix.erpnext }})
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        erpnext: [version-15, version-16]
     steps:
       - uses: actions/checkout@v4
       # the container user (frappe, uid 1000) installs and builds from the checkout
       - run: chmod -R a+rwX .
       - run: bash .github/ci/integration.sh
+        env:
+          ERPNEXT_VERSION: ${{ matrix.erpnext }}

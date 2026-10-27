@@ -120,6 +120,11 @@ def setup_iran_payroll(company):
 	settings = frappe.get_single("Payroll Settings")
 	settings.include_holidays_in_total_working_days = 1  # monthly wages count every day of the month
 	settings.save(ignore_permissions=True)
+	holiday_list = frappe.db.get_value("Company", company, "default_holiday_list")
+	if holiday_list:
+		from erpnext_iran.setup.iran_calendar import assign_to_company
+
+		assign_to_company(company, holiday_list)
 	payable = get_account(company, "210205")
 	if payable and frappe.get_meta("Company").has_field("default_payroll_payable_account"):
 		if not frappe.db.get_value("Company", company, "default_payroll_payable_account"):

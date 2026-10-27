@@ -1,0 +1,57 @@
+name: Release
+
+# Push a tag like v0.1.0: the tests run, then a Docker image per ERPNext version goes to
+# ghcr.io/<owner>/erpnext_iran and a GitHub release is made from that version's CHANGELOG.md part.
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+  packages: write
+
+jobs:
+  test:
+    uses: ./.github/workflows/ci.yml
+
+  image:
+    name: Docker image (ERPNext ${{ matrix.erpnext }})
+    needs: test
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    strategy:
+      matrix:
+        include:
+          - erpnext: version-15
+            suffix: v15
+          - erpnext: version-16
+            suffix: v16
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: docker/Dockerfile
+          build-args: ERPNEXT_VERSION=${{ matrix.erpnext }}
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository_owner }}/erpnext_iran:${{ github.ref_name }}-${{ matrix.suffix }}
+            ghcr.io/${{ github.repository_owner }}/erpnext_iran:${{ matrix.suffix }}
+
+  release:
+    name: GitHub release
+    needs: image
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # the "## <tag>" section of CHANGELOG.md, up to the next "## "
+      - run: awk -v tag="## ${GITHUB_REF_NAME}" '$0==tag{on=1;next} /^## /{on=0} on' CHANGELOG.md > notes.md
+      - run: gh release create "$GITHUB_REF_NAME" --title "ERPNext Iran $GITHUB_REF_NAME" --notes-file notes.md
+        env:
+          GH_TOKEN: ${{ github.token }}

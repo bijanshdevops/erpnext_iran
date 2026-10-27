@@ -7,6 +7,7 @@ from collections import defaultdict
 
 import frappe
 from frappe import _
+from frappe.query_builder.functions import Sum
 from frappe.utils import flt
 
 from erpnext_iran.setup.chart_of_accounts import get_account
@@ -123,17 +124,19 @@ def get_invoices(side, company, from_date, to_date, vat_account):
 def get_ledger_vat(company, from_date, to_date, accounts):
 	"""VAT booked on the ledger accounts in the period, from any voucher (journal entries too)."""
 	ledger = {}
+	gle = frappe.qb.DocType("GL Entry")
 	for side, account in accounts.items():
-		debit, credit = frappe.db.get_value(
-			"GL Entry",
-			{
-				"company": company,
-				"account": account,
-				"is_cancelled": 0,
-				"posting_date": ["between", [from_date, to_date]],
-			},
-			["sum(debit)", "sum(credit)"],
-		) or (0, 0)
+		debit, credit = (
+			frappe.qb.from_(gle)
+			.select(Sum(gle.debit), Sum(gle.credit))
+			.where(
+				(gle.company == company)
+				& (gle.account == account)
+				& (gle.is_cancelled == 0)
+				& gle.posting_date.between(from_date, to_date)
+			)
+			.run()[0]
+		)
 		ledger[side] = flt(credit) - flt(debit) if side == "Sales" else flt(debit) - flt(credit)
 	return ledger
 

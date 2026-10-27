@@ -123,3 +123,26 @@ def create_iran_holiday_list(jalali_year, include_thursday=False):
 		).insert(ignore_permissions=True)
 	add_iran_holidays(name, jalali_year, include_thursday)
 	return name
+
+
+def assign_to_company(company, holiday_list):
+	"""Frappe HR v16 finds employees' holidays through Holiday List Assignments rather than the
+	company's default list: assign the list to the whole company (no-op without that doctype)."""
+	if not frappe.db.exists("DocType", "Holiday List Assignment"):
+		return
+	if frappe.db.exists(
+		"Holiday List Assignment",
+		{"applicable_for": "Company", "assigned_to": company, "holiday_list": holiday_list, "docstatus": 1},
+	):
+		return
+	doc = frappe.get_doc(
+		{
+			"doctype": "Holiday List Assignment",
+			"applicable_for": "Company",
+			"assigned_to": company,
+			"holiday_list": holiday_list,
+			"from_date": frappe.db.get_value("Holiday List", holiday_list, "from_date"),
+		}
+	)
+	doc.insert(ignore_permissions=True)
+	doc.submit()

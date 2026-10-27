@@ -2,6 +2,7 @@
 
 import frappe
 from frappe import _
+from frappe.query_builder.functions import Sum
 from frappe.utils import add_days, getdate
 
 from erpnext_iran.books.core import build_journal, build_ledger, level_map
@@ -46,6 +47,14 @@ def voucher_descriptions(entries):
 		text = (e.remarks or "").strip()
 		if key not in remarks or (not remarks[key] and text):
 			remarks[key] = "" if text in ("", "No Remarks", _("No Remarks")) else text
+
+	# ERPNext v16 no longer copies a Journal Entry's user remark into its GL Entries
+	missing = [no for (kind, no), text in remarks.items() if kind == "Journal Entry" and not text]
+	if missing:
+		for je in frappe.get_all(
+			"Journal Entry", filters={"name": ["in", missing]}, fields=["name", "user_remark", "remark"]
+		):
+			remarks[("Journal Entry", je.name)] = (je.user_remark or je.remark or "").strip()
 	return {
 		key: f"{_(key[0])} {key[1]}" + (f" - {text}" if text else "")
 		for key, text in remarks.items()
@@ -94,13 +103,21 @@ def get_openings(company, accounts, level_of, from_date):
 		names = [a.name for a in accounts if a.root_type in root_types]
 		if not names or (since and since >= getdate(from_date)):
 			continue
-		date_filter = ["between", [since, day_before]] if since else ["<=", day_before]
-		for row in frappe.get_all(
-			"GL Entry",
-			filters={"company": company, "is_cancelled": 0, "account": ["in", names], "posting_date": date_filter},
-			fields=["account", "sum(debit) as debit", "sum(credit) as credit"],
-			group_by="account",
-		):
+		gle = frappe.qb.DocType("GL Entry")
+		query = (
+			frappe.qb.from_(gle)
+			.select(gle.account, Sum(gle.debit).as_("debit"), Sum(gle.credit).as_("credit"))
+			.where(
+				(gle.company == company)
+				& (gle.is_cancelled == 0)
+				& gle.account.isin(names)
+				& (gle.posting_date <= day_before)
+			)
+			.groupby(gle.account)
+		)
+		if since:
+			query = query.where(gle.posting_date >= since)
+		for row in query.run(as_dict=True):
 			target = level_of.get(row.account, row.account)
 			openings[target] = openings.get(target, 0) + (row.debit or 0) - (row.credit or 0)
 	return {name: value for name, value in openings.items() if name in by_name}
