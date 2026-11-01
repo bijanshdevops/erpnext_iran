@@ -170,6 +170,17 @@ class TestIranLocalization(FrappeTestCase):
 		self.assertIn("ریال ایران", irr.get("description") or "")
 		self.assertTrue(frappe.db.exists("Print Format", "IR Official Invoice"))
 
+	def test_translations_win_over_other_apps(self):
+		from frappe.translate import get_translations_from_apps
+
+		from erpnext_iran.install import keep_translations_last
+
+		keep_translations_last()
+		self.assertEqual(frappe.get_installed_apps()[-1], "erpnext_iran")
+		translations = get_translations_from_apps("fa")
+		self.assertEqual(translations["Batch No"], "شماره بچ")  # machine translation in ERPNext
+		self.assertEqual(translations["Bimonthly"], "دوماهه")  # and in Frappe HR
+
 	def test_company_name_normalized(self):
 		# created with Arabic letters; both the record ID and the name must be Persian
 		self.assertEqual(self.company.name, COMPANY)

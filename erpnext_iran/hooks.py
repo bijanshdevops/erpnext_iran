@@ -17,6 +17,7 @@ doctype_js = {
 
 after_install = "erpnext_iran.install.after_install"
 after_migrate = "erpnext_iran.install.after_migrate"
+after_app_install = "erpnext_iran.install.after_app_install"
 before_uninstall = "erpnext_iran.install.before_uninstall"
 
 boot_session = "erpnext_iran.boot.boot_session"

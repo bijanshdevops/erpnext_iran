@@ -1,3 +1,5 @@
+import json
+
 import frappe
 from frappe.custom.doctype.property_setter.property_setter import make_property_setter
 
@@ -47,6 +49,23 @@ def after_migrate():
 	setup_custom_fields()
 	setup_currency_names()
 	ensure_payroll_years()
+	keep_translations_last()
+
+
+def after_app_install(app):
+	keep_translations_last()
+
+
+def keep_translations_last():
+	"""Translations apply in install order: an app installed after this one (Frappe HR) would
+	replace our corrections with its own machine-made ones."""
+	apps = frappe.get_installed_apps()
+	if "erpnext_iran" in apps and apps[-1] != "erpnext_iran":
+		apps.remove("erpnext_iran")
+		apps.append("erpnext_iran")
+		frappe.db.set_global("installed_apps", json.dumps(apps))
+		frappe.db.commit()
+		frappe.clear_cache()
 
 
 def before_uninstall():

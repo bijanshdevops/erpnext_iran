@@ -1,4 +1,4 @@
-"""Merge tools/fa_missing.py and tools/fa_overrides.py into erpnext_iran/translations/fa.csv.
+"""Merge tools/fa_missing.py, fa_labels.py and fa_overrides.py into erpnext_iran/translations/fa.csv.
 
 Needs a site (onboarding English is read from its records):
 
@@ -16,6 +16,7 @@ APP = pathlib.Path(__file__).resolve().parent.parent
 CSV_PATH = APP / "erpnext_iran" / "translations" / "fa.csv"
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+from fa_labels import FORM_LABELS  # noqa: E402
 from fa_missing import MISSING  # noqa: E402
 from fa_overrides import CORRECTIONS, FORM_TOURS, ONBOARDING  # noqa: E402
 
@@ -43,6 +44,7 @@ def main(site):
 
 	# MISSING first so that hand-picked CORRECTIONS win where both define a string
 	new_rows = dict(MISSING)
+	new_rows.update(FORM_LABELS)
 	new_rows.update(CORRECTIONS)
 	new_rows.update(FORM_TOURS)
 	stale = []
