@@ -55,6 +55,12 @@ def apply_chart(company):
 
 	frappe.local.flags.ignore_root_company_validation = True
 	frappe.db.sql("update `tabWarehouse` set account = NULL where company = %s", company)
+	# ERPNext creates these with the company and checks links when it deletes the accounts below
+	for name in frappe.get_all("Item Tax Template", filters={"company": company}, pluck="name"):
+		frappe.delete_doc("Item Tax Template", name, ignore_permissions=True)
+	# likewise Frappe HR's expense claim types, when it is installed
+	if frappe.db.table_exists("Expense Claim Account"):
+		frappe.db.delete("Expense Claim Account", {"company": company})
 	unset_existing_data(company)
 	# standard chart-file format (names are keys), so not the importer's from_coa_importer mode
 	create_charts(company, custom_chart=load_chart()["tree"])
