@@ -118,4 +118,4 @@ ERPNEXT_VERSION=version-16 bash .github/ci/integration.sh
 
 ## مجوز
 
-GPL-3.0، همانند ERPNext.
+[GPL-3.0](LICENSE) یا هر نسخهٔ بعدی آن، همانند ERPNext. متن کامل در فایل `LICENSE` و اعلان کوتاه آن در `license.txt` آمده است.
