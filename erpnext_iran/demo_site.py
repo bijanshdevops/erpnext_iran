@@ -111,7 +111,7 @@ def set_login_notice(user, password, reset_hours=6):
 
 LOGIN_NOTICE = """<script>
 document.addEventListener("DOMContentLoaded", function () {{
-	if (!location.pathname.startsWith("/login")) return;
+	// the login form, wherever Frappe shows it: /login, and / for a visitor who is not signed in
 	var form = document.querySelector("form.form-login");
 	var card = form && form.closest(".login-content");
 	if (!card) return;
