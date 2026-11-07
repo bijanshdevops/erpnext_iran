@@ -85,8 +85,7 @@ def _site_settings(user, password, reset_hours):
 	frappe.db.set_single_value("System Settings", "login_with_email_link", 0)  # emails are muted
 	frappe.db.set_single_value("Website Settings", "app_name", "ERPNext Iran")  # "Login to ..." on the login page
 	frappe.db.set_single_value("Website Settings", "disable_signup", 1)
-	frappe.db.set_single_value("Website Settings", "head_html", LOGIN_NOTICE.format(
-		user=user, password=password, hours=reset_hours))  # fmt: skip
+	set_login_notice(user, password, reset_hours)
 	settings = frappe.get_doc("Iran Localization Settings")
 	settings.moadian_enabled = 0
 	settings.save()
@@ -103,17 +102,27 @@ def _site_settings(user, password, reset_hours):
 	}).insert(ignore_permissions=True)  # fmt: skip
 
 
+def set_login_notice(user, password, reset_hours=6):
+	"""The demo login under the login box (also run on its own to update a running demo)."""
+	frappe.db.set_single_value("Website Settings", "head_html", LOGIN_NOTICE.format(
+		user=user, password=password, hours=reset_hours))  # fmt: skip
+	frappe.db.commit()
+
+
 LOGIN_NOTICE = """<script>
 document.addEventListener("DOMContentLoaded", function () {{
 	if (!location.pathname.startsWith("/login")) return;
-	var form = document.querySelector(".login-content form, form.form-login");
-	if (!form) return;
+	var form = document.querySelector("form.form-login");
+	var card = form && form.closest(".login-content");
+	if (!card) return;
+	// under the login box, as wide as it
 	var box = document.createElement("div");
 	box.setAttribute("dir", "rtl");
-	box.style.cssText = "border:1px solid #2e7d32;border-radius:8px;padding:12px;margin-bottom:16px;line-height:1.9;text-align:right";
+	box.className = "page-card";
+	box.style.cssText = "border:1px solid #2e7d32;padding:12px 16px;margin:16px auto 0;line-height:1.9;text-align:right";
 	box.innerHTML = "<b>دموی ERPNext Iran</b><br>نام کاربری: <code>{user}</code><br>رمز: <code>{password}</code>"
 		+ "<br><small>داده‌ها فرضی‌اند و هر {hours} ساعت بازنشانی می‌شوند.</small>";
-	form.parentNode.insertBefore(box, form);
+	card.parentNode.insertBefore(box, card.nextSibling);
 	var email = document.getElementById("login_email"), pass = document.getElementById("login_password");
 	if (email && !email.value) email.value = "{user}";
 	if (pass && !pass.value) pass.value = "{password}";

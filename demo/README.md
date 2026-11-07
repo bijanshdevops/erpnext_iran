@@ -42,3 +42,12 @@ docker compose -p erpnext-demo -f demo/compose.demo.yml --env-file demo/demo.env
 ## منابع
 
 حدود ۱٫۵ تا ۲ گیگابایت حافظه و ۶ گیگابایت دیسک (بیشترش image).
+
+## تغییر متن صفحهٔ ورود روی دموی در حال اجرا
+
+بعد از گرفتن image تازه، متن را دوباره بنویسید و پشتیبان پایه را نو کنید تا بازنشانی آن را برنگرداند:
+
+```bash
+docker compose -p erpnext-demo -f demo/compose.demo.yml --env-file demo/demo.env exec demo-reset bench --site erp.greenlanco.ir execute erpnext_iran.demo_site.set_login_notice --kwargs '{"user": "demo@greenlanco.ir", "password": "demo1405", "reset_hours": 6}'
+docker compose -p erpnext-demo -f demo/compose.demo.yml --env-file demo/demo.env exec demo-reset bash -c 'rm -f sites/demo-baseline/* && bench --site erp.greenlanco.ir backup --backup-path /home/frappe/frappe-bench/sites/demo-baseline && bench --site erp.greenlanco.ir clear-website-cache'
+```
