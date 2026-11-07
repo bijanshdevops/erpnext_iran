@@ -317,6 +317,27 @@ Two salary tax brackets start at the same amount,دو پله مالیات حقو
 Iran Payroll,حقوق و دستمزد ایران
 Social Security Number,شماره بیمه
 Children for Child Allowance,تعداد فرزندان مشمول حق اولاد
+Father's Name,نام پدر
+Birth Certificate Number,شماره شناسنامه
+Place of Issue,محل صدور
+Date of Issue,تاریخ صدور
+Nationality,ملیت
+Social Security Job Code,کد شغل تأمین اجتماعی
+Six-digit job code of the social security list,کد شغل شش‌رقمی لیست بیمه
+Social Security Workshop Code,کد کارگاه تأمین اجتماعی
+Workshop Name,نام کارگاه
+"As registered with social security; the company name if empty",به نامی که نزد تأمین اجتماعی ثبت شده؛ اگر خالی باشد نام شرکت
+Employer Name,نام کارفرما
+The company name if empty,اگر خالی باشد نام شرکت
+Workshop Address,نشانی کارگاه
+Contract Row,ردیف پیمان
+"Contract row number of a contractor's list; empty otherwise",شماره ردیف پیمان در لیست پیمانکار؛ در غیر این صورت خالی
+Insurance List Files,فایل‌های لیست بیمه
+{0} does not fit in field {1} of the insurance list file,{0} در فیلد {1} فایل لیست بیمه جا نمی‌شود
+Set the Social Security Workshop Code on company {0},کد کارگاه تأمین اجتماعی را در شرکت {0} وارد کنید
+No submitted Salary Slip in this month,در این ماه فیش حقوق ثبت‌نهایی‌شده‌ای نیست
+{0}: social security number {1} is missing or longer than 8 digits,{0}: شماره بیمه {1} وارد نشده یا بیش از ۸ رقم است
+Fix these employees first,ابتدا اطلاعات این کارمندان را اصلاح کنید
 Overtime Hours,ساعت اضافه‌کار
 Payroll Year,سال حقوق
 Years of Service,سال‌های سابقه

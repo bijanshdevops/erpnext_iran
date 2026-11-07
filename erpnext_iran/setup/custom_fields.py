@@ -217,9 +217,10 @@ def all_custom_fields():
 	"""get_custom_fields() plus payroll fields (those on HRMS doctypes only with HRMS installed)."""
 	import frappe
 
-	from erpnext_iran.payroll.fields import employee_fields, hrms_fields
+	from erpnext_iran.payroll.fields import company_fields, employee_fields, hrms_fields
 
 	fields = get_custom_fields()
+	fields["Company"] = fields["Company"] + company_fields()
 	fields["Employee"] = employee_fields()
 	if "hrms" in frappe.get_installed_apps():
 		fields.update(hrms_fields())

@@ -25,6 +25,14 @@ frappe.query_reports["IR Insurance List"] = {
 		},
 		{ fieldname: "include_drafts", label: __("Include Draft Slips"), fieldtype: "Check" },
 	],
+	onload(report) {
+		report.page.add_inner_button(__("Insurance List Files"), () => {
+			const filters = report.get_filter_values(true);
+			if (!filters) return;
+			const params = new URLSearchParams({ filters: JSON.stringify(filters) });
+			window.open(frappe.urllib.get_full_url(`/api/method/erpnext_iran.payroll.dsk.download?${params}`));
+		});
+	},
 	formatter(value, row, column, data, default_formatter) {
 		value = default_formatter(value, row, column, data);
 		return data && data.bold ? `<b>${value}</b>` : value;

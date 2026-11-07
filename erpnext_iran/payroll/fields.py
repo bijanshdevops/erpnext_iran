@@ -26,9 +26,41 @@ def employee_fields():
 		 "insert_after": "ir_payroll_section"},
 		{"fieldname": "ir_insurance_number", "label": "Social Security Number", "fieldtype": "Data",
 		 "insert_after": "ir_national_id"},
-		{"fieldname": "ir_payroll_column", "fieldtype": "Column Break", "insert_after": "ir_insurance_number"},
+		{"fieldname": "ir_father_name", "label": "Father's Name", "fieldtype": "Data",
+		 "insert_after": "ir_insurance_number"},
+		{"fieldname": "ir_id_number", "label": "Birth Certificate Number", "fieldtype": "Data",
+		 "insert_after": "ir_father_name"},
+		{"fieldname": "ir_id_issue_place", "label": "Place of Issue", "fieldtype": "Data",
+		 "insert_after": "ir_id_number"},
+		{"fieldname": "ir_id_issue_date", "label": "Date of Issue", "fieldtype": "Date",
+		 "insert_after": "ir_id_issue_place"},
+		{"fieldname": "ir_payroll_column", "fieldtype": "Column Break", "insert_after": "ir_id_issue_date"},
 		{"fieldname": "ir_children", "label": "Children for Child Allowance", "fieldtype": "Int",
 		 "insert_after": "ir_payroll_column"},
+		{"fieldname": "ir_nationality", "label": "Nationality", "fieldtype": "Data", "default": "ایرانی",
+		 "insert_after": "ir_children"},
+		{"fieldname": "ir_ss_job_code", "label": "Social Security Job Code", "fieldtype": "Data", "length": 6,
+		 "description": "Six-digit job code of the social security list", "insert_after": "ir_nationality"},
+	]  # fmt: skip
+
+
+def company_fields():
+	return [
+		{"fieldname": "ir_ss_section", "label": "Social Security", "fieldtype": "Section Break",
+		 "insert_after": "ir_moadian_memory_id", "collapsible": 1},
+		{"fieldname": "ir_ss_workshop_code", "label": "Social Security Workshop Code", "fieldtype": "Data",
+		 "length": 10, "insert_after": "ir_ss_section"},
+		{"fieldname": "ir_ss_workshop_name", "label": "Workshop Name", "fieldtype": "Data",
+		 "description": "As registered with social security; the company name if empty",
+		 "insert_after": "ir_ss_workshop_code"},
+		{"fieldname": "ir_ss_employer_name", "label": "Employer Name", "fieldtype": "Data",
+		 "description": "The company name if empty", "insert_after": "ir_ss_workshop_name"},
+		{"fieldname": "ir_ss_column", "fieldtype": "Column Break", "insert_after": "ir_ss_employer_name"},
+		{"fieldname": "ir_ss_workshop_address", "label": "Workshop Address", "fieldtype": "Small Text",
+		 "insert_after": "ir_ss_column"},
+		{"fieldname": "ir_ss_contract_row", "label": "Contract Row", "fieldtype": "Data", "length": 3,
+		 "description": "Contract row number of a contractor's list; empty otherwise",
+		 "insert_after": "ir_ss_workshop_address"},
 	]  # fmt: skip
 
 

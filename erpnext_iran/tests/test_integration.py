@@ -888,7 +888,9 @@ class TestIranLocalization(FrappeTestCase):
 			self.skipTest("Frappe HR (hrms) is not installed")
 		from erpnext_iran.erpnext_iran.report.ir_insurance_list import ir_insurance_list
 		from erpnext_iran.erpnext_iran.report.ir_salary_tax_list import ir_salary_tax_list
+		from erpnext_iran.payroll import dsk, lists
 		from erpnext_iran.payroll.setup import setup_iran_payroll
+		from erpnext_iran.utils.iran_system import encode
 
 		structure = setup_iran_payroll(COMPANY)
 		self.assertEqual(setup_iran_payroll(COMPANY), structure)  # running it again changes nothing
@@ -896,7 +898,8 @@ class TestIranLocalization(FrappeTestCase):
 			{"doctype": "Employee", "first_name": "علی", "last_name": "رضایی", "gender": "Male",
 			 "date_of_birth": "1990-01-01", "date_of_joining": "2023-05-01", "company": COMPANY,
 			 "marital_status": "Married", "ir_children": 2, "ir_national_id": VALID_NATIONAL_CODE,
-			 "ir_insurance_number": "1234567890", "status": "Active"}
+			 "ir_insurance_number": "0012345678", "status": "Active", "ir_father_name": "حسن",
+			 "ir_id_number": "1234", "ir_id_issue_place": "تهران", "ir_ss_job_code": "123456"}
 		).insert()  # fmt: skip
 		assignment = frappe.get_doc(
 			{"doctype": "Salary Structure Assignment", "employee": employee.name, "salary_structure": structure,
@@ -934,11 +937,34 @@ class TestIranLocalization(FrappeTestCase):
 
 		filters = {"company": COMPANY, "jalali_year": 1405, "month": "8"}
 		row = next(r for r in ir_insurance_list.execute(filters)[1] if r.get("name") == slip.name)
-		self.assertEqual((row["payment_days"], row["daily_wage"], row["ir_insurance_number"]), (30, 10_000_000, "1234567890"))
+		self.assertEqual((row["payment_days"], row["daily_wage"], row["ir_insurance_number"]), (30, 10_000_000, "0012345678"))
 		self.assertEqual(row["insurable_benefits"], insurable - 300_000_000)
 		self.assertEqual(row["total_insurance"], amounts["IR_SS"] + slip.ir_employer_insurance)
 		row = next(r for r in ir_salary_tax_list.execute(filters)[1] if r.get("name") == slip.name)
 		self.assertEqual((row["ir_taxable_income"], row["ir_salary_tax"]), (taxable, amounts["IR_TAX"]))
+
+		# the list files for the social security portal
+		frappe.db.set_value("Company", COMPANY, {"ir_ss_workshop_code": "1234567890", "ir_ss_workshop_address": "تهران"})
+		kar, wor = dsk.build({**filters, "list_no": "1"})
+		self.assertEqual((len(kar), len(wor)), (32 + 32 * 25 + 1 + 310 + 2, 32 + 32 * 29 + 1 + 468 + 2))
+		self.assertEqual(kar[29], 0x7E)
+		workers = [r for r in read_dbf(wor) if r["DSW_ID1"] == "12345678"]
+		self.assertEqual(len(workers), 1)
+		worker = workers[0]
+		self.assertEqual((worker["DSW_ID"], worker["DSW_YY"], worker["DSW_MM"], worker["DSW_LISTNO"]), ("1234567890", "5", "8", "01"))
+		self.assertEqual((worker["DSW_FNAME"], worker["DSW_LNAME"], worker["DSW_SEX"]), (encode("علی"), encode("رضایی"), encode("مرد")))
+		self.assertEqual((worker["DSW_BDATE"], worker["DSW_JOB"], worker["PER_NATCOD"]), ("13681011", "123456", VALID_NATIONAL_CODE))
+		self.assertEqual((worker["DSW_DD"], worker["DSW_ROOZ"], worker["DSW_MAH"]), ("30", "10000000", "300000000"))
+		self.assertEqual((int(worker["DSW_INC"]), int(worker["DSW_SPOUSE"])), (amounts["IR_S"], amounts["IR_M"]))
+		self.assertEqual(int(worker["DSW_MASH"]), insurable)
+		self.assertEqual(int(worker["DSW_MAZ"]), insurable - 300_000_000 - amounts["IR_S"] - amounts["IR_M"])
+		self.assertEqual((int(worker["DSW_TOTL"]), int(worker["DSW_BIME"])), (gross, amounts["IR_SS"]))
+		workshop = read_dbf(kar)[0]
+		self.assertEqual(workshop["DSK_ADRS"], encode("تهران"))
+		self.assertEqual(int(workshop["DSK_BIC"]) + int(workshop["DSK_TKOSO"]), sum(
+			frappe.get_all("Salary Slip", filters={"name": ["in", [s.name for s in lists.get_slips(filters)]]},
+						   pluck="ir_employer_insurance")))  # fmt: skip
+		self.assertEqual(int(workshop["DSK_NUM"]), len(read_dbf(wor)))
 
 		# above the insurance ceiling: 7 daily minimum wages per day
 		assignment.cancel()
@@ -951,6 +977,26 @@ class TestIranLocalization(FrappeTestCase):
 			 "start_date": "2026-11-22", "end_date": "2026-12-21", "payroll_frequency": "Monthly"}
 		).insert()  # fmt: skip
 		self.assertEqual(high.ir_insurable_wage, 7 * 5_541_850 * 30)
+
+
+def read_dbf(data):
+	"""Records of a dBASE III file as {field: stripped text} (Persian fields stay Iran System bytes)."""
+	count, header, _length = int.from_bytes(data[4:8], "little"), int.from_bytes(data[8:10], "little"), int.from_bytes(data[10:12], "little")
+	fields, pos = [], 32
+	while data[pos] != 0x0D:
+		fields.append((data[pos : pos + 11].split(b"\0")[0].decode(), data[pos + 16]))
+		pos += 32
+	records, pos = [], header
+	for _ in range(count):
+		pos += 1  # deletion flag
+		record = {}
+		for name, size in fields:
+			raw = data[pos : pos + size].strip(b" ")
+			record[name] = raw.decode() if raw.isascii() else raw
+			pos += size
+		records.append(record)
+	return records
+
 
 def ensure_item(item_code, item_name, taxes=None):
 	if not frappe.db.exists("Item", item_code):
