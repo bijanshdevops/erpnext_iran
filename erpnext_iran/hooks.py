@@ -57,6 +57,12 @@ doc_events = {
 		"before_cancel": "erpnext_iran.doc_events.sales_invoice.before_cancel",
 		"on_cancel": "erpnext_iran.doc_events.sales_invoice.on_cancel",
 	},
+	# public demo only (site config erpnext_iran_demo_user): its guest user stays as it was set up
+	"User": {"validate": "erpnext_iran.demo_site.protect_demo_user"},
+}
+
+override_whitelisted_methods = {
+	"frappe.core.doctype.user.user.update_password": "erpnext_iran.demo_site.update_password",
 }
 
 jinja = {

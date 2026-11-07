@@ -3,3 +3,4 @@
 **/*.pyc
 erpnext_iran/public/dist
 node_modules
+demo/demo.env

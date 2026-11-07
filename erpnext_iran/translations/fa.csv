@@ -338,6 +338,7 @@ Set the Social Security Workshop Code on company {0},کد کارگاه تأمی�
 No submitted Salary Slip in this month,در این ماه فیش حقوق ثبت‌نهایی‌شده‌ای نیست
 {0}: social security number {1} is missing or longer than 8 digits,{0}: شماره بیمه {1} وارد نشده یا بیش از ۸ رقم است
 Fix these employees first,ابتدا اطلاعات این کارمندان را اصلاح کنید
+The demo user cannot be changed in the demo,کاربر دمو را در این دمو نمی‌توان تغییر داد
 Overtime Hours,ساعت اضافه‌کار
 Payroll Year,سال حقوق
 Years of Service,سال‌های سابقه
