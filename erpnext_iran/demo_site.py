@@ -102,6 +102,15 @@ def _site_settings(user, password, reset_hours):
 	}).insert(ignore_permissions=True)  # fmt: skip
 
 
+def clear_assets_cache():
+	"""Forget the cached map of built CSS/JS files.
+
+	Frappe keeps assets.json in the shared Redis cache, and `bench clear-cache` leaves it there.
+	After a new image (new file hashes) pages would link to files that are gone.
+	"""
+	frappe.cache.delete_value("assets_json", shared=True)
+
+
 def set_login_notice(user, password, reset_hours=6):
 	"""The demo login under the login box (also run on its own to update a running demo)."""
 	frappe.db.set_single_value("Website Settings", "head_html", LOGIN_NOTICE.format(

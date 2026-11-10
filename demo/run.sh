@@ -45,6 +45,8 @@ if [ ! -f "sites/$SITE/site_config.json" ] || ! ls "$BASELINE"/*-database.sql.gz
 	bench --site "$SITE" backup --backup-path "$BASELINE"
 	echo "Demo site ready"
 fi
+# a new image has new CSS/JS file names; drop the old map kept in Redis
+bench --site "$SITE" execute erpnext_iran.demo_site.clear_assets_cache || true
 warm_up
 
 while true; do
