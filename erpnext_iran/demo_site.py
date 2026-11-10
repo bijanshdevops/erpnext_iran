@@ -298,3 +298,23 @@ def _user(user, password):
 
 	update_password(user, password)
 	frappe.defaults.set_user_default("Company", COMPANY, user)
+	tune_user(user)
+
+
+# workspaces of modules this demo has no sample data for
+HIDDEN_MODULES = ["Manufacturing", "Quality Management", "Projects", "Support", "CRM", "Website",
+				  "Integrations", "ERPNext Integrations"]  # fmt: skip
+
+
+def tune_user(user):
+	"""Make the demo user's desk load faster (also run on its own on a running demo).
+
+	A default workspace spares Frappe from checking every workspace to pick the page after login,
+	and hiding unused modules leaves fewer workspaces to check when the desk loads.
+	"""
+	doc = frappe.get_doc("User", user)
+	doc.default_workspace = "Home" if frappe.db.exists("Workspace", "Home") else None
+	doc.set("block_modules", [{"module": m} for m in HIDDEN_MODULES if frappe.db.exists("Module Def", m)])
+	doc.flags.ignore_permissions = True
+	doc.save()
+	frappe.db.commit()

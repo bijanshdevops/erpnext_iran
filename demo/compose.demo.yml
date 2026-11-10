@@ -68,6 +68,9 @@ services:
 
   backend:
     <<: *backend
+    environment:
+      # the desk sends a dozen requests at once on load; the CPU is idle, so more processes
+      GUNICORN_WORKERS: ${GUNICORN_WORKERS:-4}
 
   websocket:
     <<: *backend
