@@ -1,0 +1,228 @@
+/* ---- Glass theme (setting "Glass Theme"; desk.js puts html.ir-glass) ----
+   A soft colour field behind the desk, with the navbar, page header, cards, dialogs and menus as
+   frosted glass over it. It works by lowering the opacity of Frappe's own colour variables, so
+   every page follows without per-page rules, and by blurring what shows through the main
+   surfaces. Light and dark both have their own values. */
+
+html.ir-glass {
+	--ir-glass-blur: blur(18px) saturate(160%);
+	--ir-glass-edge: rgba(255, 255, 255, 0.7);
+	--ir-glass-input-edge: rgba(15, 23, 42, 0.1);
+	--ir-glass-shadow: 0 8px 32px rgba(31, 41, 55, 0.08), 0 1px 2px rgba(31, 41, 55, 0.06);
+	--ir-glass-radius: 16px;
+	--ir-glass-field: radial-gradient(ellipse at 6% 4%, rgba(16, 185, 129, 0.55), transparent 46%),
+		radial-gradient(ellipse at 96% 8%, rgba(56, 189, 248, 0.5), transparent 44%),
+		radial-gradient(ellipse at 78% 92%, rgba(167, 139, 250, 0.45), transparent 50%),
+		radial-gradient(ellipse at 22% 96%, rgba(45, 212, 191, 0.42), transparent 46%),
+		radial-gradient(ellipse at 50% 50%, rgba(251, 191, 36, 0.14), transparent 60%), #e6edf5;
+
+	--bg-color: transparent;
+	--fg-color: rgba(255, 255, 255, 0.5);
+	--card-bg: rgba(255, 255, 255, 0.5);
+	--navbar-bg: rgba(255, 255, 255, 0.62);
+	--modal-bg: rgba(255, 255, 255, 0.84);
+	--popover-bg: rgba(255, 255, 255, 0.86);
+	--control-bg: rgba(255, 255, 255, 0.6);
+	--control-bg-on-gray: rgba(255, 255, 255, 0.6);
+	--disabled-control-bg: rgba(255, 255, 255, 0.35);
+	--subtle-fg: rgba(255, 255, 255, 0.45);
+	--subtle-accent: rgba(255, 255, 255, 0.5);
+	--fg-hover-color: rgba(255, 255, 255, 0.75);
+	--highlight-color: rgba(255, 255, 255, 0.65);
+	--bg-light-gray: rgba(255, 255, 255, 0.4);
+	--border-color: rgba(15, 23, 42, 0.08);
+	--table-border-color: rgba(15, 23, 42, 0.08);
+}
+
+html.ir-glass[data-theme="dark"] {
+	--ir-glass-edge: rgba(255, 255, 255, 0.09);
+	--ir-glass-input-edge: rgba(255, 255, 255, 0.1);
+	--ir-glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.35), 0 1px 2px rgba(0, 0, 0, 0.3);
+	--ir-glass-field: radial-gradient(ellipse at 6% 4%, rgba(16, 185, 129, 0.35), transparent 46%),
+		radial-gradient(ellipse at 96% 8%, rgba(56, 189, 248, 0.3), transparent 44%),
+		radial-gradient(ellipse at 78% 92%, rgba(139, 92, 246, 0.32), transparent 50%),
+		radial-gradient(ellipse at 22% 96%, rgba(20, 184, 166, 0.26), transparent 46%), #0a0f1c;
+
+	--fg-color: rgba(17, 24, 39, 0.55);
+	--card-bg: rgba(17, 24, 39, 0.55);
+	--navbar-bg: rgba(15, 23, 42, 0.6);
+	--modal-bg: rgba(17, 24, 39, 0.86);
+	--popover-bg: rgba(17, 24, 39, 0.9);
+	--control-bg: rgba(255, 255, 255, 0.06);
+	--control-bg-on-gray: rgba(255, 255, 255, 0.06);
+	--disabled-control-bg: rgba(255, 255, 255, 0.03);
+	--subtle-fg: rgba(255, 255, 255, 0.04);
+	--subtle-accent: rgba(255, 255, 255, 0.06);
+	--fg-hover-color: rgba(255, 255, 255, 0.08);
+	--highlight-color: rgba(255, 255, 255, 0.07);
+	--bg-light-gray: rgba(255, 255, 255, 0.05);
+	--border-color: rgba(255, 255, 255, 0.08);
+	--table-border-color: rgba(255, 255, 255, 0.08);
+}
+
+html.ir-glass body {
+	background: var(--ir-glass-field);
+	background-attachment: fixed;
+	min-height: 100vh;
+}
+
+/* surfaces that sit over the colour field: frosted, with a light edge */
+html.ir-glass .navbar,
+html.ir-glass .page-head,
+html.ir-glass .layout-main-section.frappe-card,
+html.ir-glass .frappe-card,
+html.ir-glass .widget,
+html.ir-glass .form-page,
+html.ir-glass .form-dashboard-section,
+html.ir-glass .report-wrapper,
+html.ir-glass .modal-content,
+html.ir-glass .dropdown-menu,
+html.ir-glass .awesomplete > ul,
+html.ir-glass .popover,
+html.ir-glass .desk-alert,
+html.ir-glass .ir-jpicker {
+	-webkit-backdrop-filter: var(--ir-glass-blur);
+	backdrop-filter: var(--ir-glass-blur);
+}
+
+html.ir-glass .navbar {
+	background: var(--navbar-bg);
+	border-bottom: 1px solid var(--ir-glass-edge);
+	box-shadow: 0 1px 12px rgba(15, 23, 42, 0.05);
+}
+
+/* the sticky page header shows the content scrolling under it through the blur */
+html.ir-glass .page-head {
+	background: var(--navbar-bg);
+	border-bottom: 1px solid var(--ir-glass-edge);
+}
+
+html.ir-glass .layout-main-section.frappe-card,
+html.ir-glass .frappe-card,
+html.ir-glass .widget,
+html.ir-glass .form-dashboard-section,
+html.ir-glass .report-wrapper {
+	background: var(--card-bg);
+	border: 1px solid var(--ir-glass-edge);
+	border-radius: var(--ir-glass-radius);
+	box-shadow: var(--ir-glass-shadow);
+}
+
+html.ir-glass .widget:hover {
+	box-shadow: 0 12px 36px rgba(31, 41, 55, 0.12), 0 1px 2px rgba(31, 41, 55, 0.06);
+}
+
+html.ir-glass .modal-content,
+html.ir-glass .dropdown-menu,
+html.ir-glass .awesomplete > ul,
+html.ir-glass .popover,
+html.ir-glass .ir-jpicker {
+	border: 1px solid var(--ir-glass-edge);
+	border-radius: 14px;
+	box-shadow: 0 16px 48px rgba(15, 23, 42, 0.18);
+}
+
+html.ir-glass .modal-header,
+html.ir-glass .modal-footer,
+html.ir-glass .modal-content .form-page {
+	background: transparent;
+}
+
+html.ir-glass .modal-content .form-page {
+	-webkit-backdrop-filter: none;
+	backdrop-filter: none;
+}
+
+html.ir-glass .modal-backdrop.show {
+	-webkit-backdrop-filter: blur(4px);
+	backdrop-filter: blur(4px);
+	opacity: 1;
+	background: rgba(15, 23, 42, 0.25);
+}
+
+/* the sidebar sits on the colour field itself: its active item is a small glass pill */
+html.ir-glass .desk-sidebar .standard-sidebar-item.selected,
+html.ir-glass .sidebar-item-container .standard-sidebar-item.selected {
+	background: var(--fg-color);
+	border: 1px solid var(--ir-glass-edge);
+	box-shadow: var(--ir-glass-shadow);
+}
+
+html.ir-glass .standard-sidebar-item:hover {
+	background: var(--fg-hover-color);
+}
+
+/* inputs: a faint outline so they stay visible on the near-white dialogs, a green focus ring */
+html.ir-glass .form-control,
+html.ir-glass .awesomplete input,
+html.ir-glass .frappe-control select {
+	border: 1px solid var(--ir-glass-input-edge);
+}
+
+/* dialogs and menus are nearly opaque: inputs there get a light grey fill instead of white */
+html.ir-glass .modal-content,
+html.ir-glass .dropdown-menu,
+html.ir-glass .popover {
+	--control-bg: rgba(15, 23, 42, 0.045);
+}
+
+html.ir-glass[data-theme="dark"] .modal-content,
+html.ir-glass[data-theme="dark"] .dropdown-menu,
+html.ir-glass[data-theme="dark"] .popover {
+	--control-bg: rgba(255, 255, 255, 0.07);
+}
+
+html.ir-glass .form-control:focus {
+	border-color: rgba(16, 185, 129, 0.55);
+	box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.18);
+}
+
+html.ir-glass .btn-primary,
+html.ir-glass .btn-primary:hover,
+html.ir-glass .btn-primary:focus {
+	background: linear-gradient(135deg, #059669, #0d9488);
+	border-color: transparent;
+	color: #fff;
+	box-shadow: 0 4px 14px rgba(5, 150, 105, 0.3);
+}
+
+html.ir-glass .btn-default,
+html.ir-glass .btn-secondary {
+	border: 1px solid var(--ir-glass-edge);
+}
+
+/* list and report rows: transparent, so the card's glass shows through */
+html.ir-glass .list-row-container,
+html.ir-glass .list-row-head,
+html.ir-glass .result,
+html.ir-glass .dt-scrollable,
+html.ir-glass .dt-header,
+html.ir-glass .dt-cell,
+html.ir-glass .grid-heading-row,
+html.ir-glass .grid-body .data-row {
+	background-color: transparent;
+}
+
+html.ir-glass .list-row:hover,
+html.ir-glass .list-row-container:hover {
+	background-color: var(--fg-hover-color);
+}
+
+html.ir-glass .number-card .widget-body .number,
+html.ir-glass .widget .widget-title {
+	letter-spacing: 0;
+}
+
+@media (prefers-reduced-transparency: reduce) {
+	html.ir-glass {
+		--fg-color: rgba(255, 255, 255, 0.94);
+		--card-bg: rgba(255, 255, 255, 0.94);
+		--navbar-bg: rgba(255, 255, 255, 0.96);
+	}
+
+	html.ir-glass[data-theme="dark"] {
+		--fg-color: rgba(17, 24, 39, 0.95);
+		--card-bg: rgba(17, 24, 39, 0.95);
+		--navbar-bg: rgba(15, 23, 42, 0.96);
+	}
+}

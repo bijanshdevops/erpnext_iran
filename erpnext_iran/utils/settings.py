@@ -19,6 +19,7 @@ DEFAULTS = {
 	"moadian_private_key_path": "",
 	"moadian_certificate_path": "",
 	"moadian_auto_send": 0,
+	"glass_theme": 0,
 	"show_partner_logo": 1,
 	"partner_logo": "",
 }

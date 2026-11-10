@@ -9,11 +9,14 @@ frappe.provide("erpnext_iran");
 	const mode = () => settings().jalali_display || "Off"; // Off | Jalali | Jalali and Gregorian
 	const usePersianDigits = () => !!settings().persian_digits;
 
-	// font-level Persian digits (erpnext_iran.bundle.scss, html.ir-fa-digits)
-	const applyDigitClass = () =>
+	// font-level Persian digits (erpnext_iran.bundle.scss, html.ir-fa-digits) and the glass theme
+	// (glass.scss, html.ir-glass)
+	const applyRootClasses = () => {
 		document.documentElement.classList.toggle("ir-fa-digits", !!settings().persian_digits_everywhere);
-	applyDigitClass();
-	$(document).on("app_ready", applyDigitClass);
+		document.documentElement.classList.toggle("ir-glass", !!settings().glass_theme);
+	};
+	applyRootClasses();
+	$(document).on("app_ready", applyRootClasses);
 
 	erpnext_iran.format_jalali = function (value, with_time) {
 		const j = J.fromISO(value);

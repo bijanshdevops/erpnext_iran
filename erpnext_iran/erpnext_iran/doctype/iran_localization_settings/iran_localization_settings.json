@@ -29,6 +29,7 @@
   "column_break_conn",
   "moadian_auto_send",
   "branding_section",
+  "glass_theme",
   "show_partner_logo",
   "partner_logo"
  ],
@@ -190,6 +191,13 @@
    "label": "Branding"
   },
   {
+   "default": "0",
+   "description": "Frosted-glass panels over a soft colour background in the desk, in light and dark mode. Users see it after reloading the page.",
+   "fieldname": "glass_theme",
+   "fieldtype": "Check",
+   "label": "Glass Theme"
+  },
+  {
    "default": "1",
    "description": "Shown next to the ERPNext logo while the desk loads",
    "fieldname": "show_partner_logo",
@@ -206,7 +214,7 @@
  ],
  "issingle": 1,
  "links": [],
- "modified": "2026-10-25 00:00:00.000000",
+ "modified": "2026-11-11 00:00:00.000000",
  "modified_by": "Administrator",
  "module": "ERPNext Iran",
  "name": "Iran Localization Settings",

@@ -88,6 +88,7 @@ def _site_settings(user, password, reset_hours):
 	set_login_notice(user, password, reset_hours)
 	settings = frappe.get_doc("Iran Localization Settings")
 	settings.moadian_enabled = 0
+	settings.glass_theme = 1
 	settings.save()
 	frappe.get_doc({
 		"doctype": "Note", "title": "به دموی ERPNext Iran خوش آمدید", "public": 1, "notify_on_login": 1,
