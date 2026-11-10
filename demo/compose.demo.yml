@@ -40,6 +40,8 @@ services:
   redis-cache:
     image: redis:7-alpine
     restart: unless-stopped
+    # a cache only: no snapshot on disk, so a restart starts it empty
+    command: ["redis-server", "--save", "", "--appendonly", "no"]
 
   redis-queue:
     image: redis:7-alpine
